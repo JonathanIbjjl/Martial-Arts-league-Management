@@ -9,7 +9,7 @@ namespace Contenders
     class Contender
     {
         public string Name { get; set; }
-        public string Fname { get; set; }
+        public string Lastname { get; set; }
         public string ID { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
