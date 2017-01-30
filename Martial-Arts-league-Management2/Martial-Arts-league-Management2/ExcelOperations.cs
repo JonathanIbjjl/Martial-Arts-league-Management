@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
+using System.Drawing;
 
 namespace Martial_Arts_league_Management2
 {
@@ -23,39 +24,78 @@ namespace Martial_Arts_league_Management2
 
                 else
                 {
-                    return ExApp;
+                    return _ExApp;
                 }
             }
             set
             {
-                ExApp = value;
+                _ExApp = value;
             }
         }
 
         protected Workbook XlWb = null;
         protected Worksheet ExWs = null;
-
+        protected string WorkSheetName = string.Empty; 
         protected string Path = string.Empty;
 
         public ExcelOperations(string path)
         {
-            this.Path = path;
-            Open();
+            this.Path = path;          
         }
 
+        public bool GetContenders()
+        {
+            if (Open())
+            {
+                // check if there is multiple sheets
+                if (XlWb.Worksheets.Count > 1)
+                {
+                    // show the user menu to choose sheet
+                    DynamicForms.ChooseExSheetForm choose = new DynamicForms.ChooseExSheetForm(GetExcelWorkSheets());
+                    choose.showForm();
+                    // choosen worksheet
+                    WorkSheetName = choose.ChoosenWsName;
+                    ExWs = XlWb.Worksheets[WorkSheetName];
+                }
+                else
+                {
+                    // the first worksheet is the only one
+                    ExWs = XlWb.Worksheets[0];
+                }
+                return true;
+            }
+     
+            Close();
+            return false;
+        }
 
-        protected void Open()
+        protected bool Open()
         {
             try
             {
                 XlWb = ExApp.Workbooks.Open(Path);
+                return true;
             }
 
             catch (Exception ex)
             {
                 Close();
-                throw ex;
+                return false;
             }
+        }
+
+        protected string[] GetExcelWorkSheets()
+        {
+            string[] result = new string[XlWb.Worksheets.Count];
+            byte counter = 0;
+
+            foreach (Worksheet ws in XlWb.Worksheets)
+            {
+                result[counter] = ws.Name;
+                counter++;
+            }
+
+            return result;
         }
 
         protected void Close()
@@ -92,4 +132,5 @@ namespace Martial_Arts_league_Management2
             }
         }
     }
+
 }

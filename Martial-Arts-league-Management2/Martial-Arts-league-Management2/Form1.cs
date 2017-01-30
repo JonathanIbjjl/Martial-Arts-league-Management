@@ -26,10 +26,25 @@ namespace Martial_Arts_league_Management2
 
             if (fd.ShowDialog() == DialogResult.OK)
             {
-                string path = fd.FileName;
-                ExcelOperations Exl = new ExcelOperations(path);
+                txtPath.Text = fd.FileName;
+              
             }
 
+        }
+
+        private void btnLoadFile_Click(object sender, EventArgs e)
+        {
+            if (txtPath.Text != string.Empty)
+            {
+               LoadFile();
+            }
+        }
+
+        private void LoadFile()
+        {
+            // excel instance
+            ExcelOperations Eo = new ExcelOperations(txtPath.Text);
+            Eo.GetContenders();
         }
     }
 }
