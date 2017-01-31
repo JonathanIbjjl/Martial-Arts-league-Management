@@ -9,7 +9,7 @@ using System.Drawing;
 
 namespace Martial_Arts_league_Management2
 {
-    class ExcelOperations
+    class ExcelOperations : IDisposable
     {
         protected Application _ExApp = null;
         protected Application ExApp
@@ -37,7 +37,8 @@ namespace Martial_Arts_league_Management2
         protected Worksheet ExWs = null;
         protected string WorkSheetName = string.Empty; 
         protected string Path = string.Empty;
-
+        protected Dictionary<string, int> ColumnsDictionary;
+        public Contenders.Contender ContenderObj; 
         public ExcelOperations(string path)
         {
             this.Path = path;          
@@ -62,11 +63,28 @@ namespace Martial_Arts_league_Management2
                     // the first worksheet is the only one
                     ExWs = XlWb.Worksheets[0];
                 }
+
+                //continue analizing excel, check data is legal
+                if (IsExcelIsLegal() == false)
+                    return false;
+
                 return true;
             }
-     
-            Close();
-            return false;
+
+            else
+            {
+                // excel load fail  
+                Close();
+                return false;
+            }
+        }
+
+        private bool IsExcelIsLegal()
+        {
+            ContenderObj = new Contenders.Contender();
+            // check column names
+            ColumnsDictionary = new Dictionary<string, int>();
+            return false; // TODO: delete this
         }
 
         protected bool Open()
@@ -130,6 +148,11 @@ namespace Martial_Arts_league_Management2
             {
                 throw ex;
             }
+        }
+
+        public void Dispose()
+        {
+            Close();
         }
     }
 

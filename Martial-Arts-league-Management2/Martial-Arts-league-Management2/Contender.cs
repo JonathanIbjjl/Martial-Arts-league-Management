@@ -8,13 +8,12 @@ namespace Contenders
 {
     class Contender
     {
-        public string Name { get; set; }
+        public string FirstName { get; set; }
         public string Lastname { get; set; }
         public string ID { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string DateOfBirth { get; set; } // its not DateTime Type because format is not validated inside google docs
-        public int Age { get; set; }
         public int AgeCategory { get; set; }
         public bool IsMale { get; set; }
         public int Weight { get; set; }
@@ -26,6 +25,30 @@ namespace Contenders
         public bool IsAllowedWeightGradeAbove { get; set; }
         public bool IsAllowedAgeGradeAbove { get; set; }
         public bool IsAllowedBeltGradeAbove { get; set; }
+        public bool IsAllowedVersusMan { get; set; }
         public bool IsChild { get; set; }
+
+        private Dictionary<string, bool> _HeadersDictionary;
+        public Dictionary<string, bool> HeadersDictionary
+        {
+            get
+            {
+                if (_HeadersDictionary != null)
+                {
+                    _HeadersDictionary = new Dictionary<string, bool>();
+                    return _HeadersDictionary;
+                }
+
+                else
+                {
+                    return _HeadersDictionary;
+                }
+            }
+            set
+            {
+                _HeadersDictionary = value;
+            }
+        }
+
+        }
     }
-}

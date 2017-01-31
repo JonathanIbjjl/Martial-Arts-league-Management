@@ -36,7 +36,11 @@ namespace Martial_Arts_league_Management2
         {
             if (txtPath.Text != string.Empty)
             {
-               LoadFile();
+                LoadFile();
+            }
+            else
+            {
+                Helpers.DefaultMessegeBox("יש לבחור קובץ אקסל לטעינה", "לא נבחר קובץ", MessageBoxIcon.Information);
             }
         }
 
@@ -44,7 +48,21 @@ namespace Martial_Arts_league_Management2
         {
             // excel instance
             ExcelOperations Eo = new ExcelOperations(txtPath.Text);
-            Eo.GetContenders();
+            if (Eo.GetContenders() == false)
+            {
+                MessageBox.Show("קרתה תקלה בטעינת האקסל, התוכנית הפסיקה את פעולתה", "תקלה קריטית", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign);
+                return;
+            }
+            else
+            {
+
+                Eo.Dispose();
+            }
+        }
+
+        private void txtPath_TextChanged(object sender, EventArgs e)
+        {
+            btnLoadFile.Enabled = true;
         }
     }
 }

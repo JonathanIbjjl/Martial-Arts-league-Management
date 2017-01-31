@@ -37,6 +37,8 @@
             this.txtPath = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnLoadFile = new System.Windows.Forms.Button();
+            this.קובץToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -44,8 +46,12 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.Black;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.קובץToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.menuStrip1.Size = new System.Drawing.Size(1044, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
@@ -57,6 +63,7 @@
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 24);
             this.tabControl1.Name = "tabControl1";
+            this.tabControl1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1044, 481);
             this.tabControl1.TabIndex = 1;
@@ -102,6 +109,7 @@
             this.txtPath.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.txtPath.Size = new System.Drawing.Size(497, 20);
             this.txtPath.TabIndex = 1;
+            this.txtPath.TextChanged += new System.EventHandler(this.txtPath_TextChanged);
             // 
             // groupBox1
             // 
@@ -120,13 +128,22 @@
             // btnLoadFile
             // 
             this.btnLoadFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoadFile.Location = new System.Drawing.Point(5, 25);
+            this.btnLoadFile.Enabled = false;
+            this.btnLoadFile.Location = new System.Drawing.Point(96, 25);
             this.btnLoadFile.Name = "btnLoadFile";
             this.btnLoadFile.Size = new System.Drawing.Size(86, 68);
             this.btnLoadFile.TabIndex = 2;
             this.btnLoadFile.Text = "טען קובץ";
             this.btnLoadFile.UseVisualStyleBackColor = true;
             this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
+            // 
+            // קובץToolStripMenuItem
+            // 
+            this.קובץToolStripMenuItem.BackColor = System.Drawing.Color.Black;
+            this.קובץToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.קובץToolStripMenuItem.Name = "קובץToolStripMenuItem";
+            this.קובץToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.קובץToolStripMenuItem.Text = "קובץ";
             // 
             // Form1
             // 
@@ -138,8 +155,10 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.Text = "Form1";
+            this.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Text = "IBJJL | מערכת ניהול ליגה";
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
@@ -159,6 +178,7 @@
         private System.Windows.Forms.TextBox txtPath;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnLoadFile;
+        private System.Windows.Forms.ToolStripMenuItem קובץToolStripMenuItem;
     }
 }
 
