@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using System.Drawing;
-
+using System.Diagnostics;
 namespace Martial_Arts_league_Management2
 {
     class ExcelOperations : IDisposable
@@ -37,7 +37,6 @@ namespace Martial_Arts_league_Management2
         protected Worksheet ExWs = null;
         protected string WorkSheetName = string.Empty; 
         protected string Path = string.Empty;
-        protected Dictionary<string, int> ColumnsDictionary;
         public Contenders.Contender ContenderObj; 
         public ExcelOperations(string path)
         {
@@ -56,12 +55,12 @@ namespace Martial_Arts_league_Management2
                     choose.showForm();
                     // choosen worksheet
                     WorkSheetName = choose.ChoosenWsName;
-                    ExWs = XlWb.Worksheets[WorkSheetName];
+                    ExWs = (Worksheet)XlWb.Sheets[WorkSheetName];
                 }
                 else
                 {
                     // the first worksheet is the only one
-                    ExWs = XlWb.Worksheets[0];
+                    ExWs = (Worksheet)XlWb.Sheets[1];
                 }
 
                 //continue analizing excel, check data is legal
@@ -81,10 +80,16 @@ namespace Martial_Arts_league_Management2
 
         private bool IsExcelIsLegal()
         {
+            // init contender object
             ContenderObj = new Contenders.Contender();
             // check column names
-            ColumnsDictionary = new Dictionary<string, int>();
-            return false; // TODO: delete this
+            if (CheckExcelColsExist() == false)
+            {
+                Close();
+                return false;
+            }
+
+            return true;
         }
 
         protected bool Open()
@@ -95,7 +100,7 @@ namespace Martial_Arts_league_Management2
                 return true;
             }
 
-            catch (Exception ex)
+            catch
             {
                 Close();
                 return false;
@@ -114,6 +119,54 @@ namespace Martial_Arts_league_Management2
             }
 
             return result;
+        }
+
+        protected bool CheckExcelColsExist()
+        {
+            // iterate via array column names
+            for (int i = 0; i < Helpers.ColsRecognition.GetLength(0); i++)
+            {
+                // default value of dictionary is '0' if it stays zero at the end of the function the column is missing
+                ContenderObj.HeadersDictionary.Add(Helpers.ColsRecognition[i, 0], 0);
+                // iterate trough the first 100 columns of the worksheet
+                for (int j = 1; j < 100; j++)
+                {
+
+                    string s = ExWs.Cells[1, j].Value;
+                    // check if column contains target string
+                    if (s != null && s.Contains(Helpers.ColsRecognition[i, 1]))
+                    {
+                        // swap 0 value with the column number
+                        ContenderObj.HeadersDictionary[Helpers.ColsRecognition[i, 0]] = j;
+                        break;
+                    }
+                }
+            }
+
+            // check if dictionary is legal (no zeros)
+            foreach (KeyValuePair<string, int> itm in ContenderObj.HeadersDictionary)
+            {
+                if (itm.Value == 0)
+                {
+                    // find the missing column
+                    string missing = "";
+                    for (int i = 0; i < Helpers.ColsRecognition.GetLength(0); i++)
+                    {
+                        if (itm.Key == Helpers.ColsRecognition[i, 0])
+                        {
+                            missing = Helpers.ColsRecognition[i, 2];
+                            break;
+                        }
+                    }
+                        // the dictionary is not valid promt the user
+                        Helpers.DefaultMessegeBox(":העמודה הבאה חסרה בקובץ " + " " +
+                            Environment.NewLine + missing + Environment.NewLine +
+                            "התוכנית תפסיק את פעולתה", "מידע קריטי חסר", System.Windows.Forms.MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+
+            return true; // columns are valid
         }
 
         protected void Close()

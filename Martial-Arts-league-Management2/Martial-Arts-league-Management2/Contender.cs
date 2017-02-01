@@ -20,6 +20,7 @@ namespace Contenders
         public int WeightCategory { get; set; }
         public int Belt { get; set; }
         public string AcademyName { get; set; }
+        public string AcademyNameNotInCombo { get; set; }
         public string CoachName { get; set; }
         public string CoachPhone { get; set; }
         public bool IsAllowedWeightGradeAbove { get; set; }
@@ -27,15 +28,16 @@ namespace Contenders
         public bool IsAllowedBeltGradeAbove { get; set; }
         public bool IsAllowedVersusMan { get; set; }
         public bool IsChild { get; set; }
-
-        private Dictionary<string, bool> _HeadersDictionary;
-        public Dictionary<string, bool> HeadersDictionary
+        
+        // hash table for excel column names (keys) and column number (value)
+        private Dictionary<string, int> _HeadersDictionary;
+        public Dictionary<string, int> HeadersDictionary
         {
             get
             {
-                if (_HeadersDictionary != null)
+                if (_HeadersDictionary == null)
                 {
-                    _HeadersDictionary = new Dictionary<string, bool>();
+                    _HeadersDictionary = new Dictionary<string, int>();
                     return _HeadersDictionary;
                 }
 
@@ -49,6 +51,16 @@ namespace Contenders
                 _HeadersDictionary = value;
             }
         }
+
+
+
+
+
+
+
+
+
+
 
         }
     }

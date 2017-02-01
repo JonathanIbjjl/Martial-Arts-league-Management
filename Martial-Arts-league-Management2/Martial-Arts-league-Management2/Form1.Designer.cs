@@ -30,14 +30,14 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.קובץToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btnBrowse = new System.Windows.Forms.Button();
-            this.txtPath = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnLoadFile = new System.Windows.Forms.Button();
-            this.קובץToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtPath = new System.Windows.Forms.TextBox();
+            this.btnBrowse = new System.Windows.Forms.Button();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -55,6 +55,14 @@
             this.menuStrip1.Size = new System.Drawing.Size(1044, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // קובץToolStripMenuItem
+            // 
+            this.קובץToolStripMenuItem.BackColor = System.Drawing.Color.Black;
+            this.קובץToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.קובץToolStripMenuItem.Name = "קובץToolStripMenuItem";
+            this.קובץToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.קובץToolStripMenuItem.Text = "קובץ";
             // 
             // tabControl1
             // 
@@ -78,38 +86,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1036, 455);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // btnBrowse
-            // 
-            this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowse.Location = new System.Drawing.Point(934, 45);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(86, 29);
-            this.btnBrowse.TabIndex = 0;
-            this.btnBrowse.Text = "בחר קובץ";
-            this.btnBrowse.UseVisualStyleBackColor = true;
-            this.btnBrowse.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // txtPath
-            // 
-            this.txtPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPath.Location = new System.Drawing.Point(431, 50);
-            this.txtPath.Name = "txtPath";
-            this.txtPath.ReadOnly = true;
-            this.txtPath.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtPath.Size = new System.Drawing.Size(497, 20);
-            this.txtPath.TabIndex = 1;
-            this.txtPath.TextChanged += new System.EventHandler(this.txtPath_TextChanged);
             // 
             // groupBox1
             // 
@@ -137,13 +113,37 @@
             this.btnLoadFile.UseVisualStyleBackColor = true;
             this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
             // 
-            // קובץToolStripMenuItem
+            // txtPath
             // 
-            this.קובץToolStripMenuItem.BackColor = System.Drawing.Color.Black;
-            this.קובץToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.קובץToolStripMenuItem.Name = "קובץToolStripMenuItem";
-            this.קובץToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.קובץToolStripMenuItem.Text = "קובץ";
+            this.txtPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPath.Location = new System.Drawing.Point(431, 50);
+            this.txtPath.Name = "txtPath";
+            this.txtPath.ReadOnly = true;
+            this.txtPath.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtPath.Size = new System.Drawing.Size(497, 20);
+            this.txtPath.TabIndex = 1;
+            this.txtPath.TextChanged += new System.EventHandler(this.txtPath_TextChanged);
+            // 
+            // btnBrowse
+            // 
+            this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBrowse.Location = new System.Drawing.Point(934, 45);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(86, 29);
+            this.btnBrowse.TabIndex = 0;
+            this.btnBrowse.Text = "בחר קובץ";
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1036, 455);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -156,7 +156,8 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Text = "IBJJL | מערכת ניהול ליגה";
+            this.Text = "IBJJF | מערכת ניהול ליגה";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);

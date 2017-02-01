@@ -64,5 +64,11 @@ namespace Martial_Arts_league_Management2
         {
             btnLoadFile.Enabled = true;
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
