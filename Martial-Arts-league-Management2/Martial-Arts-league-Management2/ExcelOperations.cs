@@ -9,7 +9,7 @@ using System.Drawing;
 using System.Diagnostics;
 namespace Martial_Arts_league_Management2
 {
-    class ExcelOperations : IDisposable
+  partial class ExcelOperations : IDisposable
     {
         protected Application _ExApp = null;
         protected Application ExApp
@@ -36,8 +36,9 @@ namespace Martial_Arts_league_Management2
         protected Workbook XlWb = null;
         protected Worksheet ExWs = null;
         protected string WorkSheetName = string.Empty; 
+        protected int LastRow = 1;
         protected string Path = string.Empty;
-        public Contenders.Contender ContenderObj; 
+        public Contenders.ContndersGeneral ContenderObj; 
         public ExcelOperations(string path)
         {
             this.Path = path;          
@@ -66,6 +67,9 @@ namespace Martial_Arts_league_Management2
                 //continue analizing excel, check data is legal
                 if (IsExcelIsLegal() == false)
                     return false;
+                // set contenders properties
+                if (SetContender() == false)
+                    return false;
 
                 return true;
             }
@@ -78,10 +82,11 @@ namespace Martial_Arts_league_Management2
             }
         }
 
+
         private bool IsExcelIsLegal()
         {
             // init contender object
-            ContenderObj = new Contenders.Contender();
+            ContenderObj = new Contenders.ContndersGeneral();
             // check column names
             if (CheckExcelColsExist() == false)
             {
@@ -89,7 +94,57 @@ namespace Martial_Arts_league_Management2
                 return false;
             }
 
+            // check that are not null rows
+            if (CheckNullRows() == false)
+            {
+                Close();
+                return false;
+            }
+
             return true;
+        }
+
+        private bool CheckNullRows()
+        {
+            // 1 is or un equal used rows or 1 row
+            if (SetLastRow(ContenderObj.HeadersDictionary["FirstName"], ContenderObj.HeadersDictionary["LastName"]) == 1)
+            {
+                return false;
+            }
+
+            // check if all columns have values
+            for (int i = 1; i <= LastRow; i++)
+            {
+                for (int j = 0; j <= ContenderObj.NotAllowedNullColumns.Length - 1; j++)
+                {
+                    var s = ExWs.Cells[i, ContenderObj.HeadersDictionary[ContenderObj.NotAllowedNullColumns[j]]].Value;
+ 
+
+                    if ( s == null )
+                    {
+                        Helpers.DefaultMessegeBox("חסרים נתונים בשורה" + " " + i + " " + Environment.NewLine + "עמודת" + " " + FindQuestionByPropertyName( ContenderObj.NotAllowedNullColumns[j])
+                             + Environment.NewLine + "יש לתקן את הקובץ, התוכנית תפסיק את פעולתה","נתונים קריטיים חסרים",System.Windows.Forms.MessageBoxIcon.Warning);
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        private int SetLastRow(int firstNameCol,int LastNameCol)
+        {
+
+            int lr1 = ExWs.Cells[ExWs.Rows.Count, firstNameCol].End(XlDirection.xlUp).Row;
+            int lr2 = ExWs.Cells[ExWs.Rows.Count, LastNameCol].End(XlDirection.xlUp).Row;
+
+            if (lr1 != lr2)
+            {
+                Helpers.DefaultMessegeBox("לא יתכן שעמודות שם משפחה ושם פרטי אינן שוות במספר הנתונים שלהם. התוכנית תפסיק את פעולתה", "מידע קריטי חסר", System.Windows.Forms.MessageBoxIcon.Warning);
+                return 1;
+            }
+            // set global field of last row
+            this.LastRow = lr1;
+            return lr1;
         }
 
         protected bool Open()
@@ -149,15 +204,8 @@ namespace Martial_Arts_league_Management2
                 if (itm.Value == 0)
                 {
                     // find the missing column
-                    string missing = "";
-                    for (int i = 0; i < Helpers.ColsRecognition.GetLength(0); i++)
-                    {
-                        if (itm.Key == Helpers.ColsRecognition[i, 0])
-                        {
-                            missing = Helpers.ColsRecognition[i, 2];
-                            break;
-                        }
-                    }
+                    string missing = FindQuestionByPropertyName(itm.Key);
+                  
                         // the dictionary is not valid promt the user
                         Helpers.DefaultMessegeBox(":העמודה הבאה חסרה בקובץ " + " " +
                             Environment.NewLine + missing + Environment.NewLine +
@@ -167,6 +215,21 @@ namespace Martial_Arts_league_Management2
             }
 
             return true; // columns are valid
+        }
+
+        private string FindQuestionByPropertyName(string ContenderPropertyName)
+        {
+            string missing = "";
+            for (int i = 0; i < Helpers.ColsRecognition.GetLength(0); i++)
+            {
+                if (ContenderPropertyName == Helpers.ColsRecognition[i, 0])
+                {
+                    missing = Helpers.ColsRecognition[i, 2];
+                    break;
+                }
+            }
+
+            return missing;
         }
 
         protected void Close()

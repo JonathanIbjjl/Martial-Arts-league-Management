@@ -58,7 +58,7 @@ namespace Martial_Arts_league_Management2
             string[,] ExcelColumnsRecognition = new string[19, 3];
             // column with the name of the property
             ExcelColumnsRecognition[0,0] = "FirstName";
-            ExcelColumnsRecognition[1,0] = "Lastname";
+            ExcelColumnsRecognition[1,0] = "LastName";
             ExcelColumnsRecognition[2,0] = "ID";
             ExcelColumnsRecognition[3,0] = "Email";
             ExcelColumnsRecognition[4,0] = "PhoneNumber";
@@ -125,7 +125,24 @@ namespace Martial_Arts_league_Management2
         }
 
 
+        public static bool IsNumeric(object s)
+        {
+            float output;
+            return float.TryParse((string)s, out output);
+        }
 
+        public static bool IsString(object s)
+        {
+            if (s is string)
+            {
+                return true;
+            }
+
+            else
+            {
+                return false;
+            }
+        }
 
     }
 }

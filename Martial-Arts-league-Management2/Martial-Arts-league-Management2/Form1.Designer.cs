@@ -156,7 +156,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Text = "IBJJF | מערכת ניהול ליגה";
+            this.Text = "IBJJL | מערכת ניהול ליגה";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
