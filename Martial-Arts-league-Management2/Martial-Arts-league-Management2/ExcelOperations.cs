@@ -46,6 +46,14 @@ namespace Martial_Arts_league_Management2
 
         public bool GetContenders()
         {
+
+            // check if excel is open
+            if (Helpers.fileIsOpen(Path) == true)
+            {
+                Helpers.DefaultMessegeBox("קובץ האקסל פתוח, אנא סגור אותו וטען את הקובץ שוב" + Environment.NewLine + "התוכנית תפסיק את הפעולתה", "הקובץ בשימוש", System.Windows.Forms.MessageBoxIcon.Warning);
+                return false;
+            }
+
             if (Open())
             {
                 // check if there is multiple sheets

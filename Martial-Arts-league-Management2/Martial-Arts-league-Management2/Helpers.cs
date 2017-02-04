@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Martial_Arts_league_Management2
@@ -141,6 +142,44 @@ namespace Martial_Arts_league_Management2
             else
             {
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// convert number that exist in a string to an int32 for example sdfdf43gn will return as 43
+        /// </summary>
+        /// <param name="value">string that contains inside him as digits</param>
+        /// <returns>int32</returns>
+        /// <remarks>the digits of the number must be one after another another</remarks>
+        public static double extractNumberFromString(string value)
+        {
+            string returnVal = string.Empty;
+            MatchCollection collection = Regex.Matches(value, "\\d+");
+            foreach (Match m in collection)
+            {
+                returnVal += m.ToString();
+            }
+
+            return Convert.ToDouble(returnVal);
+        }
+
+
+        public static bool fileIsOpen(string path)
+        {
+
+            try
+            {
+                System.IO.FileStream a = System.IO.File.Open(path, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.None);
+                a.Close();
+                a.Dispose();
+                a = null;
+
+                return false;
+            }
+            catch (System.IO.IOException ex)
+            {
+                return true;
             }
         }
 

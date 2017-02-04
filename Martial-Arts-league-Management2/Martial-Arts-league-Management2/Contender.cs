@@ -67,6 +67,92 @@ namespace Contenders
             }
         }
 
+        private static Dictionary<string, int> _ChildWeightCat;
+        public static Dictionary<string, int> ChildWeightCat
+        {
+            get
+            {
+                if (_ChildWeightCat == null)
+                {
+                    _ChildWeightCat = new Dictionary<string, int>();
+
+                    ChildWeightCat.Add("עד 21", 1);
+                    ChildWeightCat.Add("מעל 21", 2);
+                    ChildWeightCat.Add("עד 24", 3);
+                    ChildWeightCat.Add("עד 27", 4);
+                    ChildWeightCat.Add("עד 30", 5);
+                    ChildWeightCat.Add("מעל 30", 6);
+                    ChildWeightCat.Add("עד 34", 7);
+                    ChildWeightCat.Add("עד 38", 8);
+                    ChildWeightCat.Add("מעל 38", 9);
+                    ChildWeightCat.Add("עד 42", 10);
+                    ChildWeightCat.Add("עד 46", 11);
+                    ChildWeightCat.Add("עד 50", 12);
+                    ChildWeightCat.Add("מעל 50", 13);
+                    ChildWeightCat.Add("עד 55", 14);
+                    ChildWeightCat.Add("מעל 55", 15);
+                    ChildWeightCat.Add("עד 60", 16);
+                    ChildWeightCat.Add("עד 65", 17);
+                    ChildWeightCat.Add("מעל 65", 18);
+                    ChildWeightCat.Add("עד 70", 19);
+                    ChildWeightCat.Add("עד 75", 20);
+                    ChildWeightCat.Add("עד 80", 21);
+                    ChildWeightCat.Add("מעל 80", 22);
+
+                    return _ChildWeightCat;
+                }
+                else
+                {
+                    return _ChildWeightCat;
+                }
+            }
+        }
+
+        private static Dictionary<string, int> _AdultWeightCat;
+        public static Dictionary<string, int> AdultWeightCat
+        {
+            get
+            {
+                if (_AdultWeightCat == null)
+                {
+                    _AdultWeightCat = new Dictionary<string, int>();
+
+                    AdultWeightCat.Add("עד 53.5", 14);
+                    AdultWeightCat.Add("עד 58.5", 15);
+                    AdultWeightCat.Add("עד 60", 16);
+                    AdultWeightCat.Add("עד 64", 17);
+                    AdultWeightCat.Add("עד 69", 18);
+                    AdultWeightCat.Add("עד 70", 19);
+                    AdultWeightCat.Add("עד 74", 20);
+                    AdultWeightCat.Add("מעל 74", 21);
+                    AdultWeightCat.Add("עד 76", 22);
+                    AdultWeightCat.Add("עד 82", 23);
+                    AdultWeightCat.Add("עד 88", 24);
+                    AdultWeightCat.Add("עד 94", 25);
+                    AdultWeightCat.Add("עד 100", 26);
+                    AdultWeightCat.Add("מעל 100", 27);
+
+                    return _AdultWeightCat;
+                }
+                else
+                {
+                    return _AdultWeightCat;
+                }
+            }
+        }
+
+        public enum BeltsEnum
+        {
+            white = 1,
+            gray = 2,
+            yellow = 3,
+            orange = 4,
+            green = 5,
+            blue = 6,
+            purpule = 7,
+            brown = 8,
+            black = 9
+        }
     }
 
 
@@ -80,20 +166,21 @@ namespace Contenders
         public string DateOfBirth { get; set; } // its not DateTime Type because format is not validated inside google docs
         public int AgeCategory { get; set; }
         public bool IsMale { get; set; }
-        public int Weight { get; set; }
+        public double Weight { get; set; }
         public int WeightCategory { get; set; }
         public int Belt { get; set; }
+        private string _AcademyName;
         public string AcademyName {
             get
             {
-                if (AcademyName == string.Empty)
+                if (_AcademyName == "האקדמיה אינה מופיע ברשימה" || _AcademyName == "האקדמיה אינה מופיעה ברשימה" || _AcademyName.Contains("אינה מופיע"))
                     return AcademyNameNotInCombo;
                 else
-                    return AcademyName;
+                    return _AcademyName;
             }
             set
             {
-                AcademyName = value;
+                _AcademyName = value;
             }
         }
         public string AcademyNameNotInCombo { get; set; }
