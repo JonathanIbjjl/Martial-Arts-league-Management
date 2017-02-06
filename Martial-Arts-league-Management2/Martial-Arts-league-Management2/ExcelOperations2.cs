@@ -53,16 +53,17 @@ namespace Martial_Arts_league_Management2
                         return false;
                 }
 
-            
+
 
             foreach (Contenders.Contender f in ContendersList)
-                Debug.WriteLine(f.FirstName + " " + f.LastName  + " " + f.ID
-                    + " " + f.Email + " " + f.PhoneNumber  + " " + f.DateOfBirth
-                    + " " + f.AgeCategory  + " " + f.IsMale  + " " + f.Weight
-                    + " " + f.IsChild  + " " + f.WeightCategory.ToString()
-                   + " " + f.AcademyName +  " " + f.CoachName + " " + f.CoachPhone
-                   + " " + f.IsAllowedAgeGradeAbove + " " + f.IsAllowedBeltGradeAbove + " " + f.IsAllowedVersusMan + " " + f.IsAllowedWeightGradeAbove
-                   + " " + (Contenders.ContndersGeneral.BeltsEnum)f.Belt);
+            {
+                Debug.WriteLine( f.Grade);
+                
+            }
+
+            Debug.WriteLine("---------------");
+            LeagueScattering l = new LeagueScattering(ContendersList);
+            Debug.WriteLine(l.GetAverageGrade() + "      " +l.GetStdDivision());
 
             if (isok == true)
                 return true;
@@ -145,7 +146,7 @@ namespace Martial_Arts_league_Management2
                     return Contenders.ContndersGeneral.AgeGrades[k.Key];
                 }
             }
-
+            isok = false;
             Helpers.DefaultMessegeBox(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "מכיל קטגוריית גיל לא חוקית" + Environment.NewLine + "התוכנית תפסיק את פעולתה", "נתון חסר", System.Windows.Forms.MessageBoxIcon.Warning);
             return 0;
         }
@@ -222,8 +223,8 @@ namespace Martial_Arts_league_Management2
                     }
                 }
             }
-
-            Helpers.DefaultMessegeBox(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "מכיל קטגוריית גיל לא חוקית" + Environment.NewLine + "התוכנית תפסיק את פעולתה", "נתון חסר", System.Windows.Forms.MessageBoxIcon.Warning);
+            isok = false;
+            Helpers.DefaultMessegeBox(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "מכיל קטגוריית משקל לא חוקית" + Environment.NewLine + "התוכנית תפסיק את פעולתה", "נתון חסר", System.Windows.Forms.MessageBoxIcon.Warning);
             return 0;
         }
 

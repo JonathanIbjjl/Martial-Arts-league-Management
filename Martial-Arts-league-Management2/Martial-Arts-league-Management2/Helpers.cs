@@ -87,15 +87,15 @@ namespace Martial_Arts_league_Management2
             ExcelColumnsRecognition[5, 1] = "תאריך לידה";
             ExcelColumnsRecognition[6, 1] = "פחות שנת הלידה";
             ExcelColumnsRecognition[7, 1] = "מגדר";
-            ExcelColumnsRecognition[8, 1] = "משקל אמיתי כולל חליפה ( שקילה לפי חוקי IBJJF)";
-            ExcelColumnsRecognition[9, 1] = "קטגורית משקל.( לפי קטגוריות משקל IBJJF)";
-            ExcelColumnsRecognition[10, 1] = "דרגת חגורה לפי IBJJF בלבד";
+            ExcelColumnsRecognition[8, 1] = "משקל אמיתי כולל חליפה";
+            ExcelColumnsRecognition[9, 1] = "קטגורית משקל";
+            ExcelColumnsRecognition[10, 1] = "דרגת חגורה";
             ExcelColumnsRecognition[11, 1] = "שם אקדמיה";
             ExcelColumnsRecognition[12, 1] = "שם מאמן";
             ExcelColumnsRecognition[13, 1] = "מספר טלפון נייד של המאמן";
             ExcelColumnsRecognition[14, 1] = "במידה ולא ימצא מתחרה בקטגורית משקל";
-            ExcelColumnsRecognition[15, 1] = "במידה ולא ימצא מתחרה מאותה קטגורית גיל";
-            ExcelColumnsRecognition[16, 1] = "במידה ולא ימצא מתחרה מאותה דרגת חגורה";
+            ExcelColumnsRecognition[15, 1] = "קטגורית גיל אחת גבוהה יותר";
+            ExcelColumnsRecognition[16, 1] = "דרגת חגורה אחת גבוהה יותר";
             ExcelColumnsRecognition[17, 1] = "האם ניתן לשבץ בקטגוריה מעורבת";
             ExcelColumnsRecognition[18, 1] = "אם האקדמיה אינה מופיעה ברשימה";
 

@@ -192,6 +192,54 @@ namespace Contenders
         public bool IsAllowedVersusMan { get; set; }
         public bool IsChild { get; set; }
 
- }
+        public int Grade
+        {
+            get
+            {
+                return AgeCategory + WeightCategory + Belt;
+            }
+        }
 
+
+ }
+    /// <summary>
+    /// this class crosses contender data against the intier entire league descriptive statistics
+    /// its adds more statistic data to perform brackets division to each contender compare the the league
+    /// </summary>
+    class ContenderLeague : Contenders.Contender
+    {
+        private Martial_Arts_league_Management2.LeagueScattering League;
+        private Contender _Contender;
+        public Contender Contender
+        {
+            get
+            {
+                return _Contender;
+            }
+        }
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="contender">contender object</param>
+        /// <param name="LeagueToCompare">league of all contenders to compare</param>
+        public ContenderLeague(Contender contender,Martial_Arts_league_Management2.LeagueScattering LeagueToCompare)
+        {
+            this._Contender = contender;
+            this.League = LeagueToCompare;
+        }
+
+        /// <summary>
+        /// number of the contender incidents inside the league (count())
+        /// </summary>
+        public int FrequencyOfGrade
+        {
+            get
+            {
+                return League.Contenders.AsEnumerable().Where(x => x.Grade == Contender.Grade).Count();
+            }
+        }
+
+    }
+    
+    
 }
