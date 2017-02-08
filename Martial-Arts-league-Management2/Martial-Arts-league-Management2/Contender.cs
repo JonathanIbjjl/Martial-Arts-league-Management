@@ -239,7 +239,6 @@ namespace Contenders
             }
         }
 
-    }
-    
+    }  
     
 }

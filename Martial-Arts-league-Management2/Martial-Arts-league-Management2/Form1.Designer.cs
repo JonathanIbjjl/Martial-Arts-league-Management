@@ -34,16 +34,18 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.btnLoadFile = new System.Windows.Forms.Button();
             this.txtPath = new System.Windows.Forms.TextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.numNumberOfContenders = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numNumberOfContenders)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -91,6 +93,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.numNumberOfContenders);
             this.groupBox1.Controls.Add(this.checkBox2);
             this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Controls.Add(this.btnLoadFile);
@@ -104,6 +107,26 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "טעינת קבצים";
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(196, 62);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(199, 17);
+            this.checkBox2.TabIndex = 4;
+            this.checkBox2.Text = "בדוק תאימות גיל וקטגורית משקל";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(188, 35);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(207, 17);
+            this.checkBox1.TabIndex = 3;
+            this.checkBox1.Text = "בדוק תאימות קטגורית משקל ומגדר";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // btnLoadFile
             // 
@@ -149,25 +172,28 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // numNumberOfContenders
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(188, 35);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(207, 17);
-            this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "בדוק תאימות קטגורית משקל ומגדר";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(196, 62);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(199, 17);
-            this.checkBox2.TabIndex = 4;
-            this.checkBox2.Text = "בדוק תאימות גיל וקטגורית משקל";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.numNumberOfContenders.Location = new System.Drawing.Point(332, 85);
+            this.numNumberOfContenders.Maximum = new decimal(new int[] {
+            250,
+            0,
+            0,
+            0});
+            this.numNumberOfContenders.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numNumberOfContenders.Name = "numNumberOfContenders";
+            this.numNumberOfContenders.Size = new System.Drawing.Size(63, 20);
+            this.numNumberOfContenders.TabIndex = 5;
+            this.numNumberOfContenders.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.numNumberOfContenders.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // Form1
             // 
@@ -188,6 +214,7 @@
             this.tabPage1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numNumberOfContenders)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -206,6 +233,7 @@
         private System.Windows.Forms.ToolStripMenuItem קובץToolStripMenuItem;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.NumericUpDown numNumberOfContenders;
     }
 }
 

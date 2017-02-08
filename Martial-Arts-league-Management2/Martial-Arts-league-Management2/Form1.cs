@@ -70,5 +70,11 @@ namespace Martial_Arts_league_Management2
 
         }
 
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            // change the value of the brackets number of contenders
+            GeneralBracket.setNumberOfContenders((byte)numNumberOfContenders.Value);
+            btnBrowse.Focus();
+        }
     }
 }

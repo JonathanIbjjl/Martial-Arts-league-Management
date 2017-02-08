@@ -77,6 +77,7 @@ namespace Martial_Arts_league_Management2
         {
             return Contenders.Average(x => x.Grade);
         }
+
         /// <summary>
         /// standard division of all grades in league
         /// </summary>

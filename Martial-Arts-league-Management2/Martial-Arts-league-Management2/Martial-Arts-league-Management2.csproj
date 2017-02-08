@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bracket.cs" />
     <Compile Include="Contender.cs" />
     <Compile Include="DynamicForms.cs" />
     <Compile Include="ExcelOperations.cs" />

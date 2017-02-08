@@ -183,5 +183,32 @@ namespace Martial_Arts_league_Management2
             }
         }
 
+        public static string GetHebBeltName(Contenders.ContndersGeneral.BeltsEnum belt)
+        {
+            switch (belt)
+            {
+                case Contenders.ContndersGeneral.BeltsEnum.white:
+                    return "לבנה";
+                case Contenders.ContndersGeneral.BeltsEnum.yellow:
+                    return "צהובה";
+                case Contenders.ContndersGeneral.BeltsEnum.purpule:
+                    return "סגולה";
+                case Contenders.ContndersGeneral.BeltsEnum.orange:
+                    return "כתומה";
+                case Contenders.ContndersGeneral.BeltsEnum.green:
+                    return "ירוקה";
+                case Contenders.ContndersGeneral.BeltsEnum.gray:
+                    return "אפורה";
+                case Contenders.ContndersGeneral.BeltsEnum.brown:
+                    return "חומה";
+                case Contenders.ContndersGeneral.BeltsEnum.blue:
+                    return "כחולה";
+                case Contenders.ContndersGeneral.BeltsEnum.black:
+                    return "שחורה";
+                default:
+                    return "";
+            }
+             
+        }
     }
 }
