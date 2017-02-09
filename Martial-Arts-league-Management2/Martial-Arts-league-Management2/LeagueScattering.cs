@@ -20,7 +20,7 @@ namespace Martial_Arts_league_Management2
             }
         }
 
-        public Dictionary<int, int> RankOfFrequencies;
+        public Dictionary<double, int> RankOfFrequencies;
         public Dictionary<string, int> RankOfAcademys;
 
         public LeagueScattering(List<Contenders.Contender> contenders)
@@ -36,16 +36,16 @@ namespace Martial_Arts_league_Management2
         private void SetRankOfFrequencies()
         {
             // temp dictionary (will be sorted for the global dictionary)
-          Dictionary<int,int>  TempRankOfFrequencies = new Dictionary<int, int>();
+          Dictionary<double, int>  TempRankOfFrequencies = new Dictionary<double, int>();
             // extract distinct grades
-            int[] DistinctGrades = Contenders.Select(x => x.Grade).Distinct().ToArray();
+            double[] DistinctGrades = Contenders.Select(x => x.Grade).Distinct().ToArray();
             // EXTRACT DATA: key: distinct grade value: number of insidents in all league
-            foreach (int g in DistinctGrades)
+            foreach (double g in DistinctGrades)
             {
                 TempRankOfFrequencies.Add(g, Contenders.Where(x => x.Grade == g).Count());
             }
             // sort the dictionary by value(rank)
-           RankOfFrequencies = new Dictionary<int, int>();
+           RankOfFrequencies = new Dictionary<double, int>();
            var ordered = TempRankOfFrequencies.OrderBy(x => x.Value);
            RankOfFrequencies = ordered.ToDictionary(t => t.Key, t => t.Value);
         }

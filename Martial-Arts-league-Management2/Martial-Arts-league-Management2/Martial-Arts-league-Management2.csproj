@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bracket.cs" />
+    <Compile Include="BracketsCreator.cs" />
     <Compile Include="Contender.cs" />
     <Compile Include="DynamicForms.cs" />
     <Compile Include="ExcelOperations.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GlobalVars.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="LeagueScattering.cs" />
     <Compile Include="Program.cs" />

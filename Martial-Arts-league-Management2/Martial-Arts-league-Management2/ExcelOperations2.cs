@@ -11,11 +11,11 @@ namespace Martial_Arts_league_Management2
 {
     partial class ExcelOperations
     {
-        List<Contenders.Contender> ContendersList;
+       
         private bool SetContender()
         {
            
-            ContendersList = new List<Contenders.Contender>();
+            GlobalVars.ListOfContenders = new List<Contenders.Contender>();
             // for out parameter
             bool isok = true;
 
@@ -46,7 +46,7 @@ namespace Martial_Arts_league_Management2
                     con.IsAllowedBeltGradeAbove = GetBooleanQuestions(i, ContenderObj.HeadersDictionary["IsAllowedBeltGradeAbove"], "אישור דרגת חגורה מעל", out isok);
                     con.IsAllowedVersusMan = GetBooleanQuestions(i, ContenderObj.HeadersDictionary["IsAllowedVersusMan"], "אישור להתחרות מול בנים", out isok);
                
-                    ContendersList.Add(con);
+                    GlobalVars.ListOfContenders.Add(con);
 
                     // final check to see if there is no defect in that contender
                     if (isok == false)
@@ -55,16 +55,7 @@ namespace Martial_Arts_league_Management2
 
 
 
-            foreach (Contenders.Contender f in ContendersList)
-            {
-                Debug.WriteLine( f.Grade);
-                
-            }
-
-            Debug.WriteLine("---------------");
-            LeagueScattering l = new LeagueScattering(ContendersList);
-            Debug.WriteLine(l.GetAverageGrade() + "      " +l.GetStdDivision());
-
+         
             if (isok == true)
                 return true;
             else

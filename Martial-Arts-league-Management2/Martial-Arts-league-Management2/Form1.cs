@@ -18,6 +18,7 @@ namespace Martial_Arts_league_Management2
         }
 
         public OpenFileDialog fd = null;
+        private List<Contenders.Contender> ContendersList;
         private void button1_Click(object sender, EventArgs e)
         {
             fd = new OpenFileDialog();
@@ -37,6 +38,7 @@ namespace Martial_Arts_league_Management2
             if (txtPath.Text != string.Empty)
             {
                 LoadFile();
+                Contenders.BracketsCreator test = new Contenders.BracketsCreator(GlobalVars.ListOfContenders);
             }
             else
             {

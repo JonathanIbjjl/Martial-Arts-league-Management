@@ -43,6 +43,7 @@ namespace Martial_Arts_league_Management2
         public int AgeGrade { get; set; }
         public int BeltGrade { get; set; }
         public int WeightGrade { get; set; }
+        public GlobalVars.GenderEnum Gender { get; set; }
     
         private List< Contenders.Contender> _ContendersList;
         public List< Contenders.Contender>ContendersList
@@ -69,7 +70,7 @@ namespace Martial_Arts_league_Management2
             string age = Contenders.ContndersGeneral.AgeGrades.Where(x => x.Value == AgeGrade).Select(z => z.Key).SingleOrDefault();
             string weight = Contenders.ContndersGeneral.ChildWeightCat.Where(x => x.Value == WeightGrade).Select(z => z.Key).SingleOrDefault();
 
-            return "חגורה: " + belt + " " + "גילאי: " + age + " " + "קטגוריית משקל: " + weight;
+            return "חגורה: " + belt + " " + "גילאי: " + age + " " + "קטגוריית משקל: " + weight + " " + "מגדר: " + GlobalVars.GEtGenderStringByEnum(Gender);
         }
 
     }

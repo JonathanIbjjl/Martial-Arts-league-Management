@@ -191,12 +191,33 @@ namespace Contenders
         public bool IsAllowedBeltGradeAbove { get; set; }
         public bool IsAllowedVersusMan { get; set; }
         public bool IsChild { get; set; }
-
-        public int Grade
+        // if one of the bools is true the contender will get a factor of one point
+        public double Factor
         {
             get
             {
-                return AgeCategory + WeightCategory + Belt;
+                if (IsAllowedAgeGradeAbove == true || IsAllowedBeltGradeAbove == true || IsAllowedWeightGradeAbove == true)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+                    }
+        }
+        public double Grade
+        {
+            get
+            {
+                return AgeCategory + WeightCategory + Belt + ((IsMale == false) ? 0.5 : 0);
+            }
+        }
+        public double GradeWithFactor
+        {
+            get
+            {
+                return Grade + Factor;
             }
         }
 
@@ -206,10 +227,27 @@ namespace Contenders
     /// this class crosses contender data against the intier entire league descriptive statistics
     /// its adds more statistic data to perform brackets division to each contender compare the the league
     /// </summary>
-    class ContenderLeague : Contenders.Contender
+    class ContenderLeague
     {
         private Martial_Arts_league_Management2.LeagueScattering League;
         private Contender _Contender;
+        // indication to use this contender with factor
+        public bool UseFactor { get; set; }
+        // returen Final grade with\without a factor based on UseFactor
+        public double FinalGrade
+        {
+            get
+            {
+                if (UseFactor == true)
+                {
+                    return _Contender.GradeWithFactor;
+                }
+                else
+                {
+                    return _Contender.Grade;
+                }
+            }
+        }
         public Contender Contender
         {
             get
