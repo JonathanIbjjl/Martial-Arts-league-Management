@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Martial_Arts_league_Management2
+namespace MartialArts
 {
     public partial class Form1 : Form
     {
@@ -38,7 +38,7 @@ namespace Martial_Arts_league_Management2
             if (txtPath.Text != string.Empty)
             {
                 LoadFile();
-                Contenders.BracketsCreator test = new Contenders.BracketsCreator(GlobalVars.ListOfContenders);
+                Contenders.BracketsCreator test = new Contenders.BracketsCreator(MartialArts.GlobalVars.ListOfContenders);
             }
             else
             {

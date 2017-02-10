@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Martial_Arts_league_Management2
+namespace MartialArts
 {
     static class Program
     {

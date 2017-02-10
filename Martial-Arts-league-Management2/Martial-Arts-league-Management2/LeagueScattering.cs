@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Martial_Arts_league_Management2
+namespace MartialArts
 {
     /// <summary>
     /// class that handles Diffusion indices of the league
     /// </summary>
     class LeagueScattering
     {
+    
         private ICollection<Contenders.Contender> _Contenders;
         public ICollection<Contenders.Contender> Contenders
         {
@@ -20,7 +21,7 @@ namespace Martial_Arts_league_Management2
             }
         }
 
-        public Dictionary<double, int> RankOfFrequencies;
+        public  Dictionary<double, int> RankOfFrequencies;
         public Dictionary<string, int> RankOfAcademys;
 
         public LeagueScattering(List<Contenders.Contender> contenders)
@@ -32,8 +33,11 @@ namespace Martial_Arts_league_Management2
             SetRankOfAcademies();
         }
 
+        public LeagueScattering() { } // only for derived clasess
+        
 
-        private void SetRankOfFrequencies()
+        
+        protected virtual void SetRankOfFrequencies()
         {
             // temp dictionary (will be sorted for the global dictionary)
           Dictionary<double, int>  TempRankOfFrequencies = new Dictionary<double, int>();
@@ -50,7 +54,7 @@ namespace Martial_Arts_league_Management2
            RankOfFrequencies = ordered.ToDictionary(t => t.Key, t => t.Value);
         }
 
-        private void SetRankOfAcademies()
+        protected void SetRankOfAcademies()
         {
             // temp dictionary (will be sorted for the global dictionary)
             Dictionary<string, int> TempRankOfAcademies = new Dictionary<string, int>();
@@ -89,6 +93,62 @@ namespace Martial_Arts_league_Management2
             double sumOfSquaresOfDifferences = Contenders.Select(val => (val.Grade - average) * (val.Grade - average)).Sum();
             double sd = Math.Sqrt(sumOfSquaresOfDifferences / Contenders.Count);
             return sd;
+        }
+
+        /// <summary>
+        /// refresh frequencies when deviding to brackets
+        /// </summary>
+        /// <param name="contenders"></param>
+       public virtual void RefreshFrequencies(List<Contenders.Contender> cont)
+        {
+            _Contenders = cont;
+            // refresh frequencies dictionary
+            SetRankOfFrequencies();
+
+        }
+    }
+
+    class ScattteringWithContenderLeague : LeagueScattering
+    {
+        private ICollection<Contenders.ContenderLeague> _ContendersLeague;
+        public ICollection<Contenders.ContenderLeague> ContendersLeague
+        {
+            get
+            {
+                return _ContendersLeague;
+            }
+        }
+
+        public ScattteringWithContenderLeague(List<Contenders.ContenderLeague> contendersLeague)
+        {
+            this._ContendersLeague = contendersLeague;
+            // create rank of frequencies dictionary
+            SetRankOfFrequencies();
+        }
+
+        protected override void SetRankOfFrequencies()
+        {
+            // temp dictionary (will be sorted for the global dictionary)
+            Dictionary<double, int> TempRankOfFrequencies = new Dictionary<double, int>();
+            // extract distinct grades
+            double[] DistinctGrades = ContendersLeague.Select(x => x.FinalGrade).Distinct().ToArray();
+            // EXTRACT DATA: key: distinct grade value: number of insidents in all league
+            foreach (double g in DistinctGrades)
+            {
+                TempRankOfFrequencies.Add(g, ContendersLeague.Where(x => x.FinalGrade == g).Count());
+            }
+            // sort the dictionary by value(rank)
+            RankOfFrequencies = new Dictionary<double, int>();
+            var ordered = TempRankOfFrequencies.OrderBy(x => x.Value);
+            RankOfFrequencies = ordered.ToDictionary(t => t.Key, t => t.Value);
+        }
+
+        public void RefreshFrequencies(List<Contenders.ContenderLeague> cont)
+        {
+            _ContendersLeague = cont;
+            // refresh frequencies dictionary
+            SetRankOfFrequencies();
+
         }
     }
 }

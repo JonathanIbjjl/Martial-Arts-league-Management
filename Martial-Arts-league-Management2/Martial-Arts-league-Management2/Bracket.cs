@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Martial_Arts_league_Management2
+namespace MartialArts
 {
 
     class GeneralBracket
@@ -44,15 +44,23 @@ namespace Martial_Arts_league_Management2
         public int BeltGrade { get; set; }
         public int WeightGrade { get; set; }
         public GlobalVars.GenderEnum Gender { get; set; }
+
+        public Bracket(int ageGrade,int BeltGrade,int WeightGrade,GlobalVars.GenderEnum gender)
+        {
+            this.AgeGrade = ageGrade;
+            this.WeightGrade = WeightGrade;
+            this.BeltGrade = BeltGrade;
+            this.Gender = gender;
+        }
     
-        private List< Contenders.Contender> _ContendersList;
-        public List< Contenders.Contender>ContendersList
+        private List< Contenders.ContenderLeague> _ContendersList;
+        public List< Contenders.ContenderLeague> ContendersList
         {
             get
             {
                 if (_ContendersList == null)
                 {
-                    this._ContendersList = new List<Contenders.Contender>();  
+                    this._ContendersList = new List<Contenders.ContenderLeague>();  
                     return this._ContendersList;
                 }
                 else

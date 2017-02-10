@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Martial_Arts_league_Management2
+namespace MartialArts
 {
     class Helpers
     {

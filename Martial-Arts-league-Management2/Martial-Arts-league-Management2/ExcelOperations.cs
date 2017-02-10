@@ -7,8 +7,8 @@ using Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using System.Drawing;
 using System.Diagnostics;
-namespace Martial_Arts_league_Management2
-{
+namespace MartialArts
+{ 
   partial class ExcelOperations : IDisposable
     {
         protected Application _ExApp = null;

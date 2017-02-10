@@ -3,9 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MartialArts;
 
 namespace Contenders
 {
+
+    interface IContender
+    {
+         double Grade { get;}
+         string AcademyName { get; }
+         int FrequencyOfGrade { get; }
+        double FinalGrade { get; }
+    }
+
     class ContndersGeneral
     {
         // hash table for excel column names (keys) and column number (value)
@@ -44,20 +54,20 @@ namespace Contenders
                 {
                     _AgeGrades = new Dictionary<string, int>();
 
-                    _AgeGrades.Add("4-5", 1);
-                    _AgeGrades.Add("6-7", 2);
-                    _AgeGrades.Add("8-9", 3);
-                    _AgeGrades.Add("10-11", 4);
-                    _AgeGrades.Add("12-13", 5);
-                    _AgeGrades.Add("14-15", 6);
-                    _AgeGrades.Add("16-17", 7);
-                    _AgeGrades.Add("18-30", 8);
-                    _AgeGrades.Add("31-35", 9);
-                    _AgeGrades.Add("36-40", 10);
-                    _AgeGrades.Add("41-45", 11);
-                    _AgeGrades.Add("46-50", 12);
-                    _AgeGrades.Add("51-55", 13);
-                    _AgeGrades.Add("56", 14);
+                    _AgeGrades.Add("4-5", 100);
+                    _AgeGrades.Add("6-7", 150);
+                    _AgeGrades.Add("8-9", 200);
+                    _AgeGrades.Add("10-11", 250);
+                    _AgeGrades.Add("12-13", 300);
+                    _AgeGrades.Add("14-15", 350);
+                    _AgeGrades.Add("16-17", 400);
+                    _AgeGrades.Add("18-30", 450);
+                    _AgeGrades.Add("31-35", 500);
+                    _AgeGrades.Add("36-40", 550);
+                    _AgeGrades.Add("41-45", 600);
+                    _AgeGrades.Add("46-50", 650);
+                    _AgeGrades.Add("51-55", 700);
+                    _AgeGrades.Add("56", 750);
                     return _AgeGrades;
                 }
                 else
@@ -65,6 +75,8 @@ namespace Contenders
                     return _AgeGrades;
                 }
             }
+
+
         }
 
         private static Dictionary<string, int> _ChildWeightCat;
@@ -143,20 +155,23 @@ namespace Contenders
 
         public enum BeltsEnum
         {
-            white = 1,
-            gray = 2,
-            yellow = 3,
-            orange = 4,
-            green = 5,
-            blue = 6,
-            purpule = 7,
-            brown = 8,
-            black = 9
+            white = 1000,
+            gray = 2000,
+            yellow = 3000,
+            orange = 4000,
+            green = 5000,
+            blue = 6000,
+            purpule = 7000,
+            brown = 8000,
+            black = 9000
         }
+
+       public virtual int FrequencyOfGrade { get; }
+       public virtual double FinalGrade { get; }
     }
 
 
-    class Contender
+    class Contender :   ContndersGeneral, IContender
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -170,6 +185,9 @@ namespace Contenders
         public int WeightCategory { get; set; }
         public int Belt { get; set; }
         private string _AcademyName;
+
+     
+
         public string AcademyName {
             get
             {
@@ -191,12 +209,12 @@ namespace Contenders
         public bool IsAllowedBeltGradeAbove { get; set; }
         public bool IsAllowedVersusMan { get; set; }
         public bool IsChild { get; set; }
-        // if one of the bools is true the contender will get a factor of one point
-        public double Factor
+        
+        public double WeightFactor
         {
             get
             {
-                if (IsAllowedAgeGradeAbove == true || IsAllowedBeltGradeAbove == true || IsAllowedWeightGradeAbove == true)
+                if (IsAllowedWeightGradeAbove == true)
                 {
                     return 1;
                 }
@@ -206,6 +224,34 @@ namespace Contenders
                 }
                     }
         }
+        public double AgeFactor
+        {
+            get
+            {
+                if (IsAllowedAgeGradeAbove == true)
+                {
+                    return 50;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+        public double BeltFactor
+        {
+            get
+            {
+                if (IsAllowedAgeGradeAbove == true)
+                {
+                    return 1000;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
         public double Grade
         {
             get
@@ -213,41 +259,23 @@ namespace Contenders
                 return AgeCategory + WeightCategory + Belt + ((IsMale == false) ? 0.5 : 0);
             }
         }
-        public double GradeWithFactor
-        {
-            get
-            {
-                return Grade + Factor;
-            }
-        }
 
-
- }
+    }
     /// <summary>
     /// this class crosses contender data against the intier entire league descriptive statistics
     /// its adds more statistic data to perform brackets division to each contender compare the the league
     /// </summary>
-    class ContenderLeague
+    class ContenderLeague : ContndersGeneral, IContender
     {
-        private Martial_Arts_league_Management2.LeagueScattering League;
+        private MartialArts.LeagueScattering League;
+
+        // 1.0 the first initilization the class will use League field after manipulating contenders
+        // LoadNewScatteringStatistics() will be activated, after that activation the class will
+        // use LoadNewScatteringStatistics when calling to FrequencyOfGrade property
+        private bool UseLeagueNewStatistics  = false;
+        private MartialArts.ScattteringWithContenderLeague NewScatteringStatistics; 
+
         private Contender _Contender;
-        // indication to use this contender with factor
-        public bool UseFactor { get; set; }
-        // returen Final grade with\without a factor based on UseFactor
-        public double FinalGrade
-        {
-            get
-            {
-                if (UseFactor == true)
-                {
-                    return _Contender.GradeWithFactor;
-                }
-                else
-                {
-                    return _Contender.Grade;
-                }
-            }
-        }
         public Contender Contender
         {
             get
@@ -255,28 +283,75 @@ namespace Contenders
                 return _Contender;
             }
         }
+        // upgrade in grade variables
+        private double _Factor = 0;
+        public double Factor
+        {
+            get { return _Factor; }
+            set { _Factor = value; }
+        }
+        public override double FinalGrade
+        {
+            get
+            {
+                return Grade + Factor;
+
+            }
+        }
+
         /// <summary>
         /// constructor
         /// </summary>
         /// <param name="contender">contender object</param>
         /// <param name="LeagueToCompare">league of all contenders to compare</param>
-        public ContenderLeague(Contender contender,Martial_Arts_league_Management2.LeagueScattering LeagueToCompare)
+        public ContenderLeague(Contender contender, MartialArts.LeagueScattering LeagueToCompare)
         {
             this._Contender = contender;
             this.League = LeagueToCompare;
+
         }
 
         /// <summary>
         /// number of the contender incidents inside the league (count())
         /// </summary>
-        public int FrequencyOfGrade
+        public override int FrequencyOfGrade
         {
             get
             {
-                return League.Contenders.AsEnumerable().Where(x => x.Grade == Contender.Grade).Count();
+                // read comment 1.0
+                if (UseLeagueNewStatistics == false)
+                    return League.Contenders.AsEnumerable().Where(x => x.Grade == Contender.Grade).Count();
+                else
+                    return NewScatteringStatistics.ContendersLeague.AsEnumerable().Where(x => x.FinalGrade == FinalGrade).Count();
             }
         }
 
+        public void LoadNewScatteringStatistics(ScattteringWithContenderLeague s)
+        {
+            NewScatteringStatistics = s;
+            UseLeagueNewStatistics = true;
+        }
+
+        public double Grade
+        {
+            get
+            {
+                return Contender.Grade;
+            }
+        }
+
+        public string AcademyName
+        {
+            get
+            {
+                return Contender.AcademyName;
+            }
+        }
+
+        public override string ToString()
+        {
+            return FinalGrade.ToString();
+        }
     }  
     
 }

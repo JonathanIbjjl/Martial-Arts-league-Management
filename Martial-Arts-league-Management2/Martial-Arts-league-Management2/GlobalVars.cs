@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Martial_Arts_league_Management2
+namespace MartialArts
 {
     class GlobalVars
     {
@@ -47,7 +47,7 @@ namespace Martial_Arts_league_Management2
                 case GenderEnum.Man:
                     return "בנים";
                 default:
-                    return "מעורב";                   
+                    return "מעורב";
             }
         }
     }

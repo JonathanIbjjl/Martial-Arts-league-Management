@@ -7,7 +7,7 @@ using Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using System.Drawing;
 using System.Diagnostics;
-namespace Martial_Arts_league_Management2
+namespace MartialArts
 {
     partial class ExcelOperations
     {
@@ -53,9 +53,7 @@ namespace Martial_Arts_league_Management2
                         return false;
                 }
 
-
-
-         
+      
             if (isok == true)
                 return true;
             else
@@ -181,7 +179,7 @@ namespace Martial_Arts_league_Management2
 
         private bool IsChild(int AgeGrade)
         {
-            return AgeGrade < 8;
+            return AgeGrade < 450;
         }
 
         private int GetWeightCategory(int row, int col, string HebparameterName,bool IsChild, out bool isok)

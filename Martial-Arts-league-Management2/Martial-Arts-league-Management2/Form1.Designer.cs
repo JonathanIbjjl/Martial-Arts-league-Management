@@ -1,4 +1,4 @@
-﻿namespace Martial_Arts_league_Management2
+﻿namespace MartialArts
 {
     partial class Form1
     {
