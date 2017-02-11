@@ -173,6 +173,15 @@ namespace Contenders
 
     class Contender :   ContndersGeneral, IContender
     {
+        private static int IdentityNumber = 999;
+        public Contender()
+        {
+            // create uniq identity
+            IdentityNumber += 1;
+            SystemID = IdentityNumber;
+        }
+
+        public int SystemID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string ID { get; set; }

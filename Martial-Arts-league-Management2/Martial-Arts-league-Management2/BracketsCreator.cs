@@ -11,6 +11,7 @@ namespace Contenders
         protected MartialArts.LeagueScattering ScatteringObj;
         protected List<Contenders.ContenderLeague> ContendersLeagueList = new List<Contenders.ContenderLeague>();
         protected List<MartialArts.Bracket> BracketsList = new List<MartialArts.Bracket>();
+        protected List<Contenders.ContenderLeague> ExceptionalContenders = new List<ContenderLeague>();
         public BracketsCreator(List<Contenders.Contender> AllContendersList)
         {
             // create statistics of the all league
@@ -22,15 +23,8 @@ namespace Contenders
                 ContendersLeagueList.Add(cont);
             }
         
-            test();
-            UpgradeContenders();
-
-
-
-
-            RefreshData();
-        
-
+           test();
+            Init();
             test();
         }
 
@@ -49,22 +43,24 @@ namespace Contenders
             Debug.WriteLine("------------------------------------------------------------------------------------------------------------");
             Debug.WriteLine("שם"+ "," + "משפחה"
 + "," + "גיל" + "," +"משקל"
-+ "," + "חגורה" + "," + "ציון" + "," + "שכיחות");
++ "," + "חגורה" + "," + "ציון" + "," + "שכיחות" + "," + "מותר משקל" + "," + "מותר חגורה" + "," + "מותר גיל" + "," + "מותר בנים");
 
             foreach (Contenders.ContenderLeague f in ContendersLeagueList)
         {
             Debug.WriteLine(f.Contender.FirstName + "," + f.Contender.LastName 
 + "," + f.Contender.AgeCategory + ","+  f.Contender.WeightCategory.ToString()
-+ "," + f.Contender.Belt + "," + f.FinalGrade + "," + f.FrequencyOfGrade);
++ "," + f.Contender.Belt + "," + f.FinalGrade + "," + f.FrequencyOfGrade + "," + f.Contender.IsAllowedWeightGradeAbove 
++ "," + f.Contender.IsAllowedBeltGradeAbove + "," + f.Contender.IsAllowedAgeGradeAbove + "," + f.Contender.IsAllowedVersusMan);
         }
         }
 
+        MartialArts.ScattteringWithContenderLeague RefrshedStatistics;
         /// <summary>
         /// after each chnges in the ContendersLeagueList object must refresh data in order to change the statistcs object of all contenders
         /// </summary>
         private void RefreshData()
         {
-            MartialArts.ScattteringWithContenderLeague RefrshedStatistics = new MartialArts.ScattteringWithContenderLeague(ContendersLeagueList);
+            RefrshedStatistics = new MartialArts.ScattteringWithContenderLeague(ContendersLeagueList);
             // change the statistics object in each contender objects
             foreach (ContenderLeague n in ContendersLeagueList)
             {
@@ -75,22 +71,38 @@ namespace Contenders
         /// 1. perfect brackets will not be changed
         /// 2. step one iterate from the lower frequancies to the higher frequencies to check if its possible to close more perfect brackets
         /// </summary>
-        public void UpgradeContenders()
+        public void Init()
         {
-         
+
+            // start upgrade contenders that have frequency less then NumberOfContenders
             foreach (KeyValuePair<double,int> itm in ScatteringObj.RankOfFrequencies)
             {
-                if (itm.Value >= MartialArts.GeneralBracket.NumberOfContenders)
-                {                    
-                    LargeAmmountOfContenders(itm.Value,itm.Key);
-                }
-                else
+                if (itm.Value < MartialArts.GeneralBracket.NumberOfContenders)
                 {
-                    SmallAmmountOfContenders(itm.Value, itm.Key);
+                    SmallAmmountOfContenders(itm.Value, itm.Key); 
                 }
+
+            }
+            RefreshData();
+            
+            // try to upgrade each specific individual that have as frequency of 1
+            var Upgrade = ContendersLeagueList.Where(x => x.FrequencyOfGrade == 1).Select(c => c).ToList();
+            foreach (ContenderLeague c in Upgrade)
+            {
+                TryUpgradeLowerCont(c);
+              
             }
 
-          
+            RefreshData();
+            // after iterating each individual with freq of 1 the contenders that left have no match in that league
+            // thay will saved in ExceptionalContenders List and will be removed from ContendersLeagueList
+            ExceptionalContenders = ContendersLeagueList.Where(x => x.FrequencyOfGrade == 1).Select(c => c).ToList(); // save exceptional contenders
+            // remove exceptional contenders
+            foreach (ContenderLeague x in ExceptionalContenders)
+            {
+                var ItemToRemove = ContendersLeagueList.SingleOrDefault(r => r.Contender.SystemID == x.Contender.SystemID);
+                ContendersLeagueList.Remove(ItemToRemove);
+            }
         }
 
         private void SmallAmmountOfContenders(int value, double key)
@@ -117,8 +129,7 @@ namespace Contenders
             else
             {
                 // create academy variance and close as much brackets as possible
-                var t = ContendersLeagueList.Select(x => x).ToList();
-                CreateAcademyVariance(ref t);
+        
             }
         }
 
@@ -134,11 +145,15 @@ namespace Contenders
             if (y < 1)
                 return;
 
-            int Missing = n - y; // missing contenders if n=4 and the frequency is 2 hence 2 missing
+            int Missing = (y <= n) ? n - y : MissingContenders(y); // missing contenders if n=4 and the frequency is 2 hence 2 missing, condition 2 handles a case when frequency is 6 (for example) so 2 are missing to 8
+
+            if (Missing == 0)
+                UpgradeContenders(y - 1); // no missing contenders proceed recurtion
+
             var l = ContendersLeagueList.AsEnumerable().Where(x => x.FrequencyOfGrade == y).Select(x => x).ToList();
             // seperate all frequencies by their grade, for example frequencies = {2,2,2} and their grades in correlation is {50,60,150} so try to find matches to each group of the 3 grpups
             var distinctGrades = l.AsEnumerable().Select(x => x.FinalGrade).Distinct().ToArray();
-            // insert all the contenders with the same grade in different index in the list
+            // insert all the contenders with the same grade in different index in the list of list
             List<List<ContenderLeague>> seperated = new List<List<ContenderLeague>>();
             foreach (var g in distinctGrades)
             {
@@ -169,7 +184,7 @@ namespace Contenders
                 {
                     foreach (ContenderLeague cllow in LowerGradeAndLowerFrequencyThanGroup)
                     {
-                        if (AdultsMatchChecking(clHigh, cllow,true) == true)
+                        if (MatchChecking(clHigh, cllow,true) == true)
                         {
                             var temp = ContendersLeagueList.Select(x => x.Contender).ToList();
                             ScatteringObj.RefreshFrequencies(temp); // convert contenderList to IContender list and pass to ScatteringObj.RefreshFrequencies
@@ -186,6 +201,25 @@ namespace Contenders
             }
         }
 
+        private void TryUpgradeLowerCont(ContenderLeague Cont)
+        {
+            
+        
+            // ia mirror image of TryUpgradeToThatGroup method (opposite)
+            var p = ContendersLeagueList.AsEnumerable().Where(x => x.FinalGrade <= Cont.FinalGrade +1000+50+1 && x.FinalGrade > Cont.FinalGrade  && x.FrequencyOfGrade >= Cont.FrequencyOfGrade).Select(x => x).ToList();
+         
+                    foreach (ContenderLeague clHigh in p)
+                    {
+                        if (MatchChecking(clHigh, Cont, true) == true)
+                        {
+                    var temp = ContendersLeagueList.Select(x => x.Contender).ToList();
+                    ScatteringObj.RefreshFrequencies(temp); // convert contenderList to IContender list and pass to ScatteringObj.RefreshFrequencies
+                    break;
+                    }
+             }
+                         
+        }
+
         public bool IsPerfectBracket(int frequencyValue)
         {
             var n = MartialArts.GeneralBracket.NumberOfContenders;
@@ -195,19 +229,52 @@ namespace Contenders
                 return false;
         }
 
-        /// <summary>
-        /// check id match is possible beetween higher and lower graded contenders. the priorities is weight than belt and then both of them. 
-        /// </summary>
-        /// <param name="frequencyValue"></param>
-        /// <param name="stepUp"></param>
-        /// <param name="stepDown"></param>
+
         public void MissingContenders(int frequencyValue, out int stepUp, out int stepDown)
         {
             var n = MartialArts.GeneralBracket.NumberOfContenders;
             stepDown = frequencyValue % n; // number of contenders to substruct in order to step down i.e from 7 to 4 its 3 [n=4]
             stepUp = n - stepDown; // number of contenders to add in order to step up i.e from 7 to 8 it 1 [n=4]
         }
+        public int MissingContenders(int frequencyValue)
+        {
+            var n = MartialArts.GeneralBracket.NumberOfContenders;
+            var stepDown = frequencyValue % n; // number of contenders to substruct in order to step down i.e from 7 to 4 its 3 [n=4]
+            var stepUp = n - stepDown; // number of contenders to add in order to step up i.e from 7 to 8 it 1 [n=4]
+            return stepUp;
+        }
+        #region "Find Matches"
+        /// <summary>
+        /// this function is only to determine what function to use adult or child
+        /// </summary>
+        /// <param name="HigherGraded"></param>
+        /// <param name="LowerGraded"></param>
+        /// <param name="CheckAndUpgradeContender"></param>
+        /// <returns></returns>
+        private bool MatchChecking(ContenderLeague HigherGraded, ContenderLeague LowerGraded, bool CheckAndUpgradeContender = false)
+        {
+            // to prevent double upgrading, if in the dirst time the contender was upgraded so factor must be set to 0 to prevent adding false data
+            if (LowerGraded.Factor > 0)
+            {
+                LowerGraded.Factor = 0;
+            }
 
+            if (LowerGraded.Contender.IsChild)
+            {
+                return ChildsMatchChecking(HigherGraded, LowerGraded, CheckAndUpgradeContender);
+            }
+            else
+            {
+                return AdultsMatchChecking(HigherGraded, LowerGraded, CheckAndUpgradeContender);
+            }
+        }
+
+        /// <summary>
+        /// check if match is possible beetween higher and lower graded contenders. the priorities is weight than belt and then both of them. 
+        /// </summary>
+        /// <param name="frequencyValue"></param>
+        /// <param name="stepUp"></param>
+        /// <param name="stepDown"></param>
         private bool AdultsMatchChecking(ContenderLeague HigherGraded,ContenderLeague LowerGraded, bool CheckAndUpgradeContender = false)
         {
             // check if weight is only 1 rank of category above
@@ -253,10 +320,183 @@ namespace Contenders
 
         }
 
+        /// <summary>
+        /// check if match is possible beetween higher and lower graded contenders. the priorities is weight,belt,age,weight+belt,weight+age,belt+age,weight+age+belt 
+        /// </summary>
+        /// <param name="HigherGraded"></param>
+        /// <param name="LowerGraded"></param>
+        /// <param name="CheckAndUpgradeContender"></param>
+        /// <returns></returns>
+        private bool ChildsMatchChecking(ContenderLeague HigherGraded, ContenderLeague LowerGraded, bool CheckAndUpgradeContender = false)
+        {
+
+
+            // check if weight is only 1 rank of category above
+            if (HigherGraded.Contender.WeightCategory - LowerGraded.Contender.WeightCategory == 1)
+            {
+                // check if lower contender is allowed to have one rank of weight above and if the grades are equal its a match
+                if (LowerGraded.Contender.WeightFactor + LowerGraded.Contender.Grade == HigherGraded.FinalGrade)
+                {
+                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
+                        LowerGraded.Factor += 1;
+                    // match succided
+                    return true;
+                }
+            }
+
+            // check if belt is only 1 rank of category above
+            if (HigherGraded.Contender.Belt - LowerGraded.Contender.Belt == 1000)
+            {
+                // check if lower contender is allowed to have one rank of belt above and if the grades are equal its a match
+                if (LowerGraded.Contender.BeltFactor + LowerGraded.Contender.Grade == HigherGraded.FinalGrade)
+                {
+                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
+                        LowerGraded.Factor += 1000;
+                    // match succided
+                    return true;
+                }
+            }
+
+            // check if age is only 1 rank of category above
+            if (HigherGraded.Contender.AgeCategory - LowerGraded.Contender.AgeCategory == 50)
+            {
+                // check if lower contender is allowed to have one rank of age above and if the grades are equal its a match
+                if (LowerGraded.Contender.AgeFactor + LowerGraded.Contender.Grade == HigherGraded.FinalGrade)
+                {
+                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
+                        LowerGraded.Factor += 50;
+                    // match succided
+                    return true;
+                }
+            }
+
+            // check if the weight condition + belt condition can make a match
+            if (HigherGraded.Contender.Belt - LowerGraded.Contender.Belt == 1000 && HigherGraded.Contender.WeightCategory - LowerGraded.Contender.WeightCategory == 1)
+            {
+                if (LowerGraded.Contender.BeltFactor + LowerGraded.Contender.WeightFactor + LowerGraded.Contender.Grade == HigherGraded.FinalGrade)
+                {
+                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
+                        LowerGraded.Factor += 1001;
+                    // match succided
+                    return true;
+                }
+            }
+
+            // check if the weight condition + age condition can make a match
+            if (HigherGraded.Contender.AgeCategory - LowerGraded.Contender.AgeCategory == 50 && HigherGraded.Contender.WeightCategory - LowerGraded.Contender.WeightCategory == 1)
+            {
+                if (LowerGraded.Contender.AgeFactor + LowerGraded.Contender.WeightFactor + LowerGraded.Contender.Grade == HigherGraded.FinalGrade)
+                {
+                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
+                        LowerGraded.Factor += 51;
+                    // match succided
+                    return true;
+                }
+            }
+
+            // check if the belt condition + age condition can make a match
+            if (HigherGraded.Contender.AgeCategory - LowerGraded.Contender.AgeCategory == 50 && HigherGraded.Contender.Belt - LowerGraded.Contender.Belt == 1000)
+            {
+                if (LowerGraded.Contender.AgeFactor + LowerGraded.Contender.BeltFactor + LowerGraded.Contender.Grade == HigherGraded.FinalGrade)
+                {
+                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
+                        LowerGraded.Factor += 1050;
+                    // match succided
+                    return true;
+                }
+            }
+
+
+            // check if the belt condition + age + weight condition can make a match
+            if (HigherGraded.Contender.AgeCategory - LowerGraded.Contender.AgeCategory == 50 && HigherGraded.Contender.Belt - LowerGraded.Contender.Belt == 1000 && HigherGraded.Contender.WeightCategory - LowerGraded.Contender.WeightCategory == 1)
+            {
+                if (LowerGraded.Contender.AgeFactor + LowerGraded.Contender.BeltFactor + LowerGraded.Contender.WeightFactor+ LowerGraded.Contender.Grade == HigherGraded.FinalGrade)
+                {
+                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
+                        LowerGraded.Factor += 1051;
+                    // match succided
+                    return true;
+                }
+            }
+
+            // no match
+            return false;
+
+        }
+        #endregion
+
+
+        #region "AcademyVariance"
+
         protected void CreateAcademyVariance(ref List<Contenders.ContenderLeague> group)
         {
-           
+            // convert list to array
+            Contenders.ContenderLeague[] ar = group.ToArray();
+            // mix randomaly all the contenders to increace random variance
+            SetRandomVariance(ref ar);
+        
+            for (int i = 1; i < ar.Length; i++)
+            {
+                // get the last n contender academy names
+                var LastBracketContenders = GetLastBracketContenders(i,ref ar);
+                // if last n contenders are from the same academy then search for swapping
+                if (LastBracketContenders.Contains(ar[i].AcademyName))
+                {
+                    // search forward until find academy that not existing in the last n indexes
+                    for (int j = i + 1; j < ar.Length; j++)
+                    {
+                        if (!LastBracketContenders.Contains(ar[j].AcademyName))
+                        {
+                           // contender with new academy name was found swap beetween the 2
+                            var temp = ar[j];
+                            ar[j] = ar[i];
+                            ar[i] = temp;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // convert back to list
+            group = ar.ToList();
         }
+
+        /// <summary>
+        /// method to create Random Variance and mix all the contenders by their academy names
+        /// </summary>
+        /// <param name="ar"></param>
+        private void SetRandomVariance(ref ContenderLeague[] ar)
+        {
+            Random rand = new Random();
+
+            for (int mix = 1; mix <= 3; mix++)
+            {
+                for (int i = 0; i < ar.Length; i++)
+                {
+                    int swap = rand.Next(0, ar.Length - 1);
+                    var temp = ar[swap];
+                    ar[swap] = ar[i];
+                    ar[i] = temp;
+                }
+            }
+        }
+
+        private List<string> GetLastBracketContenders(int i, ref ContenderLeague[] ar)
+        {
+            List<string> r = new List<string>();
+            // find the last n academy name of the contenders. for example if NumberOfContenders is 4 then
+            // the method will return the last ar[i-1],ar[i-2],ar[i-3],ar[i-4] academy names
+            for (int j = 1; j<=MartialArts.GeneralBracket.NumberOfContenders;j++)
+            {
+                if (i - j >= 0)
+                {
+                    r.Add(ar[i - j].AcademyName);
+                }
+            }
+            return r;
+        }
+
+        #endregion
 
     }
 }

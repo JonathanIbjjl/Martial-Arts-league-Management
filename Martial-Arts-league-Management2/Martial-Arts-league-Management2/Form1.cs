@@ -37,8 +37,12 @@ namespace MartialArts
         {
             if (txtPath.Text != string.Empty)
             {
+                var start = DateTime.Now;
                 LoadFile();
                 Contenders.BracketsCreator test = new Contenders.BracketsCreator(MartialArts.GlobalVars.ListOfContenders);
+                TimeSpan duration =  DateTime.Now - start;
+
+                Helpers.DefaultMessegeBox(duration.Seconds.ToString(), "", MessageBoxIcon.Asterisk);
             }
             else
             {

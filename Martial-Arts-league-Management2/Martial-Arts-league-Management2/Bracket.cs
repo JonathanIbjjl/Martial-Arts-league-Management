@@ -34,6 +34,8 @@ namespace MartialArts
         {
             if (numberOfContenders < 1 || numberOfContenders > 250)
                 Helpers.DefaultMessegeBox("מספר המתחרים בבית לא יכול להיות קטן מ-1 או גדול מ-250", "מספר מתחרים לא חוקי", System.Windows.Forms.MessageBoxIcon.Information);
+            else
+                NumberOfContenders = numberOfContenders;
         }
     }
     class Bracket
