@@ -265,7 +265,7 @@ namespace Contenders
         {
             get
             {
-                return AgeCategory + WeightCategory + Belt + ((IsMale == false) ? 0.5 : 0);
+                return AgeCategory + WeightCategory + Belt - ((IsMale == false) ? 0.5 : 0);
             }
         }
 
