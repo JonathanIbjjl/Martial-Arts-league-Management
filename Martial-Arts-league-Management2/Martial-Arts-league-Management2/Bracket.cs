@@ -40,7 +40,11 @@ namespace MartialArts
     }
     class Bracket
     {
-        public int _BracketNumber { get; set; }
+        private static int _BracketNumber = 0;
+        public int BracketNumber { get; private set; }
+    
+
+
         public double BracketTotalGrade { get; set; }
         public int AgeGrade { get; set; }
         public int BeltGrade { get; set; }
@@ -53,6 +57,8 @@ namespace MartialArts
             this.WeightGrade = WeightGrade;
             this.BeltGrade = BeltGrade;
             this.Gender = gender;
+            _BracketNumber += 1;
+            BracketNumber = _BracketNumber;
         }
     
         private List< Contenders.ContenderLeague> _ContendersList;
@@ -70,6 +76,12 @@ namespace MartialArts
                     return this._ContendersList;
                 }
 
+            }
+
+            set
+            {
+                if (value != null)
+                    _ContendersList = value;
             }
         }
 

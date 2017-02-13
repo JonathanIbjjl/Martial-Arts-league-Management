@@ -181,7 +181,7 @@ namespace Contenders
             SystemID = IdentityNumber;
         }
 
-        public int SystemID { get; set; }
+        public int SystemID { get; private set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string ID { get; set; }

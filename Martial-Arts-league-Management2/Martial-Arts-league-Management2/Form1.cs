@@ -39,6 +39,7 @@ namespace MartialArts
             {
                 var start = DateTime.Now;
                 LoadFile();
+                dgvMain.DataSource = MartialArts.GlobalVars.ListOfContenders;
                 Contenders.BracketsCreator test = new Contenders.BracketsCreator(MartialArts.GlobalVars.ListOfContenders);
                 TimeSpan duration =  DateTime.Now - start;
 

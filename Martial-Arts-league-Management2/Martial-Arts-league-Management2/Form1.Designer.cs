@@ -34,18 +34,20 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.numNumberOfContenders = new System.Windows.Forms.NumericUpDown();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.btnLoadFile = new System.Windows.Forms.Button();
             this.txtPath = new System.Windows.Forms.TextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.numNumberOfContenders = new System.Windows.Forms.NumericUpDown();
+            this.dgvMain = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numNumberOfContenders)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -82,6 +84,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.dgvMain);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -107,6 +110,30 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "טעינת קבצים";
+            // 
+            // numNumberOfContenders
+            // 
+            this.numNumberOfContenders.Location = new System.Drawing.Point(332, 85);
+            this.numNumberOfContenders.Maximum = new decimal(new int[] {
+            250,
+            0,
+            0,
+            0});
+            this.numNumberOfContenders.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numNumberOfContenders.Name = "numNumberOfContenders";
+            this.numNumberOfContenders.ReadOnly = true;
+            this.numNumberOfContenders.Size = new System.Drawing.Size(63, 20);
+            this.numNumberOfContenders.TabIndex = 5;
+            this.numNumberOfContenders.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.numNumberOfContenders.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // checkBox2
             // 
@@ -172,28 +199,15 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // numNumberOfContenders
+            // dgvMain
             // 
-            this.numNumberOfContenders.Location = new System.Drawing.Point(332, 85);
-            this.numNumberOfContenders.Maximum = new decimal(new int[] {
-            250,
-            0,
-            0,
-            0});
-            this.numNumberOfContenders.Minimum = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.numNumberOfContenders.Name = "numNumberOfContenders";
-            this.numNumberOfContenders.Size = new System.Drawing.Size(63, 20);
-            this.numNumberOfContenders.TabIndex = 5;
-            this.numNumberOfContenders.Value = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-            this.numNumberOfContenders.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            this.dgvMain.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMain.Location = new System.Drawing.Point(24, 129);
+            this.dgvMain.Name = "dgvMain";
+            this.dgvMain.Size = new System.Drawing.Size(999, 318);
+            this.dgvMain.TabIndex = 3;
             // 
             // Form1
             // 
@@ -215,6 +229,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numNumberOfContenders)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -234,6 +249,7 @@
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.NumericUpDown numNumberOfContenders;
+        private System.Windows.Forms.DataGridView dgvMain;
     }
 }
 
