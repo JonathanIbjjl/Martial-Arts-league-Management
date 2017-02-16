@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -171,7 +172,7 @@ namespace Contenders
     }
 
 
-    class Contender :   ContndersGeneral, IContender
+    class Contender :   ContndersGeneral, IContender, System.Collections.IEnumerable
     {
         private static int IdentityNumber = 999;
         public Contender()
@@ -269,7 +270,142 @@ namespace Contenders
             }
         }
 
+        public double Score_WeightFactor
+        {
+            get
+            {
+                if (IsAllowedWeightGradeAbove == true)
+                    return Grade + 1 + 0.01;
+                else
+                    return 0;
+            }
+       }
+        public double Score_BeltFactor
+        {
+            get
+            {
+                if (IsAllowedBeltGradeAbove == true)
+                    return Grade + 1000 + 0.02;
+                else
+                    return 0;
+            }
+        }
+        public double Score_AgeFactor
+        {
+            get
+            {
+                if (IsAllowedAgeGradeAbove == true && IsChild==true)
+                    return Grade + 50 + 0.03;
+                else
+                    return 0;
+            }
+        }
+        public double Score_Weight_Belt_Factor
+        {
+            get
+            {
+                if (IsAllowedWeightGradeAbove == true && IsAllowedBeltGradeAbove == true)
+                    return Grade + 1 + 1000 + 0.04;
+                else
+                    return 0;
+            }
+        }
+        public double Score_Weight_Age_Factor
+        {
+            get
+            {
+                if (IsAllowedWeightGradeAbove == true && IsAllowedAgeGradeAbove == true && IsChild==true)
+                    return Grade + 1 + 50 + 0.05;
+                else
+                    return 0;
+            }
+        }
+        public double Score_Belt_Age_Factor
+        {
+            get
+            {
+                if (IsAllowedBeltGradeAbove == true && IsAllowedAgeGradeAbove == true && IsChild == true)
+                    return Grade + 1 + 50 + 0.06;
+                else
+                    return 0;
+            }
+        }
+        public double Score_AllFactors
+        {
+            get
+            {
+                if (IsAllowedBeltGradeAbove == true && IsAllowedAgeGradeAbove == true && IsAllowedWeightGradeAbove ==true && IsChild == true)
+                    return Grade + 1 + 50 + 1000 + 0.07;
+                else
+                    return 0;
+            }
+        }
+        public double Score_WomanToMan
+        {
+            get
+            {
+                if (IsMale == false && IsAllowedVersusMan == true)
+                    return Grade + 0.5 + 0.08;
+                else
+                    return 0;
+            }
+        }
+        private List<PotentialBrackets> _PbList;
+        public List<PotentialBrackets> PbList
+        {
+            get
+            {
+                if (_PbList == null)
+                {
+                    _PbList = new List<PotentialBrackets>();
+                    return _PbList;
+                }
+
+                else
+                {
+                    return _PbList;
+                }
+            }
+
+            private set
+            {
+                PbList = value;
+            }
+        }
+        
+        public IEnumerator GetEnumerator()
+        {
+            yield return Grade;
+            yield return Score_WeightFactor;
+            yield return Score_BeltFactor;
+            yield return Score_AgeFactor;
+            yield return Score_Weight_Belt_Factor;
+            yield return Score_Weight_Age_Factor;
+            yield return Score_Belt_Age_Factor;
+            yield return Score_AllFactors;
+            yield return Score_WomanToMan;
+        }
+
+
+        public void AddPotentialBracket(double score, int frequency,double stdDivision, decimal originalscoresrating, double proximitytonumofconts)
+        {
+            PbList.Add(new PotentialBrackets {Score = score,Frquency = frequency,StdDivision = stdDivision,
+                OriginalScoresRating = originalscoresrating,proximityToNumOfConts = proximitytonumofconts});
+        }
+
+
+     public struct PotentialBrackets
+        {
+        public double Score;
+        public int Frquency;
+        public double StdDivision;
+        public decimal OriginalScoresRating;
+        public double proximityToNumOfConts;
+
+        }
     }
+
+
     /// <summary>
     /// this class crosses contender data against the intier entire league descriptive statistics
     /// its adds more statistic data to perform brackets division to each contender compare the the league

@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bracket.cs" />
+    <Compile Include="BracketsBuilder.cs" />
     <Compile Include="BracketsCreator.cs" />
     <Compile Include="Contender.cs" />
     <Compile Include="DynamicForms.cs" />

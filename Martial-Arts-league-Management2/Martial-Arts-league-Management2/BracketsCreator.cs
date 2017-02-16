@@ -43,14 +43,14 @@ namespace Contenders
             Debug.WriteLine("------------------------------------------------------------------------------------------------------------");
             Debug.WriteLine("שם" + "," + "משפחה"
 + "," + "גיל" + "," + "משקל"
-+ "," + "חגורה" + "," + "ציון" + "," + "שכיחות" + "," + "מותר משקל" + "," + "מותר חגורה" + "," + "מותר גיל" + "," + "מותר בנים");
++ "," + "חגורה" + "," + "ציון" + "," + "שכיחות" + "," + "מותר משקל" + "," + "מותר חגורה" + "," + "מותר גיל" + "," + "מותר בנים" + "," + "מגדר");
 
             foreach (Contenders.ContenderLeague f in ContendersLeagueList)
             {
                 Debug.WriteLine(f.Contender.FirstName + "," + f.Contender.LastName
     + "," + f.Contender.AgeCategory + "," + f.Contender.WeightCategory.ToString()
-    + "," + f.Contender.Belt + "," + f.FinalGrade + "," + f.FrequencyOfGrade + "," + f.Contender.IsAllowedWeightGradeAbove
-    + "," + f.Contender.IsAllowedBeltGradeAbove + "," + f.Contender.IsAllowedAgeGradeAbove + "," + f.Contender.IsAllowedVersusMan);
+    + "," + f.Contender.Belt + "," + f.Contender.Grade + "," + f.FrequencyOfGrade + "," + f.Contender.IsAllowedWeightGradeAbove
+    + "," + f.Contender.IsAllowedBeltGradeAbove + "," + f.Contender.IsAllowedAgeGradeAbove + "," + f.Contender.IsAllowedVersusMan + "," + f.Contender.IsMale);
             }
         }
 
@@ -692,101 +692,193 @@ namespace Contenders
 
 
 
-        private int MatchCheckingAgainstHigher_RealGrade(ContenderLeague HigherGraded, ContenderLeague LowerGraded, bool CheckAndUpgradeContender = false)        {
+        private int MatchCheckingAgainstHigher_RealGrade(ContenderLeague HigherGraded, ContenderLeague LowerGraded, bool CheckAndUpgradeContender = false)
+        {
             // to prevent double upgrading, if in the dirst time the contender was upgraded so factor must be set to 0 to prevent adding false data
-            if (LowerGraded.Factor > 0)            {                LowerGraded.Factor = 0;            }            if (LowerGraded.Contender.IsChild)            {                return ChildsMatchCheckingAgainstHigherRealGrade(HigherGraded, LowerGraded, CheckAndUpgradeContender);            }            else            {                return AdultsMatchCheckingAgainstHigherRealGrade(HigherGraded, LowerGraded, CheckAndUpgradeContender);            }        }
+            if (LowerGraded.Factor > 0)
+            {
+                LowerGraded.Factor = 0;
+            }
+
+            if (LowerGraded.Contender.IsChild)
+            {
+                return ChildsMatchCheckingAgainstHigherRealGrade(HigherGraded, LowerGraded, CheckAndUpgradeContender);
+            }
+            else
+            {
+                return AdultsMatchCheckingAgainstHigherRealGrade(HigherGraded, LowerGraded, CheckAndUpgradeContender);
+            }
+        }
 
         #region "Real Grade"
 
 
-        /// <summary>        /// AGAINST REAL GRADE!        /// check if match is possible beetween higher and lower graded contenders. the priorities is weight than belt and then both of them.         /// </summary>        /// <param name="frequencyValue"></param>        /// <param name="stepUp"></param>        /// <param name="stepDown"></param>        private int AdultsMatchCheckingAgainstHigherRealGrade(ContenderLeague HigherGraded, ContenderLeague LowerGraded, bool CheckAndUpgradeContender = false)        {
+        /// <summary>
+        /// AGAINST REAL GRADE!
+        /// check if match is possible beetween higher and lower graded contenders. the priorities is weight than belt and then both of them. 
+        /// </summary>
+        /// <param name="frequencyValue"></param>
+        /// <param name="stepUp"></param>
+        /// <param name="stepDown"></param>
+        private int AdultsMatchCheckingAgainstHigherRealGrade(ContenderLeague HigherGraded, ContenderLeague LowerGraded, bool CheckAndUpgradeContender = false)
+        {
             // check if weight is only 1 rank of category above
-            if (HigherGraded.Contender.WeightCategory - LowerGraded.Contender.WeightCategory == 1)            {
+            if (HigherGraded.Contender.WeightCategory - LowerGraded.Contender.WeightCategory == 1)
+            {
                 // check if lower contender is allowed to have one rank of weight above and if the grades are equal its a match
-                if (LowerGraded.Contender.WeightFactor + LowerGraded.Contender.Grade == HigherGraded.Grade)                {                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
+                if (LowerGraded.Contender.WeightFactor + LowerGraded.Contender.Grade == HigherGraded.Grade)
+                {
+                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
                         LowerGraded.Factor += 1;
                     // match succided
-                    return HigherGraded.Contender.SystemID;                }            }
+                    return HigherGraded.Contender.SystemID;
+                }
+            }
 
             // check if belt is only 1 rank of category above
-            if (HigherGraded.Contender.Belt - LowerGraded.Contender.Belt == 1000)            {
+            if (HigherGraded.Contender.Belt - LowerGraded.Contender.Belt == 1000)
+            {
                 // check if lower contender is allowed to have one rank of belt above and if the grades are equal its a match
-                if (LowerGraded.Contender.BeltFactor + LowerGraded.Contender.Grade == HigherGraded.Grade)                {                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
+                if (LowerGraded.Contender.BeltFactor + LowerGraded.Contender.Grade == HigherGraded.Grade)
+                {
+                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
                         LowerGraded.Factor += 1000;
                     // match succided
-                    return HigherGraded.Contender.SystemID;                }            }
+                    return HigherGraded.Contender.SystemID;
+                }
+            }
 
             // check if the 2 condition above can make a match
-            if (HigherGraded.Contender.Belt - LowerGraded.Contender.Belt == 1000 && HigherGraded.Contender.WeightCategory - LowerGraded.Contender.WeightCategory == 1)            {                if (LowerGraded.Contender.BeltFactor + LowerGraded.Contender.WeightFactor + LowerGraded.Contender.Grade == HigherGraded.Grade)                {                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
+            if (HigherGraded.Contender.Belt - LowerGraded.Contender.Belt == 1000 && HigherGraded.Contender.WeightCategory - LowerGraded.Contender.WeightCategory == 1)
+            {
+                if (LowerGraded.Contender.BeltFactor + LowerGraded.Contender.WeightFactor + LowerGraded.Contender.Grade == HigherGraded.Grade)
+                {
+                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
                         LowerGraded.Factor += 1001;
                     // match succided
-                    return HigherGraded.Contender.SystemID;                }            }
+                    return HigherGraded.Contender.SystemID;
+                }
+            }
 
             // if LowerGraded is woman and HigherGraded is man try to upgrade the woman to mans bracket
-            if (LowerGraded.Contender.IsMale == false && HigherGraded.Contender.IsMale == true)                return WomanMatchToManChecking(HigherGraded, LowerGraded, CheckAndUpgradeContender);
+            if (LowerGraded.Contender.IsMale == false && HigherGraded.Contender.IsMale == true)
+                return WomanMatchToManChecking(HigherGraded, LowerGraded, CheckAndUpgradeContender);
 
             // no match
-            return 0;        }
+            return 0;
+
+        }
 
 
 
-        /// <summary>        /// AGAINST REAL GRADE!        /// check if match is possible beetween higher and lower graded contenders. the priorities is weight,belt,age,weight+belt,weight+age,belt+age,weight+age+belt         /// </summary>        /// <param name="HigherGraded"></param>        /// <param name="LowerGraded"></param>        /// <param name="CheckAndUpgradeContender"></param>        /// <returns></returns>        private int ChildsMatchCheckingAgainstHigherRealGrade(ContenderLeague HigherGraded, ContenderLeague LowerGraded, bool CheckAndUpgradeContender = false)        {
+        /// <summary>
+        /// AGAINST REAL GRADE!
+        /// check if match is possible beetween higher and lower graded contenders. the priorities is weight,belt,age,weight+belt,weight+age,belt+age,weight+age+belt 
+        /// </summary>
+        /// <param name="HigherGraded"></param>
+        /// <param name="LowerGraded"></param>
+        /// <param name="CheckAndUpgradeContender"></param>
+        /// <returns></returns>
+        private int ChildsMatchCheckingAgainstHigherRealGrade(ContenderLeague HigherGraded, ContenderLeague LowerGraded, bool CheckAndUpgradeContender = false)
+        {
 
 
             // check if weight is only 1 rank of category above
-            if (HigherGraded.Contender.WeightCategory - LowerGraded.Contender.WeightCategory == 1)            {
+            if (HigherGraded.Contender.WeightCategory - LowerGraded.Contender.WeightCategory == 1)
+            {
                 // check if lower contender is allowed to have one rank of weight above and if the grades are equal its a match
-                if (LowerGraded.Contender.WeightFactor + LowerGraded.Contender.Grade == HigherGraded.Grade)                {                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
+                if (LowerGraded.Contender.WeightFactor + LowerGraded.Contender.Grade == HigherGraded.Grade)
+                {
+                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
                         LowerGraded.Factor += 1;
                     // match succided
-                    return HigherGraded.Contender.SystemID;                }            }
+                    return HigherGraded.Contender.SystemID;
+                }
+            }
 
             // check if belt is only 1 rank of category above
-            if (HigherGraded.Contender.Belt - LowerGraded.Contender.Belt == 1000)            {
+            if (HigherGraded.Contender.Belt - LowerGraded.Contender.Belt == 1000)
+            {
                 // check if lower contender is allowed to have one rank of belt above and if the grades are equal its a match
-                if (LowerGraded.Contender.BeltFactor + LowerGraded.Contender.Grade == HigherGraded.Grade)                {                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
+                if (LowerGraded.Contender.BeltFactor + LowerGraded.Contender.Grade == HigherGraded.Grade)
+                {
+                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
                         LowerGraded.Factor += 1000;
                     // match succided
-                    return HigherGraded.Contender.SystemID;                }            }
+                    return HigherGraded.Contender.SystemID;
+                }
+            }
 
             // check if age is only 1 rank of category above
-            if (HigherGraded.Contender.AgeCategory - LowerGraded.Contender.AgeCategory == 50)            {
+            if (HigherGraded.Contender.AgeCategory - LowerGraded.Contender.AgeCategory == 50)
+            {
                 // check if lower contender is allowed to have one rank of age above and if the grades are equal its a match
-                if (LowerGraded.Contender.AgeFactor + LowerGraded.Contender.Grade == HigherGraded.Grade)                {                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
+                if (LowerGraded.Contender.AgeFactor + LowerGraded.Contender.Grade == HigherGraded.Grade)
+                {
+                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
                         LowerGraded.Factor += 50;
                     // match succided
-                    return HigherGraded.Contender.SystemID;                }            }
+                    return HigherGraded.Contender.SystemID;
+                }
+            }
 
             // check if the weight condition + belt condition can make a match
-            if (HigherGraded.Contender.Belt - LowerGraded.Contender.Belt == 1000 && HigherGraded.Contender.WeightCategory - LowerGraded.Contender.WeightCategory == 1)            {                if (LowerGraded.Contender.BeltFactor + LowerGraded.Contender.WeightFactor + LowerGraded.Contender.Grade == HigherGraded.Grade)                {                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
+            if (HigherGraded.Contender.Belt - LowerGraded.Contender.Belt == 1000 && HigherGraded.Contender.WeightCategory - LowerGraded.Contender.WeightCategory == 1)
+            {
+                if (LowerGraded.Contender.BeltFactor + LowerGraded.Contender.WeightFactor + LowerGraded.Contender.Grade == HigherGraded.Grade)
+                {
+                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
                         LowerGraded.Factor += 1001;
                     // match succided
-                    return HigherGraded.Contender.SystemID;                }            }
+                    return HigherGraded.Contender.SystemID;
+                }
+            }
 
             // check if the weight condition + age condition can make a match
-            if (HigherGraded.Contender.AgeCategory - LowerGraded.Contender.AgeCategory == 50 && HigherGraded.Contender.WeightCategory - LowerGraded.Contender.WeightCategory == 1)            {                if (LowerGraded.Contender.AgeFactor + LowerGraded.Contender.WeightFactor + LowerGraded.Contender.Grade == HigherGraded.Grade)                {                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
+            if (HigherGraded.Contender.AgeCategory - LowerGraded.Contender.AgeCategory == 50 && HigherGraded.Contender.WeightCategory - LowerGraded.Contender.WeightCategory == 1)
+            {
+                if (LowerGraded.Contender.AgeFactor + LowerGraded.Contender.WeightFactor + LowerGraded.Contender.Grade == HigherGraded.Grade)
+                {
+                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
                         LowerGraded.Factor += 51;
                     // match succided
-                    return HigherGraded.Contender.SystemID;                }            }
+                    return HigherGraded.Contender.SystemID;
+                }
+            }
 
             // check if the belt condition + age condition can make a match
-            if (HigherGraded.Contender.AgeCategory - LowerGraded.Contender.AgeCategory == 50 && HigherGraded.Contender.Belt - LowerGraded.Contender.Belt == 1000)            {                if (LowerGraded.Contender.AgeFactor + LowerGraded.Contender.BeltFactor + LowerGraded.Contender.Grade == HigherGraded.Grade)                {                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
+            if (HigherGraded.Contender.AgeCategory - LowerGraded.Contender.AgeCategory == 50 && HigherGraded.Contender.Belt - LowerGraded.Contender.Belt == 1000)
+            {
+                if (LowerGraded.Contender.AgeFactor + LowerGraded.Contender.BeltFactor + LowerGraded.Contender.Grade == HigherGraded.Grade)
+                {
+                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
                         LowerGraded.Factor += 1050;
                     // match succided
-                    return HigherGraded.Contender.SystemID;                }            }
+                    return HigherGraded.Contender.SystemID;
+                }
+            }
 
 
             // check if the belt condition + age + weight condition can make a match
-            if (HigherGraded.Contender.AgeCategory - LowerGraded.Contender.AgeCategory == 50 && HigherGraded.Contender.Belt - LowerGraded.Contender.Belt == 1000 && HigherGraded.Contender.WeightCategory - LowerGraded.Contender.WeightCategory == 1)            {                if (LowerGraded.Contender.AgeFactor + LowerGraded.Contender.BeltFactor + LowerGraded.Contender.WeightFactor + LowerGraded.Contender.Grade == HigherGraded.Grade)                {                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
+            if (HigherGraded.Contender.AgeCategory - LowerGraded.Contender.AgeCategory == 50 && HigherGraded.Contender.Belt - LowerGraded.Contender.Belt == 1000 && HigherGraded.Contender.WeightCategory - LowerGraded.Contender.WeightCategory == 1)
+            {
+                if (LowerGraded.Contender.AgeFactor + LowerGraded.Contender.BeltFactor + LowerGraded.Contender.WeightFactor + LowerGraded.Contender.Grade == HigherGraded.Grade)
+                {
+                    if (CheckAndUpgradeContender == true) // upgrade contender if needed
                         LowerGraded.Factor += 1051;
                     // match succided
-                    return HigherGraded.Contender.SystemID;                }            }
+                    return HigherGraded.Contender.SystemID;
+                }
+            }
 
             // if LowerGraded is woman and HigherGraded is man try to upgrade the woman to mans bracket
-            if (LowerGraded.Contender.IsMale == false && HigherGraded.Contender.IsMale == true)                return WomanMatchToManChecking(HigherGraded, LowerGraded, CheckAndUpgradeContender);
+            if (LowerGraded.Contender.IsMale == false && HigherGraded.Contender.IsMale == true)
+                return WomanMatchToManChecking(HigherGraded, LowerGraded, CheckAndUpgradeContender);
 
             // no match
-            return 0;        }
+            return 0;
+
+        }
         #endregion
 
         #endregion

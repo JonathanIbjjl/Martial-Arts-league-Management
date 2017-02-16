@@ -59,6 +59,7 @@ namespace MartialArts
             this.Gender = gender;
             _BracketNumber += 1;
             BracketNumber = _BracketNumber;
+           
         }
     
         private List< Contenders.ContenderLeague> _ContendersList;
