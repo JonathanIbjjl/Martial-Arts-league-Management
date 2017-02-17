@@ -49,6 +49,7 @@ namespace MartialArts
         public int AgeGrade { get; set; }
         public int BeltGrade { get; set; }
         public int WeightGrade { get; set; }
+
         public GlobalVars.GenderEnum Gender { get; set; }
 
         public Bracket(int ageGrade,int BeltGrade,int WeightGrade,GlobalVars.GenderEnum gender)
@@ -62,14 +63,14 @@ namespace MartialArts
            
         }
     
-        private List< Contenders.ContenderLeague> _ContendersList;
-        public List< Contenders.ContenderLeague> ContendersList
+        private List< Contenders.Contender> _ContendersList;
+        public List< Contenders.Contender> ContendersList
         {
             get
             {
                 if (_ContendersList == null)
                 {
-                    this._ContendersList = new List<Contenders.ContenderLeague>();  
+                    this._ContendersList = new List<Contenders.Contender>();  
                     return this._ContendersList;
                 }
                 else
@@ -85,6 +86,19 @@ namespace MartialArts
                     _ContendersList = value;
             }
         }
+
+        public int NumberOfContenders
+        {
+            get
+            {
+                return ContendersList.Count();
+            }
+        }
+
+        public void AddContenders(List<Contenders.Contender> bracketConts)
+        {
+            ContendersList = bracketConts;
+        } 
 
         // TODO: return the bracket description string
         public override string ToString()

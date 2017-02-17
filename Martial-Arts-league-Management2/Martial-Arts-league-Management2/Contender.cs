@@ -11,11 +11,12 @@ namespace Contenders
 
     interface IContender
     {
-         double Grade { get;}
-         string AcademyName { get; }
-         int FrequencyOfGrade { get; }
-        double FinalGrade { get; }
+        int SystemID { get;  set; }
+        bool IsUseless { get; set; }
+        bool IsPlaced { get; set; }
     }
+
+    
 
     class ContndersGeneral
     {
@@ -180,9 +181,12 @@ namespace Contenders
             // create uniq identity
             IdentityNumber += 1;
             SystemID = IdentityNumber;
+
+            IsUseless = false;
+            IsPlaced = false;
         }
 
-        public int SystemID { get; private set; }
+        public int SystemID { get;  set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string ID { get; set; }
@@ -325,7 +329,7 @@ namespace Contenders
             get
             {
                 if (IsAllowedBeltGradeAbove == true && IsAllowedAgeGradeAbove == true && IsChild == true)
-                    return Grade + 1 + 50 + 0.06;
+                    return Grade + 1000 + 50 + 0.06;
                 else
                     return 0;
             }
@@ -372,7 +376,9 @@ namespace Contenders
                 PbList = value;
             }
         }
-        
+        public bool IsUseless { get; set; }
+        public bool IsPlaced { get; set; }
+        public double FinalGradeInBracket { get; set; }
         public IEnumerator GetEnumerator()
         {
             yield return Grade;
@@ -383,27 +389,122 @@ namespace Contenders
             yield return Score_Weight_Age_Factor;
             yield return Score_Belt_Age_Factor;
             yield return Score_AllFactors;
-            yield return Score_WomanToMan;
+          //  yield return Score_WomanToMan;
+        }
+
+        public PotentialBrackets GetMaxRatedBracket()
+        {
+            if (IsMale == true)
+            {
+                return PbList[0];
+            }
+
+            else
+            {
+                // best bracket for woman is a womans bracket
+                return PbList[0];
+            }
+        }
+
+        public int GetMaxNumberOfContsBracketNum()
+        {
+            return PbList.Max(x => x.Frquency);
+        }
+
+        public void CreateRanks()
+        {
+            for (int i = 0; i < PbList.Count; i++)
+            {
+                PbList[i] = GetStdRank(PbList[i]);
+                PbList[i] =  GetProximityRank(PbList[i]);
+                PbList[i] =  GetOriginalScoreRate(PbList[i]);
+            }
+
+            // order from higher to lower
+            PbList.OrderByDescending(i => i.GeneralRate);
+        }
+
+        public PotentialBrackets GetStdRank(PotentialBrackets p)
+        {
+            // rank std division
+            int result = PbList.Count;
+            foreach (PotentialBrackets p1 in PbList)
+            {
+                if (p.StdDivision > p1.StdDivision)
+                    result -= 1;
+            }
+
+            p.StdRank = result;
+            return p;
+        }
+
+        public PotentialBrackets GetProximityRank(PotentialBrackets p)
+        {
+            // rank std division
+            int result = PbList.Count;
+            foreach (PotentialBrackets p1 in PbList)
+            {
+                if (p.proximityToNumOfConts < p1.proximityToNumOfConts)
+                    result -= 1;
+            }
+
+            p.ProximityRank = result;
+            return p;
+        }
+
+        public PotentialBrackets GetOriginalScoreRate(PotentialBrackets p)
+        {
+            // rank std division
+            int result = PbList.Count;
+            foreach (PotentialBrackets p1 in PbList)
+            {
+                if (p.OriginalScoresRating < p1.OriginalScoresRating)
+                    result -= 1;
+            }
+            p.OriginalScoreRank = result;
+            return p;
         }
 
 
-        public void AddPotentialBracket(double score, int frequency,double stdDivision, decimal originalscoresrating, double proximitytonumofconts)
+        public byte PotentialBracetNum = 1;
+        public void AddPotentialBracket(double score, int frequency,double stdDivision, decimal originalscoresrating,
+            double proximitytonumofconts, List<int> participantsIDs, Dictionary<int, double> idandscore,GlobalVars.GenderEnum gender)
         {
+            // make fixes if its a woman (is must not have any factor if its mixed house)
             PbList.Add(new PotentialBrackets {Score = score,Frquency = frequency,StdDivision = stdDivision,
-                OriginalScoresRating = originalscoresrating,proximityToNumOfConts = proximitytonumofconts});
+            OriginalScoresRating = originalscoresrating,proximityToNumOfConts = proximitytonumofconts,
+                ParticipantsIDs = participantsIDs,BracketID = PotentialBracetNum,IdAndScore = idandscore,Gender= gender});
+            PotentialBracetNum += 1;
         }
 
 
      public struct PotentialBrackets
         {
+        public byte BracketID;
         public double Score;
         public int Frquency;
+        public GlobalVars.GenderEnum Gender;
         public double StdDivision;
         public decimal OriginalScoresRating;
         public double proximityToNumOfConts;
-
+        public List<int> ParticipantsIDs;
+        public Dictionary<int, double> IdAndScore;
+        // calculated vars
+        public int StdRank;
+        public int ProximityRank;
+        public int OriginalScoreRank;
+        public int GeneralRate
+            {
+                get
+                {
+                    return StdRank + ProximityRank + OriginalScoreRank;
+                }
+            }
+             
         }
+   
     }
+
 
 
     /// <summary>
@@ -490,6 +591,45 @@ namespace Contenders
             get
             {
                 return Contender.AcademyName;
+            }
+        }
+
+        public int SystemID
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public bool IsUseless
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public bool IsPlaced
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
             }
         }
 

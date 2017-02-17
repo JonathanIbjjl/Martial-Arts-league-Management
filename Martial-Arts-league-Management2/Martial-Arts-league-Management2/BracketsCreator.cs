@@ -192,7 +192,7 @@ namespace Contenders
                 {
                     var l = ContendersLeagueList.AsEnumerable().Where(x => x.FinalGrade == itm.Key).Select(x => x).ToList();
                     MartialArts.Bracket br = new MartialArts.Bracket(l.Max(age => age.Contender.AgeCategory), l.Max(belt => belt.Contender.Belt), l.Max(weight => weight.Contender.Belt), MartialArts.GlobalVars.GenderEnum.Man);
-                    br.ContendersList = l;
+              //      br.ContendersList = l;
                     brList.Add(br);
                 }
 
@@ -230,7 +230,7 @@ namespace Contenders
 
                         for (int j = LoopFrom; j < LoopUntil; j++)
                         {
-                            br.ContendersList.Add(l[j]);                        
+                        //    br.ContendersList.Add(l[j]);                        
                         }
 
                         brList.Add(br);
@@ -246,24 +246,24 @@ namespace Contenders
 + "," + "גיל" + "," + "משקל"
 + "," + "חגורה" + "," + "ציון" + "," + "שכיחות" + "," + "מותר משקל" + "," + "מותר חגורה" + "," + "מותר גיל" + "," + "מותר בנים" + "," + "זכר" + "," + "ציון אמיתי" + "," + "מספר בית" + "," + "שם אקדמיה");
 
-            foreach (MartialArts.Bracket b in brList)
-            {
-                foreach (Contenders.ContenderLeague f in b.ContendersList)
-                {
+    //        foreach (MartialArts.Bracket b in brList)
+    //        {
+    //            foreach (Contenders.ContenderLeague f in b.ContendersList)
+    //            {
 
 
 
-                    Debug.WriteLine(f.Contender.FirstName + "," + f.Contender.LastName
-        + "," + f.Contender.AgeCategory + "," + f.Contender.WeightCategory.ToString()
-        + "," + f.Contender.Belt + "," + f.FinalGrade + "," + f.FrequencyOfGrade + "," + f.Contender.IsAllowedWeightGradeAbove
-        + "," + f.Contender.IsAllowedBeltGradeAbove + "," + f.Contender.IsAllowedAgeGradeAbove + "," + f.Contender.IsAllowedVersusMan  + "," + f.Contender.IsMale + "," + f.Contender.Grade + "," + b.BracketNumber + "," + f.Contender.AcademyName);
-                }
+    //                Debug.WriteLine(f.Contender.FirstName + "," + f.Contender.LastName
+    //    + "," + f.Contender.AgeCategory + "," + f.Contender.WeightCategory.ToString()
+    //    + "," + f.Contender.Belt + "," + f.FinalGrade + "," + f.FrequencyOfGrade + "," + f.Contender.IsAllowedWeightGradeAbove
+    //    + "," + f.Contender.IsAllowedBeltGradeAbove + "," + f.Contender.IsAllowedAgeGradeAbove + "," + f.Contender.IsAllowedVersusMan  + "," + f.Contender.IsMale + "," + f.Contender.Grade + "," + b.BracketNumber + "," + f.Contender.AcademyName);
+    //            }
 
-            Debug.WriteLine("");
-            Debug.WriteLine("");
+    //        Debug.WriteLine("");
+    //        Debug.WriteLine("");
         
 
-    }
+    //}
 
 }
 
