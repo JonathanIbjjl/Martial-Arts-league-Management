@@ -270,10 +270,9 @@ namespace Contenders
         {
             get
             {
-                return AgeCategory + WeightCategory + Belt - ((IsMale == false) ? 0.5 : 0);
+                return (AgeCategory + WeightCategory + Belt);
             }
         }
-
         public double Score_WeightFactor
         {
             get
@@ -373,7 +372,30 @@ namespace Contenders
 
             private set
             {
-                PbList = value;
+                _PbList = value;
+            }
+        }
+
+        private List<List<PotentialBrackets>> _PbListArchive;
+        public List<List<PotentialBrackets>> PbListArchive
+        {
+            get
+            {
+                if (_PbListArchive == null)
+                {
+                    _PbListArchive = new List<List<PotentialBrackets>>();
+                    return _PbListArchive;
+                }
+
+                else
+                {
+                    return _PbListArchive;
+                }
+            }
+
+            private set
+            {
+                _PbListArchive = value;
             }
         }
         public bool IsUseless { get; set; }
@@ -392,19 +414,39 @@ namespace Contenders
           //  yield return Score_WomanToMan;
         }
 
+        public void ClearPbList()
+        {
+            // save combinations
+            if (_PbList !=null && PbList.Count > 0)
+                PbListArchive.Add(PbList);
+
+            PbList.Clear();
+        }
+
         public PotentialBrackets GetMaxRatedBracket()
         {
             if (IsMale == true)
             {
+                PbList.OrderByDescending(i => i.GeneralRate);
                 return PbList[0];
             }
 
             else
             {
                 // best bracket for woman is a womans bracket
+                PbList.OrderByDescending(i => i.GeneralRate);
                 return PbList[0];
             }
         }
+
+        public PotentialBrackets GetMostRecommendedBracket()
+        {
+                // most ideal for bracket by by priority: first priority is original score second place is proximity to n (frequency) and third place is std division beetween contenders 
+                PbList.OrderByDescending(i => i.OriginalScoreRank).ThenBy(n => n.ProximityRank).ThenBy(n => n.StdRank);
+                return PbList[0];          
+        }
+
+
 
         public int GetMaxNumberOfContsBracketNum()
         {

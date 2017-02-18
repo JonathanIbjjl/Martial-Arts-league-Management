@@ -201,7 +201,7 @@ namespace Contenders
                   
                     var l = ContendersLeagueList.AsEnumerable().Where(x => x.FinalGrade == itm.Key).Select(x => x).ToList();
                     // create variance
-                    CreateAcademyVariance(ref l);
+                  //  CreateAcademyVariance(ref l);
 
                     int stepUp = 0;
                     int stepDown = 0;
@@ -885,10 +885,10 @@ namespace Contenders
 
         #region "AcademyVariance"
 
-        protected void CreateAcademyVariance(ref List<Contenders.ContenderLeague> group)
+        public static void CreateAcademyVariance(ref List<Contenders.Contender> group)
         {
             // convert list to array
-            Contenders.ContenderLeague[] ar = group.ToArray();
+            Contenders.Contender[] ar = group.ToArray();
             // mix randomaly all the contenders to increace random variance
             SetRandomVariance(ref ar);
         
@@ -922,7 +922,7 @@ namespace Contenders
         /// method to create Random Variance and mix all the contenders by their academy names
         /// </summary>
         /// <param name="ar"></param>
-        private void SetRandomVariance(ref ContenderLeague[] ar)
+        private static void SetRandomVariance(ref Contender[] ar)
         {
             Random rand = new Random();
 
@@ -938,7 +938,7 @@ namespace Contenders
             }
         }
 
-        private List<string> GetLastBracketContenders(int i, ref ContenderLeague[] ar)
+        private static List<string> GetLastBracketContenders(int i, ref Contender[] ar)
         {
             List<string> r = new List<string>();
             // find the last n academy name of the contenders. for example if NumberOfContenders is 4 then
