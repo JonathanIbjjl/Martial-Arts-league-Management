@@ -442,7 +442,7 @@ namespace Contenders
         /// <param name="frequencyValue">the frequency of the contenders in that grade</param>
         /// <param name="stepUp">how many contenders left rounding up</param>
         /// <param name="stepDown">how many contenders rounding down</param>
-        public void MissingContenders(int frequencyValue, out int stepUp, out int stepDown)
+        public static void MissingContenders(int frequencyValue, out int stepUp, out int stepDown)
         {
             var n = MartialArts.GeneralBracket.NumberOfContenders;
             stepDown = frequencyValue % n; // number of contenders to substruct in order to step down i.e from 7 to 4 its 3 [n=4]
@@ -453,7 +453,7 @@ namespace Contenders
         /// </summary>
         /// <param name="frequencyValue">the frequency of the contenders in that grade</param>
         /// <returns></returns>
-        public int MissingContenders(int frequencyValue)
+        public static int MissingContenders(int frequencyValue)
         {
             var n = MartialArts.GeneralBracket.NumberOfContenders;
             var stepDown = frequencyValue % n; // number of contenders to substruct in order to step down i.e from 7 to 4 its 3 [n=4]

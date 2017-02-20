@@ -43,12 +43,16 @@ namespace MartialArts
         private static int _BracketNumber = 0;
         public int BracketNumber { get; private set; }
     
-
-
-        public double BracketTotalGrade { get; set; }
         public int AgeGrade { get; set; }
         public int BeltGrade { get; set; }
         public int WeightGrade { get; set; }
+        public double AverageGrade
+        {
+            get
+            {
+                return ContendersList.Average(x => x.FinalGradeInBracket);
+            }
+        }
 
         public GlobalVars.GenderEnum Gender { get; set; }
 

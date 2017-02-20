@@ -417,8 +417,11 @@ namespace Contenders
         public void ClearPbList()
         {
             // save combinations
-            if (_PbList !=null && PbList.Count > 0)
-                PbListArchive.Add(PbList);
+            if (_PbList != null && PbList.Count > 0)
+            {
+                var copy = PbList;
+                PbListArchive.Add(copy.ToList());
+            }
 
             PbList.Clear();
         }
