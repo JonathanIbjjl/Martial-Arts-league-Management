@@ -8,6 +8,14 @@ namespace MartialArts
 {
     class GlobalVars
     {
+        public static int NumOfContendersInLeuge
+        {
+            get
+            {
+              return  ListOfContenders.Count();
+            }
+        }
+
         private static List<Contenders.Contender> _ListOfContenders;
         public static List<Contenders.Contender> ListOfContenders
         {

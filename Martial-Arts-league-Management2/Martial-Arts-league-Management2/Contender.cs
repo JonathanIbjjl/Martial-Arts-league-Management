@@ -375,15 +375,15 @@ namespace Contenders
                 _PbList = value;
             }
         }
-
-        private List<List<PotentialBrackets>> _PbListArchive;
-        public List<List<PotentialBrackets>> PbListArchive
+        
+        private List<PotentialBrackets> _PbListArchive;
+        public List<PotentialBrackets> PbListArchive
         {
             get
             {
                 if (_PbListArchive == null)
                 {
-                    _PbListArchive = new List<List<PotentialBrackets>>();
+                    _PbListArchive = new List<PotentialBrackets>();
                     return _PbListArchive;
                 }
 
@@ -416,44 +416,38 @@ namespace Contenders
 
         public void ClearPbList()
         {
-            // save combinations
-            if (_PbList != null && PbList.Count > 0)
-            {
-                var copy = PbList;
-                PbListArchive.Add(copy.ToList());
-            }
-
             PbList.Clear();
         }
 
-        public PotentialBrackets GetMaxRatedBracket()
-        {
-            if (IsMale == true)
-            {
-                PbList.OrderByDescending(i => i.GeneralRate);
-                return PbList[0];
-            }
 
-            else
-            {
-                // best bracket for woman is a womans bracket
-                PbList.OrderByDescending(i => i.GeneralRate);
-                return PbList[0];
-            }
-        }
 
         public PotentialBrackets GetMostRecommendedBracket()
         {
-                // most ideal for bracket by by priority: first priority is original score second place is proximity to n (frequency) and third place is std division beetween contenders 
-                PbList.OrderByDescending(i => i.OriginalScoreRank).ThenBy(n => n.ProximityRank).ThenBy(n => n.StdRank);
-                return PbList[0];          
+            // most ideal for bracket by by priority: first priority is original score second place is proximity to n (frequency) and third place is std division beetween contenders 
+            PbList = PbList.OrderByDescending(i => i.OriginalScoreRank).ThenBy(n => n.ProximityRank).ThenBy(n => n.StdRank).ToList();
+            return PbList[0];
+                    
         }
 
+        public int MostRecomendedBracketFrequency
+        {
+            get
+            {
+                if (PbList.Count > 0)
+                    return GetMostRecommendedBracket().Frquency;
+                else
+                    return 0;
+            }
+
+        }
 
 
         public int GetMaxNumberOfContsBracketNum()
         {
-            return PbList.Max(x => x.Frquency);
+            if (PbList.Count > 1)
+                return PbList.Max(x => x.Frquency);
+            else
+                return 0;
         }
 
         public void CreateRanks()
@@ -522,8 +516,27 @@ namespace Contenders
             PotentialBracetNum += 1;
         }
 
+        public void AddPotentialBracketToArchive(double score, int frequency, double stdDivision, decimal originalscoresrating,
+            double proximitytonumofconts, List<int> participantsIDs, Dictionary<int, double> idandscore, GlobalVars.GenderEnum gender)
+        {
+            // make fixes if its a woman (is must not have any factor if its mixed house)
+            PbListArchive.Add(new PotentialBrackets
+            {
+                Score = score,
+                Frquency = frequency,
+                StdDivision = stdDivision,
+                OriginalScoresRating = originalscoresrating,
+                proximityToNumOfConts = proximitytonumofconts,
+                ParticipantsIDs = participantsIDs,
+                BracketID = PotentialBracetNum,
+                IdAndScore = idandscore,
+                Gender = gender
+            });
+            PotentialBracetNum += 1;
+        }
 
-     public struct PotentialBrackets
+
+        public struct PotentialBrackets
         {
         public byte BracketID;
         public double Score;

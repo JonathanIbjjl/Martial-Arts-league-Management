@@ -8,7 +8,7 @@ using Contenders;
 
 namespace MartialArts
 {
-    class BracketsBuilder: PotentialBracketsGeneralStatistics
+    class BracketsBuilder : PotentialBracketsGeneralStatistics
     {
         private bool OnlyWoman { get; set; }
         protected List<Contenders.Contender> ContendersList = new List<Contenders.Contender>();
@@ -19,16 +19,17 @@ namespace MartialArts
         protected double AllPotentialBracketsAverage { get; set; }
         protected double AllPotentialBracketsStdDivision;
 
-        public BracketsBuilder(List<Contenders.Contender> cont,bool OnlyWoman)
+        public BracketsBuilder(List<Contenders.Contender> cont, bool OnlyWoman)
         {
             this.OnlyWoman = OnlyWoman;
             ContendersList = cont;
-            CreateScoreAndID();
-           
         }
 
         private void CreateScoreAndID()
         {
+            if (ContendersList.Count <= 1)
+                return;
+
             // create the potential scores of all contenders
             List<ScoreAndID> l = new List<ScoreAndID>();
 
@@ -87,40 +88,81 @@ namespace MartialArts
 
         private void test()
         {
-            Debug.WriteLine("**********************************************************************************************************************************************************");
 
-            foreach (ScoreAndID s in PotentialScores)
-            {
-                Debug.WriteLine("{0}, {1}, {2}",s.SystemID, s.Score, s.RoundDownScore);
-            }
-
-            Debug.WriteLine("??????????????????????????????????????????????????????????????????????????????");
+          BracketsList =   BracketsList.OrderBy(x => x.NumberOfContenders).ToList();
             foreach (MartialArts.Bracket b in BracketsList)
             {
+                Debug.WriteLine(b.ToString());
+                Debug.WriteLine("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}", "שם", "שם משפחה", "אקדמיה", "חגורה", "משקל", "גיל", "פקטור משקל", "פקטור חגורה", "פקטור גיל", "פקטור בנים", "SystemID");
+
                 foreach (Contender c in b.ContendersList)
                 {
-                    Debug.WriteLine("{0}, {1}, {2}, {3}, {4}, {5}", c.SystemID, c.FirstName,c.LastName,c.AcademyName,b.NumberOfContenders,c.FinalGradeInBracket);
-                   
+
+
+                   string belt = Helpers.GetHebBeltName((Contenders.ContndersGeneral.BeltsEnum)c.Belt);
+                    string age = Contenders.ContndersGeneral.AgeGrades.Where(x => x.Value == c.AgeCategory).Select(z => z.Key).SingleOrDefault();
+                    string weight = Contenders.ContndersGeneral.ChildWeightCat.Where(x => x.Value == c.WeightCategory).Select(z => z.Key).SingleOrDefault();
+
+                    Debug.WriteLine("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}", c.FirstName, c.LastName, c.AcademyName, belt, weight, age, c.IsAllowedWeightGradeAbove, c.IsAllowedBeltGradeAbove, c.IsAllowedAgeGradeAbove, c.IsAllowedVersusMan, c.SystemID);
+
                 }
 
                 Debug.WriteLine("");
                 Debug.WriteLine("");
             }
 
+            Debug.WriteLine("");
+            Debug.WriteLine("");
+            Debug.WriteLine("מתחרים שהמערכת בחרה לוותר עליהם");
+            Debug.WriteLine("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}", "שם", "שם משפחה", "אקדמיה", "חגורה", "משקל", "גיל", "פקטור משקל", "פקטור חגורה", "פקטור גיל", "פקטור בנים", "SystemID");
             foreach (Contender c in ContendersList)
             {
-                if (c.PbList.Count > 0)
+
+
+                string belt = Helpers.GetHebBeltName((Contenders.ContndersGeneral.BeltsEnum)c.Belt);
+                string age = Contenders.ContndersGeneral.AgeGrades.Where(x => x.Value == c.AgeCategory).Select(z => z.Key).SingleOrDefault();
+                string weight = Contenders.ContndersGeneral.ChildWeightCat.Where(x => x.Value == c.WeightCategory).Select(z => z.Key).SingleOrDefault();
+
+                Debug.WriteLine("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}", c.FirstName, c.LastName, c.AcademyName, belt, weight, age, c.IsAllowedWeightGradeAbove, c.IsAllowedBeltGradeAbove, c.IsAllowedAgeGradeAbove, c.IsAllowedVersusMan, c.SystemID);
+
+                Debug.WriteLine("");
+                foreach (Contender.PotentialBrackets p in c.PbListArchive)
                 {
-                    Contender.PotentialBrackets p = c.GetMostRecommendedBracket();
-                    foreach (KeyValuePair<int, double> itm in p.IdAndScore)
+                    foreach (KeyValuePair<int, double> k in p.IdAndScore)
                     {
-                        Debug.WriteLine(itm.Key + " =========== " + itm.Value);
+                        Debug.WriteLine("{0}, {1}", k.Key, k.Value);
                     }
+                    Debug.WriteLine("");
                 }
-                Debug.WriteLine("&&&&&&&&&&&&&&&&&&&&&&&&");
+                Debug.WriteLine("");
+                Debug.WriteLine("");
+
             }
 
+            Debug.WriteLine("");
+            Debug.WriteLine("");
+            Debug.WriteLine("מתחרים ללא שום התאמה");
+            Debug.WriteLine("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}", "שם", "שם משפחה", "אקדמיה", "חגורה", "משקל", "גיל", "פקטור משקל", "פקטור חגורה", "פקטור גיל","פקטור בנים","SystemID");
+
+            foreach (Contender c in UselessContenders)
+            {
+
+
+                string belt = Helpers.GetHebBeltName((Contenders.ContndersGeneral.BeltsEnum)c.Belt);
+                string age = Contenders.ContndersGeneral.AgeGrades.Where(x => x.Value == c.AgeCategory).Select(z => z.Key).SingleOrDefault();
+                string weight = Contenders.ContndersGeneral.ChildWeightCat.Where(x => x.Value == c.WeightCategory).Select(z => z.Key).SingleOrDefault();
+
+                Debug.WriteLine("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}", c.FirstName, c.LastName, c.AcademyName, belt, weight, age, c.IsAllowedWeightGradeAbove, c.IsAllowedBeltGradeAbove, c.IsAllowedAgeGradeAbove, c.IsAllowedVersusMan,c.SystemID);
+
+               
+            }
+
+
         }
+
+
+
+
         public void Init()
         {
 
@@ -129,82 +171,97 @@ namespace MartialArts
             {
                 HandleWoman();
                 // sort statistics again 
-                SortPotentialScoresAgain();
+                ArrangePotentialBracketsAgain();
+            }
+            else
+            {
+                // load the potential brackets and statistics of each contender
+                ArrangePotentialBracketsAgain();
             }
 
-            // load the potential brackets and statistics of each contender
-            LoadContsPotentialBrackets();
-            test();
-
-            // remove useless contenders
+            // remove useless contenders only on mans instance
+            if(OnlyWoman ==false)
             RemoveUselesses();
+
             // sort statistics again 
-            SortPotentialScoresAgain();
+            ArrangePotentialBracketsAgain();
             // reduce perfect brackets only
             ReducePerfectBrackets();
-            // sort statistics again 
-            SortPotentialScoresAgain();
-            test();
-            // Create statistics and rank inside each bracket and beetween the brackets in order to get to the next stage
-        //    CreateBracketsRating();
-            // handle Contenders That are Less then N + the match is the most ideal for all contnders by max general score
-            HandleLessThanNumOfConts(MartialArts.GeneralBracket.NumberOfContenders-1);
-            // sort statistics again 
-            SortPotentialScoresAgain();
-            test();
+            // handle Contenders That are Less then N + the match the most ideal for all contnders by max general score
+            HandleLessThanNumOfConts(MartialArts.GeneralBracket.NumberOfContenders - 1);
+
             // handle Contenders That are Less then N + the match is the most ideal for all contnders by max frequency
-            HandleBigBrackets();
-            HandleSmallBrackets();
-            HandleRemeining();
+            HandleBrackets();
             test();
+            HandleRemeining();
+     
         }
 
         private void HandleRemeining()
-        { 
+        {
             for (int i = 0; i < ContendersList.Count; i++)
             {
                 foreach (Bracket b in BracketsList)
                 {
                     if (Math.Floor(ContendersList[i].Grade) == Math.Floor(b.AverageGrade))
                     {
-                        b.ContendersList.Add(ContendersList[i]);
+                        AddReminingToBracket( ContendersList[i].SystemID, ContendersList[i].Grade, b.BracketNumber);
+                        break;
                     }
-                   else if (Math.Floor(ContendersList[i].Score_WeightFactor) == Math.Floor(b.AverageGrade))
+                    else if (Math.Floor(ContendersList[i].Score_WeightFactor) == Math.Floor(b.AverageGrade))
                     {
-                        b.ContendersList.Add(ContendersList[i]);
+                        AddReminingToBracket(ContendersList[i].SystemID, ContendersList[i].Score_WeightFactor, b.BracketNumber);
+                        break;
                     }
 
                     else if (Math.Floor(ContendersList[i].Score_BeltFactor) == Math.Floor(b.AverageGrade))
                     {
-                        b.ContendersList.Add(ContendersList[i]);
+                        AddReminingToBracket(ContendersList[i].SystemID, ContendersList[i].Score_BeltFactor, b.BracketNumber);
+                        break;
                     }
-                    else if (Math.Floor(ContendersList[i].AgeFactor) == Math.Floor(b.AverageGrade) && ContendersList[i].IsChild==true)
+                    else if (Math.Floor(ContendersList[i].Score_AgeFactor) == Math.Floor(b.AverageGrade) && ContendersList[i].IsChild == true)
                     {
-                        b.ContendersList.Add(ContendersList[i]);
+                        AddReminingToBracket(ContendersList[i].SystemID, ContendersList[i].Score_AgeFactor, b.BracketNumber);
+                        break;
                     }
-                    else if (Math.Floor(ContendersList[i].Score_Weight_Belt_Factor) == Math.Floor(b.AverageGrade) )
+                    else if (Math.Floor(ContendersList[i].Score_Weight_Belt_Factor) == Math.Floor(b.AverageGrade))
                     {
-                        b.ContendersList.Add(ContendersList[i]);
+                        AddReminingToBracket(ContendersList[i].SystemID, ContendersList[i].Score_Weight_Belt_Factor, b.BracketNumber);
+                        break;
                     }
                     else if (Math.Floor(ContendersList[i].Score_Weight_Age_Factor) == Math.Floor(b.AverageGrade) && ContendersList[i].IsChild == true)
                     {
-                        b.ContendersList.Add(ContendersList[i]);
+                        AddReminingToBracket(ContendersList[i].SystemID, ContendersList[i].Score_Weight_Age_Factor, b.BracketNumber);
+                        break;
                     }
                     else if (Math.Floor(ContendersList[i].Score_AllFactors) == Math.Floor(b.AverageGrade) && ContendersList[i].IsChild == true)
                     {
-                        b.ContendersList.Add(ContendersList[i]);
+                        AddReminingToBracket(ContendersList[i].SystemID, ContendersList[i].Score_AllFactors, b.BracketNumber);
+                        break;
                     }
 
                 }
             }
         }
+   
+        private void AddReminingToBracket(int systemID,double finalGradeForBracket,int BracketID)
+        {
+            var Cont = ContendersList.Where(x => x.SystemID == systemID).Select(x => x).First();
+            var Bracket = BracketsList.Where(x => x.BracketNumber == BracketID).Select(z => z).Single();
 
+            Bracket.ContendersList.Add(Cont);
+            Cont.FinalGradeInBracket = finalGradeForBracket;
+            Cont.IsPlaced = true;
+            RemoveItemFromList(Cont.SystemID, false);
+        }
+
+   
         private void HandleWoman()
         {
             var WomanList = ContendersList.Where(x => x.IsMale == false).Select(w => w).ToList();
             if (WomanList.Count <= 1)
                 return;
-                
+
             BracketsBuilder WomanInstace = new BracketsBuilder(WomanList, true);
             WomanInstace.Init();
             // remove from that instance the womans from woman instance and add their brackets for that instance
@@ -216,10 +273,14 @@ namespace MartialArts
                 // remove from this instance
                 for (int j = 0; j < WomanInstace.BracketsList[i].ContendersList.Count; j++)
                 {
+                    var cont = ContendersList.Where(x => x.SystemID == WomanInstace.BracketsList[i].ContendersList[j].SystemID).First();
+                    cont.IsPlaced = true;
+                    cont.FinalGradeInBracket = WomanInstace.BracketsList[i].ContendersList[j].FinalGradeInBracket;
+
                     RemoveItemFromList(WomanInstace.BracketsList[i].ContendersList[j].SystemID, false);
+
                 }
             }
-
         }
 
         private void HandleLessThanNumOfConts(int NumOfContsToHandle)
@@ -230,15 +291,15 @@ namespace MartialArts
 
             for (int i = 0; i < ContendersList.Count; i++)
             {
-                if (ContendersList[i].GetMaxNumberOfContsBracketNum() == NumOfContsToHandle && ContendersList[i].IsPlaced==false)
+                if (ContendersList[i].GetMaxNumberOfContsBracketNum() == NumOfContsToHandle && ContendersList[i].IsPlaced == false)
                 {
-                    if (ContendersList[i].GetMaxRatedBracket().Frquency == NumOfContsToHandle)
+                    if (ContendersList[i].GetMostRecommendedBracket().Frquency == NumOfContsToHandle)
                     {
                         if (IsPerfectForEverybody(ContendersList[i].SystemID) == true)
                         {
                             // add to bracket
-                            BuiledBracket(ReturnContendersByListOfIds(ContendersList[i].GetMaxRatedBracket().ParticipantsIDs), ContendersList[i].GetMaxRatedBracket().IdAndScore);
-
+                            BuiledBracket(ReturnContendersByListOfIds(ContendersList[i].GetMostRecommendedBracket().ParticipantsIDs), ContendersList[i].GetMostRecommendedBracket().IdAndScore);
+                            ArrangePotentialBracketsAgain();
                         }
                     }
                 }
@@ -271,7 +332,7 @@ namespace MartialArts
             }
             else
             {
-                int diff =  Freq-N;
+                int diff = Freq - N;
                 double result = 1;
                 for (int i = 0; i < diff; i++)
                 {
@@ -285,13 +346,13 @@ namespace MartialArts
         private bool IsPerfectForEverybody(int ID)
         {
             // this is the most rated bracket of this contender, now check if for other contenders its also the best bracket
-            Contenders.Contender.PotentialBrackets p = ContendersList.Where(x=> x.SystemID == ID).Select(c=>c).Single().GetMaxRatedBracket();
+            Contenders.Contender.PotentialBrackets p = ContendersList.Where(x => x.SystemID == ID).Select(c => c).Single().GetMostRecommendedBracket();
             bool IsPerfectForEverybody = true;
             for (int j = 0; j < p.ParticipantsIDs.Count; j++)
             {
 
                 var p1 = ContendersList.Where(x => x.SystemID == p.ParticipantsIDs[j]).Select(c => c).Single();
-                if (p1.IsPlaced == false && p1.GetMaxRatedBracket().GeneralRate == p.GeneralRate)
+                if (p1.IsPlaced == false && p1.GetMostRecommendedBracket().GeneralRate == p.GeneralRate)
                 {
                     IsPerfectForEverybody = true;
                 }
@@ -315,7 +376,8 @@ namespace MartialArts
                         if (p.Frquency == MartialArts.GeneralBracket.NumberOfContenders && p.StdDivision == 0 && p.OriginalScoresRating == 1)
                         {
                             // its a perfect  bracket with perfect number of contenders - create a bracket
-                            BuiledBracket(ReturnContendersByListOfIds(p.ParticipantsIDs),p.IdAndScore);
+                            BuiledBracket(ReturnContendersByListOfIds(p.ParticipantsIDs), p.IdAndScore);
+                            ArrangePotentialBracketsAgain();
                         }
                     }
                 }
@@ -325,107 +387,144 @@ namespace MartialArts
 
         private void HandleSmallBrackets()
         {
+ 
             if (ContendersList.Count == 0)
                 return;
 
-           while(ContendersList.Count > 0 && ContendersList.AsEnumerable().SelectMany(x => x.PbList).Select(x => x.Frquency).DefaultIfEmpty().Max() > 0)
+            while (ContendersList.Count > 0 && ContendersList.AsEnumerable().Select(x => x.MostRecomendedBracketFrequency).DefaultIfEmpty().Max() > 0 
+                && ContendersList.AsEnumerable().Select(x => x.MostRecomendedBracketFrequency).DefaultIfEmpty().Max() < MartialArts.GeneralBracket.NumberOfContenders)
+            {
 
-                {
+                // extract contender with Max Recomended Bracket
+                int MaxRecBracket = ContendersList.AsEnumerable().Select(x => x.MostRecomendedBracketFrequency).DefaultIfEmpty().Max();
+                Contender ContMaxRec = ContendersList.
+                Where(x => x.MostRecomendedBracketFrequency == MaxRecBracket).Select(x => x).First();
 
-                for (int i = 0; i < ContendersList.Count; i++)
+                // for safty check if not placed
+                if (ContMaxRec.IsPlaced == false)
                 {
-     
-                    if (ContendersList[i].PbList.Count > 0 && ContendersList[i].IsPlaced == false)
+                    // extract all the contenders of that recomnded bracket
+                    var Conts = ReturnContendersByListOfIds(ContMaxRec.GetMostRecommendedBracket().ParticipantsIDs);
+                    // for safty check that no body is placed
+                    if (Conts.All(x => x.IsPlaced == false))
                     {
-                        var Conts = ReturnContendersByListOfIds(ContendersList[i].GetMostRecommendedBracket().ParticipantsIDs);
-                        if (Conts.All(x => x.IsPlaced == false))
-                        {
-                        
-                            BuiledBracket(Conts, ContendersList[i].GetMostRecommendedBracket().IdAndScore);
-                            CreateScoreAndID();
-                            LoadContsPotentialBrackets();
+                        // builed bracket and arage potential brackets again
+                        BuiledBracket(Conts, ContMaxRec.GetMostRecommendedBracket().IdAndScore);
+                        if (ContendersList.Count == 0)
+                            return;
+                        ArrangePotentialBracketsAgain();
 
-                        }
                     }
                 }
             }
+
+            if (ContendersList.AsEnumerable().Select(x => x.MostRecomendedBracketFrequency).DefaultIfEmpty().Max() >= MartialArts.GeneralBracket.NumberOfContenders)
+            {
+                HandleBrackets();
+            }
         }
 
-        private void HandleBigBrackets()
+
+        private void HandleBrackets()
         {
+           
             if (ContendersList.Count <= 1)
                 return;
 
-            while (ContendersList.AsEnumerable().SelectMany(x => x.PbList).Select(x => x.Frquency).DefaultIfEmpty().Max() >= MartialArts.GeneralBracket.NumberOfContenders && ContendersList.Count > 0)
+            while (ContendersList.AsEnumerable().Select(x => x.MostRecomendedBracketFrequency).DefaultIfEmpty().Max() >= MartialArts.GeneralBracket.NumberOfContenders && ContendersList.Count > 0 )
             {
-                for (int i = 0; i < ContendersList.Count; i++)
-                {
+                // extract contender with Max Recomended Bracket
+                int MaxRecBracket = ContendersList.AsEnumerable().Select(x => x.MostRecomendedBracketFrequency).DefaultIfEmpty().Max();
+                Contender ContMaxRec = ContendersList.
+                Where(x => x.MostRecomendedBracketFrequency == MaxRecBracket).Select(x => x).First();
 
-                    if (ContendersList[i].PbList.Count > 0 && ContendersList[i].GetMostRecommendedBracket().Frquency >= MartialArts.GeneralBracket.NumberOfContenders && ContendersList[i].IsPlaced == false)
+                // for safty check if not placed
+                if (ContMaxRec.IsPlaced == false)
+                {
+                    // extract all the contenders of that recomnded bracket
+                    var Conts = ReturnContendersByListOfIds(ContMaxRec.GetMostRecommendedBracket().ParticipantsIDs);
+                    // for safty check that no body is placed
+                    if (Conts.All(x => x.IsPlaced == false))
                     {
-                        var Conts = ReturnContendersByListOfIds(ContendersList[i].GetMostRecommendedBracket().ParticipantsIDs);
-                        if (Conts.All(x => x.IsPlaced == false))
+
+                        if (Conts.Count > MartialArts.GeneralBracket.NumberOfContenders)
                         {
-                            // contender must be splitted or sorted
-                            if (Conts.Count > MartialArts.GeneralBracket.NumberOfContenders)
-                            {
-                                SplitBigBracket(Conts, ContendersList[i].GetMostRecommendedBracket());
-                            }
-                            else
-                            {
-                                // add to bracket
-                                BuiledBracket(Conts, ContendersList[i].GetMostRecommendedBracket().IdAndScore);
-                                CreateScoreAndID();
-                                LoadContsPotentialBrackets();
-                            }
-                            if (ContendersList.Count == 1)
-                                return;
+                            SplitBigBracket(Conts, ContMaxRec.GetMostRecommendedBracket());
                         }
+                        else
+                        {
+                            // builed bracket and arage potential brackets again
+                            BuiledBracket(Conts, ContMaxRec.GetMostRecommendedBracket().IdAndScore);
+                            ArrangePotentialBracketsAgain();
+                        }                       
+
+                        if (ContendersList.Count == 1)
+                            return;
                     }
                 }
             }
+
+            if (ContendersList.AsEnumerable().Select(x => x.MostRecomendedBracketFrequency).DefaultIfEmpty().Max() < MartialArts.GeneralBracket.NumberOfContenders)
+            {
+                HandleSmallBrackets();
+            }
         }
 
-        private int SplitBigBracket( List<Contender> Conts,Contender.PotentialBrackets RecomendedBracket)
-        {
-            // option 1: exact number of contnders to 2*N,3*N,4*N....x*N brackets. sort only
-            // option 2: more that N but less then 2N. split and sort
-            // option 3 more then N*x 
 
+
+        /// <summary>
+        /// filter the most fitted N contenders for a bracket of N 
+        /// the rest of the contenders that is less rated contenders will stay in ContenderList and will be back in the next iterations
+        /// </summary>
+        /// <param name="Conts"></param>
+        /// <param name="RecomendedBracket"></param>
+        /// <returns></returns>
+        private void SplitBigBracket(List<Contender> Conts, Contender.PotentialBrackets RecomendedBracket)
+        {
+
+            // create variance of academies
             BracketsCreator.CreateAcademyVariance(ref Conts);
 
 
-            // score each academy by the number of frequency, the more the academy is more rare the score will be higher (in order to sort by orderby with the conditions)
-            // for example: bracket of N=8 and the academis are: A,A,B,C,D,E,F,G so the score of A Will be 2/8 the the rest will be 1/8 - lower grade for rare academy
-            //  Conts.OrderByDescending(i => i.OriginalScoreRank).ThenBy(n => n.ProximityRank).ThenBy(n => n.StdRank);
+            // for variance score
             int Variance = 1;
-            List<DecisionStruct> l = new List<DecisionStruct>();
+            // for calculating abs z score of weight
+            double WeightAverage;
+            double WeightStdDiv;
+            WeightStdDiv = GetStdDivision(Conts.Select(x => x.Weight).ToArray(), out WeightAverage);
+            // create a struct with fields to calculate the most fitted contenders for bracket of N
+            List<DecisionStruct> SortedConts = new List<DecisionStruct>();
+
             for (int i = 0; i < Conts.Count; i++)
             {
                 var decision = new DecisionStruct();
                 decision.SystemID = Conts[i].SystemID;
+                decision.Abs_Weight_Z_Score = Get_Abs_Weight_Z_Score(WeightAverage, WeightStdDiv, Conts[i].Weight);
                 decision.CurrentBracketScore = RecomendedBracket.IdAndScore[Conts[i].SystemID]; // score for that bracket
                 string AcademyName = Conts[i].AcademyName;
-                decision.AcademyVarianceScore = Variance += 1; //(double)(Conts.Where(x => x.AcademyName == AcademyName).Count()) / (double)(Conts.Count);
-                l.Add(decision);
+                // score each academy by the number of frequency, the more the academy is more rare the score will be higher (in order to sort by orderby with the conditions)
+                // for example: bracket of N=8 and the academis are: A,A,B,C,D,E,F,G so the score of A Will be 2/8 the the rest will be 1/8 - lower grade for rare academy
+                //  Conts.OrderByDescending(i => i.OriginalScoreRank).ThenBy(n => n.ProximityRank).ThenBy(n => n.StdRank);
+                decision.AcademyVarianceScore = Variance += 1;
+                SortedConts.Add(decision);
             }
+            // the conditions to rate the most rated contenders
+            SortedConts = SortedConts.OrderBy(s => s.CurrentBracketScore).ThenBy(n => n.AcademyVarianceScore).ThenBy(w => w.Abs_Weight_Z_Score).ToList();
 
-            l.OrderByDescending(s => s.CurrentBracketScore).ThenBy(n => n.AcademyVarianceScore);
-
+            // dictionary to hold the coosen contenders from the first N indexes of SortedConts List 
             Dictionary<int, double> ChoosenContsIdAndFinalScore = new Dictionary<int, double>();
             List<Contender> ChoosenConts = new List<Contender>();
+
             for (int c = 0; c < MartialArts.GeneralBracket.NumberOfContenders; c++)
             {
-                ChoosenContsIdAndFinalScore.Add(l[c].SystemID, l[c].CurrentBracketScore);
-                ChoosenConts.Add(ContendersList.Where(x => x.SystemID == l[c].SystemID).Select(z => z).Single());
+                ChoosenContsIdAndFinalScore.Add(SortedConts[c].SystemID, SortedConts[c].CurrentBracketScore);
+                ChoosenConts.Add(ContendersList.Where(x => x.SystemID == SortedConts[c].SystemID).Select(z => z).First());
             }
-            
+
+            // builed bracket and arage potential brackets again
             BuiledBracket(ChoosenConts, ChoosenContsIdAndFinalScore);
-            CreateScoreAndID();
-            LoadContsPotentialBrackets();
+            ArrangePotentialBracketsAgain();
 
-
-            return 0;
         }
 
         private void CreateBracketsRating()
@@ -438,11 +537,13 @@ namespace MartialArts
             // the reason for the syntax ContendersList.ToList(): http://stackoverflow.com/questions/604831/collection-was-modified-enumeration-operation-may-not-execute
             foreach (Contender c in ContendersList.ToList())
             {
+
                 if (c.PbList.Count == 0)
                 {
-                    RemoveItemFromList(c.SystemID,true);
-                    
+                    RemoveItemFromList(c.SystemID, true);
+
                 }
+
             }
         }
         /// <summary>
@@ -451,6 +552,8 @@ namespace MartialArts
         /// </summary>
         private void LoadContsPotentialBrackets()
         {
+            if (ContendersList.Count <= 1)
+                return;
 
             foreach (Contenders.Contender c in ContendersList)
             {
@@ -472,53 +575,33 @@ namespace MartialArts
                             List<int> bracketIds;
                             // Dictionary to hold also ID`s parallel to scores
                             Dictionary<int, double> IdAndScore = new Dictionary<int, double>();
-                              // statstic measure for that option: shows the rate of original (most idial) of all contenders in that combination 
-                              decimal OriginalRating;
+                            // statstic measure for that option: shows the rate of original (most idial) of all contenders in that combination 
+                            decimal OriginalRating;
                             // gender var
                             GlobalVars.GenderEnum gender;
                             // std division of the combination (idial is std division of 0)
-                            double Statistics = GetBracketStdDivision(p.Score, out OriginalRating,out bracketIds,ref IdAndScore,out gender);
+                            double Statistics = GetBracketStatistic(p.Score, out OriginalRating, out bracketIds, ref IdAndScore, out gender);
                             // the rate of proximity to number of contenders. if number of contenders is 4 and there are 4 contenders in that combination ProximityToNumOfConts will be 1
                             double ProximityToNumOfConts = GetProximty(freq);
-                           
-                            c.AddPotentialBracket(p.Score, freq, Statistics, OriginalRating, ProximityToNumOfConts,bracketIds,IdAndScore, gender);
+
+                            c.AddPotentialBracket(p.Score, freq, Statistics, OriginalRating, ProximityToNumOfConts, bracketIds, IdAndScore, gender);
                             c.CreateRanks();
+
+                            // add only for the first time, to use in GUI for recomdations
+                            if (c.PbListArchive.Count == 0)
+                                c.AddPotentialBracketToArchive(p.Score, freq, Statistics, OriginalRating, ProximityToNumOfConts, bracketIds, IdAndScore, gender);
                         }
                     }
                 }
             }
         }
 
-      
 
 
-        private void RemoveItemFromList<T>(ref List<T> list, int sysId,bool SetToUselessCont) where T : Contenders.IContender
+
+        private void RemoveItemFromList<T>(ref List<T> list, int sysId, bool SetToUselessCont) where T : Contenders.IContender
         {
-                var ItemToRemove = list.SingleOrDefault(r => r.SystemID == sysId);
-                // add to useless contenders list
-                UselessContenders.Add(ContendersList.Where(x => x.SystemID == sysId).Select(x => x).Single());
-               
-            // for case of removing participants that have no contenders
-            if (SetToUselessCont == true)
-               ContendersList.Where(x=> x.SystemID == ItemToRemove.SystemID).Single().IsUseless = true;
-            else
-                ContendersList.Where(x => x.SystemID == ItemToRemove.SystemID).Single().IsPlaced = true;
-
-            // remove
-            list.Remove(ItemToRemove);
-
-            // remove from statistics all the combinations of that contender
-            var statistcs = PotentialScores.Where(r => r.SystemID == sysId).Select(x=> x).ToList();
-                foreach (var x in statistcs)
-                {
-                   PotentialScores.Remove(x);
-                }
-
-        }
-
-        private void RemoveItemFromList( int sysId, bool SetToUselessCont) 
-        {
-            var ItemToRemove = ContendersList.SingleOrDefault(r => r.SystemID == sysId);
+            var ItemToRemove = list.SingleOrDefault(r => r.SystemID == sysId);
             // add to useless contenders list
             UselessContenders.Add(ContendersList.Where(x => x.SystemID == sysId).Select(x => x).Single());
 
@@ -529,7 +612,7 @@ namespace MartialArts
                 ContendersList.Where(x => x.SystemID == ItemToRemove.SystemID).Single().IsPlaced = true;
 
             // remove
-            ContendersList.Remove(ItemToRemove);
+            list.Remove(ItemToRemove);
 
             // remove from statistics all the combinations of that contender
             var statistcs = PotentialScores.Where(r => r.SystemID == sysId).Select(x => x).ToList();
@@ -537,9 +620,41 @@ namespace MartialArts
             {
                 PotentialScores.Remove(x);
             }
+
         }
 
-        private double GetBracketStdDivision(double score, out decimal OriginlGradesRating,out List<int> PotentialContsIDs,ref Dictionary<int,double> IdAndScore,out GlobalVars.GenderEnum Gender)
+        private void RemoveItemFromList(int sysId, bool SetToUselessCont)
+        {
+            var ItemToRemove = ContendersList.SingleOrDefault(r => r.SystemID == sysId);
+
+            //if (ItemToRemove == null)
+            //    return;
+
+
+
+            // for case of removing participants that have no contenders
+            if (SetToUselessCont == true)
+            {
+                ContendersList.Where(x => x.SystemID == ItemToRemove.SystemID).Single().IsUseless = true;
+                // add to useless contenders list
+                UselessContenders.Add(ContendersList.Where(x => x.SystemID == sysId).Select(x => x).Single());
+                // remove
+                ContendersList.Remove(ItemToRemove);
+            }
+            else
+            {
+                ContendersList.Where(x => x.SystemID == ItemToRemove.SystemID).Single().IsPlaced = true;
+                // remove
+                ContendersList.Remove(ItemToRemove);
+            }
+
+
+
+            ArrangePotentialBracketsAgain();
+
+        }
+
+        private double GetBracketStatistic(double score, out decimal OriginlGradesRating, out List<int> PotentialContsIDs, ref Dictionary<int, double> IdAndScore, out GlobalVars.GenderEnum Gender)
         {
             double examinedScore = Math.Floor(score);
             var l = PotentialScores.Where(x => Math.Floor(x.Score) == Math.Floor(examinedScore)).ToList();
@@ -575,6 +690,33 @@ namespace MartialArts
             return sd;
         }
 
+        private double GetStdDivision(double[] Numbers, out double average)
+        {
+            // calculate average
+            average = Numbers.Average();
+            var av = average;
+            double sumOfSquaresOfDifferences = Numbers.Select(val => (val - av) * (val - av)).Sum();
+            double sd = Math.Sqrt(sumOfSquaresOfDifferences / Numbers.Length);
+            return sd;
+        }
+        private double Get_Abs_Weight_Z_Score(double average, double stdDivision, double weight)
+        {
+            if (average == 0 || stdDivision == 0 || weight == 0 || weight < 10 || average < 10)
+            {
+                // if one of the parametes does not make sense return a random reasnible number
+                Random r = new Random();
+                return r.NextDouble() * 1.5;
+
+            }
+            // return the Z score of the weight of the contnder with absulute value in order to rank from averge down and query with OREDER BY
+            return Math.Abs((weight - average) / stdDivision);
+        }
+
+        private void ArrangePotentialBracketsAgain()
+        {
+            CreateScoreAndID();
+            LoadContsPotentialBrackets();
+        }
         private void SortPotentialScoresAgain()
         {
             var l = PotentialScores.AsEnumerable().OrderBy(x => x.Score).ToList();
@@ -587,7 +729,7 @@ namespace MartialArts
             int HighestAge = br.Max(x => x.AgeCategory);
             int HighestBelt = br.Max(x => x.Belt);
             int HighestWeight = br.Max(x => x.WeightCategory);
-           
+
             GlobalVars.GenderEnum bracketGender;
             if (br.All(x => x.IsMale == true))
             {
@@ -615,7 +757,7 @@ namespace MartialArts
                 // final grade
                 c.FinalGradeInBracket = IdAndScore[c.SystemID];
                 RemoveItemFromList(c.SystemID, false);
-            }           
+            }
         }
 
         public List<Contender> ReturnContendersByListOfIds(List<int> ids)
@@ -624,8 +766,8 @@ namespace MartialArts
             foreach (int i in ids)
             {
                 Contender c = ContendersList.Where(x => x.SystemID == i).Select(d => d).SingleOrDefault();
-                if (c!=null)
-                result.Add(c);
+                if (c != null)
+                    result.Add(c);
             }
 
             return result;
@@ -663,7 +805,7 @@ namespace MartialArts
 
                 set
                 {
-                    IsUseless =value;
+                    IsUseless = value;
                 }
             }
 
@@ -683,19 +825,20 @@ namespace MartialArts
             public bool IsMale;
         }
 
-        public struct DecisionStruct 
+        public struct DecisionStruct
         {
             public double CurrentBracketScore;
             public double AcademyVarianceScore;
+            public double Abs_Weight_Z_Score;
             public int SystemID;
         }
     }
 
     class PotentialBracketsGeneralStatistics
     {
-        public static double GetAverage(List<Contender> list,out double stdDivision)
+        public static double GetAverage(List<Contender> list, out double stdDivision)
         {
-            List<int> result =  new List<int>();
+            List<int> result = new List<int>();
             foreach (Contender c in list)
             {
                 foreach (Contender.PotentialBrackets p in c.PbList)
@@ -710,7 +853,7 @@ namespace MartialArts
             foreach (int i in result)
             {
                 sumOfSquaresOfDifferences += (i - average) * (i - average);
-              
+
             }
 
             stdDivision = Math.Sqrt(sumOfSquaresOfDifferences / result.Count);
