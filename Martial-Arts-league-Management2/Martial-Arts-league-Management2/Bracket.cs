@@ -42,7 +42,16 @@ namespace MartialArts
     {
         private static int _BracketNumber = 0;
         public int BracketNumber { get; private set; }
-    
+        public bool IsChild
+        {
+            get
+            {
+                if (ContendersList[0].IsChild == true)
+                    return true;
+                else
+                    return false;
+            }
+        }
         public int AgeGrade { get; set; }
         public int BeltGrade { get; set; }
         public int WeightGrade { get; set; }
@@ -109,7 +118,11 @@ namespace MartialArts
         {
             string belt = Helpers.GetHebBeltName((Contenders.ContndersGeneral.BeltsEnum)BeltGrade);
             string age = Contenders.ContndersGeneral.AgeGrades.Where(x => x.Value == AgeGrade).Select(z => z.Key).SingleOrDefault();
-            string weight = Contenders.ContndersGeneral.ChildWeightCat.Where(x => x.Value == WeightGrade).Select(z => z.Key).SingleOrDefault();
+            string weight = "";
+            if (IsChild == true)
+                weight = Contenders.ContndersGeneral.ChildWeightCat.Where(x => x.Value == WeightGrade).Select(z => z.Key).SingleOrDefault();
+            else
+                weight = Contenders.ContndersGeneral.AdultWeightCat.Where(x => x.Value == WeightGrade).Select(z => z.Key).SingleOrDefault();
 
             return "חגורה: " + belt + " " + "גילאי: " + age + " " + "קטגוריית משקל: " + weight + " " + "מגדר: " + GlobalVars.GEtGenderStringByEnum(Gender);
         }

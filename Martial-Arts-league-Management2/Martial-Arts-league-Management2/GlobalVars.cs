@@ -8,6 +8,7 @@ namespace MartialArts
 {
     class GlobalVars
     {
+        public static bool IsLoading;
         public static int NumOfContendersInLeuge
         {
             get

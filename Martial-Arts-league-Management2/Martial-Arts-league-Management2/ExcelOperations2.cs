@@ -11,10 +11,10 @@ namespace MartialArts
 {
     partial class ExcelOperations
     {
-       
+        List<string> Defects = new List<string>();
         private bool SetContender()
         {
-           
+            
             GlobalVars.ListOfContenders = new List<Contenders.Contender>();
             // for out parameter
             bool isok = true;
@@ -48,16 +48,22 @@ namespace MartialArts
                
                     GlobalVars.ListOfContenders.Add(con);
 
-                    // final check to see if there is no defect in that contender
-                    if (isok == false)
-                        return false;
                 }
 
-      
-            if (isok == true)
+            if (Defects.Count <= 0)
+            {
                 return true;
+            }
             else
+            {
+                string ExDefects="";
+                foreach (string s in Defects)
+                {
+                    ExDefects += s;
+                }
+                Helpers.DefaultMessegeBox(ExDefects, "", System.Windows.Forms.MessageBoxIcon.Asterisk);
                 return false;
+            }
 
         }
 
@@ -68,21 +74,24 @@ namespace MartialArts
 
             if (Helpers.IsString(s)==false)
             {
-                Helpers.DefaultMessegeBox(" השדה " + HebparameterName + " " +" בשורה "  + row + " " + "חייב להיות בשפה עברית או לועזית" + Environment.NewLine + "התוכנית תפסיק את פעולתה", "נתון חסר", System.Windows.Forms.MessageBoxIcon.Warning);
+               // Helpers.DefaultMessegeBox(" השדה " + HebparameterName + " " +" בשורה "  + row + " " + "חייב להיות בשפה עברית או לועזית" + Environment.NewLine + "התוכנית תפסיק את פעולתה", "נתון חסר", System.Windows.Forms.MessageBoxIcon.Warning);
+                Defects.Add(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "חייב להיות בשפה עברית או לועזית" + Environment.NewLine);
                 isok = false;
                 return string.Empty;
             }
 
            if (s == "")
             {
-                Helpers.DefaultMessegeBox(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "לא יכול להיות ריק" + Environment.NewLine + "התוכנית תפסיק את פעולתה", "נתון חסר", System.Windows.Forms.MessageBoxIcon.Warning);
+               // Helpers.DefaultMessegeBox(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "לא יכול להיות ריק" + Environment.NewLine + "התוכנית תפסיק את פעולתה", "נתון חסר", System.Windows.Forms.MessageBoxIcon.Warning);
+                Defects.Add(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "לא יכול להיות ריק" + Environment.NewLine);
                 isok = false;
                 return string.Empty;
             }
 
             if (((string)s).Trim().Length <= 1)
             {
-                Helpers.DefaultMessegeBox(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "חייב להכיל יותר מאות אחת" + Environment.NewLine + "התוכנית תפסיק את פעולתה", "נתון חסר", System.Windows.Forms.MessageBoxIcon.Warning);
+              //  Helpers.DefaultMessegeBox(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "חייב להכיל יותר מאות אחת" + Environment.NewLine + "התוכנית תפסיק את פעולתה", "נתון חסר", System.Windows.Forms.MessageBoxIcon.Warning);
+                Defects.Add(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "חייב להכיל יותר מאות אחת" + Environment.NewLine);
                 isok = false;
                 return string.Empty;
             }
@@ -98,7 +107,8 @@ namespace MartialArts
 
             if (result.Trim().Length <= 6)
             {
-                Helpers.DefaultMessegeBox(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "חייב להכיל יותר משישה תווים" + Environment.NewLine + "התוכנית תפסיק את פעולתה", "נתון חסר", System.Windows.Forms.MessageBoxIcon.Warning);
+               // Helpers.DefaultMessegeBox(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "חייב להכיל יותר משישה תווים" + Environment.NewLine + "התוכנית תפסיק את פעולתה", "נתון חסר", System.Windows.Forms.MessageBoxIcon.Warning);
+                Defects.Add(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "חייב להכיל יותר משישה תווים" + Environment.NewLine);
                 isok = false;
                 return result;
             }
@@ -136,7 +146,7 @@ namespace MartialArts
                 }
             }
             isok = false;
-            Helpers.DefaultMessegeBox(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "מכיל קטגוריית גיל לא חוקית" + Environment.NewLine + "התוכנית תפסיק את פעולתה", "נתון חסר", System.Windows.Forms.MessageBoxIcon.Warning);
+            Defects.Add(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "מכיל קטגוריית גיל לא חוקית" + Environment.NewLine);
             return 0;
         }
 
@@ -148,7 +158,7 @@ namespace MartialArts
             if (result.Trim() != "זכר" && result.Trim() != "נקבה")
             {
                 isok = false;
-                Helpers.DefaultMessegeBox(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "חייב להכיל את הערכים זכר או נקבה בלבד" + Environment.NewLine + "התוכנית תפסיק את פעולתה", "נתון חסר", System.Windows.Forms.MessageBoxIcon.Warning);
+                Defects.Add(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "חייב להכיל את הערכים זכר או נקבה בלבד" + Environment.NewLine);
                 return false;
             }
 
@@ -172,7 +182,7 @@ namespace MartialArts
             else
             {
                 isok = false;
-                Helpers.DefaultMessegeBox(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "חייב להכיל מספר כלשהו שמייצג משקל" + Environment.NewLine + "התוכנית תפסיק את פעולתה", "נתון חסר", System.Windows.Forms.MessageBoxIcon.Warning);
+                 Defects.Add(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "חייב להכיל מספר כלשהו שמייצג משקל" + Environment.NewLine);
                 return 0;
             }
         }
@@ -267,7 +277,7 @@ namespace MartialArts
                  
                 default:
                     isok = false;
-                    Helpers.DefaultMessegeBox(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "חייב להכיל דרגת חגורה חוקית" + Environment.NewLine + "התוכנית תפסיק את פעולתה", "נתון חסר", System.Windows.Forms.MessageBoxIcon.Warning);
+                    Defects.Add(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "חייב להכיל דרגת חגורה חוקית" + Environment.NewLine);
                     return 0;       
             }
 

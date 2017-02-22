@@ -33,6 +33,20 @@ namespace MartialArts
             System.Windows.Forms.MessageBoxDefaultButton.Button1, System.Windows.Forms.MessageBoxOptions.RightAlign);
         }
 
+        public static bool YesNoMessegeBox(string txt, string caption, System.Windows.Forms.MessageBoxIcon icon)
+        {
+            if (System.Windows.Forms.MessageBox.Show(txt,
+            caption, System.Windows.Forms.MessageBoxButtons.YesNo, icon,
+            System.Windows.Forms.MessageBoxDefaultButton.Button1, System.Windows.Forms.MessageBoxOptions.RightAlign) == System.Windows.Forms.DialogResult.No)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
 
         private static string[,] _ColsRecognition;
         /// <summary>
