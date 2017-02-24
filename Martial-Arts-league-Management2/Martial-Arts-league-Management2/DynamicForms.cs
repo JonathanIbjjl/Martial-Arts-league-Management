@@ -53,14 +53,18 @@ namespace DynamicForms
             form.StartPosition = FormStartPosition.CenterScreen;
             form.MaximizeBox = false;
             form.FormBorderStyle = FormBorderStyle.Fixed3D;
+            form.BackColor = MartialArts.GlobalVars.Sys_Yellow;
+            form.FormBorderStyle = FormBorderStyle.None;
 
             // messege label
             Label lblmsg = new Label();
-            lblmsg.Size = new Size(180, lblMsgHight);
+            lblmsg.Size = new Size(205, lblMsgHight);
             lblmsg.Location = new Point(5, 0);
             lblmsg.RightToLeft = RightToLeft.Yes;
             lblmsg.TextAlign = ContentAlignment.MiddleCenter;
             lblmsg.Text = "נמצאו גיליונות מרובים בקובץ. אנא בחר גיליון:";
+            lblmsg.BackColor = MartialArts.GlobalVars.Sys_Yellow;
+            lblmsg.ForeColor = MartialArts.GlobalVars.Sys_DarkerGray;
             form.Controls.Add(lblmsg);
 
             flowPanel = new FlowLayoutPanel();
@@ -71,7 +75,7 @@ namespace DynamicForms
             // add buttons with sheet names
             foreach (string s in SheetNames)
             {
-                CustomButton cb = new CustomButton(180, 25, s);
+                CustomButton cb = new CustomButton(200, 25, s);
                 cb.button.Click += new EventHandler(cb_Click);
 
                 flowPanel.Controls.Add(cb.button);
@@ -97,7 +101,7 @@ namespace DynamicForms
             }
             // add margin of buttons
             result = result + (SheetNames.Length +1) * 8;
-            return result;
+            return result+5;
         }
     }
 
@@ -108,7 +112,8 @@ namespace DynamicForms
         {
             button = new Button();
             button.Size = new Size(width, height);
-            button.BackColor = Color.Gray;
+            button.BackColor = MartialArts.GlobalVars.Sys_DarkerGray;
+            button.ForeColor = MartialArts.GlobalVars.Sys_White;
             button.TextAlign = ContentAlignment.MiddleCenter;
             button.FlatStyle = FlatStyle.Popup;
             button.Cursor = Cursors.Hand;

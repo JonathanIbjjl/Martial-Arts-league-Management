@@ -51,9 +51,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.קרדיטיםToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.עריכהToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ייצארשימתמתחריםלאקסלToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -349,19 +349,9 @@
             this.קרדיטיםToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.קרדיטיםToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
             this.קרדיטיםToolStripMenuItem.Name = "קרדיטיםToolStripMenuItem";
-            this.קרדיטיםToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.קרדיטיםToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.קרדיטיםToolStripMenuItem.Text = "קרדיטים";
             this.קרדיטיםToolStripMenuItem.Click += new System.EventHandler(this.קרדיטיםToolStripMenuItem_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.ErrorImage = null;
-            this.pictureBox1.Image = global::Martial_Arts_league_Management2.Properties.Resources.ICON_BJJL231;
-            this.pictureBox1.Location = new System.Drawing.Point(8, 9);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(105, 95);
-            this.pictureBox1.TabIndex = 8;
-            this.pictureBox1.TabStop = false;
             // 
             // עריכהToolStripMenuItem
             // 
@@ -379,6 +369,18 @@
             this.ייצארשימתמתחריםלאקסלToolStripMenuItem.Name = "ייצארשימתמתחריםלאקסלToolStripMenuItem";
             this.ייצארשימתמתחריםלאקסלToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.ייצארשימתמתחריםלאקסלToolStripMenuItem.Text = "ייצא רשימת מתחרים לאקסל";
+            this.ייצארשימתמתחריםלאקסלToolStripMenuItem.Click += new System.EventHandler(this.ייצארשימתמתחריםלאקסלToolStripMenuItem_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.ErrorImage = null;
+            this.pictureBox1.Image = global::Martial_Arts_league_Management2.Properties.Resources.ICON_BJJL231;
+            this.pictureBox1.Location = new System.Drawing.Point(8, 9);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(105, 95);
+            this.pictureBox1.TabIndex = 8;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // Form1
             // 
@@ -387,6 +389,7 @@
             this.ClientSize = new System.Drawing.Size(1044, 505);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";

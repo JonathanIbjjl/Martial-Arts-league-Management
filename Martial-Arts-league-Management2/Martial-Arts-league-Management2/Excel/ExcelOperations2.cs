@@ -59,9 +59,11 @@ namespace MartialArts
                 string ExDefects="";
                 foreach (string s in Defects)
                 {
-                    ExDefects += s;
+                    ExDefects += s + Environment.NewLine;
                 }
-                Helpers.DefaultMessegeBox(ExDefects, "", System.Windows.Forms.MessageBoxIcon.Asterisk);
+                this.Close(); // close excel file
+                Martial_Arts_league_Management2.PromtForm p = new Martial_Arts_league_Management2.PromtForm(ExDefects, true,"התוכנית תפסיק את פעולתה:" + " " +"נדרשים תיקונים לקובץ נתונים",true);
+                p.ShowDialog();
                 return false;
             }
 

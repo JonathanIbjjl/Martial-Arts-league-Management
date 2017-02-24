@@ -50,7 +50,7 @@ namespace MartialArts
             // check if excel is open
             if (Helpers.fileIsOpen(Path) == true)
             {
-                Helpers.DefaultMessegeBox("קובץ האקסל פתוח, אנא סגור אותו וטען את הקובץ שוב" + Environment.NewLine + "התוכנית תפסיק את הפעולתה", "הקובץ בשימוש", System.Windows.Forms.MessageBoxIcon.Warning);
+                ShowPromtForm("קובץ האקסל פתוח, אנא סגור אותו וטען את הקובץ שוב" + Environment.NewLine + "התוכנית תפסיק את הפעולתה");
                 return false;
             }
 
@@ -130,8 +130,8 @@ namespace MartialArts
 
                     if ( s == null )
                     {
-                        Helpers.DefaultMessegeBox("חסרים נתונים בשורה" + " " + i + " " + Environment.NewLine + "עמודת" + " " + FindQuestionByPropertyName( ContenderObj.NotAllowedNullColumns[j])
-                             + Environment.NewLine + "יש לתקן את הקובץ, התוכנית תפסיק את פעולתה","נתונים קריטיים חסרים",System.Windows.Forms.MessageBoxIcon.Warning);
+                        ShowPromtForm("חסרים נתונים בשורה" + " " + i + " " + Environment.NewLine + "עמודת" + " " + FindQuestionByPropertyName(ContenderObj.NotAllowedNullColumns[j])
+                             + Environment.NewLine + "יש לתקן את הקובץ, התוכנית תפסיק את פעולתה");
                         return false;
                     }
                 }
@@ -147,7 +147,7 @@ namespace MartialArts
 
             if (lr1 != lr2)
             {
-                Helpers.DefaultMessegeBox("לא יתכן שעמודות שם משפחה ושם פרטי אינן שוות במספר הנתונים שלהם. התוכנית תפסיק את פעולתה", "מידע קריטי חסר", System.Windows.Forms.MessageBoxIcon.Warning);
+                ShowPromtForm("לא יתכן שעמודות שם משפחה ושם פרטי אינן שוות במספר הנתונים שלהם. התוכנית תפסיק את פעולתה");              
                 return 1;
             }
             // set global field of last row
@@ -213,11 +213,11 @@ namespace MartialArts
                 {
                     // find the missing column
                     string missing = FindQuestionByPropertyName(itm.Key);
-                  
-                        // the dictionary is not valid promt the user
-                        Helpers.DefaultMessegeBox(":העמודה הבאה חסרה בקובץ " + " " +
-                            Environment.NewLine + missing + Environment.NewLine +
-                            "התוכנית תפסיק את פעולתה", "מידע קריטי חסר", System.Windows.Forms.MessageBoxIcon.Error);
+
+                    // the dictionary is not valid promt the user
+                    ShowPromtForm(":העמודה הבאה חסרה בקובץ " + " " +
+                        Environment.NewLine + missing + Environment.NewLine +
+                        "התוכנית תפסיק את פעולתה");
                     return false;
                 }
             }
@@ -277,6 +277,14 @@ namespace MartialArts
         public void Dispose()
         {
             Close();
+        }
+
+        private void ShowPromtForm(string txt)
+        {
+            using (Martial_Arts_league_Management2.PromtForm promt = new Martial_Arts_league_Management2.PromtForm(txt, false, "התוכנית תפסיק את פעולתה", true))
+            {
+                promt.ShowDialog();
+            }
         }
     }
 

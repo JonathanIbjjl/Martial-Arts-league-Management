@@ -26,6 +26,15 @@ namespace MartialArts
             }
         }
 
+
+        public static void ShowGenericPromtForm(string txt)
+        {
+            using (Martial_Arts_league_Management2.PromtForm promt = new Martial_Arts_league_Management2.PromtForm(txt, false, "הודעה ממערכת IBJJL", true))
+            {
+                promt.ShowDialog();
+            }
+        }
+
         public static void DefaultMessegeBox(string txt, string caption,System.Windows.Forms.MessageBoxIcon icon)
         {
             System.Windows.Forms.MessageBox.Show(txt,

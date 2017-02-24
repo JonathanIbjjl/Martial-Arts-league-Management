@@ -63,6 +63,49 @@ namespace MartialArts
             }
         }
 
-       
+        #region "System Colors"
+        public static System.Drawing.Color Sys_Yellow
+        {
+            get
+            {
+                return System.Drawing.Color.FromArgb(227, 154, 44);
+            }
+        }
+
+        public static System.Drawing.Color Sys_Red
+        {
+            get
+            {
+                return System.Drawing.Color.Maroon;
+            }
+        }
+
+        public static System.Drawing.Color Sys_DarkerGray
+        {
+            get
+            {
+                return System.Drawing.Color.FromArgb(28,28,28);
+            }
+        }
+
+        public static System.Drawing.Color Sys_LighterGray
+        {
+            get
+            {
+                return System.Drawing.Color.FromArgb(48, 48, 48);
+            }
+        }
+
+        public static System.Drawing.Color Sys_White
+        {
+            get
+            {
+                return System.Drawing.Color.FromArgb(250, 250, 250);
+            }
+        }
+
+
+        #endregion
+
     }
 }

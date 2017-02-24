@@ -95,6 +95,7 @@ namespace MartialArts
             }
             else
             {
+                GlobalVars.ListOfContenders.Clear();
                 Helpers.DefaultMessegeBox("יש לבחור קובץ אקסל לטעינה", "לא נבחר קובץ", MessageBoxIcon.Information);
             }
         }
@@ -105,13 +106,17 @@ namespace MartialArts
 
             if (GlobalVars.ListOfContenders.Count > 1)
             {
-                if (Helpers.YesNoMessegeBox("?קיימת רשימת מתחרים בזכרון המערכת " + " " + "האם ברצונך להחליף אותם", "קיימים נתונים בזכרון", MessageBoxIcon.Question) == false)
+                Martial_Arts_league_Management2.PromtForm promt = new Martial_Arts_league_Management2.PromtForm("קיימת רשימת מתחרים בזיכרון המערכת, האם ברצונך להחליף אותם?");
+
+                if (promt.ShowDialog() == DialogResult.No)
                     return false;
                 else
                 {
                     GlobalVars.ListOfContenders.Clear();
                     dgvMain.DataSource = null;
                 }
+
+                promt.Dispose();
             }
 
             GlobalVars.IsLoading = true;
@@ -120,7 +125,7 @@ namespace MartialArts
             ExcelOperations Eo = new ExcelOperations(txtPath.Text);
             if (Eo.GetContenders() == false)
             {
-                MessageBox.Show("התוכנית הפסיקה את פעולתה", "תקלה קריטית", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign);
+             //   MessageBox.Show("התוכנית הפסיקה את פעולתה", "תקלה קריטית", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign);
                 GlobalVars.IsLoading = false;
                 return false;
             }
@@ -312,7 +317,53 @@ namespace MartialArts
             Martial_Arts_league_Management2.Credits credits = new Martial_Arts_league_Management2.Credits();
             credits.ShowDialog();
         }
+
+        private void ייצארשימתמתחריםלאקסלToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+
+
+            if (dgvMain.RowCount > 0)
+            {
+                // promt the user to permit
+                using (var promt = new Martial_Arts_league_Management2.PromtForm("האם לייצא את רשימת המתחרים לקובץ אקסל?"))
+                {
+                    var result = promt.ShowDialog();
+                    if (result == DialogResult.No)
+                    {
+                        return;
+                    }
+                }
+
+                this.tabControl1.SelectedTab = tabPage1;
+
+                System.Threading.Thread waitThread = new System.Threading.Thread(LoadWaitClock);
+                waitThread.Start();
+
+                System.Threading.Thread load = new System.Threading.Thread(ExportDgvToExcel);
+                load.Start();
+
+            }
+            else
+            {
+                Helpers.ShowGenericPromtForm("אין פריטים לייצוא ברשימה");
+            }
+        }
+
+        private void ExportDgvToExcel()
+        {
+            MartialArts.ExportDgvToExcel export = new ExportDgvToExcel("");
+            export.Export(dgvMain);
+            this.Invoke(new Action(wClock.Dispose));
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Martial_Arts_league_Management2.PromtForm p = new Martial_Arts_league_Management2.PromtForm("זו שאל ה שאלה שאלה?asdasdd", true);
+            p.ShowDialog();
+        }
     }
+
 
     public static class ExtensionMethods
     {

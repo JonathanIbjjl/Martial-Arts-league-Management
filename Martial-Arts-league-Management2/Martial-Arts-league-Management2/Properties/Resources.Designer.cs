@@ -63,6 +63,26 @@ namespace Martial_Arts_league_Management2.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ICON_BJJL_Small {
+            get {
+                object obj = ResourceManager.GetObject("ICON_BJJL_Small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ICON_BJJL_Small1 {
+            get {
+                object obj = ResourceManager.GetObject("ICON_BJJL_Small1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ICON_BJJL22 {
             get {
                 object obj = ResourceManager.GetObject("ICON_BJJL22", resourceCulture);
@@ -86,6 +106,16 @@ namespace Martial_Arts_league_Management2.Properties {
         internal static System.Drawing.Bitmap ICON_BJJL231 {
             get {
                 object obj = ResourceManager.GetObject("ICON_BJJL231", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ICON_BJJL232 {
+            get {
+                object obj = ResourceManager.GetObject("ICON_BJJL232", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
