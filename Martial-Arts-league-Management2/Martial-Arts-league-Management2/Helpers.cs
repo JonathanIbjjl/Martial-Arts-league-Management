@@ -224,5 +224,33 @@ namespace MartialArts
             }
              
         }
+
+        public static Color GetBeltColor(int beltNum)
+        {
+            switch (beltNum)
+
+            {
+                case 1000:
+                    return Color.FromArgb(248,248,248);
+                case 2000:
+                    return Color.Gray;
+                case 3000:
+                 return   Color.Yellow;
+                case 4000:
+                    return Color.Orange;
+                case 5000:
+                    return Color.Green;
+                case 6000:
+                    return Color.FromArgb(27, 133, 184);
+                case 7000:
+                    return Color.Purple;
+                case 8000:
+                    return Color.FromArgb(139, 69, 19);
+                case 9000:
+                   return Color.FromArgb(20,20,20);
+                default:
+                   return Color.White;
+            }
+        }
     }
 }

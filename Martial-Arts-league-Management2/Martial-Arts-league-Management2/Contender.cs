@@ -401,6 +401,59 @@ namespace Contenders
         public bool IsUseless { get; set; }
         public bool IsPlaced { get; set; }
         public double FinalGradeInBracket { get; set; }
+
+        public string HebrewBeltColor
+        {
+            get
+            {
+                return Helpers.GetHebBeltName((Contenders.ContndersGeneral.BeltsEnum)Belt);
+            }
+        }
+        public System.Drawing.Color GetBeltColorValue
+        {
+            get
+            {
+                return Helpers.GetBeltColor(Belt);
+            }
+        }
+        public string GetAgeValue
+        {
+            get
+            {
+                string age = "0-0";
+                foreach (KeyValuePair<string,int> p in AgeGrades)
+                {
+                    if (p.Value == AgeCategory)
+                        age = p.Key;
+                }
+                return age;
+            }
+        }
+        public string GetWeightValue
+        {
+            get
+            {
+                string weight = "0-0";
+                if (IsChild)
+                {
+                    foreach (KeyValuePair<string, int> p in ChildWeightCat)
+                    {
+                        if (p.Value == WeightCategory)
+                            weight = p.Key;
+                    }
+                }
+                else
+                {
+                    foreach (KeyValuePair<string, int> p in AdultWeightCat)
+                    {
+                        if (p.Value == WeightCategory)
+                            weight = p.Key;
+                    }
+                }
+                return weight;
+            }
+        }
+
         public IEnumerator GetEnumerator()
         {
             yield return Grade;
