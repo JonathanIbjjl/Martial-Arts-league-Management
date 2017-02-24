@@ -50,11 +50,14 @@ namespace Martial_Arts_league_Management2
 
             if (LongText == true)
             {
-                RichTextBox r = new RichTextBox();
+                TextBox r = new TextBox();
+                r.Multiline = true;
                 r.Size = lblQuestion.Size;
                 r.Location = lblQuestion.Location;
                 r.ReadOnly = true;
-                r.ScrollBars = RichTextBoxScrollBars.Both;
+                r.ScrollBars = ScrollBars.Both;
+                
+  
                 lblQuestion.Dispose();
                 
                 r.RightToLeft = RightToLeft.Yes;

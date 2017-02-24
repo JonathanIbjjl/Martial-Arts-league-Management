@@ -16,7 +16,7 @@ namespace MartialArts
 
     public partial class Form1 : Form
     {
-
+        BracketsBuilder Brackets;
         public Form1()
         {
             InitializeComponent();
@@ -168,8 +168,8 @@ namespace MartialArts
             else
             {
                 GlobalVars.IsLoading = true;
-                BracketsBuilder b = new BracketsBuilder(MartialArts.GlobalVars.ListOfContenders, false);
-                b.Init();
+                Brackets = new BracketsBuilder(MartialArts.GlobalVars.ListOfContenders, false);
+                Brackets.Init();
                 GlobalVars.IsLoading = false;
                 this.Invoke(new Action(wClock.Dispose));
                 Helpers.DefaultMessegeBox("DONE", "", MessageBoxIcon.Asterisk);
@@ -359,8 +359,39 @@ namespace MartialArts
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            Martial_Arts_league_Management2.PromtForm p = new Martial_Arts_league_Management2.PromtForm("זו שאל ה שאלה שאלה?asdasdd", true);
-            p.ShowDialog();
+            Random r = new Random();
+            Visual.VisualContender f = new Visual.VisualContender(GlobalVars.ListOfContenders[r.Next(1,60)]);
+            f.Init();
+            f.Vcontender.Location = new Point(pictureBox1.Location.X + pictureBox1.Width + 5, pictureBox1.Location.Y);
+            FilesPanel.Controls.Add(f.Vcontender);
+
+            Visual.VisualContender f1 = new Visual.VisualContender(GlobalVars.ListOfContenders[r.Next(1, 60)]);
+            f1.Init();
+            f1.Vcontender.Location = new Point(pictureBox1.Location.X + pictureBox1.Width + 5, f.Vcontender.Location.Y + f.Vcontender.Height + 3);
+            FilesPanel.Controls.Add(f1.Vcontender);
+
+            Visual.VisualContender f2 = new Visual.VisualContender(GlobalVars.ListOfContenders[r.Next(1, 60)]);
+            f2.Init();
+            f2.Vcontender.Location = new Point(pictureBox1.Location.X + pictureBox1.Width + 5, f1.Vcontender.Location.Y + f1.Vcontender.Height + 3);
+            FilesPanel.Controls.Add(f2.Vcontender);
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+            foreach (MartialArts.Bracket b in Brackets.BracketsList)
+            {
+                foreach (Contenders.Contender c in b.ContendersList)
+                {
+                    Visual.VisualContender f = new Visual.VisualContender(c);
+                    f.Init();
+                    flowLayoutPanel1.Controls.Add(f.Vcontender);
+                }
+                Label l = new Label();
+                l.Size = new Size(507, 36);
+                flowLayoutPanel1.Controls.Add(l);
+            }
         }
     }
 

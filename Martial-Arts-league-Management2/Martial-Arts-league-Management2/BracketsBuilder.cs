@@ -165,6 +165,7 @@ namespace MartialArts
 
         public void Init()
         {
+            ArrangePotentialBracketsAgain(true); // data to add to archive
 
             // handle only woman explictly, woman bracket even 2 contenders is better than mixed houses, if woman are left after that method they have no factor agains man
             if (OnlyWoman == false) // when only woman is true ther is no need for that method
@@ -550,7 +551,7 @@ namespace MartialArts
         /// each contender has a list of potential brackets struct with statistic info about all the potential brackets
         /// this method will load this property inside each contender obj
         /// </summary>
-        private void LoadContsPotentialBrackets()
+        private void LoadContsPotentialBrackets(bool UpdateArchive = false)
         {
             if (ContendersList.Count <= 1)
                 return;
@@ -588,7 +589,7 @@ namespace MartialArts
                             c.CreateRanks();
 
                             // add only for the first time, to use in GUI for recomdations
-                            if (c.PbListArchive.Count == 0)
+                            if (UpdateArchive == true)
                                 c.AddPotentialBracketToArchive(p.Score, freq, Statistics, OriginalRating, ProximityToNumOfConts, bracketIds, IdAndScore, gender);
                         }
                     }
@@ -712,10 +713,10 @@ namespace MartialArts
             return Math.Abs((weight - average) / stdDivision);
         }
 
-        private void ArrangePotentialBracketsAgain()
+        private void ArrangePotentialBracketsAgain(bool UpdateArchive = false)
         {
             CreateScoreAndID();
-            LoadContsPotentialBrackets();
+            LoadContsPotentialBrackets(UpdateArchive);
         }
         private void SortPotentialScoresAgain()
         {
