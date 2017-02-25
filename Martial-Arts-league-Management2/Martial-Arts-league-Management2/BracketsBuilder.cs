@@ -11,9 +11,9 @@ namespace MartialArts
     class BracketsBuilder : PotentialBracketsGeneralStatistics
     {
         private bool OnlyWoman { get; set; }
-        protected List<Contenders.Contender> ContendersList = new List<Contenders.Contender>();
+        public List<Contenders.Contender> ContendersList = new List<Contenders.Contender>();
         protected List<ScoreAndID> PotentialScores = new List<ScoreAndID>();
-        protected List<Contenders.Contender> UselessContenders = new List<Contenders.Contender>();
+        public List<Contenders.Contender> UselessContenders = new List<Contenders.Contender>();
         public List<MartialArts.Bracket> BracketsList = new List<MartialArts.Bracket>();
 
         protected double AllPotentialBracketsAverage { get; set; }
@@ -22,7 +22,7 @@ namespace MartialArts
         public BracketsBuilder(List<Contenders.Contender> cont, bool OnlyWoman)
         {
             this.OnlyWoman = OnlyWoman;
-            ContendersList = cont;
+            ContendersList = cont.ToList();
         }
 
         private void CreateScoreAndID()
@@ -745,7 +745,7 @@ namespace MartialArts
                 bracketGender = GlobalVars.GenderEnum.Mixed;
             }
 
-            MartialArts.Bracket b = new Bracket(HighestAge, HighestBelt, HighestWeight, bracketGender);
+            MartialArts.Bracket b = new Bracket(HighestAge, HighestBelt, HighestWeight);
             // add contenders
             b.AddContenders(br);
             // add to brackets list

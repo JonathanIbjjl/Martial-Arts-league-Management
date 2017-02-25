@@ -63,14 +63,33 @@ namespace MartialArts
             }
         }
 
-        public GlobalVars.GenderEnum Gender { get; set; }
+        public GlobalVars.GenderEnum Gender
+        {
+            get
+            {
+                // gender
+                if (ContendersList.All(x => x.IsMale == true))
+                {
+                    return GlobalVars.GenderEnum.Man;
+                }
+                else if (ContendersList.All(x => x.IsMale == false))
+                {
+                    return GlobalVars.GenderEnum.Woman;
+                }
+                else
+                {
+                    return GlobalVars.GenderEnum.Mixed;
+                }
+            }
+           
+        }
 
-        public Bracket(int ageGrade,int BeltGrade,int WeightGrade,GlobalVars.GenderEnum gender)
+        public Bracket(int ageGrade,int BeltGrade,int WeightGrade)
         {
             this.AgeGrade = ageGrade;
             this.WeightGrade = WeightGrade;
             this.BeltGrade = BeltGrade;
-            this.Gender = gender;
+           
             _BracketNumber += 1;
             BracketNumber = _BracketNumber;
            

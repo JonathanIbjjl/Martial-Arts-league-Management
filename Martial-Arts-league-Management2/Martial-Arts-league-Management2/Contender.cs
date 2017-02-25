@@ -11,12 +11,12 @@ namespace Contenders
 
     interface IContender
     {
-        int SystemID { get;  set; }
+        int SystemID { get; set; }
         bool IsUseless { get; set; }
         bool IsPlaced { get; set; }
     }
 
-    
+
 
     class ContndersGeneral
     {
@@ -168,12 +168,47 @@ namespace Contenders
             black = 9000
         }
 
-       public virtual int FrequencyOfGrade { get; }
-       public virtual double FinalGrade { get; }
+        public virtual int FrequencyOfGrade { get; }
+        public virtual double FinalGrade { get; }
+
+        /// <summary>
+        /// by exploring the numbers after decimal points, function will return a string with the explanation of the factor
+        /// </summary>
+        /// <param name="grade"></param>
+        /// <returns></returns>
+        public static string GetFactorExplanation(double grade)
+        {
+            if (grade <= 0) // only for safty, not suppose tha hapen
+                return "";
+            decimal FixGrade = (Decimal)grade;
+            decimal Remaining = FixGrade - Math.Floor(FixGrade);
+            string reason = "";
+
+            if (Remaining == 0.01M)
+               reason = "עם פקטור של משקל";
+            else if (Remaining == 0.02M)
+                reason = "עם פקטור של חגורה";
+            else if (Remaining == 0.03M)
+                reason = "עם פקטור של גיל";
+            else if (Remaining == 0.04M)
+                reason = "עם פקטור של משקל וחגורה";
+            else if (Remaining == 0.05M)
+                reason = "עם פקטור של משקל וגיל";
+            else if (Remaining == 0.06M)
+                reason = "עם פקטור של חגורה וגיל";
+            else if (Remaining == 0.07M)
+                reason = "עם פקטור של חגורה משקל וגיל";
+            else if (Remaining == 0.08M)
+                reason = "עם פקטור של אישור להתחרות מול בנים";
+            else
+                reason = "";
+
+            return reason;
+        }
     }
 
 
-    class Contender :   ContndersGeneral, IContender, System.Collections.IEnumerable
+    class Contender : ContndersGeneral, IContender, System.Collections.IEnumerable
     {
         private static int IdentityNumber = 999;
         public Contender()
@@ -186,7 +221,7 @@ namespace Contenders
             IsPlaced = false;
         }
 
-        public int SystemID { get;  set; }
+        public int SystemID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string ID { get; set; }
@@ -200,9 +235,10 @@ namespace Contenders
         public int Belt { get; set; }
         private string _AcademyName;
 
-     
 
-        public string AcademyName {
+
+        public string AcademyName
+        {
             get
             {
                 if (_AcademyName == "האקדמיה אינה מופיע ברשימה" || _AcademyName == "האקדמיה אינה מופיעה ברשימה" || _AcademyName.Contains("אינה מופיע"))
@@ -223,7 +259,7 @@ namespace Contenders
         public bool IsAllowedBeltGradeAbove { get; set; }
         public bool IsAllowedVersusMan { get; set; }
         public bool IsChild { get; set; }
-        
+
         public double WeightFactor
         {
             get
@@ -236,7 +272,7 @@ namespace Contenders
                 {
                     return 0;
                 }
-                    }
+            }
         }
         public double AgeFactor
         {
@@ -282,7 +318,7 @@ namespace Contenders
                 else
                     return 0;
             }
-       }
+        }
         public double Score_BeltFactor
         {
             get
@@ -297,7 +333,7 @@ namespace Contenders
         {
             get
             {
-                if (IsAllowedAgeGradeAbove == true && IsChild==true)
+                if (IsAllowedAgeGradeAbove == true && IsChild == true)
                     return Grade + 50 + 0.03;
                 else
                     return 0;
@@ -317,7 +353,7 @@ namespace Contenders
         {
             get
             {
-                if (IsAllowedWeightGradeAbove == true && IsAllowedAgeGradeAbove == true && IsChild==true)
+                if (IsAllowedWeightGradeAbove == true && IsAllowedAgeGradeAbove == true && IsChild == true)
                     return Grade + 1 + 50 + 0.05;
                 else
                     return 0;
@@ -337,7 +373,7 @@ namespace Contenders
         {
             get
             {
-                if (IsAllowedBeltGradeAbove == true && IsAllowedAgeGradeAbove == true && IsAllowedWeightGradeAbove ==true && IsChild == true)
+                if (IsAllowedBeltGradeAbove == true && IsAllowedAgeGradeAbove == true && IsAllowedWeightGradeAbove == true && IsChild == true)
                     return Grade + 1 + 50 + 1000 + 0.07;
                 else
                     return 0;
@@ -375,7 +411,7 @@ namespace Contenders
                 _PbList = value;
             }
         }
-        
+
         private List<PotentialBrackets> _PbListArchive;
         public List<PotentialBrackets> PbListArchive
         {
@@ -421,7 +457,7 @@ namespace Contenders
             get
             {
                 string age = "0-0";
-                foreach (KeyValuePair<string,int> p in AgeGrades)
+                foreach (KeyValuePair<string, int> p in AgeGrades)
                 {
                     if (p.Value == AgeCategory)
                         age = p.Key;
@@ -464,7 +500,7 @@ namespace Contenders
             yield return Score_Weight_Age_Factor;
             yield return Score_Belt_Age_Factor;
             yield return Score_AllFactors;
-          //  yield return Score_WomanToMan;
+            //  yield return Score_WomanToMan;
         }
 
         public void ClearPbList()
@@ -479,7 +515,7 @@ namespace Contenders
             // most ideal for bracket by by priority: first priority is original score second place is proximity to n (frequency) and third place is std division beetween contenders 
             PbList = PbList.OrderByDescending(i => i.OriginalScoreRank).ThenBy(n => n.ProximityRank).ThenBy(n => n.StdRank).ToList();
             return PbList[0];
-                    
+
         }
 
         public int MostRecomendedBracketFrequency
@@ -508,8 +544,8 @@ namespace Contenders
             for (int i = 0; i < PbList.Count; i++)
             {
                 PbList[i] = GetStdRank(PbList[i]);
-                PbList[i] =  GetProximityRank(PbList[i]);
-                PbList[i] =  GetOriginalScoreRate(PbList[i]);
+                PbList[i] = GetProximityRank(PbList[i]);
+                PbList[i] = GetOriginalScoreRate(PbList[i]);
             }
 
             // order from higher to lower
@@ -559,13 +595,22 @@ namespace Contenders
 
 
         public byte PotentialBracetNum = 1;
-        public void AddPotentialBracket(double score, int frequency,double stdDivision, decimal originalscoresrating,
-            double proximitytonumofconts, List<int> participantsIDs, Dictionary<int, double> idandscore,GlobalVars.GenderEnum gender)
+        public void AddPotentialBracket(double score, int frequency, double stdDivision, decimal originalscoresrating,
+            double proximitytonumofconts, List<int> participantsIDs, Dictionary<int, double> idandscore, GlobalVars.GenderEnum gender)
         {
             // make fixes if its a woman (is must not have any factor if its mixed house)
-            PbList.Add(new PotentialBrackets {Score = score,Frquency = frequency,StdDivision = stdDivision,
-            OriginalScoresRating = originalscoresrating,proximityToNumOfConts = proximitytonumofconts,
-                ParticipantsIDs = participantsIDs,BracketID = PotentialBracetNum,IdAndScore = idandscore,Gender= gender});
+            PbList.Add(new PotentialBrackets
+            {
+                Score = score,
+                Frquency = frequency,
+                StdDivision = stdDivision,
+                OriginalScoresRating = originalscoresrating,
+                proximityToNumOfConts = proximitytonumofconts,
+                ParticipantsIDs = participantsIDs,
+                BracketID = PotentialBracetNum,
+                IdAndScore = idandscore,
+                Gender = gender
+            });
             PotentialBracetNum += 1;
         }
 
@@ -591,29 +636,29 @@ namespace Contenders
 
         public struct PotentialBrackets
         {
-        public byte BracketID;
-        public double Score;
-        public int Frquency;
-        public GlobalVars.GenderEnum Gender;
-        public double StdDivision;
-        public decimal OriginalScoresRating;
-        public double proximityToNumOfConts;
-        public List<int> ParticipantsIDs;
-        public Dictionary<int, double> IdAndScore;
-        // calculated vars
-        public int StdRank;
-        public int ProximityRank;
-        public int OriginalScoreRank;
-        public int GeneralRate
+            public byte BracketID;
+            public double Score;
+            public int Frquency;
+            public GlobalVars.GenderEnum Gender;
+            public double StdDivision;
+            public decimal OriginalScoresRating;
+            public double proximityToNumOfConts;
+            public List<int> ParticipantsIDs;
+            public Dictionary<int, double> IdAndScore;
+            // calculated vars
+            public int StdRank;
+            public int ProximityRank;
+            public int OriginalScoreRank;
+            public int GeneralRate
             {
                 get
                 {
                     return StdRank + ProximityRank + OriginalScoreRank;
                 }
             }
-             
+
         }
-   
+
     }
 
 
@@ -629,8 +674,8 @@ namespace Contenders
         // 1.0 the first initilization the class will use League field after manipulating contenders
         // LoadNewScatteringStatistics() will be activated, after that activation the class will
         // use LoadNewScatteringStatistics when calling to FrequencyOfGrade property
-        private bool UseLeagueNewStatistics  = false;
-        private MartialArts.ScattteringWithContenderLeague NewScatteringStatistics; 
+        private bool UseLeagueNewStatistics = false;
+        private MartialArts.ScattteringWithContenderLeague NewScatteringStatistics;
 
         private Contender _Contender;
         public Contender Contender
@@ -748,6 +793,6 @@ namespace Contenders
         {
             return FinalGrade.ToString();
         }
-    }  
-    
+    }
+
 }

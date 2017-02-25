@@ -191,7 +191,7 @@ namespace Contenders
                 if (itm.Value < MartialArts.GeneralBracket.NumberOfContenders)
                 {
                     var l = ContendersLeagueList.AsEnumerable().Where(x => x.FinalGrade == itm.Key).Select(x => x).ToList();
-                    MartialArts.Bracket br = new MartialArts.Bracket(l.Max(age => age.Contender.AgeCategory), l.Max(belt => belt.Contender.Belt), l.Max(weight => weight.Contender.Belt), MartialArts.GlobalVars.GenderEnum.Man);
+                    MartialArts.Bracket br = new MartialArts.Bracket(l.Max(age => age.Contender.AgeCategory), l.Max(belt => belt.Contender.Belt), l.Max(weight => weight.Contender.Belt));
               //      br.ContendersList = l;
                     brList.Add(br);
                 }
@@ -213,7 +213,7 @@ namespace Contenders
 
                     for (int i = 0 ; i < timesToLoop; i++)
                     {
-                        MartialArts.Bracket br = new MartialArts.Bracket(l.Max(age => age.Contender.AgeCategory), l.Max(belt => belt.Contender.Belt), l.Max(weight => weight.Contender.Belt), MartialArts.GlobalVars.GenderEnum.Man);
+                        MartialArts.Bracket br = new MartialArts.Bracket(l.Max(age => age.Contender.AgeCategory), l.Max(belt => belt.Contender.Belt), l.Max(weight => weight.Contender.Belt));
 
                         // for example (frequency=13,n=4), firstloop: 0*4[0],secondloop:1*4[4],thirdloop:2*4;
                         int LoopFrom = i * MartialArts.GeneralBracket.NumberOfContenders;

@@ -14,10 +14,24 @@ namespace Martial_Arts_league_Management2
     {
         public String text;
         public bool LongText;
-        public bool OnlyYesButton; 
+        public bool OnlyYesButton;
+        public double FormSizeMultiplication = 1;
         public PromtForm(string txt,bool LongText = false,string Header = "הודעה ממערכת IBJJL",bool OnlyYesButton=false,string btnYesText = "אישור",string btnNoText = "ביטול")
         {
             InitializeComponent();
+
+            this.text = txt;
+            this.lblHeader.Text = Header;
+            this.LongText = LongText;
+            this.OnlyYesButton = OnlyYesButton;
+            this.btnYes.Text = btnYesText;
+            this.btnNo.Text = btnNoText;
+        }
+
+        public PromtForm(Size FormSize,string txt, bool LongText = false, string Header = "הודעה ממערכת IBJJL", bool OnlyYesButton = false, string btnYesText = "אישור", string btnNoText = "ביטול")
+        {
+            InitializeComponent();
+            this.Size = FormSize;
             this.text = txt;
             this.lblHeader.Text = Header;
             this.LongText = LongText;
@@ -40,7 +54,6 @@ namespace Martial_Arts_league_Management2
 
         private void LoadMe()
         {
-
             if (OnlyYesButton == true)
             {
                 btnYes.Size = new Size(lblQuestion.Width, btnYes.Height);
@@ -51,6 +64,8 @@ namespace Martial_Arts_league_Management2
             if (LongText == true)
             {
                 TextBox r = new TextBox();
+                r.Font = new Font("Consolas", 8, FontStyle.Regular);
+                r.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
                 r.Multiline = true;
                 r.Size = lblQuestion.Size;
                 r.Location = lblQuestion.Location;
@@ -69,6 +84,11 @@ namespace Martial_Arts_league_Management2
 
         }
 
+        private void FormSize()
+        {
+    
+        }
+
         private void btnYes_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
@@ -79,6 +99,11 @@ namespace Martial_Arts_league_Management2
         {
             this.DialogResult = DialogResult.No;
             this.Close();
+        }
+
+        private void lblQuestion_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

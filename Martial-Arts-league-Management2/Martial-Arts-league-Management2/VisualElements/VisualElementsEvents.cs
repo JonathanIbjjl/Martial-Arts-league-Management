@@ -35,7 +35,11 @@ namespace Visual
             s.Append(Environment.NewLine);
             s.Append(Environment.NewLine);
 
-            s.Append("צירופים אפשריים");
+            s.Append("##################################"
++ Environment.NewLine + "######### צירופים אפשריים ########"
++ Environment.NewLine + "##################################");
+
+            s.Append(Environment.NewLine);
             s.Append(Environment.NewLine);
 
             if (Contender.PbListArchive.Count <= 0)
@@ -48,7 +52,14 @@ namespace Visual
                 foreach (Contenders.Contender.PotentialBrackets pb in Contender.PbListArchive)
                 {
 
-                    s.Append(pb.Score);
+                    foreach (KeyValuePair<int, double> scoreAndId in pb.IdAndScore)
+                    {
+                        var name = MartialArts.GlobalVars.ListOfContenders.Where(x => x.SystemID == scoreAndId.Key).Select(z => z.SystemID + " " + z.FirstName + " " + z.LastName).FirstOrDefault();
+                        s.Append(name + " " + Contenders.ContndersGeneral.GetFactorExplanation(scoreAndId.Value));
+                        s.Append(Environment.NewLine);
+                    }
+                    s.Append(line);
+                    s.Append(Environment.NewLine);
                     s.Append(Environment.NewLine);
                 }
             }
@@ -56,7 +67,7 @@ namespace Visual
 
 
             string con = s.ToString();
-            Martial_Arts_league_Management2.PromtForm promt = new Martial_Arts_league_Management2.PromtForm(con, true, "פרטי מתחרה", true, "סגור");
+            Martial_Arts_league_Management2.PromtForm promt = new Martial_Arts_league_Management2.PromtForm(new System.Drawing.Size(600,600),con, true, "פרטי מתחרה", true, "סגור");
             promt.Show();
 
         }
