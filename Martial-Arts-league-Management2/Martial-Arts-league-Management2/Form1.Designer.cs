@@ -42,7 +42,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.FilesPanel = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
@@ -56,20 +55,29 @@
             this.dgvMain = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblIsUselessContsCount = new System.Windows.Forms.Label();
+            this.lblAllUnplacedContsCount = new System.Windows.Forms.Label();
+            this.lblPlacedContsCount = new System.Windows.Forms.Label();
+            this.lblAllContsCount = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.lblBracketsClock = new System.Windows.Forms.Label();
+            this.lblPercentwithoutUseless = new System.Windows.Forms.Label();
+            this.lblPercent = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.UnPlacedFpanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblLine = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.BracktsFPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.UnPlacedFpanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.lblPercent = new System.Windows.Forms.Label();
-            this.lblPercentwithoutUseless = new System.Windows.Forms.Label();
-            this.lblBracketsClock = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -193,7 +201,6 @@
             this.FilesPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.FilesPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.FilesPanel.Controls.Add(this.button1);
             this.FilesPanel.Controls.Add(this.btnBrowse);
             this.FilesPanel.Controls.Add(this.checkBox1);
             this.FilesPanel.Controls.Add(this.checkBox2);
@@ -207,15 +214,6 @@
             this.FilesPanel.Name = "FilesPanel";
             this.FilesPanel.Size = new System.Drawing.Size(1275, 118);
             this.FilesPanel.TabIndex = 9;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(247, 18);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(81, 67);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // btnBrowse
             // 
@@ -419,12 +417,22 @@
             // 
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer1.Location = new System.Drawing.Point(3, 3);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.lblIsUselessContsCount);
+            this.splitContainer1.Panel1.Controls.Add(this.lblAllUnplacedContsCount);
+            this.splitContainer1.Panel1.Controls.Add(this.lblPlacedContsCount);
+            this.splitContainer1.Panel1.Controls.Add(this.lblAllContsCount);
+            this.splitContainer1.Panel1.Controls.Add(this.label16);
+            this.splitContainer1.Panel1.Controls.Add(this.label15);
+            this.splitContainer1.Panel1.Controls.Add(this.label14);
+            this.splitContainer1.Panel1.Controls.Add(this.label13);
+            this.splitContainer1.Panel1.Controls.Add(this.btnSearch);
             this.splitContainer1.Panel1.Controls.Add(this.label12);
             this.splitContainer1.Panel1.Controls.Add(this.label11);
             this.splitContainer1.Panel1.Controls.Add(this.lblBracketsClock);
@@ -436,7 +444,7 @@
             this.splitContainer1.Panel1.Controls.Add(this.label7);
             this.splitContainer1.Panel1.Controls.Add(this.label6);
             this.splitContainer1.Panel1.Controls.Add(this.UnPlacedFpanel);
-            this.splitContainer1.Panel1.Controls.Add(this.label5);
+            this.splitContainer1.Panel1.Controls.Add(this.lblLine);
             this.splitContainer1.Panel1.Controls.Add(this.pictureBox2);
             this.splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(3);
             this.splitContainer1.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -446,19 +454,279 @@
             this.splitContainer1.Panel2.Controls.Add(this.BracktsFPanel);
             this.splitContainer1.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.splitContainer1.Size = new System.Drawing.Size(1275, 613);
-            this.splitContainer1.SplitterDistance = 165;
+            this.splitContainer1.SplitterDistance = 229;
             this.splitContainer1.TabIndex = 0;
+            this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
-            // label5
+            // lblIsUselessContsCount
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblIsUselessContsCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblIsUselessContsCount.BackColor = System.Drawing.Color.Transparent;
+            this.lblIsUselessContsCount.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lblIsUselessContsCount.ForeColor = System.Drawing.Color.Red;
+            this.lblIsUselessContsCount.Location = new System.Drawing.Point(814, 189);
+            this.lblIsUselessContsCount.Name = "lblIsUselessContsCount";
+            this.lblIsUselessContsCount.Size = new System.Drawing.Size(40, 16);
+            this.lblIsUselessContsCount.TabIndex = 31;
+            this.lblIsUselessContsCount.Text = "456";
+            this.lblIsUselessContsCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblAllUnplacedContsCount
+            // 
+            this.lblAllUnplacedContsCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAllUnplacedContsCount.BackColor = System.Drawing.Color.Transparent;
+            this.lblAllUnplacedContsCount.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lblAllUnplacedContsCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.lblAllUnplacedContsCount.Location = new System.Drawing.Point(1022, 189);
+            this.lblAllUnplacedContsCount.Name = "lblAllUnplacedContsCount";
+            this.lblAllUnplacedContsCount.Size = new System.Drawing.Size(88, 16);
+            this.lblAllUnplacedContsCount.TabIndex = 30;
+            this.lblAllUnplacedContsCount.Text = "456";
+            this.lblAllUnplacedContsCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblPlacedContsCount
+            // 
+            this.lblPlacedContsCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPlacedContsCount.BackColor = System.Drawing.Color.Transparent;
+            this.lblPlacedContsCount.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lblPlacedContsCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.lblPlacedContsCount.Location = new System.Drawing.Point(814, 160);
+            this.lblPlacedContsCount.Name = "lblPlacedContsCount";
+            this.lblPlacedContsCount.Size = new System.Drawing.Size(65, 16);
+            this.lblPlacedContsCount.TabIndex = 29;
+            this.lblPlacedContsCount.Text = "456";
+            this.lblPlacedContsCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblAllContsCount
+            // 
+            this.lblAllContsCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAllContsCount.BackColor = System.Drawing.Color.Transparent;
+            this.lblAllContsCount.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lblAllContsCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.lblAllContsCount.Location = new System.Drawing.Point(1060, 160);
+            this.lblAllContsCount.Name = "lblAllContsCount";
+            this.lblAllContsCount.Size = new System.Drawing.Size(88, 16);
+            this.lblAllContsCount.TabIndex = 28;
+            this.lblAllContsCount.Text = "456";
+            this.lblAllContsCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label16
+            // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label16.AutoEllipsis = true;
+            this.label16.AutoSize = true;
+            this.label16.BackColor = System.Drawing.Color.Transparent;
+            this.label16.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label16.ForeColor = System.Drawing.Color.Silver;
+            this.label16.Location = new System.Drawing.Point(1116, 189);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(126, 16);
+            this.label16.TabIndex = 27;
+            this.label16.Text = "מתחרים לא משובצים:";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label15
+            // 
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label15.AutoSize = true;
+            this.label15.BackColor = System.Drawing.Color.Transparent;
+            this.label15.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label15.ForeColor = System.Drawing.Color.Silver;
+            this.label15.Location = new System.Drawing.Point(856, 189);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(166, 16);
+            this.label15.TabIndex = 26;
+            this.label15.Text = "מתחרים ללא אפשרות שיבוץ:";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.Transparent;
+            this.label14.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label14.ForeColor = System.Drawing.Color.Silver;
+            this.label14.Location = new System.Drawing.Point(882, 160);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(140, 16);
+            this.label14.TabIndex = 25;
+            this.label14.Text = "סה\"כ מתחרים משובצים:";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label13
+            // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.Transparent;
+            this.label13.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label13.ForeColor = System.Drawing.Color.Silver;
+            this.label13.Location = new System.Drawing.Point(1154, 160);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(88, 16);
+            this.label13.TabIndex = 24;
+            this.label13.Text = "סה\"כ מתחרים:";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSearch.Enabled = false;
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSearch.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.btnSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.btnSearch.Location = new System.Drawing.Point(143, 57);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(86, 38);
+            this.btnSearch.TabIndex = 23;
+            this.btnSearch.Text = "צור בתים";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.label5.Location = new System.Drawing.Point(4, 147);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(1261, 10);
-            this.label5.TabIndex = 10;
+            this.label12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.label12.Location = new System.Drawing.Point(235, 24);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(1, 182);
+            this.label12.TabIndex = 22;
+            // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.label11.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label11.Location = new System.Drawing.Point(235, 3);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(539, 24);
+            this.label11.TabIndex = 21;
+            this.label11.Text = "מתחרים חסרי התאמה";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblBracketsClock
+            // 
+            this.lblBracketsClock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblBracketsClock.BackColor = System.Drawing.Color.Transparent;
+            this.lblBracketsClock.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lblBracketsClock.ForeColor = System.Drawing.Color.Silver;
+            this.lblBracketsClock.Location = new System.Drawing.Point(857, 57);
+            this.lblBracketsClock.Name = "lblBracketsClock";
+            this.lblBracketsClock.Size = new System.Drawing.Size(90, 90);
+            this.lblBracketsClock.TabIndex = 20;
+            this.lblBracketsClock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblPercentwithoutUseless
+            // 
+            this.lblPercentwithoutUseless.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPercentwithoutUseless.BackColor = System.Drawing.Color.Transparent;
+            this.lblPercentwithoutUseless.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lblPercentwithoutUseless.ForeColor = System.Drawing.Color.Silver;
+            this.lblPercentwithoutUseless.Location = new System.Drawing.Point(1020, 57);
+            this.lblPercentwithoutUseless.Name = "lblPercentwithoutUseless";
+            this.lblPercentwithoutUseless.Size = new System.Drawing.Size(90, 90);
+            this.lblPercentwithoutUseless.TabIndex = 19;
+            this.lblPercentwithoutUseless.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblPercent
+            // 
+            this.lblPercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPercent.BackColor = System.Drawing.Color.Transparent;
+            this.lblPercent.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lblPercent.ForeColor = System.Drawing.Color.Silver;
+            this.lblPercent.Location = new System.Drawing.Point(1163, 57);
+            this.lblPercent.Name = "lblPercent";
+            this.lblPercent.Size = new System.Drawing.Size(90, 90);
+            this.lblPercent.TabIndex = 18;
+            this.lblPercent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.label10.Location = new System.Drawing.Point(804, 27);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(1, 182);
+            this.label10.TabIndex = 17;
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.BackColor = System.Drawing.Color.Transparent;
+            this.label9.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label9.ForeColor = System.Drawing.Color.Silver;
+            this.label9.Location = new System.Drawing.Point(814, 36);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(162, 16);
+            this.label9.TabIndex = 16;
+            this.label9.Text = "אחוז בתים של 4 מתחרים";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label8.ForeColor = System.Drawing.Color.Silver;
+            this.label8.Location = new System.Drawing.Point(1013, 36);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(104, 16);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "אחוז התאמה נטו";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label7.ForeColor = System.Drawing.Color.Silver;
+            this.label7.Location = new System.Drawing.Point(1154, 36);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(111, 16);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "אחוז התאמה";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label7.Click += new System.EventHandler(this.label7_Click);
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.label6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label6.Location = new System.Drawing.Point(804, 3);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(461, 24);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "סטטיסטיקת התאמות";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // UnPlacedFpanel
+            // 
+            this.UnPlacedFpanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.UnPlacedFpanel.AutoScroll = true;
+            this.UnPlacedFpanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.UnPlacedFpanel.Location = new System.Drawing.Point(242, 30);
+            this.UnPlacedFpanel.Name = "UnPlacedFpanel";
+            this.UnPlacedFpanel.Size = new System.Drawing.Size(532, 178);
+            this.UnPlacedFpanel.TabIndex = 12;
+            // 
+            // lblLine
+            // 
+            this.lblLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.lblLine.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.lblLine.Location = new System.Drawing.Point(4, 211);
+            this.lblLine.Name = "lblLine";
+            this.lblLine.Size = new System.Drawing.Size(1261, 10);
+            this.lblLine.TabIndex = 10;
             // 
             // pictureBox2
             // 
@@ -478,141 +746,8 @@
             this.BracktsFPanel.AutoScroll = true;
             this.BracktsFPanel.Location = new System.Drawing.Point(3, 3);
             this.BracktsFPanel.Name = "BracktsFPanel";
-            this.BracktsFPanel.Size = new System.Drawing.Size(1265, 436);
+            this.BracktsFPanel.Size = new System.Drawing.Size(1265, 372);
             this.BracktsFPanel.TabIndex = 0;
-            // 
-            // UnPlacedFpanel
-            // 
-            this.UnPlacedFpanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.UnPlacedFpanel.AutoScroll = true;
-            this.UnPlacedFpanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.UnPlacedFpanel.Location = new System.Drawing.Point(242, 30);
-            this.UnPlacedFpanel.Name = "UnPlacedFpanel";
-            this.UnPlacedFpanel.Size = new System.Drawing.Size(532, 114);
-            this.UnPlacedFpanel.TabIndex = 12;
-            // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.label6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label6.Location = new System.Drawing.Point(804, 3);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(461, 24);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "סטטיסטיקת התאמות";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label7
-            // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label7.ForeColor = System.Drawing.Color.Silver;
-            this.label7.Location = new System.Drawing.Point(1154, 36);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(111, 16);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "אחוז התאמה";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label7.Click += new System.EventHandler(this.label7_Click);
-            // 
-            // label8
-            // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.label8.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label8.ForeColor = System.Drawing.Color.Silver;
-            this.label8.Location = new System.Drawing.Point(982, 36);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(166, 16);
-            this.label8.TabIndex = 15;
-            this.label8.Text = "אחוז התאמה ללא חסרי התאמה";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label9
-            // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.BackColor = System.Drawing.Color.Transparent;
-            this.label9.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label9.ForeColor = System.Drawing.Color.Silver;
-            this.label9.Location = new System.Drawing.Point(814, 36);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(162, 16);
-            this.label9.TabIndex = 16;
-            this.label9.Text = "אחוז בתים של 4 משתתפים";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label10
-            // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.label10.Location = new System.Drawing.Point(804, 27);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(1, 118);
-            this.label10.TabIndex = 17;
-            // 
-            // lblPercent
-            // 
-            this.lblPercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPercent.BackColor = System.Drawing.Color.Transparent;
-            this.lblPercent.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.lblPercent.ForeColor = System.Drawing.Color.Silver;
-            this.lblPercent.Location = new System.Drawing.Point(1163, 57);
-            this.lblPercent.Name = "lblPercent";
-            this.lblPercent.Size = new System.Drawing.Size(90, 90);
-            this.lblPercent.TabIndex = 18;
-            this.lblPercent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblPercentwithoutUseless
-            // 
-            this.lblPercentwithoutUseless.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPercentwithoutUseless.BackColor = System.Drawing.Color.Transparent;
-            this.lblPercentwithoutUseless.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.lblPercentwithoutUseless.ForeColor = System.Drawing.Color.Silver;
-            this.lblPercentwithoutUseless.Location = new System.Drawing.Point(1020, 57);
-            this.lblPercentwithoutUseless.Name = "lblPercentwithoutUseless";
-            this.lblPercentwithoutUseless.Size = new System.Drawing.Size(90, 90);
-            this.lblPercentwithoutUseless.TabIndex = 19;
-            this.lblPercentwithoutUseless.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblBracketsClock
-            // 
-            this.lblBracketsClock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblBracketsClock.BackColor = System.Drawing.Color.Transparent;
-            this.lblBracketsClock.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.lblBracketsClock.ForeColor = System.Drawing.Color.Silver;
-            this.lblBracketsClock.Location = new System.Drawing.Point(857, 57);
-            this.lblBracketsClock.Name = "lblBracketsClock";
-            this.lblBracketsClock.Size = new System.Drawing.Size(90, 90);
-            this.lblBracketsClock.TabIndex = 20;
-            this.lblBracketsClock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label11
-            // 
-            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.label11.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label11.Location = new System.Drawing.Point(235, 3);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(539, 24);
-            this.label11.TabIndex = 21;
-            this.label11.Text = "מתחרים חסרי התאמה";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label12
-            // 
-            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.label12.Location = new System.Drawing.Point(235, 24);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(1, 118);
-            this.label12.TabIndex = 22;
             // 
             // Form1
             // 
@@ -640,6 +775,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
@@ -673,11 +809,10 @@
         private System.Windows.Forms.ToolStripMenuItem קרדיטיםToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem עריכהToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ייצארשימתמתחריםלאקסלToolStripMenuItem;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.FlowLayoutPanel BracktsFPanel;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblLine;
         private System.Windows.Forms.FlowLayoutPanel UnPlacedFpanel;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
@@ -689,6 +824,15 @@
         private System.Windows.Forms.Label lblPercent;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Label lblIsUselessContsCount;
+        private System.Windows.Forms.Label lblAllUnplacedContsCount;
+        private System.Windows.Forms.Label lblPlacedContsCount;
+        private System.Windows.Forms.Label lblAllContsCount;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
     }
 }
 

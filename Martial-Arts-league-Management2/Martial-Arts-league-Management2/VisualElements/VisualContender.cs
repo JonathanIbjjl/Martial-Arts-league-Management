@@ -91,7 +91,7 @@ namespace Visual
         }
     }
 
-   partial class VisualContender : VisualElements
+   partial class VisualContender : VisualElements,IDisposable
     {
         public Contenders.Contender Contender { get; set; }
         protected BeltColors BeltShapes;
@@ -326,6 +326,7 @@ namespace Visual
             Vcontender.Controls.Add(AgeCatPanel);
             Vcontender.Controls.Add(PersonalDataPanel);
             Vcontender.Controls.Add(BtnShowContData);
+
         }
 
         public Label GetLabel()
@@ -433,6 +434,26 @@ namespace Visual
 
         }
 
+
+        public void MakeShadow()
+        {
+            if (_ContMainPanel == null)
+                return;
+            if (Contender.FirstName.Contains("פיני") == false)
+                for (int anim = Vcontender.Height; anim >= 10; anim--)
+                {
+                    Vcontender.Size = new Size(Vcontender.Width, anim);
+                    Application.DoEvents();
+                    System.Threading.Thread.Sleep(10);
+                }
+            
+
+        }
+
+        public void Dispose()
+        {
+            
+        }
     }
 
 }

@@ -204,38 +204,38 @@ namespace MartialArts
             {
                 foreach (Bracket b in BracketsList)
                 {
-                    if (Math.Floor(ContendersList[i].Grade) == Math.Floor(b.AverageGrade))
+                    if (Math.Floor(ContendersList[i].Grade) == Math.Floor(b.AverageGrade) && ReturnBinaryGender(b) == ContendersList[i].IsMale)
                     {
                         AddReminingToBracket( ContendersList[i].SystemID, ContendersList[i].Grade, b.BracketNumber);
                         break;
                     }
-                    else if (Math.Floor(ContendersList[i].Score_WeightFactor) == Math.Floor(b.AverageGrade))
+                    else if (Math.Floor(ContendersList[i].Score_WeightFactor) == Math.Floor(b.AverageGrade) && ReturnBinaryGender(b) == ContendersList[i].IsMale)
                     {
                         AddReminingToBracket(ContendersList[i].SystemID, ContendersList[i].Score_WeightFactor, b.BracketNumber);
                         break;
                     }
 
-                    else if (Math.Floor(ContendersList[i].Score_BeltFactor) == Math.Floor(b.AverageGrade))
+                    else if (Math.Floor(ContendersList[i].Score_BeltFactor) == Math.Floor(b.AverageGrade) && ReturnBinaryGender(b) == ContendersList[i].IsMale)
                     {
                         AddReminingToBracket(ContendersList[i].SystemID, ContendersList[i].Score_BeltFactor, b.BracketNumber);
                         break;
                     }
-                    else if (Math.Floor(ContendersList[i].Score_AgeFactor) == Math.Floor(b.AverageGrade) && ContendersList[i].IsChild == true)
+                    else if (Math.Floor(ContendersList[i].Score_AgeFactor) == Math.Floor(b.AverageGrade) && ContendersList[i].IsChild == true && ReturnBinaryGender(b) == ContendersList[i].IsMale)
                     {
                         AddReminingToBracket(ContendersList[i].SystemID, ContendersList[i].Score_AgeFactor, b.BracketNumber);
                         break;
                     }
-                    else if (Math.Floor(ContendersList[i].Score_Weight_Belt_Factor) == Math.Floor(b.AverageGrade))
+                    else if (Math.Floor(ContendersList[i].Score_Weight_Belt_Factor) == Math.Floor(b.AverageGrade) && ReturnBinaryGender(b) == ContendersList[i].IsMale)
                     {
                         AddReminingToBracket(ContendersList[i].SystemID, ContendersList[i].Score_Weight_Belt_Factor, b.BracketNumber);
                         break;
                     }
-                    else if (Math.Floor(ContendersList[i].Score_Weight_Age_Factor) == Math.Floor(b.AverageGrade) && ContendersList[i].IsChild == true)
+                    else if (Math.Floor(ContendersList[i].Score_Weight_Age_Factor) == Math.Floor(b.AverageGrade) && ContendersList[i].IsChild == true && ReturnBinaryGender(b) == ContendersList[i].IsMale)
                     {
                         AddReminingToBracket(ContendersList[i].SystemID, ContendersList[i].Score_Weight_Age_Factor, b.BracketNumber);
                         break;
                     }
-                    else if (Math.Floor(ContendersList[i].Score_AllFactors) == Math.Floor(b.AverageGrade) && ContendersList[i].IsChild == true)
+                    else if (Math.Floor(ContendersList[i].Score_AllFactors) == Math.Floor(b.AverageGrade) && ContendersList[i].IsChild == true && ReturnBinaryGender(b) == ContendersList[i].IsMale)
                     {
                         AddReminingToBracket(ContendersList[i].SystemID, ContendersList[i].Score_AllFactors, b.BracketNumber);
                         break;
@@ -244,7 +244,15 @@ namespace MartialArts
                 }
             }
         }
-   
+
+        private bool ReturnBinaryGender(Bracket b)
+        {
+            if (b.Gender == GlobalVars.GenderEnum.Man)
+                return true;
+            else 
+                return false;
+        }
+
         private void AddReminingToBracket(int systemID,double finalGradeForBracket,int BracketID)
         {
             var Cont = ContendersList.Where(x => x.SystemID == systemID).Select(x => x).First();

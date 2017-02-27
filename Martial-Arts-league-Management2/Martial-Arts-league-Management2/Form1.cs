@@ -47,6 +47,7 @@ namespace MartialArts
 
         private void Form1_Load(object sender, EventArgs e)
         {
+          //  splitContainer1.SplitterDistance = splitContainer1.Height - 372;
 
         }
 
@@ -177,7 +178,7 @@ namespace MartialArts
                 Brackets.Init();
                 GlobalVars.IsLoading = false;
                 this.Invoke(new Action(wClock.Dispose));
-                this.Invoke(new Action(TestToDelete));
+                this.Invoke(new Action(CreateVisualBrackets));
             }
         }
 
@@ -404,9 +405,7 @@ namespace MartialArts
                 {
                     if (promt.ShowDialog() == DialogResult.OK)
                     {
-                        Brackets = null;
-                        BracktsFPanel.Controls.Clear();
-                        UnPlacedFpanel.Controls.Clear();
+                        ClearExistingBrackets();
                         return true;
                     }
                     else
@@ -421,7 +420,20 @@ namespace MartialArts
             }
         }
 
-        
+        private void ClearExistingBrackets()
+        {
+            if (Brackets != null)
+            {
+                Brackets = null;
+            }
+            BracktsFPanel.Controls.Clear();
+            UnPlacedFpanel.Controls.Clear();
+            if (LeagueEvent != null)
+            {
+                LeagueEvent = null;
+            } 
+        }
+
         private void TestToDelete()
         {
             tabControl1.SelectedTab = tabPage2;
@@ -467,9 +479,9 @@ namespace MartialArts
         }
 
 
-        private BusinessClocks.ExecutiveClocks.GoalsClock _MatchClock;
-        private BusinessClocks.ExecutiveClocks.GoalsClock _MatchWithoutUselessClock;
-        private BusinessClocks.ExecutiveClocks.GoalsClock _BracketsClock;
+      //  private BusinessClocks.ExecutiveClocks.GoalsClock _MatchClock;
+      //  private BusinessClocks.ExecutiveClocks.GoalsClock _MatchWithoutUselessClock;
+      //  private BusinessClocks.ExecutiveClocks.GoalsClock _BracketsClock;
         private void CreateStatisticClocks()
         {
             float Percent = (float)(Brackets.BracketsList.SelectMany(x => x.ContendersList).Count()) / ((float)GlobalVars.ListOfContenders.Count);
@@ -504,6 +516,23 @@ namespace MartialArts
         private void label7_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            if (e.Y <= lblIsUselessContsCount.Location.Y + lblIsUselessContsCount.Height + lblLine.Height*2)
+            {
+                lblLine.Visible = false;
+            }
+            else
+            {
+                lblLine.Visible = true;
+            }
         }
     }
 

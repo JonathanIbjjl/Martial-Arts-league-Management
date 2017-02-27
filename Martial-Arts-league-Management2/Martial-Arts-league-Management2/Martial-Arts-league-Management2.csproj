@@ -71,6 +71,9 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalVars.cs" />
+    <Compile Include="GUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Helpers.cs" />
     <Compile Include="LeagueScattering.cs" />
     <Compile Include="Program.cs" />
@@ -84,6 +87,7 @@
     <Compile Include="VisualElements\VisualBracket.cs" />
     <Compile Include="VisualElements\VisualContender.cs" />
     <Compile Include="VisualElements\VisualElementsEvents.cs" />
+    <Compile Include="VisualElements\VisualLeagueEvent.cs" />
     <EmbeddedResource Include="Credits.resx">
       <DependentUpon>Credits.cs</DependentUpon>
     </EmbeddedResource>
