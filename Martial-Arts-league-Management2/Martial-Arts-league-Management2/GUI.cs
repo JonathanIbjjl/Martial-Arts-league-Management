@@ -19,46 +19,60 @@ namespace MartialArts
         public void CreateVisualBrackets()
         {
             Visual.VisualLeagueEvent.FormObj = this;
+            try
+            {
+                Cursor.Hide();
 
-            Cursor.Hide();
-            tabControl1.SelectedTab = tabPage2;
-            // sort by Bracket Size
-            Brackets.BracketsList = Brackets.BracketsList.AsEnumerable().OrderByDescending(x => x.NumberOfContenders).ToList();
+                // sort by Bracket Size
+                Brackets.BracketsList = Brackets.BracketsList.AsEnumerable().OrderByDescending(x => x.NumberOfContenders).ToList();
 
-            foreach (MartialArts.Bracket b in Brackets.BracketsList)
+                foreach (MartialArts.Bracket b in Brackets.BracketsList)
+                {
+
+                    Visual.VisualBracket br = new Visual.VisualBracket(b);
+                    br.Init();
+                    Visual.VisualLeagueEvent.AddVisualBracket(br);
+                    // add to GUI
+                    BracktsFPanel.Controls.Add(br.Vbracket);
+                }
+
+                // add uselesess and unplaced contenders
+
+                // unplaced
+                foreach (Contenders.Contender c in Brackets.ContendersList)
+                {
+                    Visual.VisualContender visualcont = new Visual.VisualContender(c);
+                    visualcont.Init();
+                    Visual.VisualLeagueEvent.AddUnplacedContender(visualcont);
+                    UnPlacedFpanel.Controls.Add(visualcont.Vcontender);
+                }
+
+                // Uselesses
+                foreach (Contenders.Contender c in Brackets.UselessContenders)
+                {
+                    Visual.VisualContender visualcont = new Visual.VisualContender(c);
+                    visualcont.Init();
+                    Visual.VisualLeagueEvent.AddUnplacedContender(visualcont);
+                    UnPlacedFpanel.Controls.Add(visualcont.Vcontender);
+                }
+
+                // must merge all contenders in LeagueEvent instance
+                Visual.VisualLeagueEvent.MergeListsForSearch();
+                UpdateClocks();
+
+                System.Threading.Thread.Sleep(1000);
+                tabControl1.SelectedTab = tabPage2;
+            }
+            catch (Exception ex)
             {
 
-                Visual.VisualBracket br = new Visual.VisualBracket(b);
-                br.Init();
-                Visual.VisualLeagueEvent.AddVisualBracket(br);
-                // add to GUI
-                BracktsFPanel.Controls.Add(br.Vbracket);
             }
-
-            // add uselesess and unplaced contenders
-
-            // unplaced
-            foreach (Contenders.Contender c in Brackets.ContendersList)
+            finally
             {
-                Visual.VisualContender visualcont = new Visual.VisualContender(c);
-                visualcont.Init();
-                Visual.VisualLeagueEvent.AddUnplacedContender(visualcont);
-                UnPlacedFpanel.Controls.Add(visualcont.Vcontender);
+                Cursor.Show();
+                MoveCursor();
             }
-
-            // Uselesses
-            foreach (Contenders.Contender c in Brackets.UselessContenders)
-            {
-                Visual.VisualContender visualcont = new Visual.VisualContender(c);
-                visualcont.Init();
-                Visual.VisualLeagueEvent.AddUnplacedContender(visualcont);
-                UnPlacedFpanel.Controls.Add(visualcont.Vcontender);
-            }
-
-            // must merge all contenders in LeagueEvent instance
-            Visual.VisualLeagueEvent.MergeListsForSearch();
-            UpdateClocks();
-            Cursor.Show();
+          
         }
 
         public void UpdateClocks(bool FirstLoadWithoutPercent = false)
@@ -156,7 +170,7 @@ namespace MartialArts
             float Percent = 0;
             if (FirstLoadWithoutPercent == false)
             {
-                int NumberOf_N_Brackets = Visual.VisualLeagueEvent.VisualBracketsList.Where(x => x.Bracket.NumberOfContenders == GeneralBracket.NumberOfContenders).Count();
+                int NumberOf_N_Brackets = Visual.VisualLeagueEvent.VisualBracketsList.Where(x => x.Bracket.NumberOfContenders >= GeneralBracket.NumberOfContenders).Count();
                 int NumberOfBrackets = Visual.VisualLeagueEvent.VisualBracketsList.Select(x => x.Bracket).Count();
                 Percent = (float)(NumberOf_N_Brackets) / (float)NumberOfBrackets;
             }

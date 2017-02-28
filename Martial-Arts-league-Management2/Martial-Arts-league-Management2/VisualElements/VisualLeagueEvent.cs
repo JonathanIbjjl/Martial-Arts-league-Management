@@ -50,6 +50,8 @@ namespace Visual
         public static bool IsMerged = false;
 
         public static MartialArts.Form1 FormObj;
+        // used for copy contenders, the property will save the system id of the copied contender
+        public static int ClipBoardValue { get; set; }
 
         public VisualLeagueEvent(MartialArts.Form1 formobj)
         {
@@ -88,6 +90,14 @@ namespace Visual
             var VisualContender = AllVisualContenders.AsEnumerable().Where(x => x.Contender.SystemID == sysid).Single();
             // first remove from current bracket if contender is not from unplaced panel
             RemoveContender(sysid);
+            // TODO: DISCOVER BUG: there is a very rare unknown bug, probably somthing with the drag and drop,
+            // the bug creates contender that exist twice, in the GUI the user dont see it, but in the lists he exist twice
+            // very rare bug and its hard to dicover it
+            // the if steatment should solve it as a quick fix
+            if (VisualBracketsList.SelectMany(x => x.Bracket.ContendersList).Any(x => x.SystemID == sysid) == true)
+            {
+                return;
+            }
 
             if (b == null)
             {
@@ -114,8 +124,18 @@ namespace Visual
 
         public static void RemoveContender(int sysid)
         {
+
+            // first check if contender came from unplaced contemders, if so remove
+            if (VisualUnplacedBracketsList.Any(x => x.SystemID == sysid) == true)
+            {
+                var cont = VisualUnplacedBracketsList.Where(x => x.SystemID == sysid).Select(c => c).Single();
+                // remove
+                VisualUnplacedBracketsList.Remove(cont);
+                return;
+            }
+
+            // the contender exist in one of the visual brackets
             bool isRemoved = false;
-            
             // extract Current Bracket 
             foreach (VisualBracket vb in VisualBracketsList)
             {
@@ -157,6 +177,53 @@ namespace Visual
                 if (isRemoved == true)
                     break;
             }
+        }
+
+        internal static void CreateNewBracket(int ContID)
+        {
+            
+
+            // first check unplacedList to remove
+            if (VisualUnplacedBracketsList.Any(x => x.SystemID == ContID) == true)
+            {
+                var cont = VisualUnplacedBracketsList.Where(x => x.SystemID == ContID).Select(c => c).Single();
+                // remove from unplaced area
+                VisualUnplacedBracketsList.Remove(cont);
+            }
+            else
+            {
+                // remove from Bracket area
+                RemoveContender(ContID);
+            }
+
+            // the old visual contender will be disposd in order to remove from GUI
+            var NewBracketVisualContToDispose = AllVisualContenders.Where(x => x.SystemID == ContID).Select(c => c).Single();
+            // new visual contender will be created for the new bracket
+            var NewBracketCont = AllVisualContenders.Where(x => x.SystemID == ContID).Select(c => c.Contender).Single();
+
+            // remove from AllvisualContenders list (will be created again later)
+            AllVisualContenders.Remove(NewBracketVisualContToDispose);
+            // dispose old visual contender and he will dissapear from his old place in GUI
+            NewBracketVisualContToDispose.Vcontender.Dispose();
+            NewBracketVisualContToDispose = null;
+
+            // create a new bracket
+            MartialArts.Bracket newBracket = new MartialArts.Bracket(NewBracketCont.AgeCategory, NewBracketCont.Belt, NewBracketCont.WeightCategory);
+            newBracket.AddSingleContender(NewBracketCont);
+            // create a new visual bracket
+            VisualBracket newVisualBracket = new VisualBracket(newBracket);
+            newVisualBracket.Init();
+            // add to bracket list
+            VisualBracketsList.Add(newVisualBracket);
+            // add to panel
+            FormObj.BracktsFPanel.Controls.Add(newVisualBracket.Vbracket);
+            // add the"new" visual contender to AllContenderList (he was removed) in order to find him in searches
+            AllVisualContenders.Add(newVisualBracket.VisualCont[0]);
+            // scroll to end of the panel to show the user the new bracket, first wait for weak graphic cards
+            System.Threading.Thread.Sleep(50);
+            FormObj.BracktsFPanel.VerticalScroll.Value = FormObj.BracktsFPanel.VerticalScroll.Maximum;
+            // refresh clocks
+            FormObj.UpdateClocks();
         }
 
         public static void MergeListsForSearch()
@@ -287,5 +354,7 @@ namespace Visual
                 AllVisualContenders = null;
             }
          }
+
+
     }
 }

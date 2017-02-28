@@ -315,8 +315,9 @@ namespace Visual
                     cm.BackColor = MartialArts.GlobalVars.Sys_Yellow;
                     cm.ForeColor = MartialArts.GlobalVars.Sys_DarkerGray;
                     cm.Items.Add("העתק מתחרה");
-                    cm.Items.Add("הדבק מתחרה");
+                    cm.Items.Add("צור בית חדש");
                     cm.Items[0].Name = Contender.SystemID.ToString();
+                    cm.Items[1].Name = Contender.SystemID.ToString() + " ";
                     cm.ItemClicked += new ToolStripItemClickedEventHandler(contexMenuuu_ItemClicked);
                     _BtnShowContData.ContextMenuStrip = cm;
 

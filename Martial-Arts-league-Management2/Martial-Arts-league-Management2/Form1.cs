@@ -370,24 +370,18 @@ namespace MartialArts
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            Random r = new Random();
-            Visual.VisualContender f = new Visual.VisualContender(GlobalVars.ListOfContenders[r.Next(1, 60)]);
-            f.Init();
-            f.Vcontender.Location = new Point(pictureBox1.Location.X + pictureBox1.Width + 5, pictureBox1.Location.Y);
-            FilesPanel.Controls.Add(f.Vcontender);
-
-            Visual.VisualContender f1 = new Visual.VisualContender(GlobalVars.ListOfContenders[r.Next(1, 60)]);
-            f1.Init();
-            f1.Vcontender.Location = new Point(pictureBox1.Location.X + pictureBox1.Width + 5, f.Vcontender.Location.Y + f.Vcontender.Height + 3);
-            FilesPanel.Controls.Add(f1.Vcontender);
-
-            Visual.VisualContender f2 = new Visual.VisualContender(GlobalVars.ListOfContenders[r.Next(1, 60)]);
-            f2.Init();
-            f2.Vcontender.Location = new Point(pictureBox1.Location.X + pictureBox1.Width + 5, f1.Vcontender.Location.Y + f1.Vcontender.Height + 3);
-            FilesPanel.Controls.Add(f2.Vcontender);
-
+            MoveCursor();
         }
 
+        private void MoveCursor()
+        {
+            // Set the Current cursor, move the cursor's Position,
+            // and set its clipping rectangle to the form. 
+
+            this.Cursor = new Cursor(Cursor.Current.Handle);
+            Cursor.Position = new Point(0, 0);
+            Cursor.Clip = new Rectangle(this.Location, this.Size);
+        }
         private void button1_Click_1(object sender, EventArgs e)
         {
 
@@ -522,6 +516,7 @@ namespace MartialArts
             }
         }
 
+        #region "Drag And Drop"
         private void UnPlacedFpanel_DragDrop(object sender, DragEventArgs e)
         {
             System.Windows.Forms.Control c = e.Data.GetData(e.Data.GetFormats()[0]) as System.Windows.Forms.Control;
@@ -538,6 +533,9 @@ namespace MartialArts
 
             // Extract Contender ID
             int ContID = (int)MartialArts.Helpers.extractNumberFromString(Parent.Name);
+            // check if contender is allready belongs to UnplacedPanel
+            if (Visual.VisualLeagueEvent.VisualUnplacedBracketsList.Any(x => x.SystemID == ContID))
+                return;
 
             ((System.Windows.Forms.Control)sender).Controls.Add(Parent);
 
@@ -552,6 +550,27 @@ namespace MartialArts
         private void BracktsFPanel_MouseClick(object sender, MouseEventArgs e)
         {
 
+        }
+
+        #endregion
+
+        private void btnUNDO_Click(object sender, EventArgs e)
+        {
+            foreach (Visual.VisualBracket vb in Visual.VisualLeagueEvent.VisualBracketsList)
+            {
+                foreach (Visual.VisualContender v in vb.VisualCont)
+                {
+                    Debug.WriteLine(v.Contender.FirstName + " " + v.Contender.LastName);
+                }
+                Debug.WriteLine("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+            }
+
+            Debug.WriteLine("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+            foreach (Visual.VisualContender v in Visual.VisualLeagueEvent.VisualUnplacedBracketsList)
+            
+            {
+                Debug.WriteLine(v.Contender.FirstName + " " + v.Contender.LastName);
+            }
         }
     }
 
@@ -579,5 +598,11 @@ namespace MartialArts
             pi.SetValue(fp, setting, null);
         }
 
+        public static bool IsNumeric(this string s)
+        {
+            float output;
+            return float.TryParse(s, out output);
         }
+
     }
+}

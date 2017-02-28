@@ -55,6 +55,18 @@ namespace MartialArts
         public int AgeGrade { get; set; }
         public int BeltGrade { get; set; }
         public int WeightGrade { get; set; }
+
+        /// <summary>
+        ///   will refresh data based on the higher contender
+        ///   the aftermath is Tostring() method will be refreshed also
+        /// </summary>
+        public void RefreshBracketInfo()
+        {
+            AgeGrade = ContendersList.Max(x => x.AgeCategory);
+            BeltGrade = ContendersList.Max(x => x.Belt);
+            WeightGrade = ContendersList.Max(x => x.WeightCategory);
+        }
+
         public double AverageGrade
         {
             get
@@ -130,7 +142,12 @@ namespace MartialArts
         public void AddContenders(List<Contenders.Contender> bracketConts)
         {
             ContendersList = bracketConts;
-        } 
+        }
+
+        public void AddSingleContender(Contenders.Contender cont)
+        {
+            ContendersList.Add(cont);
+        }
 
         // TODO: return the bracket description string
         public override string ToString()

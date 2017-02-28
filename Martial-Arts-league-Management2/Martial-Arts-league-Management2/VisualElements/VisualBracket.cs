@@ -50,6 +50,15 @@ namespace  Visual
                     _Header.Margin = new Padding(3, 3, 3, 3);
                     _Header.Font = new Font("ARIAL", 12, FontStyle.Bold | FontStyle.Underline);
                     _Header.TextAlign = ContentAlignment.MiddleCenter;
+
+                    ContextMenuStrip cm = new ContextMenuStrip();
+                    cm.Show();
+                    cm.BackColor = MartialArts.GlobalVars.Sys_Yellow;
+                    cm.ForeColor = MartialArts.GlobalVars.Sys_DarkerGray;
+                    cm.Items.Add("הדבק מתחרה");
+                    cm.ItemClicked += new ToolStripItemClickedEventHandler(contexMenuuu_ItemClicked);
+                    _Header.ContextMenuStrip = cm;
+
                     return _Header;
                 }
                 else
@@ -140,10 +149,8 @@ namespace  Visual
             if (CheckContTransffer(visualcont) == false)
                 return;
             // Its the header ( Vbracket FlowLayoutPanel child, hence we use Parent.Controls.Add)
-            if (((System.Windows.Forms.Control)sender).Name.Contains("BracketHeader"))
             ((System.Windows.Forms.Control)sender).Parent.Controls.Add(Parent);
-            else // its the Vbracket FlowLayoutPanel
-                ((System.Windows.Forms.Control)sender).Controls.Add(Parent);
+
 
             VisualLeagueEvent.AddContender(ContID,this);
 
@@ -188,13 +195,51 @@ namespace  Visual
                 Vbracket.Size = new Size(VisualContender.ContMainPanel_Size.Width + 4, ((VisualContender.ContMainPanel_Size.Height + 6) * VisualCont.Count) + 26); // ontMainPanel_Size.Height + 6 is the margin beetween contenders,last digit:  Header And Margin
 
                 // refresh header
+                Bracket.RefreshBracketInfo();
                 Header.Text = Bracket.ToString();
                 return null;
             }
         }
 
 
+        void contexMenuuu_ItemClicked(object sender, System.Windows.Forms.ToolStripItemClickedEventArgs e)
+        {
+            System.Windows.Forms.ToolStripItem item = e.ClickedItem;
 
+            if (item.Text == "הדבק מתחרה")
+            {
+
+                if (VisualLeagueEvent.ClipBoardValue < 1000)
+                {
+                    // no contender was copied do nothing
+                }
+                else
+                {
+                    PasteVisualContender();
+                    // delete the last contnder that was copied
+                    VisualLeagueEvent.ClipBoardValue = 0;
+                }
+            }
+        }
+
+        private void PasteVisualContender()
+        {
+            // Extract Contender ID
+            int ContID = VisualLeagueEvent.ClipBoardValue;
+            // check if contender is allready belongs to this bracket
+            if (Bracket.ContendersList.Any(x => x.SystemID == ContID))
+                return;
+
+            // Extract cont
+            VisualContender visualcont = VisualLeagueEvent.AllVisualContenders.Where(x => x.Contender.SystemID == ContID).Select(x => x).Single();
+            // check if the contender score is suitable for bracket of not promt the user
+            if (CheckContTransffer(visualcont) == false)
+                return;
+
+            // add to fpanel
+            Vbracket.Controls.Add(visualcont.Vcontender);
+            VisualLeagueEvent.AddContender(ContID, this);
+        }
         #endregion
 
     }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using MartialArts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -94,7 +96,19 @@ namespace Visual
             if (item.Text == "העתק מתחרה")
             {
                 System.Windows.Forms.ContextMenuStrip c = sender as System.Windows.Forms.ContextMenuStrip;
-                MartialArts.Helpers.DefaultMessegeBox(e.ClickedItem.Name, "", System.Windows.Forms.MessageBoxIcon.Asterisk);
+                if (e.ClickedItem.Name.IsNumeric() == true)
+                {
+                    // save the contender id that will be pasted
+                    VisualLeagueEvent.ClipBoardValue = int.Parse(e.ClickedItem.Name);
+                }
+            }
+
+            else if (item.Text == "צור בית חדש")
+            {
+                if (e.ClickedItem.Name.ToString().Trim().IsNumeric() == true)
+                {
+                    VisualLeagueEvent.CreateNewBracket(int.Parse(e.ClickedItem.Name.ToString().Trim()));
+                }
             }
         }
 
@@ -107,4 +121,5 @@ namespace Visual
             e.DrawText();
         }
     }
+
 }
