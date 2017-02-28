@@ -91,7 +91,7 @@ namespace Visual
         }
     }
 
-   partial class VisualContender : VisualElements,IDisposable
+   partial class VisualContender : VisualElements,IDisposable,Contenders.IContender
     {
         public Contenders.Contender Contender { get; set; }
         protected BeltColors BeltShapes;
@@ -127,8 +127,15 @@ namespace Visual
                 if (_ContMainPanel == null)
                 {
                     _ContMainPanel = new FlowLayoutPanel();
+                    MartialArts.ExtensionMethods.DoubleBuffered_FlPanel(_ContMainPanel, true);
+                    // tha name will be used in drag and drop
+                    _ContMainPanel.Name = "Cont " + Contender.SystemID.ToString();
+                    _ContMainPanel.AllowDrop = true;
+                    _ContMainPanel.MouseEnter += new EventHandler(Vcont_MouseEnter);
+                    _ContMainPanel.DragEnter += new DragEventHandler(Vcont_DragEnter);
                     _ContMainPanel.Size = ContMainPanel_Size;
                     _ContMainPanel.BackColor = BeltShapes.MediumColor;
+                 //   _ContMainPanel.Margin = new Padding(6, 6, 6, 6);
                     _ContMainPanel.RightToLeft = RightToLeft.Yes;
                     return _ContMainPanel;
                 }
@@ -302,6 +309,24 @@ namespace Visual
                         _BtnShowContData.BackColor = Color.Red;
 
                     _BtnShowContData.Click += new EventHandler(ShowContData_Click);
+
+                    ContextMenuStrip cm = new ContextMenuStrip();
+                    cm.Show();
+                    cm.BackColor = MartialArts.GlobalVars.Sys_Yellow;
+                    cm.ForeColor = MartialArts.GlobalVars.Sys_DarkerGray;
+                    cm.Items.Add("העתק מתחרה");
+                    cm.Items.Add("הדבק מתחרה");
+                    cm.Items[0].Name = Contender.SystemID.ToString();
+                    cm.ItemClicked += new ToolStripItemClickedEventHandler(contexMenuuu_ItemClicked);
+                    _BtnShowContData.ContextMenuStrip = cm;
+
+                    ToolTip tp = new ToolTip();
+                    tp.SetToolTip(_BtnShowContData, "לחץ קליק ימני להעתיק מתחרה וקליק שמאלי לפרטים נוספים אודות המתחרה");
+                    tp.OwnerDraw = true;
+                    tp.BackColor = MartialArts.GlobalVars.Sys_Red;
+                    tp.ForeColor = Color.White;
+                    tp.Draw += new DrawToolTipEventHandler(tp_Draw);
+
                     return _BtnShowContData;
                 }
                 else
@@ -316,7 +341,44 @@ namespace Visual
             }
         }
 
+        public int SystemID
+        {
+            get
+            {
+                return Contender.SystemID;
+            }
 
+            set
+            {
+                Contender.SystemID = value;
+            }
+        }
+
+        public bool IsUseless
+        {
+            get
+            {
+                return Contender.IsUseless;
+            }
+
+            set
+            {
+                Contender.IsUseless = value;
+            }
+        }
+
+        public bool IsPlaced
+        {
+            get
+            {
+               return Contender.IsPlaced;
+            }
+
+            set
+            {
+                Contender.IsPlaced = value;
+            }
+        }
 
         public void Init()
         {
@@ -336,6 +398,10 @@ namespace Visual
             lbl.RightToLeft = RightToLeft.Yes;
             lbl.TextAlign = ContentAlignment.MiddleCenter;
             lbl.ForeColor = ForeColor;
+            lbl.AllowDrop = true;
+            lbl.MouseEnter += new EventHandler(Vcont_MouseEnter);
+            lbl.DragEnter += new DragEventHandler(Vcont_DragEnter);
+
             return lbl;
         }
 
@@ -410,8 +476,11 @@ namespace Visual
 
             fp.Controls.Add(Factor);
 
-            // Private and Family name
-            Label name = GetLabel();
+
+
+       
+        // Private and Family name
+        Label name = GetLabel();
             name.Size = new Size(151, 12);
             name.Text = Contender.FirstName + " " + Contender.LastName;
             name.Margin = new Padding(1, 1, 1, 1);
@@ -421,7 +490,7 @@ namespace Visual
                 name.BackColor = BeltShapes.LightColor;
             else
                 name.BackColor = Color.FromArgb(255, 105, 180);
-
+ 
             fp.Controls.Add(name);
 
             // Academy
@@ -435,19 +504,30 @@ namespace Visual
         }
 
 
-        public void MakeShadow()
+        public bool MakeShadow(string UnshadowString)
         {
+            bool isTarget = false;
             if (_ContMainPanel == null)
-                return;
-            if (Contender.FirstName.Contains("פיני") == false)
-                for (int anim = Vcontender.Height; anim >= 10; anim--)
-                {
-                    Vcontender.Size = new Size(Vcontender.Width, anim);
-                    Application.DoEvents();
-                    System.Threading.Thread.Sleep(10);
-                }
-            
+            {
+                return isTarget;
+            }
 
+            string FirstAndLastName = Contender.FirstName.Trim() + " " + Contender.LastName.Trim();
+            if (FirstAndLastName.Contains(UnshadowString) == false)
+            {
+                Vcontender.Visible = false;
+                return isTarget;
+            }
+            else
+            {
+                return true;
+            }
+             
+        }
+
+        public void CancelShadow()
+        {
+            Vcontender.Visible = true;
         }
 
         public void Dispose()

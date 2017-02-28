@@ -20,12 +20,14 @@ namespace MartialArts
         public Form1()
         {
             InitializeComponent();
-            UnPlacedFpanel.Size = new Size(Visual.VisualContender.ContMainPanel_Size.Width + 25, UnPlacedFpanel.Height);
+            ExtensionMethods.DoubleBuffered_FlPanel(BracktsFPanel, true);
+            ExtensionMethods.DoubleBuffered_FlPanel(UnPlacedFpanel, true);
+
         }
 
         public OpenFileDialog fd = null;
 
-        
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -35,21 +37,22 @@ namespace MartialArts
 
             if (fd.ShowDialog() == DialogResult.OK)
             {
-                txtPath.Text = fd.FileName;           
+                txtPath.Text = fd.FileName;
             }
 
         }
 
-     
+
 
 
 
 
         private void Form1_Load(object sender, EventArgs e)
         {
-          //  splitContainer1.SplitterDistance = splitContainer1.Height - 372;
-
+            UpdateClocks(true);
+        
         }
+
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
@@ -58,7 +61,7 @@ namespace MartialArts
             btnBrowse.Focus();
         }
 
-     
+
 
         private void txtPath_TextChanged_1(object sender, EventArgs e)
         {
@@ -67,13 +70,13 @@ namespace MartialArts
 
         private void btnLoadFile_Click_1(object sender, EventArgs e)
         {
-          
-              
-               System.Threading.Thread waitThread = new System.Threading.Thread(LoadWaitClock);
-               waitThread.Start();
 
-               System.Threading.Thread load = new System.Threading.Thread(LoadFileThread);
-               load.Start();
+
+            System.Threading.Thread waitThread = new System.Threading.Thread(LoadWaitClock);
+            waitThread.Start();
+
+            System.Threading.Thread load = new System.Threading.Thread(LoadFileThread);
+            load.Start();
 
         }
 
@@ -82,7 +85,7 @@ namespace MartialArts
         {
             if (txtPath.Text != string.Empty)
             {
-                
+
                 if (LoadFile() == false)
                 {
                     this.Invoke(new Action(wClock.Dispose));
@@ -93,7 +96,7 @@ namespace MartialArts
                     // TODO: make the dgv properly
                     this.Invoke(new Action(LoadDgv));
                     this.Invoke(new Action(wClock.Dispose));
-                
+
                 }
 
             }
@@ -129,7 +132,7 @@ namespace MartialArts
             ExcelOperations Eo = new ExcelOperations(txtPath.Text);
             if (Eo.GetContenders() == false)
             {
-             //   MessageBox.Show("התוכנית הפסיקה את פעולתה", "תקלה קריטית", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign);
+                //   MessageBox.Show("התוכנית הפסיקה את פעולתה", "תקלה קריטית", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign);
                 GlobalVars.IsLoading = false;
                 return false;
             }
@@ -137,7 +140,7 @@ namespace MartialArts
             {
                 Eo.Dispose();
                 GlobalVars.IsLoading = false;
-               this.Invoke(new Action(EnablebtbBuiledBrackets));
+                this.Invoke(new Action(EnablebtbBuiledBrackets));
                 return true;
             }
         }
@@ -165,11 +168,16 @@ namespace MartialArts
         {
 
             if (GlobalVars.IsLoading == true)
+            {
+                this.Invoke(new Action(wClock.Dispose));
                 return;
+            }
             if (GlobalVars.ListOfContenders.Count < 2)
             {
                 this.Invoke(new Action(wClock.Dispose));
                 Helpers.DefaultMessegeBox("לא קיימים משתתפים לבניית בתים" + Environment.NewLine + "אנא טען קובץ", "חסרים נתונים", MessageBoxIcon.Warning);
+                GlobalVars.IsLoading = false;
+                this.Invoke(new Action(wClock.Dispose));
             }
             else
             {
@@ -182,11 +190,11 @@ namespace MartialArts
             }
         }
 
-      
+
         private BusinessClocks.ExecutiveClocks.WaitClock wClock;
         private void LoadWaitClock()
         {
-           FilesPanel.Invoke(new Action(AddClock));
+            FilesPanel.Invoke(new Action(AddClock));
         }
 
         private void AddClock()
@@ -194,22 +202,22 @@ namespace MartialArts
 
             Int16 height = (Int16)((btnBuiledBrackets.Location.Y + btnBuiledBrackets.Height) - txtPath.Location.Y);
             var x = btnBuiledBrackets.Location.X - 100 - 40;
-            var y = txtPath.Location.Y-5;
-               
-            wClock = new WaitClock(100, 100,"...המתן");
+            var y = txtPath.Location.Y - 5;
+
+            wClock = new WaitClock(100, 100, "...המתן");
             wClock.ClockBackGroundColor = FilesPanel.BackColor;
             wClock.LoadFont("ARIAL", 9, FontStyle.Bold);
             wClock.OuterCircleWeight = 10;
             wClock.InnerCircleWeight = 5;
             wClock.OuterCircleColor = Color.FromArgb(227, 154, 44);
-            wClock.setArrayColors(new Color[] { Color.FromArgb(28,28,28), Color.Maroon });
+            wClock.setArrayColors(new Color[] { Color.FromArgb(28, 28, 28), Color.Maroon });
 
             wClock.Create(true);
             wClock.Clock.Location = new Point(x, y);
             FilesPanel.Controls.Add(wClock.Clock);
         }
 
-      
+
 
         private void LoadDgv()
         {
@@ -248,7 +256,7 @@ namespace MartialArts
             dgvMain.Columns.Add("IsAllowedBeltGradeAbove", "פקטור חגורה");
             dgvMain.Columns.Add("IsAllowedWeightGradeAbove", "פקטור משקל");
 
-     
+
 
             // add rows
             dgvMain.Rows.Add(GlobalVars.ListOfContenders.Count);
@@ -269,7 +277,7 @@ namespace MartialArts
                 dgvMain.Rows[i].Cells["CoachPhone"].Value = GlobalVars.ListOfContenders[i].CoachPhone;
 
                 if (GlobalVars.ListOfContenders[i].IsMale == true)
-                dgvMain.Rows[i].Cells["IsMale"].Value = "זכר";
+                    dgvMain.Rows[i].Cells["IsMale"].Value = "זכר";
                 else
                     dgvMain.Rows[i].Cells["IsMale"].Value = "נקבה";
 
@@ -278,14 +286,14 @@ namespace MartialArts
                 else
                     dgvMain.Rows[i].Cells["IsAllowedVersusMan"].Value = "לא";
 
-                dgvMain.Rows[i].Cells["IsAllowedAgeGradeAbove"].Value = (GlobalVars.ListOfContenders[i].IsAllowedAgeGradeAbove==true) ? "כן" : "לא";
+                dgvMain.Rows[i].Cells["IsAllowedAgeGradeAbove"].Value = (GlobalVars.ListOfContenders[i].IsAllowedAgeGradeAbove == true) ? "כן" : "לא";
                 dgvMain.Rows[i].Cells["IsAllowedBeltGradeAbove"].Value = (GlobalVars.ListOfContenders[i].IsAllowedBeltGradeAbove == true) ? "כן" : "לא";
                 dgvMain.Rows[i].Cells["IsAllowedWeightGradeAbove"].Value = (GlobalVars.ListOfContenders[i].IsAllowedWeightGradeAbove == true) ? "כן" : "לא";
 
                 // color
                 dgvMain.Rows[i].DefaultCellStyle.BackColor = GlobalVars.ListOfContenders[i].GetBeltColorValue;
                 if (GlobalVars.ListOfContenders[i].Belt == 9000)
-                   dgvMain.Rows[i].DefaultCellStyle.ForeColor = Color.White;
+                    dgvMain.Rows[i].DefaultCellStyle.ForeColor = Color.White;
 
                 this.dgvMain.Rows[i].HeaderCell.Value = GlobalVars.ListOfContenders[i].SystemID.ToString();
 
@@ -299,15 +307,15 @@ namespace MartialArts
             // sort
             this.dgvMain.Sort(this.dgvMain.Columns["HebrewBeltColor"], ListSortDirection.Ascending);
 
- 
+
 
 
         }
 
         private void dgvMain_DoubleClick(object sender, EventArgs e)
         {
-         
-           Emails.OpenEmail(dgvMain.Rows[dgvMain.CurrentRow.Index].Cells[5].Value.ToString());
+
+            Emails.OpenEmail(dgvMain.Rows[dgvMain.CurrentRow.Index].Cells[5].Value.ToString());
         }
 
         private void dgvMain_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -363,7 +371,7 @@ namespace MartialArts
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             Random r = new Random();
-            Visual.VisualContender f = new Visual.VisualContender(GlobalVars.ListOfContenders[r.Next(1,60)]);
+            Visual.VisualContender f = new Visual.VisualContender(GlobalVars.ListOfContenders[r.Next(1, 60)]);
             f.Init();
             f.Vcontender.Location = new Point(pictureBox1.Location.X + pictureBox1.Width + 5, pictureBox1.Location.Y);
             FilesPanel.Controls.Add(f.Vcontender);
@@ -428,91 +436,18 @@ namespace MartialArts
             }
             BracktsFPanel.Controls.Clear();
             UnPlacedFpanel.Controls.Clear();
-            if (LeagueEvent != null)
-            {
-                LeagueEvent = null;
-            } 
-        }
+            Visual.VisualLeagueEvent.ClearClass();
 
-        private void TestToDelete()
-        {
-            tabControl1.SelectedTab = tabPage2;
-            Brackets.BracketsList = Brackets.BracketsList.AsEnumerable().OrderByDescending(x => x.NumberOfContenders).ToList();
-            foreach (MartialArts.Bracket b in Brackets.BracketsList)
+            for (int i = 0; i < GlobalVars.ListOfContenders.Count; i++)
             {
-                //foreach (Contenders.Contender c in b.ContendersList)
-                //{
-                //    Visual.VisualContender f = new Visual.VisualContender(c);
-                //    f.Init();
-                //    flowLayoutPanel1.Controls.Add(f.Vcontender);
-                //}
-                //Label l = new Label();
-                //l.Size = new Size(507, 36);
-                //flowLayoutPanel1.Controls.Add(l);
-
-                Visual.VisualBracket br = new Visual.VisualBracket(b);
-                br.Init();
-                BracktsFPanel.Controls.Add(br.Vbracket);
+                GlobalVars.ListOfContenders[i].IsPlaced = false;
+                GlobalVars.ListOfContenders[i].IsUseless = false;
             }
 
-            // unplaced
-            foreach (Contenders.Contender c in Brackets.ContendersList)
-            {
-                Visual.VisualContender visualcont = new Visual.VisualContender(c);
-                visualcont.Init();
-                UnPlacedFpanel.Controls.Add(visualcont.Vcontender);
-            }
-
-            // uselesses
-            foreach (Contenders.Contender c in Brackets.UselessContenders)
-            {
-                Visual.VisualContender visualcont = new Visual.VisualContender(c);
-                visualcont.Init();
-                UnPlacedFpanel.Controls.Add(visualcont.Vcontender);
-            }
-
-          
-
-            CreateStatisticClocks();
-            CreateMatchWithoutUseless();
-            BracketsClock();
+            GlobalVars.IsLoading = false;
         }
 
 
-      //  private BusinessClocks.ExecutiveClocks.GoalsClock _MatchClock;
-      //  private BusinessClocks.ExecutiveClocks.GoalsClock _MatchWithoutUselessClock;
-      //  private BusinessClocks.ExecutiveClocks.GoalsClock _BracketsClock;
-        private void CreateStatisticClocks()
-        {
-            float Percent = (float)(Brackets.BracketsList.SelectMany(x => x.ContendersList).Count()) / ((float)GlobalVars.ListOfContenders.Count);
-            if (_MatchClock == null)
-            {
-                _MatchClock = new GoalsClock(90, 90, Percent);
-                _MatchClock.OuterCircleWeight = 10;
-                _MatchClock.InnerCircleWeight = 5;
-                _MatchClock.InnerCircleColor = GlobalVars.Sys_Yellow;
-                _MatchClock.OuterCircleColor = Color.FromArgb(78, 78, 78);
-
-                _MatchClock.ClockBackGroundColor = splitContainer1.Panel1.BackColor;
-                _MatchClock.Create(false);
-                _MatchClock.Clock.Anchor = AnchorStyles.Right | AnchorStyles.Top;
-
-                _MatchClock.Clock.Location = new Point(0,0);
-                 lblPercent.Controls.Add(_MatchClock.Clock);
-            }
-            else
-            {
-                _MatchClock.PercentOfGoals = Percent;
-                _MatchClock.RefreshClock(true);
-            }
-        }
-
-        private void CreateMatchWithoutUseless()        {            float Percent = (float)(Brackets.BracketsList.SelectMany(x => x.ContendersList).Count()) / ((float)GlobalVars.ListOfContenders.Count - Brackets.UselessContenders.Count);            if (_MatchWithoutUselessClock == null)            {                _MatchWithoutUselessClock = new GoalsClock(90, 90, Percent);                _MatchWithoutUselessClock.OuterCircleWeight = 10;                _MatchWithoutUselessClock.InnerCircleWeight = 5;                _MatchWithoutUselessClock.InnerCircleColor = GlobalVars.Sys_Yellow;                _MatchWithoutUselessClock.OuterCircleColor = Color.FromArgb(78, 78, 78);                _MatchWithoutUselessClock.ClockBackGroundColor = splitContainer1.Panel1.BackColor;                _MatchWithoutUselessClock.Create(false);                _MatchWithoutUselessClock.Clock.Anchor = AnchorStyles.Right | AnchorStyles.Top;                _MatchWithoutUselessClock.Clock.Location = new Point(0, 0);
-                lblPercentwithoutUseless.Controls.Add(_MatchWithoutUselessClock.Clock);            }            else            {                _MatchWithoutUselessClock.PercentOfGoals = Percent;                _MatchWithoutUselessClock.RefreshClock(true);            }        }
-
-
-        private void BracketsClock()        {            float Percent = (float)(Brackets.BracketsList.Where(x=>x.NumberOfContenders == MartialArts.GeneralBracket.NumberOfContenders).Count()) / ((float)Brackets.BracketsList.Count);            if (_BracketsClock == null)            {                _BracketsClock = new GoalsClock(90, 90, Percent);                _BracketsClock.OuterCircleWeight = 10;                _BracketsClock.InnerCircleWeight = 5;                _BracketsClock.InnerCircleColor = GlobalVars.Sys_Yellow;                _BracketsClock.OuterCircleColor = Color.FromArgb(78, 78, 78);                _BracketsClock.ClockBackGroundColor = splitContainer1.Panel1.BackColor;                _BracketsClock.Create(false);                _BracketsClock.Clock.Anchor = AnchorStyles.Right | AnchorStyles.Top;                _BracketsClock.Clock.Location = new Point(0, 0);
-                lblBracketsClock.Controls.Add(_BracketsClock.Clock);            }            else            {                _BracketsClock.PercentOfGoals = Percent;                _BracketsClock.RefreshClock(true);            }        }
         private void label7_Click(object sender, EventArgs e)
         {
 
@@ -525,16 +460,102 @@ namespace MartialArts
 
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
         {
-            if (e.Y <= lblIsUselessContsCount.Location.Y + lblIsUselessContsCount.Height + lblLine.Height*2)
+
+        }
+
+        private void btnSearch_Click_1(object sender, EventArgs e)
+        {
+            if (btnSearch.Text != "אפס חיפוש (Esc)")
             {
-                lblLine.Visible = false;
+                MakeASearch();
             }
             else
             {
-                lblLine.Visible = true;
+                RollBackBtnSearch();
             }
         }
+
+        private void RollBackBtnSearch()
+        {
+            btnSearch.Text = "חפש";
+            btnSearch.BackColor = GlobalVars.Sys_Yellow;
+            btnSearch.ForeColor = Color.FromArgb(28, 28, 28);
+            Visual.VisualLeagueEvent.CancelAllShadowsOfSearch();
+            lblSearchMsg.Text = "";
+        }
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                MakeASearch();
+            }
+        }
+
+        private void MakeASearch()
+        {
+            if (Visual.VisualLeagueEvent.AllVisualContenders != null)
+            {
+                lblSearchMsg.Text = "";
+                int numberOfResults;
+                Visual.VisualLeagueEvent.Search(txtSearch.Text, out numberOfResults);
+                txtSearch.Text = "";
+                if (numberOfResults == 0)
+                {
+                    lblSearchMsg.Text = "אין תוצאות";
+                }
+                else
+                {
+                    lblSearchMsg.Text = numberOfResults.ToString() + " " + "תוצאות";
+                    btnSearch.Text = "אפס חיפוש (Esc)";
+                    btnSearch.BackColor = Color.FromArgb(10, 10, 10);
+                    btnSearch.ForeColor = Color.White;
+                }
+            }
+        }
+
+        private void tabControl1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                RollBackBtnSearch();
+            }
+        }
+
+        private void UnPlacedFpanel_DragDrop(object sender, DragEventArgs e)
+        {
+            System.Windows.Forms.Control c = e.Data.GetData(e.Data.GetFormats()[0]) as System.Windows.Forms.Control;
+
+
+            // find parent control (Vcont FlowLayout Panel), max parent is "grandfather"
+            System.Windows.Forms.Control Parent;
+            if (c.Name.Contains("Cont"))
+                Parent = c;
+            else if (c.Parent.Name.Contains("Cont"))
+                Parent = c.Parent;
+            else
+                Parent = c.Parent.Parent;
+
+            // Extract Contender ID
+            int ContID = (int)MartialArts.Helpers.extractNumberFromString(Parent.Name);
+
+            ((System.Windows.Forms.Control)sender).Controls.Add(Parent);
+
+            Visual.VisualLeagueEvent.AddContender(ContID);
+        }
+
+        private void UnPlacedFpanel_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effect = System.Windows.Forms.DragDropEffects.All;
+        }
+
+        private void BracktsFPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
     }
+
+
 
 
 
@@ -549,5 +570,14 @@ namespace MartialArts
                 BindingFlags.Instance | BindingFlags.NonPublic);
             pi.SetValue(dgv, setting, null);
         }
+
+        public static void DoubleBuffered_FlPanel(this FlowLayoutPanel fp, bool setting)
+        {
+            Type dgvType = fp.GetType();
+            PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
+                BindingFlags.Instance | BindingFlags.NonPublic);
+            pi.SetValue(fp, setting, null);
+        }
+
+        }
     }
-}

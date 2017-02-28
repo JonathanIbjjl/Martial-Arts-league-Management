@@ -245,7 +245,9 @@ namespace MartialArts
             }
         }
 
-        private bool ReturnBinaryGender(Bracket b)
+
+
+        public static bool ReturnBinaryGender(Bracket b)
         {
             if (b.Gender == GlobalVars.GenderEnum.Man)
                 return true;
@@ -608,7 +610,7 @@ namespace MartialArts
 
 
 
-        private void RemoveItemFromList<T>(ref List<T> list, int sysId, bool SetToUselessCont) where T : Contenders.IContender
+        public void RemoveItemFromList<T>(ref List<T> list, int sysId, bool SetToUselessCont) where T : Contenders.IContender
         {
             var ItemToRemove = list.SingleOrDefault(r => r.SystemID == sysId);
             // add to useless contenders list

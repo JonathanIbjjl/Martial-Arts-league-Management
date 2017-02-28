@@ -15,13 +15,12 @@ namespace MartialArts
         private BusinessClocks.ExecutiveClocks.GoalsClock _MatchClock;
         private BusinessClocks.ExecutiveClocks.GoalsClock _MatchWithoutUselessClock;
         private BusinessClocks.ExecutiveClocks.GoalsClock _BracketsClock;
-        Visual.VisualLeagueEvent LeagueEvent = new Visual.VisualLeagueEvent();
+  
         public void CreateVisualBrackets()
         {
-            // if ClearExistingBrackets() was activated
-            if (LeagueEvent == null)
-                LeagueEvent = new Visual.VisualLeagueEvent();
+            Visual.VisualLeagueEvent.FormObj = this;
 
+            Cursor.Hide();
             tabControl1.SelectedTab = tabPage2;
             // sort by Bracket Size
             Brackets.BracketsList = Brackets.BracketsList.AsEnumerable().OrderByDescending(x => x.NumberOfContenders).ToList();
@@ -31,7 +30,7 @@ namespace MartialArts
 
                 Visual.VisualBracket br = new Visual.VisualBracket(b);
                 br.Init();
-                LeagueEvent.AddVisualBracket(br);
+                Visual.VisualLeagueEvent.AddVisualBracket(br);
                 // add to GUI
                 BracktsFPanel.Controls.Add(br.Vbracket);
             }
@@ -43,7 +42,7 @@ namespace MartialArts
             {
                 Visual.VisualContender visualcont = new Visual.VisualContender(c);
                 visualcont.Init();
-                LeagueEvent.AddUnplacedContender(c);
+                Visual.VisualLeagueEvent.AddUnplacedContender(visualcont);
                 UnPlacedFpanel.Controls.Add(visualcont.Vcontender);
             }
 
@@ -52,30 +51,50 @@ namespace MartialArts
             {
                 Visual.VisualContender visualcont = new Visual.VisualContender(c);
                 visualcont.Init();
-                LeagueEvent.AddUnplacedContender(c);
+                Visual.VisualLeagueEvent.AddUnplacedContender(visualcont);
                 UnPlacedFpanel.Controls.Add(visualcont.Vcontender);
             }
 
+            // must merge all contenders in LeagueEvent instance
+            Visual.VisualLeagueEvent.MergeListsForSearch();
             UpdateClocks();
+            Cursor.Show();
         }
 
-        private void UpdateClocks()
+        public void UpdateClocks(bool FirstLoadWithoutPercent = false)
         {
-            UpdateStatisticClocks();
-            UpdateNetoClock();
-            UpdateBracketsClock();
+            UpdateStatisticClocks(FirstLoadWithoutPercent);
+            UpdateNetoClock(FirstLoadWithoutPercent);
+            UpdateBracketsClock(FirstLoadWithoutPercent);
         }
 
-        private void UpdateStatisticClocks()
+        private void UpdateStatisticClocks(bool FirstLoadWithoutPercent = false)
         {
-            int ContendersWhithBracket = LeagueEvent.VisualBracketsList.SelectMany(x => x.Bracket.ContendersList).Count();
-            int AllConts = ContendersWhithBracket + LeagueEvent.VisualUnplacedBracketsList.Select(x => x).Count();
-            
-            float Percent = (float)ContendersWhithBracket / (float)AllConts;
+            float Percent = 0;
+            if (FirstLoadWithoutPercent == false)
+            {
+                int ContendersWhithBracket = Visual.VisualLeagueEvent.VisualBracketsList.SelectMany(x => x.Bracket.ContendersList).Count();
+                int AllConts = ContendersWhithBracket + Visual.VisualLeagueEvent.VisualUnplacedBracketsList.Select(x => x).Count();
+                Percent = (float)ContendersWhithBracket / (float)AllConts;
+
+                // statistics lables
+                lblPlacedContsCount.Text = ContendersWhithBracket.ToString().PadLeft(3, '0');
+                lblAllContsCount.Text = AllConts.ToString().PadLeft(3, '0');
+
+                int allUnplacedConts = Visual.VisualLeagueEvent.VisualUnplacedBracketsList.Select(x => x).Count();
+                int Useless = Visual.VisualLeagueEvent.VisualUnplacedBracketsList.Where(x => x.Contender.IsUseless == true).Count();
+
+                lblIsUselessContsCount.Text = Useless.ToString().PadLeft(3, '0');
+
+                if (Useless > allUnplacedConts)
+                    lblAllUnplacedContsCount.Text = (Useless - allUnplacedConts).ToString().PadLeft(3, '0');
+                else
+                    lblAllUnplacedContsCount.Text = (allUnplacedConts - Useless).ToString().PadLeft(3, '0');
+            }
 
             if (_MatchClock == null)
             {
-                _MatchClock = new GoalsClock(90, 90, Percent);
+                _MatchClock = new GoalsClock(70, 70, Percent);
                 _MatchClock.OuterCircleWeight = 10;
                 _MatchClock.InnerCircleWeight = 5;
                 _MatchClock.InnerCircleColor = GlobalVars.Sys_Yellow;
@@ -94,42 +113,77 @@ namespace MartialArts
                 _MatchClock.RefreshClock(true);
             }
 
-            // statistics lables
-            lblPlacedContsCount.Text = ContendersWhithBracket.ToString();
-            lblAllContsCount.Text = AllConts.ToString();
+           
+        }
 
-            int allUnplacedConts = LeagueEvent.VisualUnplacedBracketsList.Select(x => x).Count();
-            int Useless = LeagueEvent.VisualUnplacedBracketsList.Where(x => x.IsUseless == true).Count();
+        private void UpdateNetoClock(bool FirstLoadWithoutPercent = false)
+        {
 
-            lblIsUselessContsCount.Text = Useless.ToString();
+            float Percent = 0;
+            if (FirstLoadWithoutPercent == false)
+            {
+                int ContendersWhithBracket = Visual.VisualLeagueEvent.VisualBracketsList.SelectMany(x => x.Bracket.ContendersList).Count();
+                int AllContsMinusUseless = (ContendersWhithBracket + Visual.VisualLeagueEvent.VisualUnplacedBracketsList.Select(x => x).Count())
+                    - Visual.VisualLeagueEvent.VisualUnplacedBracketsList.Where(x => x.Contender.IsUseless == true).Count();
 
-            if (Useless > allUnplacedConts)
-                lblAllUnplacedContsCount.Text = (Useless - allUnplacedConts).ToString();
+                Percent = (float)ContendersWhithBracket / (float)AllContsMinusUseless;
+            }
+         
+            if (_MatchWithoutUselessClock == null)
+            {
+                _MatchWithoutUselessClock = new GoalsClock(70, 70, Percent);
+                _MatchWithoutUselessClock.OuterCircleWeight = 10;
+                _MatchWithoutUselessClock.InnerCircleWeight = 5;
+                _MatchWithoutUselessClock.InnerCircleColor = GlobalVars.Sys_Yellow;
+                _MatchWithoutUselessClock.OuterCircleColor = Color.FromArgb(78, 78, 78);
+
+                _MatchWithoutUselessClock.ClockBackGroundColor = splitContainer1.Panel1.BackColor;
+                _MatchWithoutUselessClock.Create(false);
+                _MatchWithoutUselessClock.Clock.Anchor = AnchorStyles.Right | AnchorStyles.Top;
+
+                _MatchWithoutUselessClock.Clock.Location = new Point(0, 0);
+                lblPercentwithoutUseless.Controls.Add(_MatchWithoutUselessClock.Clock);
+            }
             else
-                lblAllUnplacedContsCount.Text = (allUnplacedConts - Useless).ToString();
-
+            {
+                _MatchWithoutUselessClock.PercentOfGoals = Percent;
+                _MatchWithoutUselessClock.RefreshClock(true);
+            }
         }
 
-        private void UpdateNetoClock()
+        private void UpdateBracketsClock(bool FirstLoadWithoutPercent = false)
         {
+            float Percent = 0;
+            if (FirstLoadWithoutPercent == false)
+            {
+                int NumberOf_N_Brackets = Visual.VisualLeagueEvent.VisualBracketsList.Where(x => x.Bracket.NumberOfContenders == GeneralBracket.NumberOfContenders).Count();
+                int NumberOfBrackets = Visual.VisualLeagueEvent.VisualBracketsList.Select(x => x.Bracket).Count();
+                Percent = (float)(NumberOf_N_Brackets) / (float)NumberOfBrackets;
+            }
 
+            if (_BracketsClock == null)
+            {
+                _BracketsClock = new GoalsClock(70, 70, Percent);
+                _BracketsClock.OuterCircleWeight = 10;
+                _BracketsClock.InnerCircleWeight = 5;
+                _BracketsClock.InnerCircleColor = GlobalVars.Sys_Yellow;
+                _BracketsClock.OuterCircleColor = Color.FromArgb(78, 78, 78);
 
-            int ContendersWhithBracket = LeagueEvent.VisualBracketsList.SelectMany(x => x.Bracket.ContendersList).Count();
-            int AllContsMinusUseless = (ContendersWhithBracket + LeagueEvent.VisualUnplacedBracketsList.Select(x => x).Count())
-                - LeagueEvent.VisualUnplacedBracketsList.Where(x => x.IsUseless == true).Count();
+                _BracketsClock.ClockBackGroundColor = splitContainer1.Panel1.BackColor;
+                _BracketsClock.Create(false);
+                _BracketsClock.Clock.Anchor = AnchorStyles.Right | AnchorStyles.Top;
 
-            float Percent = (float)ContendersWhithBracket / (float)AllContsMinusUseless;
-                      // float Percent = (float)(Brackets.BracketsList.SelectMany(x => x.ContendersList).Count()) / ((float)GlobalVars.ListOfContenders.Count - Brackets.UselessContenders.Count);            if (_MatchWithoutUselessClock == null)            {                _MatchWithoutUselessClock = new GoalsClock(90, 90, Percent);                _MatchWithoutUselessClock.OuterCircleWeight = 10;                _MatchWithoutUselessClock.InnerCircleWeight = 5;                _MatchWithoutUselessClock.InnerCircleColor = GlobalVars.Sys_Yellow;                _MatchWithoutUselessClock.OuterCircleColor = Color.FromArgb(78, 78, 78);                _MatchWithoutUselessClock.ClockBackGroundColor = splitContainer1.Panel1.BackColor;                _MatchWithoutUselessClock.Create(false);                _MatchWithoutUselessClock.Clock.Anchor = AnchorStyles.Right | AnchorStyles.Top;                _MatchWithoutUselessClock.Clock.Location = new Point(0, 0);
-                lblPercentwithoutUseless.Controls.Add(_MatchWithoutUselessClock.Clock);            }            else            {                _MatchWithoutUselessClock.PercentOfGoals = Percent;                _MatchWithoutUselessClock.RefreshClock(true);            }
+                _BracketsClock.Clock.Location = new Point(0, 0);
+                lblBracketsClock.Controls.Add(_BracketsClock.Clock);
+            }
+            else
+            {
+                _BracketsClock.PercentOfGoals = Percent;
+                _BracketsClock.RefreshClock(true);
+            }
         }
 
-        private void UpdateBracketsClock()
-        {
-            int NumberOf_N_Brackets = LeagueEvent.VisualBracketsList.Where(x => x.Bracket.NumberOfContenders == GeneralBracket.NumberOfContenders).Count();
-            int NumberOfBrackets = LeagueEvent.VisualBracketsList.Select(x=> x.Bracket).Count();
-            float Percent = (float)(NumberOf_N_Brackets) / (float)NumberOfBrackets;                         if (_BracketsClock == null)            {                _BracketsClock = new GoalsClock(90, 90, Percent);                _BracketsClock.OuterCircleWeight = 10;                _BracketsClock.InnerCircleWeight = 5;                _BracketsClock.InnerCircleColor = GlobalVars.Sys_Yellow;                _BracketsClock.OuterCircleColor = Color.FromArgb(78, 78, 78);                _BracketsClock.ClockBackGroundColor = splitContainer1.Panel1.BackColor;                _BracketsClock.Create(false);                _BracketsClock.Clock.Anchor = AnchorStyles.Right | AnchorStyles.Top;                _BracketsClock.Clock.Location = new Point(0, 0);
-                lblBracketsClock.Controls.Add(_BracketsClock.Clock);            }            else            {                _BracketsClock.PercentOfGoals = Percent;                _BracketsClock.RefreshClock(true);            }
-        }
+   
 
 
     }

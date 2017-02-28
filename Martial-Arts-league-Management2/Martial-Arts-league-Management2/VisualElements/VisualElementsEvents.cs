@@ -71,5 +71,40 @@ namespace Visual
             promt.Show();
 
         }
+
+
+        #region "Drag And Drop"
+        private void Vcont_MouseEnter(object sender, EventArgs e)
+
+        {
+            System.Windows.Forms.Control c = sender as System.Windows.Forms.Control;
+
+            c.DoDragDrop(c, System.Windows.Forms.DragDropEffects.Move);
+        }
+
+        private void Vcont_DragEnter(object sender, System.Windows.Forms.DragEventArgs e)
+        {
+            e.Effect = System.Windows.Forms.DragDropEffects.All;
+        }
+
+        void contexMenuuu_ItemClicked(object sender, System.Windows.Forms.ToolStripItemClickedEventArgs e)
+        {
+            System.Windows.Forms.ToolStripItem item = e.ClickedItem;
+
+            if (item.Text == "העתק מתחרה")
+            {
+                System.Windows.Forms.ContextMenuStrip c = sender as System.Windows.Forms.ContextMenuStrip;
+                MartialArts.Helpers.DefaultMessegeBox(e.ClickedItem.Name, "", System.Windows.Forms.MessageBoxIcon.Asterisk);
+            }
+        }
+
+        #endregion
+
+        private void tp_Draw(object sender, System.Windows.Forms.DrawToolTipEventArgs e)
+        {
+            e.DrawBackground();
+            e.DrawBorder();
+            e.DrawText();
+        }
     }
 }
