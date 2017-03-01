@@ -21,10 +21,11 @@ namespace MartialArts
         public Form1()
         {
             InitializeComponent();
-            ExtensionMethods.DoubleBuffered_FlPanel(BracktsFPanel, true);
-            ExtensionMethods.DoubleBuffered_FlPanel(UnPlacedFpanel, true);
-            splitContainer1.DoubleBuffered_SplitContainer(true);
-            splitContainer1.Panel2.DoubleBuffered_Panel(true);
+            this.BracktsFPanel.MouseWheel += FpPanel_MouseWheel;
+            //ExtensionMethods.DoubleBuffered_FlPanel(BracktsFPanel, true); TODO: DELETE
+            //ExtensionMethods.DoubleBuffered_FlPanel(UnPlacedFpanel, true);
+            //splitContainer1.DoubleBuffered_SplitContainer(true);
+            //splitContainer1.Panel2.DoubleBuffered_Panel(true);
         }
 
         public OpenFileDialog fd = null;
@@ -61,6 +62,9 @@ namespace MartialArts
             toolTip1.BackColor = MartialArts.GlobalVars.Sys_Red;
             toolTip1.ForeColor = Color.White;
             toolTip1.Draw += new DrawToolTipEventHandler(tp_Draw);
+
+            // check files archive directory
+            Helpers.checkPath();
         }
 
         private void tp_Draw(object sender, System.Windows.Forms.DrawToolTipEventArgs e)
@@ -348,11 +352,7 @@ namespace MartialArts
 
         }
 
-        private void קרדיטיםToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Martial_Arts_league_Management2.Credits credits = new Martial_Arts_league_Management2.Credits();
-            credits.ShowDialog();
-        }
+ 
 
         private void ייצארשימתמתחריםלאקסלToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -633,10 +633,42 @@ namespace MartialArts
                 {
                     return;
                 }
+
+
             }
 
+
+            this.tabControl1.SelectedTab = tabPage1;
+            
+            System.Threading.Thread waitThread = new System.Threading.Thread(LoadWaitClock);
+            waitThread.Start();
+
+            System.Threading.Thread load = new System.Threading.Thread(ExportBracketsToExcel);
+            load.Start();
+        }
+
+        private void ExportBracketsToExcel()
+        {
             ExportBrackets export = new ExportBrackets("", Visual.VisualLeagueEvent.GetUndoStruct());
             export.init();
+            this.Invoke(new Action(wClock.Dispose));
+        }
+
+        private void FpPanel_MouseWheel(object sender, MouseEventArgs e)
+        {
+       
+        }
+
+        private void קרדיטיםToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Martial_Arts_league_Management2.Credits credits = new Martial_Arts_league_Management2.Credits();
+            credits.ShowDialog();
+        }
+
+        private void ArchiveFiles_Click(object sender, EventArgs e)
+        {
+            // open archive folder
+            Helpers.OpenArchiveFolder();
         }
     }
 
@@ -656,37 +688,38 @@ namespace MartialArts
             pi.SetValue(dgv, setting, null);
         }
 
-        public static void DoubleBuffered_FlPanel(this FlowLayoutPanel fp, bool setting)
-        {
-            Type dgvType = fp.GetType();
-            PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
-                BindingFlags.Instance | BindingFlags.NonPublic);
-            pi.SetValue(fp, setting, null);
-        }
+        // TODO: DELETE
+        //public static void DoubleBuffered_FlPanel(this FlowLayoutPanel fp, bool setting)
+        //{
+        //    Type dgvType = fp.GetType();
+        //    PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
+        //        BindingFlags.Instance | BindingFlags.NonPublic);
+        //    pi.SetValue(fp, setting, null);
+        //}
 
-        public static void DoubleBuffered_Label(this Label lbl, bool setting)
-        {
-            Type dgvType = lbl.GetType();
-            PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
-                BindingFlags.Instance | BindingFlags.NonPublic);
-            pi.SetValue(lbl, setting, null);
-        }
+        //public static void DoubleBuffered_Label(this Label lbl, bool setting)
+        //{
+        //    Type dgvType = lbl.GetType();
+        //    PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
+        //        BindingFlags.Instance | BindingFlags.NonPublic);
+        //    pi.SetValue(lbl, setting, null);
+        //}
 
-        public static void DoubleBuffered_SplitContainer(this SplitContainer sp, bool setting)
-        {
-            Type dgvType = sp.GetType();
-            PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
-                BindingFlags.Instance | BindingFlags.NonPublic);
-            pi.SetValue(sp, setting, null);
-        }
+        //public static void DoubleBuffered_SplitContainer(this SplitContainer sp, bool setting)
+        //{
+        //    Type dgvType = sp.GetType();
+        //    PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
+        //        BindingFlags.Instance | BindingFlags.NonPublic);
+        //    pi.SetValue(sp, setting, null);
+        //}
 
-        public static void DoubleBuffered_Panel(this Panel panel, bool setting)
-        {
-            Type dgvType = panel.GetType();
-            PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
-                BindingFlags.Instance | BindingFlags.NonPublic);
-            pi.SetValue(panel, setting, null);
-        }
+        //public static void DoubleBuffered_Panel(this Panel panel, bool setting)
+        //{
+        //    Type dgvType = panel.GetType();
+        //    PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
+        //        BindingFlags.Instance | BindingFlags.NonPublic);
+        //    pi.SetValue(panel, setting, null);
+        //}
 
 
 

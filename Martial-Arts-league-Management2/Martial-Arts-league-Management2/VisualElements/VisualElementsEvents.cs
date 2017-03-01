@@ -77,14 +77,28 @@ namespace Visual
 
 
         #region "Drag And Drop"
-        private void Vcont_MouseEnter(object sender, EventArgs e)
+
+
+
+        private void Vcont_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
 
         {
-           System.Windows.Forms.Control c = sender as System.Windows.Forms.Control;
-            c.DoDragDrop(c, System.Windows.Forms.DragDropEffects.Move);
+            System.Windows.Forms.Control c = sender as System.Windows.Forms.Control;
+            c.Invoke(new Action<System.Windows.Forms.Control>(DoEffect), c);
+        }
+
+        private void DoEffect(System.Windows.Forms.Control c)
+        {
+            c.DoDragDrop(c, System.Windows.Forms.DragDropEffects.Copy);
         }
 
         private void Vcont_DragEnter(object sender, System.Windows.Forms.DragEventArgs e)
+        {
+            System.Windows.Forms.Control c = sender as System.Windows.Forms.Control;
+            c.Invoke(new Action<System.Windows.Forms.DragEventArgs>(DoEffect), e);
+        }
+
+        private void DoEffect(System.Windows.Forms.DragEventArgs e)
         {
             e.Effect = System.Windows.Forms.DragDropEffects.All;
         }

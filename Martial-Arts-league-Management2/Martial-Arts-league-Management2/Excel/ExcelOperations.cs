@@ -72,6 +72,8 @@ namespace MartialArts
                     ExWs = (Worksheet)XlWb.Sheets[1];
                 }
 
+                // remove autofilters if there are
+                ExWs.AutoFilterMode = false;
                 //continue analizing excel, check data is legal
                 if (IsExcelIsLegal() == false)
                     return false;
@@ -159,6 +161,7 @@ namespace MartialArts
         {
             try
             {
+                ExApp.DisplayAlerts = false;
                 XlWb = ExApp.Workbooks.Open(Path);
                 return true;
             }
@@ -166,6 +169,7 @@ namespace MartialArts
             catch
             {
                 Close();
+                ExApp.DisplayAlerts = true;
                 return false;
             }
         }
@@ -261,6 +265,7 @@ namespace MartialArts
                 
                 if (_ExApp != null)
                 {
+                    ExApp.DisplayAlerts = true;
                     ExApp.Quit();
                     Marshal.ReleaseComObject(_ExApp);
                     ExApp = null;
@@ -286,6 +291,47 @@ namespace MartialArts
                 promt.ShowDialog();
             }
         }
-    }
 
+        #region "METHODS FOR ALL EXCEL MODULS"
+
+       protected enum ExcelFileSubjects
+        {
+             Brackets,
+             ContendersList
+        }
+
+        protected string GetFileName(ExcelFileSubjects subject)
+        {
+            string filename = "";
+
+            switch (subject)
+            {
+                case ExcelFileSubjects.Brackets:
+                    filename = "בתים ";
+                    break;
+                case ExcelFileSubjects.ContendersList:
+                    filename = "רשימת מתחרים ";
+                    break;
+                default:
+                    filename = "קובץ ארכיון ";
+                    break;
+            }
+
+            // add uniq time
+            filename = filename + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".xlsx";
+
+            return filename;
+        }
+        protected virtual void SaveAs(ExcelFileSubjects subject)
+        {
+            if (Helpers.IsDirExist == true)
+            {
+
+                string fullPath = Helpers.RootPath + GetFileName(subject);
+                XlWb.SaveAs(fullPath);
+            }
+        }
+
+        #endregion
+    }
 }

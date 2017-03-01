@@ -35,7 +35,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.קובץToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.קרדיטיםToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ArchiveFiles = new System.Windows.Forms.ToolStripMenuItem();
+            this.קרדיטיםToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.עריכהToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ייצארשימתמתחריםלאקסלToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ייצארשימתבתיםלאקסלToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -119,20 +120,30 @@
             // 
             this.קובץToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.קובץToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.קרדיטיםToolStripMenuItem});
+            this.ArchiveFiles,
+            this.קרדיטיםToolStripMenuItem1});
             this.קובץToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
             this.קובץToolStripMenuItem.Name = "קובץToolStripMenuItem";
             this.קובץToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.קובץToolStripMenuItem.Text = "קובץ";
             // 
-            // קרדיטיםToolStripMenuItem
+            // ArchiveFiles
             // 
-            this.קרדיטיםToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.קרדיטיםToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.קרדיטיםToolStripMenuItem.Name = "קרדיטיםToolStripMenuItem";
-            this.קרדיטיםToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
-            this.קרדיטיםToolStripMenuItem.Text = "קרדיטים";
-            this.קרדיטיםToolStripMenuItem.Click += new System.EventHandler(this.קרדיטיםToolStripMenuItem_Click);
+            this.ArchiveFiles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.ArchiveFiles.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.ArchiveFiles.Name = "ArchiveFiles";
+            this.ArchiveFiles.Size = new System.Drawing.Size(196, 22);
+            this.ArchiveFiles.Text = "פתח תקיית קבצי ארכיון";
+            this.ArchiveFiles.Click += new System.EventHandler(this.ArchiveFiles_Click);
+            // 
+            // קרדיטיםToolStripMenuItem1
+            // 
+            this.קרדיטיםToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.קרדיטיםToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.קרדיטיםToolStripMenuItem1.Name = "קרדיטיםToolStripMenuItem1";
+            this.קרדיטיםToolStripMenuItem1.Size = new System.Drawing.Size(196, 22);
+            this.קרדיטיםToolStripMenuItem1.Text = "קרדיטים";
+            this.קרדיטיםToolStripMenuItem1.Click += new System.EventHandler(this.קרדיטיםToolStripMenuItem1_Click);
             // 
             // עריכהToolStripMenuItem
             // 
@@ -200,7 +211,7 @@
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.groupBox2.Location = new System.Drawing.Point(308, 35);
+            this.groupBox2.Location = new System.Drawing.Point(308, 29);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(186, 55);
             this.groupBox2.TabIndex = 41;
@@ -901,7 +912,7 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem קובץToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem קרדיטיםToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ArchiveFiles;
         private System.Windows.Forms.ToolStripMenuItem עריכהToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ייצארשימתמתחריםלאקסלToolStripMenuItem;
         private System.Windows.Forms.TabPage tabPage2;
@@ -951,6 +962,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem ייצארשימתבתיםלאקסלToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem קרדיטיםToolStripMenuItem1;
     }
 }
 

@@ -129,11 +129,11 @@ namespace Visual
                 if (_ContMainPanel == null)
                 {
                     _ContMainPanel = new FlowLayoutPanel();
-                    _ContMainPanel.DoubleBuffered_FlPanel(true);
+                    //_ContMainPanel.DoubleBuffered_FlPanel(true); TODO: DELETE
                     // tha name will be used in drag and drop
                     _ContMainPanel.Name = "Cont " + Contender.SystemID.ToString();
                     _ContMainPanel.AllowDrop = true;
-                    _ContMainPanel.MouseEnter += new EventHandler(Vcont_MouseEnter);
+                    _ContMainPanel.MouseDown += new MouseEventHandler(Vcont_MouseDown);
                     _ContMainPanel.DragEnter += new DragEventHandler(Vcont_DragEnter);
                     _ContMainPanel.Size = ContMainPanel_Size;
                     _ContMainPanel.BackColor = BeltShapes.MediumColor;
@@ -251,7 +251,7 @@ namespace Visual
                 if (_AgeCatPanel == null)
                 {
                     _AgeCatPanel = GetFpanel();
-                    _AgeCatPanel.DoubleBuffered_FlPanel(true);
+                    //_AgeCatPanel.DoubleBuffered_FlPanel(true); TODO: DELETE
                     _AgeCatPanel.Size = new Size(90, 31);
                     AddControlsToAgeCatPanel(ref _AgeCatPanel);
                     return _AgeCatPanel;
@@ -275,7 +275,7 @@ namespace Visual
                 if (_PersonalDataPanel == null)
                 {                  
                     _PersonalDataPanel = GetFpanel();
-                    _PersonalDataPanel.DoubleBuffered_FlPanel(true);
+                    //_PersonalDataPanel.DoubleBuffered_FlPanel(true); TODO: DELETE
                     _PersonalDataPanel.Size = new Size(177, 31);
                     _PersonalDataPanel.Padding = new Padding(2, 2, 2, 2);
                     AddControlsToPersonalDataPanel(ref _PersonalDataPanel);
@@ -402,15 +402,14 @@ namespace Visual
         {
             Label lbl = new Label();
             lbl.Dock = DockStyle.None;
-            lbl.DoubleBuffered_Label(true);
+            //lbl.DoubleBuffered_Label(true); TODO: DELETE
             lbl.Margin = new Padding(3, 3, 3, 3);
             lbl.RightToLeft = RightToLeft.Yes;
             lbl.TextAlign = ContentAlignment.MiddleCenter;
             lbl.ForeColor = ForeColor;
             lbl.AllowDrop = true;
-            lbl.MouseEnter += new EventHandler(Vcont_MouseEnter);
             lbl.DragEnter += new DragEventHandler(Vcont_DragEnter);
-
+            lbl.MouseDown += new MouseEventHandler(Vcont_MouseDown);
             return lbl;
         }
 

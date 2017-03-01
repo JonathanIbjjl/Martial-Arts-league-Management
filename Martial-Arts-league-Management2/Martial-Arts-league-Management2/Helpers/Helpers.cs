@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MartialArts
 {
-    class Helpers
+    partial class Helpers
     {
         /// <summary>
         /// add image from embedded resources
@@ -30,7 +30,7 @@ namespace MartialArts
         public static void ShowGenericPromtForm(string txt)
         {
             using (Martial_Arts_league_Management2.PromtForm promt = new Martial_Arts_league_Management2.PromtForm(txt, false, "הודעה ממערכת IBJJL", true))
-            {
+            { 
                 promt.ShowDialog();
             }
         }

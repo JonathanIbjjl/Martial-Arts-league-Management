@@ -23,11 +23,11 @@ namespace MartialArts
             {
                 ExApp = new Application();
                 XlWb = ExApp.Workbooks.Add();
-
+           
+                UnplacedSheet();
                 BracketsSheet();
-                //  UnplacedSheet();
-                //  SummarySheet();
 
+                base.SaveAs(ExcelFileSubjects.Brackets);
                 ExApp.Visible = true;
             }
 
@@ -37,14 +37,42 @@ namespace MartialArts
             }
         }
 
-        private void SummarySheet()
-        {
-            throw new NotImplementedException();
-        }
 
         private void UnplacedSheet()
         {
-            throw new NotImplementedException();
+            ExWs = XlWb.Worksheets.Add();
+            ExWs.Name = "ללא שיבוץ";
+            ExWs.Select();
+
+            int counter = 5;
+            BracketHeader(counter, "מתחרים שלא שובצו על ידי המערכת");
+            // fix the last column header
+            ExWs.Cells[counter + 1, 9] = "ללא מתחרים מתאימים באירוע";
+            counter+=2;
+
+            foreach (Visual.VisualContender c in LeagueEventData._VisualUnplacedBracketsList)
+            {
+                ExWs.Cells[counter, 2] = c.Contender.ID;
+                ExWs.Cells[counter, 3] = c.Contender.FirstName;
+                ExWs.Cells[counter, 4] = c.Contender.LastName;
+                ExWs.Cells[counter, 5] = c.Contender.HebrewBeltColor;
+                ExWs.Cells[counter, 6] = c.Contender.GetWeightValue;
+                ExWs.Cells[counter, 7] = " " + c.Contender.GetAgeValue + " ";
+                ExWs.Cells[counter, 8] = c.Contender.AcademyName;
+                ExWs.Cells[counter, 9] = (c.IsUseless == true) ? "כן" : "לא";
+
+
+                RowsDesign(counter);
+                counter++;
+            }
+
+                // sheet header
+                sheetHeader(ExWs.Range["b2:i3"], "מתחרים ללא שיבוץ");
+            // signature
+            sheetSignature(ExWs.Range["b1:i1"]);
+
+            ExWs.Columns["A:M"].autofit();
+
         }
 
         private void BracketsSheet()
@@ -73,8 +101,6 @@ namespace MartialArts
                     ExWs.Cells[counter, 9] = Contenders.ContndersGeneral.GetFactorExplanation(c,vb);
 
                     RowsDesign(counter);
-
-
                     counter++;
                 }
 

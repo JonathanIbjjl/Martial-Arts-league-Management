@@ -109,7 +109,8 @@
     <Compile Include="GUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Helpers.cs" />
+    <Compile Include="Helpers\Helpers.cs" />
+    <Compile Include="Helpers\PathHelper.cs" />
     <Compile Include="LeagueScattering.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="PromtForm.cs">

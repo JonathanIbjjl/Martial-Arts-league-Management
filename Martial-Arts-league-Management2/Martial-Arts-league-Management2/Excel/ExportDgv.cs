@@ -39,6 +39,7 @@ namespace MartialArts
                 }
 
                 ExWs.Columns["A:Z"].Autofit();
+                base.SaveAs(ExcelFileSubjects.ContendersList);
                 ExApp.Visible = true;
                 return true;
             }

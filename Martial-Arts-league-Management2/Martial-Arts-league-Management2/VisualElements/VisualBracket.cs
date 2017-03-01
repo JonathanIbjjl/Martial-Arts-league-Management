@@ -40,7 +40,7 @@ namespace  Visual
                 if (_Header == null)
                 {
                     _Header = new Label();
-                    _Header.DoubleBuffered_Label(true);
+                    //_Header.DoubleBuffered_Label(true); TODO: DELETE
                     // will be used in drag and drop
                     _Header.Name = "BracketHeader " + Bracket.BracketNumber.ToString();
                     _Header.DragOver += new DragEventHandler(Vbracket_DragOver);
@@ -82,7 +82,7 @@ namespace  Visual
                     // will be used in drag and drop
                     _Vbracket.Name = "Bracket " + Bracket.BracketNumber.ToString();
                     _Vbracket.AllowDrop = true;
-                    _Vbracket.DoubleBuffered_FlPanel(true);
+                    //_Vbracket.DoubleBuffered_FlPanel(true); TODO: DELETE
                     _Vbracket.Size = new Size(VisualContender.ContMainPanel_Size.Width + 4, ((VisualContender.ContMainPanel_Size.Height + 6) * Bracket.ContendersList.Count ) +26); // ontMainPanel_Size.Height + 6 is the margin beetween contenders,last digit:  Header And Margin
                     _Vbracket.BackColor = Color.Black;
                     _Vbracket.Margin = new Padding(6, 6, 6, 6);
