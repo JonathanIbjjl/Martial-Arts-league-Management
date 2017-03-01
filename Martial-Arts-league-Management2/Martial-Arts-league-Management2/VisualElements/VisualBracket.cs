@@ -5,9 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MartialArts;
 namespace  Visual
 {
-    class VisualBracket: VisualElements
+
+    [Serializable]
+    class VisualBracket: VisualElements,ICloneable
     {
        public MartialArts.Bracket Bracket;
        private  FlowLayoutPanel _Vbracket;
@@ -37,6 +40,7 @@ namespace  Visual
                 if (_Header == null)
                 {
                     _Header = new Label();
+                    _Header.DoubleBuffered_Label(true);
                     // will be used in drag and drop
                     _Header.Name = "BracketHeader " + Bracket.BracketNumber.ToString();
                     _Header.DragOver += new DragEventHandler(Vbracket_DragOver);
@@ -78,7 +82,7 @@ namespace  Visual
                     // will be used in drag and drop
                     _Vbracket.Name = "Bracket " + Bracket.BracketNumber.ToString();
                     _Vbracket.AllowDrop = true;
-                     MartialArts.ExtensionMethods.DoubleBuffered_FlPanel(_Vbracket, true);
+                    _Vbracket.DoubleBuffered_FlPanel(true);
                     _Vbracket.Size = new Size(VisualContender.ContMainPanel_Size.Width + 4, ((VisualContender.ContMainPanel_Size.Height + 6) * Bracket.ContendersList.Count ) +26); // ontMainPanel_Size.Height + 6 is the margin beetween contenders,last digit:  Header And Margin
                     _Vbracket.BackColor = Color.Black;
                     _Vbracket.Margin = new Padding(6, 6, 6, 6);
@@ -159,7 +163,8 @@ namespace  Visual
 
         private bool CheckContTransffer(VisualContender vis)
         {
-            if (VisualLeagueEvent.IsSutibleForBracket(vis, this) == false)
+            double finalgrade;
+            if (VisualLeagueEvent.IsSutibleForBracket(vis, this,out finalgrade) == false)
             {
 
                 using (Martial_Arts_league_Management2.PromtForm promt= new Martial_Arts_league_Management2.PromtForm("המתחרה שברצונך להעביר לבית זה אינו מתאים לציון הממוצע של הבית, אנא אשר על מנת להעבירו", false))
@@ -239,6 +244,11 @@ namespace  Visual
             // add to fpanel
             Vbracket.Controls.Add(visualcont.Vcontender);
             VisualLeagueEvent.AddContender(ContID, this);
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
         #endregion
 

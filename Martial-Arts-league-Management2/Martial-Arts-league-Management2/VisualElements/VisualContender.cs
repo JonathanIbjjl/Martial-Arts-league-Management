@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MartialArts;
 namespace Visual
 {
+
     class VisualElements
     {
         protected struct BeltColors
@@ -43,37 +45,37 @@ namespace Visual
                 case Contenders.ContndersGeneral.BeltsEnum.yellow:
                     Cshapes.DarkColor = Color.FromArgb(204, 204, 0);
                     Cshapes.MediumColor = Color.FromArgb(255, 255, 0);
-                    Cshapes.LightColor = Color.FromArgb(255, 255, 102);
+                    Cshapes.LightColor = Color.FromArgb(255, 255, 51);
                     break;
                 case Contenders.ContndersGeneral.BeltsEnum.purpule:
                     Cshapes.DarkColor = Color.FromArgb(51, 0, 51);
                     Cshapes.MediumColor = Color.FromArgb(102, 0, 102);
-                    Cshapes.LightColor = Color.FromArgb(245, 0, 245);
+                    Cshapes.LightColor = Color.FromArgb(112, 48, 160);
                     break;
                 case Contenders.ContndersGeneral.BeltsEnum.orange:
-                    Cshapes.DarkColor = Color.FromArgb(204, 102, 0);
-                    Cshapes.MediumColor = Color.FromArgb(255, 128, 0);
-                    Cshapes.LightColor = Color.FromArgb(255, 178, 102);
+                    Cshapes.DarkColor = Color.FromArgb(153, 76, 0);
+                    Cshapes.MediumColor = Color.FromArgb(204, 102, 0);
+                    Cshapes.LightColor = Color.FromArgb(255, 128, 0);
                     break;
                 case Contenders.ContndersGeneral.BeltsEnum.green:
-                    Cshapes.DarkColor = Color.FromArgb(0, 100, 0);
+                    Cshapes.DarkColor = Color.FromArgb(0, 102, 0);
                     Cshapes.MediumColor = Color.FromArgb(0, 204, 0);
-                    Cshapes.LightColor = Color.FromArgb(102, 255, 102);
+                    Cshapes.LightColor = Color.FromArgb(0, 255, 0);
                     break;
                 case Contenders.ContndersGeneral.BeltsEnum.gray:
                     Cshapes.DarkColor = Color.FromArgb(64, 64, 64);
-                    Cshapes.MediumColor = Color.FromArgb(128, 128, 128);
-                    Cshapes.LightColor = Color.FromArgb(192, 192, 192);
+                    Cshapes.MediumColor = Color.FromArgb(96, 96, 96);
+                    Cshapes.LightColor = Color.FromArgb(160, 160, 160);
                     break;
                 case Contenders.ContndersGeneral.BeltsEnum.brown:
-                    Cshapes.DarkColor = Color.FromArgb(139, 69, 19);
-                    Cshapes.MediumColor = Color.FromArgb(210, 105, 30);
-                    Cshapes.LightColor = Color.FromArgb(244, 164, 96);
+                    Cshapes.DarkColor = Color.FromArgb(51, 25, 0);
+                    Cshapes.MediumColor = Color.FromArgb(102, 51, 0);
+                    Cshapes.LightColor = Color.FromArgb(153, 76, 0);
                     break;
                 case Contenders.ContndersGeneral.BeltsEnum.blue:
-                    Cshapes.DarkColor = Color.FromArgb(25, 25, 112);
-                    Cshapes.MediumColor = Color.FromArgb(65, 105, 225);
-                    Cshapes.LightColor = Color.FromArgb(135, 206, 250);
+                    Cshapes.DarkColor = Color.FromArgb(0, 0, 153);
+                    Cshapes.MediumColor = Color.FromArgb(0, 0, 204);
+                    Cshapes.LightColor = Color.FromArgb(0, 128, 255);
                     break;
                 case Contenders.ContndersGeneral.BeltsEnum.black:
                     Cshapes.DarkColor = Color.FromArgb(0, 0, 0);
@@ -127,7 +129,7 @@ namespace Visual
                 if (_ContMainPanel == null)
                 {
                     _ContMainPanel = new FlowLayoutPanel();
-                    MartialArts.ExtensionMethods.DoubleBuffered_FlPanel(_ContMainPanel, true);
+                    _ContMainPanel.DoubleBuffered_FlPanel(true);
                     // tha name will be used in drag and drop
                     _ContMainPanel.Name = "Cont " + Contender.SystemID.ToString();
                     _ContMainPanel.AllowDrop = true;
@@ -249,6 +251,7 @@ namespace Visual
                 if (_AgeCatPanel == null)
                 {
                     _AgeCatPanel = GetFpanel();
+                    _AgeCatPanel.DoubleBuffered_FlPanel(true);
                     _AgeCatPanel.Size = new Size(90, 31);
                     AddControlsToAgeCatPanel(ref _AgeCatPanel);
                     return _AgeCatPanel;
@@ -270,8 +273,9 @@ namespace Visual
             get
             {
                 if (_PersonalDataPanel == null)
-                {
+                {                  
                     _PersonalDataPanel = GetFpanel();
+                    _PersonalDataPanel.DoubleBuffered_FlPanel(true);
                     _PersonalDataPanel.Size = new Size(177, 31);
                     _PersonalDataPanel.Padding = new Padding(2, 2, 2, 2);
                     AddControlsToPersonalDataPanel(ref _PersonalDataPanel);
@@ -316,13 +320,15 @@ namespace Visual
                     cm.ForeColor = MartialArts.GlobalVars.Sys_DarkerGray;
                     cm.Items.Add("העתק מתחרה");
                     cm.Items.Add("צור בית חדש");
+                    cm.Items.Add("בדוק פקטור בבית");
                     cm.Items[0].Name = Contender.SystemID.ToString();
                     cm.Items[1].Name = Contender.SystemID.ToString() + " ";
+                    cm.Items[2].Name = Contender.SystemID.ToString() + "  ";
                     cm.ItemClicked += new ToolStripItemClickedEventHandler(contexMenuuu_ItemClicked);
                     _BtnShowContData.ContextMenuStrip = cm;
 
                     ToolTip tp = new ToolTip();
-                    tp.SetToolTip(_BtnShowContData, "לחץ קליק ימני להעתיק מתחרה וקליק שמאלי לפרטים נוספים אודות המתחרה");
+                    tp.SetToolTip(_BtnShowContData, ".קליק ימני: אפשרויות נוספות. קליק שמאלי: פרטים נוספים אודות המתחרה");
                     tp.OwnerDraw = true;
                     tp.BackColor = MartialArts.GlobalVars.Sys_Red;
                     tp.ForeColor = Color.White;
@@ -395,6 +401,8 @@ namespace Visual
         public Label GetLabel()
         {
             Label lbl = new Label();
+            lbl.Dock = DockStyle.None;
+            lbl.DoubleBuffered_Label(true);
             lbl.Margin = new Padding(3, 3, 3, 3);
             lbl.RightToLeft = RightToLeft.Yes;
             lbl.TextAlign = ContentAlignment.MiddleCenter;
@@ -490,7 +498,7 @@ namespace Visual
             if (Contender.IsMale == true)
                 name.BackColor = BeltShapes.LightColor;
             else
-                name.BackColor = Color.FromArgb(255, 105, 180);
+                name.BackColor = Color.FromArgb(255,0,127);
  
             fp.Controls.Add(name);
 

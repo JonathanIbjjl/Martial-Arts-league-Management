@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Visual
 {
+    [Serializable]
     partial class VisualContender
     {
         // event for Data button
@@ -69,7 +70,7 @@ namespace Visual
 
 
             string con = s.ToString();
-            Martial_Arts_league_Management2.PromtForm promt = new Martial_Arts_league_Management2.PromtForm(new System.Drawing.Size(600,600),con, true, "פרטי מתחרה", true, "סגור");
+            Martial_Arts_league_Management2.PromtForm promt = new Martial_Arts_league_Management2.PromtForm(new System.Drawing.Size(600, 600), con, true, "פרטי מתחרה", true, "סגור");
             promt.Show();
 
         }
@@ -79,8 +80,7 @@ namespace Visual
         private void Vcont_MouseEnter(object sender, EventArgs e)
 
         {
-            System.Windows.Forms.Control c = sender as System.Windows.Forms.Control;
-
+           System.Windows.Forms.Control c = sender as System.Windows.Forms.Control;
             c.DoDragDrop(c, System.Windows.Forms.DragDropEffects.Move);
         }
 
@@ -107,9 +107,56 @@ namespace Visual
             {
                 if (e.ClickedItem.Name.ToString().Trim().IsNumeric() == true)
                 {
+
+                    // promt the user to permit
+                    using (var promt = new Martial_Arts_league_Management2.PromtForm("המתחרה יימחק מהבית הנוכחי ויפתח בית חדש שייצג את ציון החגורה הגיל והמשקל שלו" + Environment.NewLine + "אנא אשר על מנת להמשיך"))
+                    {
+                        var result = promt.ShowDialog();
+                        if (result == System.Windows.Forms.DialogResult.No)
+                        {
+                            return;
+                        }
+                    }
+
                     VisualLeagueEvent.CreateNewBracket(int.Parse(e.ClickedItem.Name.ToString().Trim()));
                 }
             }
+
+            else if (item.Text == "בדוק פקטור בבית")
+            {
+                if (e.ClickedItem.Name.ToString().Trim().IsNumeric() == true)
+                {
+
+                    FactorCheck(int.Parse(e.ClickedItem.Name));
+
+                }
+            }
+
+        }
+
+
+        private void FactorCheck(int contID)
+        {
+            // extract contender
+            var cont = VisualLeagueEvent.AllVisualContenders.Where(x => x.SystemID == contID).Select(c => c).Single();
+            // extract visual bracket number
+            var vbNum = VisualLeagueEvent.GetVisualBracketNumtByVisualContender(contID);
+            if (vbNum == -1)
+            {
+                // the contender is uplaced in no bracket
+                Helpers.ShowGenericPromtForm(cont.Contender.FirstName + " " + cont.Contender.LastName + " " + "עדיין לא שובץ בשום בית" + " לכן לא ניתן להציג פקטור");
+                return;
+            }
+
+            // extract visual bracket
+            var vb = VisualLeagueEvent.VisualBracketsList.Where(x => x.Bracket.BracketNumber == vbNum).Select(b => b).Single();
+            // get the factor string
+            string factor = Contenders.ContndersGeneral.GetFactorExplanation(cont, vb);
+            if (factor == "")
+                factor = "לא הופעל אף פקטור עבור " + cont.Contender.FirstName + " " + cont.Contender.LastName;
+
+            // show the factor
+            Helpers.ShowGenericPromtForm(factor);
         }
 
         #endregion

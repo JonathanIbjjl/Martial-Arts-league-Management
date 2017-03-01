@@ -205,6 +205,14 @@ namespace Contenders
 
             return reason;
         }
+
+        public static string GetFactorExplanation(Visual.VisualContender cont,Visual.VisualBracket vb)
+        {
+            double finalgrade;
+            Visual.VisualLeagueEvent.IsSutibleForBracket(cont, vb,out finalgrade);
+
+            return GetFactorExplanation(finalgrade);
+        }
     }
 
 

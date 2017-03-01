@@ -104,7 +104,13 @@ namespace MartialArts
             }
         }
 
-
+        public static System.Drawing.Color Sys_LabelGray
+        {
+            get
+            {
+                return System.Drawing.Color.FromArgb(200, 200, 200);
+            }
+        }
         #endregion
 
     }

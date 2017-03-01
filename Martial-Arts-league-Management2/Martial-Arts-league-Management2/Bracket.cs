@@ -38,6 +38,7 @@ namespace MartialArts
                 NumberOfContenders = numberOfContenders;
         }
     }
+
     class Bracket
     {
         private static int _BracketNumber = 0;

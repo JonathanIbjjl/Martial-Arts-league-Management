@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MartialArts;
+
 
 namespace Visual
 {
@@ -47,7 +49,37 @@ namespace Visual
         }
 
         public static List<VisualContender> AllVisualContenders;
+
+        private static List<UndoStruct> _UndoList;
+        public static List<UndoStruct> UndoList
+        {
+            get
+            {
+                if (_UndoList == null)
+                {
+                    _UndoList = new List<UndoStruct>();
+                    return _UndoList;
+                }
+                else
+                {
+                    return _UndoList;
+                }
+            }
+            set
+            {
+                _UndoList = value;
+            }
+        }
+
         public static bool IsMerged = false;
+        public static bool VisualElementsAndEventExist
+        {
+            get
+            {
+                return IsMerged;
+            }
+        }
+
 
         public static MartialArts.Form1 FormObj;
         // used for copy contenders, the property will save the system id of the copied contender
@@ -79,6 +111,33 @@ namespace Visual
 
         }
 
+        public static UndoStruct GetUndoStruct()
+        {
+            UndoStruct undo = new UndoStruct();
+            undo.AllVisualContenders = AllVisualContenders.ToList();
+            undo._VisualBracketsList = VisualBracketsList.ToList();
+            undo._VisualUnplacedBracketsList = _VisualUnplacedBracketsList.ToList();
+            return undo;
+        }
+        /// <summary>
+        /// the application will save the last 15 changes 
+        /// </summary>
+        /// TODO: FINISH THIS!
+        public static void AddToUndoList()
+        {
+            // save the current event to struct
+            UndoStruct undo = new UndoStruct();
+            undo.AllVisualContenders = new List<VisualContender>();
+            undo._VisualBracketsList = new List<VisualBracket>(VisualBracketsList.Clone());
+            undo._VisualUnplacedBracketsList = new List<VisualContender>(VisualUnplacedBracketsList.ToList());
+
+            if (UndoList.Count == 14)
+            {
+                UndoList.RemoveAt(0);
+            }
+
+            UndoList.Add(undo);
+        }
 
         /// <summary>
         /// add contender to visual bracket or to unplaced list
@@ -87,6 +146,7 @@ namespace Visual
         /// <param name="b">if null contender is moving to uplaced list</param>
         public static void AddContender(int sysid, VisualBracket b = null)
         {
+
             var VisualContender = AllVisualContenders.AsEnumerable().Where(x => x.Contender.SystemID == sysid).Single();
             // first remove from current bracket if contender is not from unplaced panel
             RemoveContender(sysid);
@@ -120,7 +180,7 @@ namespace Visual
             // update GUI Clocks
             FormObj.UpdateClocks();
         }
-    
+
 
         public static void RemoveContender(int sysid)
         {
@@ -153,7 +213,7 @@ namespace Visual
                     break;
             }
 
-             isRemoved = false;
+            isRemoved = false;
 
             // extract Current Bracket 
             foreach (VisualBracket vb in VisualBracketsList)
@@ -179,9 +239,32 @@ namespace Visual
             }
         }
 
+
+        public static int GetVisualBracketNumtByVisualContender(int sysid)
+        {
+            int result = -1;
+
+            // extract Current Bracket 
+            foreach (VisualBracket vb in VisualBracketsList)
+            {
+                foreach (VisualContender c in vb.VisualCont)
+                {
+                    if (c.Contender.SystemID == sysid)
+                    {
+                        result = vb.Bracket.BracketNumber;
+                        break;
+                    }
+                }
+
+                if (result > -1)
+                    break;
+            }
+
+            return result;
+        }
+
         internal static void CreateNewBracket(int ContID)
         {
-            
 
             // first check unplacedList to remove
             if (VisualUnplacedBracketsList.Any(x => x.SystemID == ContID) == true)
@@ -246,7 +329,7 @@ namespace Visual
         /// returns the Y location of the visual contender
         /// </summary>
         /// <returns></returns>
-        public static int Search(string searchString,out int NumOfResults)
+        public static int Search(string searchString, out int NumOfResults)
         {
             if (IsMerged == false)
                 throw new Exception("MergeListsForSearch() method must be initilized in order to perform a search");
@@ -259,17 +342,17 @@ namespace Visual
             }
             var fix = searchString.Trim();
             bool found = false;
-     
-                foreach (VisualContender c in AllVisualContenders)
+
+            foreach (VisualContender c in AllVisualContenders)
+            {
+                if (c.MakeShadow(fix) == true)
                 {
-                    if (c.MakeShadow(fix) == true)
-                    {
-                        found = true;
-                        IsShadowd = true;
-                        NumOfResults++;
-                    }
+                    found = true;
+                    IsShadowd = true;
+                    NumOfResults++;
                 }
-            
+            }
+
 
             // if nothing was found make all controls visible
             if (found == false)
@@ -282,56 +365,63 @@ namespace Visual
 
         public static void CancelAllShadowsOfSearch()
         {
-          
-                foreach (VisualContender c in AllVisualContenders)
-                {
-                    c.CancelShadow();
-                }
-            
+
+            foreach (VisualContender c in AllVisualContenders)
+            {
+                c.CancelShadow();
+            }
+
 
             IsShadowd = false;
         }
 
-        public static bool IsSutibleForBracket(VisualContender v, VisualBracket b)
-                 {
+        public static bool IsSutibleForBracket(VisualContender v, VisualBracket b, out double finalgrade)
+        {
+            finalgrade = v.Contender.Grade;
+            bool IsSuitable = false;
 
-                   bool IsSuitable = false;
+            if (Math.Floor(v.Contender.Grade) == Math.Floor(b.Bracket.AverageGrade) && MartialArts.BracketsBuilder.ReturnBinaryGender(b.Bracket) == v.Contender.IsMale)
+            {
+                finalgrade = v.Contender.Grade;
+                IsSuitable = true;
+            }
+            else if (Math.Floor(v.Contender.Score_WeightFactor) == Math.Floor(b.Bracket.AverageGrade) && MartialArts.BracketsBuilder.ReturnBinaryGender(b.Bracket) == v.Contender.IsMale)
+            {
+                finalgrade = v.Contender.Score_WeightFactor;
+                IsSuitable = true;
+            }
 
-                    if (Math.Floor(v.Contender.Grade) == Math.Floor(b.Bracket.AverageGrade) && MartialArts.BracketsBuilder.ReturnBinaryGender(b.Bracket) == v.Contender.IsMale)
-                    {
-                        IsSuitable = true;
-                    }
-                    else if (Math.Floor(v.Contender.Score_WeightFactor) == Math.Floor(b.Bracket.AverageGrade) && MartialArts.BracketsBuilder.ReturnBinaryGender(b.Bracket) == v.Contender.IsMale)
-                    {
-                        IsSuitable = true;
-                    }
-
-                    else if (Math.Floor(v.Contender.Score_BeltFactor) == Math.Floor(b.Bracket.AverageGrade) && MartialArts.BracketsBuilder.ReturnBinaryGender(b.Bracket) == v.Contender.IsMale)
-                    {
-                      IsSuitable = true;
-                    }
-                    else if (Math.Floor(v.Contender.Score_AgeFactor) == Math.Floor(b.Bracket.AverageGrade) && v.Contender.IsChild == true && MartialArts.BracketsBuilder.ReturnBinaryGender(b.Bracket) == v.Contender.IsMale)
-                    {
-                      IsSuitable = true;
-                    }
-                    else if (Math.Floor(v.Contender.Score_Weight_Belt_Factor) == Math.Floor(b.Bracket.AverageGrade) && MartialArts.BracketsBuilder.ReturnBinaryGender(b.Bracket) == v.Contender.IsMale)
-                    {
-                      IsSuitable = true;
-                    }
-                    else if (Math.Floor(v.Contender.Score_Weight_Age_Factor) == Math.Floor(b.Bracket.AverageGrade) && v.Contender.IsChild == true && MartialArts.BracketsBuilder.ReturnBinaryGender(b.Bracket) == v.Contender.IsMale)
-                    {
-                      IsSuitable = true;
-                    }
-                    else if (Math.Floor(v.Contender.Score_AllFactors) == Math.Floor(b.Bracket.AverageGrade) && v.Contender.IsChild == true && MartialArts.BracketsBuilder.ReturnBinaryGender(b.Bracket) == v.Contender.IsMale)
-                    {
-                       IsSuitable = true;
-                    }
+            else if (Math.Floor(v.Contender.Score_BeltFactor) == Math.Floor(b.Bracket.AverageGrade) && MartialArts.BracketsBuilder.ReturnBinaryGender(b.Bracket) == v.Contender.IsMale)
+            {
+                finalgrade = v.Contender.Score_BeltFactor;
+                IsSuitable = true;
+            }
+            else if (Math.Floor(v.Contender.Score_AgeFactor) == Math.Floor(b.Bracket.AverageGrade) && v.Contender.IsChild == true && MartialArts.BracketsBuilder.ReturnBinaryGender(b.Bracket) == v.Contender.IsMale)
+            {
+                finalgrade = v.Contender.Score_AgeFactor;
+                IsSuitable = true;
+            }
+            else if (Math.Floor(v.Contender.Score_Weight_Belt_Factor) == Math.Floor(b.Bracket.AverageGrade) && MartialArts.BracketsBuilder.ReturnBinaryGender(b.Bracket) == v.Contender.IsMale)
+            {
+                finalgrade = v.Contender.Score_Weight_Belt_Factor;
+                IsSuitable = true;
+            }
+            else if (Math.Floor(v.Contender.Score_Weight_Age_Factor) == Math.Floor(b.Bracket.AverageGrade) && v.Contender.IsChild == true && MartialArts.BracketsBuilder.ReturnBinaryGender(b.Bracket) == v.Contender.IsMale)
+            {
+                finalgrade = v.Contender.Score_Weight_Age_Factor;
+                IsSuitable = true;
+            }
+            else if (Math.Floor(v.Contender.Score_AllFactors) == Math.Floor(b.Bracket.AverageGrade) && v.Contender.IsChild == true && MartialArts.BracketsBuilder.ReturnBinaryGender(b.Bracket) == v.Contender.IsMale)
+            {
+                finalgrade = v.Contender.Score_AllFactors;
+                IsSuitable = true;
+            }
 
             return IsSuitable;
         }
 
 
-            
+
 
         public static void ClearClass()
         {
@@ -353,8 +443,26 @@ namespace Visual
                 AllVisualContenders.Clear();
                 AllVisualContenders = null;
             }
-         }
+
+            if (UndoList != null)
+            {
+                UndoList.Clear();
+                UndoList = null;
+            }
+        }
 
 
+        public struct UndoStruct
+        {
+            public List<VisualBracket> _VisualBracketsList;
+            public List<VisualContender> _VisualUnplacedBracketsList;
+            public List<VisualContender> AllVisualContenders;
+
+        }
+
+        internal static void MoveBw()
+        {
+
+        }
     }
 }

@@ -97,6 +97,7 @@
     <Compile Include="Emails.cs" />
     <Compile Include="Excel\ExcelOperations.cs" />
     <Compile Include="Excel\ExcelOperations2.cs" />
+    <Compile Include="Excel\ExportBrackets.cs" />
     <Compile Include="Excel\ExportDgv.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

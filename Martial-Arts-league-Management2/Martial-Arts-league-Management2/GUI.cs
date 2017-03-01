@@ -113,13 +113,14 @@ namespace MartialArts
                 _MatchClock.InnerCircleWeight = 5;
                 _MatchClock.InnerCircleColor = GlobalVars.Sys_Yellow;
                 _MatchClock.OuterCircleColor = Color.FromArgb(78, 78, 78);
-
+                _MatchClock.FontColor = GlobalVars.Sys_LabelGray;
                 _MatchClock.ClockBackGroundColor = splitContainer1.Panel1.BackColor;
                 _MatchClock.Create(false);
                 _MatchClock.Clock.Anchor = AnchorStyles.Right | AnchorStyles.Top;
 
                 _MatchClock.Clock.Location = new Point(0, 0);
                 lblPercent.Controls.Add(_MatchClock.Clock);
+                toolTip1.SetToolTip(_MatchClock.Clock, "אחוז המתחרים המשובצים מתוך כלל המשתתפים");
             }
             else
             {
@@ -150,13 +151,14 @@ namespace MartialArts
                 _MatchWithoutUselessClock.InnerCircleWeight = 5;
                 _MatchWithoutUselessClock.InnerCircleColor = GlobalVars.Sys_Yellow;
                 _MatchWithoutUselessClock.OuterCircleColor = Color.FromArgb(78, 78, 78);
-
+                _MatchWithoutUselessClock.FontColor = GlobalVars.Sys_LabelGray;
                 _MatchWithoutUselessClock.ClockBackGroundColor = splitContainer1.Panel1.BackColor;
                 _MatchWithoutUselessClock.Create(false);
                 _MatchWithoutUselessClock.Clock.Anchor = AnchorStyles.Right | AnchorStyles.Top;
 
                 _MatchWithoutUselessClock.Clock.Location = new Point(0, 0);
                 lblPercentwithoutUseless.Controls.Add(_MatchWithoutUselessClock.Clock);
+                toolTip1.SetToolTip(_MatchWithoutUselessClock.Clock, "אחוז המתחרים המשובצים מתוך כלל המשתתפים למעט משתתפים ללא התאמה לאף מתחרה באירוע הנוכחי");
             }
             else
             {
@@ -182,13 +184,13 @@ namespace MartialArts
                 _BracketsClock.InnerCircleWeight = 5;
                 _BracketsClock.InnerCircleColor = GlobalVars.Sys_Yellow;
                 _BracketsClock.OuterCircleColor = Color.FromArgb(78, 78, 78);
-
+                _BracketsClock.FontColor = GlobalVars.Sys_LabelGray;
                 _BracketsClock.ClockBackGroundColor = splitContainer1.Panel1.BackColor;
                 _BracketsClock.Create(false);
                 _BracketsClock.Clock.Anchor = AnchorStyles.Right | AnchorStyles.Top;
-
                 _BracketsClock.Clock.Location = new Point(0, 0);
                 lblBracketsClock.Controls.Add(_BracketsClock.Clock);
+                toolTip1.SetToolTip(_BracketsClock.Clock, "אחוז הבתים ששווים או גבוהים ממספר המשתתפים המבוקש לבית");
             }
             else
             {

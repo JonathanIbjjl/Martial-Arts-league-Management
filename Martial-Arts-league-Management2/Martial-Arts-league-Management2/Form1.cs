@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using BusinessClocks.ExecutiveClocks;
 using System.Reflection;
 using System.Diagnostics;
+using System.Media;
 
 namespace MartialArts
 {
@@ -22,7 +23,8 @@ namespace MartialArts
             InitializeComponent();
             ExtensionMethods.DoubleBuffered_FlPanel(BracktsFPanel, true);
             ExtensionMethods.DoubleBuffered_FlPanel(UnPlacedFpanel, true);
-
+            splitContainer1.DoubleBuffered_SplitContainer(true);
+            splitContainer1.Panel2.DoubleBuffered_Panel(true);
         }
 
         public OpenFileDialog fd = null;
@@ -50,9 +52,23 @@ namespace MartialArts
         private void Form1_Load(object sender, EventArgs e)
         {
             UpdateClocks(true);
-        
+            LoadMe();
         }
 
+        private void LoadMe()
+        {
+            toolTip1.OwnerDraw = true;
+            toolTip1.BackColor = MartialArts.GlobalVars.Sys_Red;
+            toolTip1.ForeColor = Color.White;
+            toolTip1.Draw += new DrawToolTipEventHandler(tp_Draw);
+        }
+
+        private void tp_Draw(object sender, System.Windows.Forms.DrawToolTipEventArgs e)
+        {
+            e.DrawBackground();
+            e.DrawBorder();
+            e.DrawText();
+        }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
@@ -70,7 +86,8 @@ namespace MartialArts
 
         private void btnLoadFile_Click_1(object sender, EventArgs e)
         {
-
+            if (GlobalVars.IsLoading == true)
+                return;
 
             System.Threading.Thread waitThread = new System.Threading.Thread(LoadWaitClock);
             waitThread.Start();
@@ -83,12 +100,15 @@ namespace MartialArts
 
         private void LoadFileThread()
         {
+            GlobalVars.IsLoading = true;
+
             if (txtPath.Text != string.Empty)
             {
 
                 if (LoadFile() == false)
                 {
                     this.Invoke(new Action(wClock.Dispose));
+                    GlobalVars.IsLoading = false;
                     return;
                 }
                 else
@@ -105,6 +125,8 @@ namespace MartialArts
                 GlobalVars.ListOfContenders.Clear();
                 Helpers.DefaultMessegeBox("יש לבחור קובץ אקסל לטעינה", "לא נבחר קובץ", MessageBoxIcon.Information);
             }
+
+            GlobalVars.IsLoading = false;
         }
 
 
@@ -153,7 +175,10 @@ namespace MartialArts
 
         private void btnBuiledBrackets_Click(object sender, EventArgs e)
         {
-            if (BuiletBracketsAgain() == true)
+            if (GlobalVars.IsLoading == true)
+                return;
+
+                if (BuiletBracketsAgain() == true)
             {
                 System.Threading.Thread waitThread = new System.Threading.Thread(LoadWaitClock);
                 waitThread.Start();
@@ -183,10 +208,10 @@ namespace MartialArts
             {
                 GlobalVars.IsLoading = true;
                 Brackets = new BracketsBuilder(MartialArts.GlobalVars.ListOfContenders, false);
-                Brackets.Init();
-                GlobalVars.IsLoading = false;
+                Brackets.Init();               
                 this.Invoke(new Action(wClock.Dispose));
                 this.Invoke(new Action(CreateVisualBrackets));
+                GlobalVars.IsLoading = false;
             }
         }
 
@@ -556,6 +581,7 @@ namespace MartialArts
 
         private void btnUNDO_Click(object sender, EventArgs e)
         {
+            SystemSounds.Beep.Play();
             foreach (Visual.VisualBracket vb in Visual.VisualLeagueEvent.VisualBracketsList)
             {
                 foreach (Visual.VisualContender v in vb.VisualCont)
@@ -571,6 +597,46 @@ namespace MartialArts
             {
                 Debug.WriteLine(v.Contender.FirstName + " " + v.Contender.LastName);
             }
+        }
+
+        private void btnBW_Click(object sender, EventArgs e)
+        {
+            UnderConstruction();
+        }
+
+        private void btnFW_Click(object sender, EventArgs e)
+        {
+            UnderConstruction();
+        }
+
+        public static void UnderConstruction()
+        {
+            Helpers.ShowGenericPromtForm("UNDER CONSTRUCTION");
+        }
+
+        private void ייצארשימתבתיםלאקסלToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (GlobalVars.IsLoading == true)
+                return;
+
+            if (Visual.VisualLeagueEvent.VisualElementsAndEventExist == false)
+            {
+                Helpers.ShowGenericPromtForm("לא קיימים בתים, יש ליצור בתים באמצעות לחצן יצירת בתים לאחר טעינת נתונים");
+                return;
+            }
+
+            // promt the user to permit
+            using (var promt = new Martial_Arts_league_Management2.PromtForm("האם לייצא את רשימת הבתים המסכמת לקובץ אקסל?"))
+            {
+                var result = promt.ShowDialog();
+                if (result == DialogResult.No)
+                {
+                    return;
+                }
+            }
+
+            ExportBrackets export = new ExportBrackets("", Visual.VisualLeagueEvent.GetUndoStruct());
+            export.init();
         }
     }
 
@@ -598,11 +664,42 @@ namespace MartialArts
             pi.SetValue(fp, setting, null);
         }
 
+        public static void DoubleBuffered_Label(this Label lbl, bool setting)
+        {
+            Type dgvType = lbl.GetType();
+            PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
+                BindingFlags.Instance | BindingFlags.NonPublic);
+            pi.SetValue(lbl, setting, null);
+        }
+
+        public static void DoubleBuffered_SplitContainer(this SplitContainer sp, bool setting)
+        {
+            Type dgvType = sp.GetType();
+            PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
+                BindingFlags.Instance | BindingFlags.NonPublic);
+            pi.SetValue(sp, setting, null);
+        }
+
+        public static void DoubleBuffered_Panel(this Panel panel, bool setting)
+        {
+            Type dgvType = panel.GetType();
+            PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
+                BindingFlags.Instance | BindingFlags.NonPublic);
+            pi.SetValue(panel, setting, null);
+        }
+
+
+
         public static bool IsNumeric(this string s)
         {
             float output;
             return float.TryParse(s, out output);
         }
 
+        // Deep clone
+        public static IList<T> Clone<T>(this IList<T> listToClone) where T : ICloneable
+        {
+            return listToClone.Select(item => (T)item.Clone()).ToList();
+        }
     }
 }
