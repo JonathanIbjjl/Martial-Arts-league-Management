@@ -540,7 +540,88 @@ namespace Visual
 
         public void Dispose()
         {
-            
+            if (_WeightCatPanel != null)
+            {
+                foreach (Control x in _WeightCatPanel.Controls)
+                {
+                    x.Dispose();
+                }
+
+                _WeightCatPanel.Dispose();
+            }
+
+
+            if (_BeltFactorShape != null)
+            {
+
+                foreach (Control x in _BeltFactorShape.Controls)
+                {
+                    x.Dispose();
+                }
+
+                _BeltFactorShape.Dispose();
+            }
+
+            if (_PersonalDataPanel != null)
+            {
+                foreach (Control x in _PersonalDataPanel.Controls)
+                {
+                    x.Dispose();
+                }
+
+                _PersonalDataPanel.Dispose();
+            }
+
+            if (_BtnShowContData != null)
+            {
+                foreach (Control x in _BtnShowContData.Controls)
+                {
+                    x.Dispose();
+                }
+
+                _BtnShowContData.Dispose();
+            }
+
+            if (_AgeCatPanel != null)
+            {
+                foreach (Control x in _AgeCatPanel.Controls)
+                {
+                    x.Dispose();
+                }
+
+                _AgeCatPanel.Dispose();
+            }
+
+            if (_WeightCatPanel != null)
+            {
+                foreach (Control x in _WeightCatPanel.Controls)
+                {
+                    x.Dispose();
+                }
+
+                _WeightCatPanel.Dispose();
+            }
+
+            if (_ExactWeightShape != null)
+            {
+                foreach (Control x in _ExactWeightShape.Controls)
+                {
+                    x.Dispose();
+                }
+
+                _ExactWeightShape.Dispose();
+            }
+
+            if (_ContMainPanel != null)
+            {
+                foreach (Control x in _ContMainPanel.Controls)
+                {
+                    x.Dispose();
+                }
+
+                _ContMainPanel.Dispose();
+            }
+
         }
     }
 

@@ -941,7 +941,7 @@
             this.btnBuiledBrackets.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.btnBuiledBrackets.ForeColor = System.Drawing.Color.Maroon;
             this.btnBuiledBrackets.Image = global::Martial_Arts_league_Management2.Properties.Resources._148841HungarianYellow;
-            this.btnBuiledBrackets.Location = new System.Drawing.Point(618, 44);
+            this.btnBuiledBrackets.Location = new System.Drawing.Point(618, 39);
             this.btnBuiledBrackets.Name = "btnBuiledBrackets";
             this.btnBuiledBrackets.Size = new System.Drawing.Size(84, 60);
             this.btnBuiledBrackets.TabIndex = 2;

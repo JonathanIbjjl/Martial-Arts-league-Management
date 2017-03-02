@@ -10,7 +10,7 @@ namespace  Visual
 {
 
     [Serializable]
-    class VisualBracket: VisualElements,ICloneable
+    class VisualBracket: VisualElements,ICloneable,IDisposable
     {
        public MartialArts.Bracket Bracket;
        private  FlowLayoutPanel _Vbracket;
@@ -250,6 +250,30 @@ namespace  Visual
         {
             return this.MemberwiseClone();
         }
+
+        public void Dispose()
+        {
+            if (_Header != null)
+            {
+                foreach (Control c in _Header.Controls)
+                {
+                    c.Dispose();
+                }
+
+                _Header.Dispose();
+            }
+
+            if (_Vbracket != null)
+            {
+                foreach (Control c in _Vbracket.Controls)
+                {
+                    c.Dispose();
+                }
+
+                _Vbracket.Dispose();
+            }
+        }
+
         #endregion
 
     }

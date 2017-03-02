@@ -56,6 +56,10 @@ namespace MartialArts
             }
             else
             {
+
+                GlobalVars.ListOfContenders.Clear();
+                GlobalVars.ListOfContenders = null;
+
                 string ExDefects="";
                 foreach (string s in Defects)
                 {
@@ -174,6 +178,13 @@ namespace MartialArts
             var s = ExWs.Cells[row, col].value;
             string result = System.Convert.ToString(s);
 
+            if (result.IsNumeric() == false)
+            {
+                Defects.Add(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "חייב להכיל מספר כלשהו שמייצג משקל" + Environment.NewLine);
+                isok = false;
+                return 0;
+            }
+
             double intResult = Helpers.extractNumberFromString(result);
 
             if (intResult > 0)
@@ -225,7 +236,7 @@ namespace MartialArts
                 }
             }
             isok = false;
-            Helpers.DefaultMessegeBox(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "מכיל קטגוריית משקל לא חוקית" + Environment.NewLine + "התוכנית תפסיק את פעולתה", "נתון חסר", System.Windows.Forms.MessageBoxIcon.Warning);
+            Defects.Add(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "מכיל קטגוריית משקל לא חוקית" + Environment.NewLine);
             return 0;
         }
 

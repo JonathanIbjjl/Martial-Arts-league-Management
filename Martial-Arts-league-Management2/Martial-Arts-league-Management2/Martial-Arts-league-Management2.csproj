@@ -66,6 +66,9 @@
   <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ICON_BJJL23.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BusinessClocks">
       <HintPath>..\..\..\..\..\..\Documents\Visual Studio 2015\Projects\Final_BusinessClocks_OpenSource_VB\BusinessClocks\bin\Debug\BusinessClocks.dll</HintPath>
@@ -265,6 +268,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\148841HungarianYellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ICON_BJJL23.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

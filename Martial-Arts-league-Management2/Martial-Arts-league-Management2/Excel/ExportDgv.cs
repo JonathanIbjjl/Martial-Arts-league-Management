@@ -32,7 +32,8 @@ namespace MartialArts
                     for (int Erows = 0; Erows <= dgv.RowCount - 1; Erows++)
                     {
                         ExWs.Cells[Erows + 2, Ecolumns + 1] = dgv.Rows[Erows].Cells[Ecolumns].Value;
-                        ExWs.Range[ExWs.Cells[Erows + 2, Ecolumns + 1], ExWs.Cells[Erows + 2, dgv.Columns.Count - 1]].interior.color = dgv.Rows[Erows].DefaultCellStyle.BackColor;
+
+                        ExWs.Range[ExWs.Cells[Erows + 2, Ecolumns + 1], ExWs.Cells[Erows + 2, dgv.Columns.Count - 1]].interior.color = System.Drawing.Color.FromArgb(200,200,200);
                         ExWs.Range[ExWs.Cells[Erows + 2, Ecolumns + 1], ExWs.Cells[Erows + 2, dgv.Columns.Count - 1]].font.color = dgv.Rows[Erows].DefaultCellStyle.ForeColor;
                     }
 

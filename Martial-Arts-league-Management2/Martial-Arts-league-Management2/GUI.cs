@@ -255,27 +255,36 @@ namespace MartialArts
         {
             if (dgvMain.Rows.Count > 0)
             {
-                dgvMain.Rows.Clear();
+                dgvMain.Rows.Clear();             
+            }
+
+            if (dgvMain.Columns.Count > 0)
+            {
                 dgvMain.Columns.Clear();
             }
+
+
 
             dgvMain.DoubleBuffered(true);
             dgvMain.EnableHeadersVisualStyles = false;
             dgvMain.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(28, 28, 28);
             dgvMain.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(227, 154, 44);
             dgvMain.DefaultCellStyle.BackColor = Color.FromArgb(200, 200, 200);
+
             this.dgvMain.RowHeadersWidth = 70;
-            dgvMain.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
-            dgvMain.SelectionMode = DataGridViewSelectionMode.CellSelect;
+        
+            dgvMain.SelectionMode = DataGridViewSelectionMode.RowHeaderSelect;
       
+
+            dgvMain.ReadOnly = false;
             dgvMain.AllowUserToAddRows = true;
             dgvMain.AllowUserToDeleteRows = true;
-            dgvMain.ReadOnly = false;
+            // dgvMain.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
 
             this.dgvMain.CellValidating += new
-    DataGridViewCellValidatingEventHandler(dgvMain_CellValidating);
-            this.dgvMain.CellEndEdit += new
-                DataGridViewCellEventHandler(dgvMain_CellEndEdit);
+              DataGridViewCellValidatingEventHandler(dgvMain_CellValidating);
+              this.dgvMain.CellEndEdit += new
+              DataGridViewCellEventHandler(dgvMain_CellEndEdit);
 
 
             // 
@@ -428,7 +437,7 @@ namespace MartialArts
                 {
                     dgvMain.Rows[e.RowIndex].ErrorText =
                         "ת.ז חייבת להכיל לפחות 8 ספרות";
-                 //   e.Cancel = true;
+                   // e.Cancel = true;
                 }
 
             }

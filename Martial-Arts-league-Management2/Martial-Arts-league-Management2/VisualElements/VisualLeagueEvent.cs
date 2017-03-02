@@ -429,18 +429,44 @@ namespace Visual
 
             if (VisualBracketsList != null)
             {
+
+                for (int i = 0; i < VisualBracketsList.Count; i++)
+                {
+                    VisualBracketsList[i].Dispose();
+
+                    for (int j = 0; j < VisualBracketsList[i].VisualCont.Count; j++)
+                    {
+                        VisualBracketsList[i].VisualCont[j].Dispose();
+                    }
+                }
+
                 VisualBracketsList.Clear();
                 VisualBracketsList = null;
             }
 
+
+
             if (VisualUnplacedBracketsList != null)
             {
+
+                for (int i = 0; i < VisualUnplacedBracketsList.Count; i++)
+                {
+                    VisualUnplacedBracketsList[i].Dispose();
+                }
+
                 VisualUnplacedBracketsList.Clear();
                 VisualUnplacedBracketsList = null;
             }
 
+
+
             if (AllVisualContenders != null)
             {
+                for (int i = 0; i < AllVisualContenders.Count; i++)
+                {
+                    AllVisualContenders[i].Dispose();
+                }
+
                 AllVisualContenders.Clear();
                 AllVisualContenders = null;
             }
@@ -450,6 +476,8 @@ namespace Visual
                 UndoList.Clear();
                 UndoList = null;
             }
+
+
         }
 
 

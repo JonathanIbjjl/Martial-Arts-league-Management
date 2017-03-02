@@ -194,8 +194,6 @@ namespace MartialArts
 
                 if (BuiletBracketsAgain() == true)
             {
-                // doing it still from main thread
-                dgvMain.AllowUserToAddRows = false; 
 
                 System.Threading.Thread waitThread = new System.Threading.Thread(LoadWaitClock);
                 waitThread.Start();
@@ -216,7 +214,7 @@ namespace MartialArts
             }
             if (GlobalVars.ListOfContenders.Count < 2 && dgvMain.Rows.Count<2)
             {
-                Helpers.DefaultMessegeBox("לא קיימים משתתפים לבניית בתים" + Environment.NewLine + "אנא טען קובץ או ייצר רשימה", "חסרים נתונים", MessageBoxIcon.Warning);
+                Helpers.ShowGenericPromtForm("לא קיימים משתתפים לבניית בתים" + Environment.NewLine + "אנא טען קובץ או ייצר רשימה");
                 GlobalVars.IsLoading = false;
                 this.Invoke(new Action(wClock.Dispose));
             }
@@ -238,6 +236,16 @@ namespace MartialArts
                     }
                 }
 
+                if (MartialArts.GlobalVars.ListOfContenders.Count > 550)
+                {
+                    // OS cant create more that 9998 user objects. 550 conts are 8653 user objects (safty range)
+                    Helpers.ShowGenericPromtForm("לא ניתן לטעון יותר מ550 מתחרים" +Environment.NewLine + "מאחר ומערכת ההפעלה מאפשרת יצירה של עד 9998 אוביקטיי משתמש");
+                    GlobalVars.IsLoading = false;
+                    this.Invoke(new Action(wClock.Dispose));
+                    return;
+                }
+
+                // create graphical brackets
                 GlobalVars.IsLoading = true;
                 Brackets = new BracketsBuilder(MartialArts.GlobalVars.ListOfContenders, false);
                 Brackets.Init();               
@@ -424,7 +432,7 @@ namespace MartialArts
         {
             if (Environment.UserName == "john")
             {
-                DgvDefenitions();
+              
             }
         }
 
@@ -485,57 +493,10 @@ namespace MartialArts
             }
 
             
-
-            foreach (Control c in BracktsFPanel.Controls)
-            {
-                c.Dispose();
-
-                foreach (Control child in c.Controls)
-                {
-                    child.Dispose();
-
-                    foreach (Control grandChild in child.Controls)
-                    {
-                        grandChild.Dispose();
-                    }
-                }
-            }
-
-            foreach (Control c in UnPlacedFpanel.Controls)
-            {
-                c.Dispose();
-
-                foreach (Control child in c.Controls)
-                {
-                    child.Dispose();
-
-                    foreach (Control grandChild in child.Controls)
-                    {
-                        grandChild.Dispose();
-                    }
-                }
-            }
-
-
             BracktsFPanel.Controls.Clear();
             UnPlacedFpanel.Controls.Clear();
 
-            UnPlacedFpanel.Dispose();
-            UnPlacedFpanel = new FlowLayoutPanel();
-            UnPlacedFpanel.BackColor = Color.Black;
-            UnPlacedFpanel.Dock = DockStyle.Fill;
-            UnPlacedFpanel.AutoScroll = true;
-            UnPlacedFpanel.Location = new Point(0, 0);
-            splitContainer1.Panel1.Controls.Add(UnPlacedFpanel);
-
-            BracktsFPanel.Dispose();
-            BracktsFPanel = new FlowLayoutPanel();
-            BracktsFPanel.BackColor = Color.Black;
-            BracktsFPanel.Dock = DockStyle.Fill;
-            BracktsFPanel.AutoScroll = true;
-            BracktsFPanel.Location = new Point(0, 0);
-            splitContainer1.Panel2.Controls.Add(BracktsFPanel);
-
+            // all controls disposed via this method
             Visual.VisualLeagueEvent.ClearClass();
 
             for (int i = 0; i < GlobalVars.ListOfContenders.Count; i++)
@@ -772,6 +733,7 @@ namespace MartialArts
             MartialArts.GlobalVars.ListOfContenders = null;
             ClearExistingBrackets();
             DgvDefenitions();
+            dgvMain.Rows[0].Cells[0].Selected = true;
         }
 
         private void הצגרשימהלדוגמאToolStripMenuItem_Click(object sender, EventArgs e)
