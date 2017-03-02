@@ -54,7 +54,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.lblIsUselessContsCount = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.UnPlacedFpanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -76,8 +75,6 @@
             this.btnBrowse = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnBuiledBrackets = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.numNumberOfContenders = new System.Windows.Forms.NumericUpDown();
             this.txtPath = new System.Windows.Forms.TextBox();
@@ -86,21 +83,33 @@
             this.dgvMain = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.radChild = new System.Windows.Forms.RadioButton();
+            this.radAdult = new System.Windows.Forms.RadioButton();
+            this.lblwaitClock = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.אפשרויותToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemCreateNewList = new System.Windows.Forms.ToolStripMenuItem();
+            this.הצגרשימהלדוגמאToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnBuiledBrackets = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.btnNewList = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.FilesPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numNumberOfContenders)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
             this.tabControl1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -108,7 +117,8 @@
             this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.קובץToolStripMenuItem,
-            this.עריכהToolStripMenuItem});
+            this.עריכהToolStripMenuItem,
+            this.אפשרויותToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -176,6 +186,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.tabPage2.Controls.Add(this.btnNewList);
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.btnUNDO);
             this.tabPage2.Controls.Add(this.groupBox1);
@@ -183,7 +194,6 @@
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.pictureBox2);
             this.tabPage2.Controls.Add(this.lblIsUselessContsCount);
             this.tabPage2.Controls.Add(this.splitContainer1);
             this.tabPage2.Controls.Add(this.label13);
@@ -196,6 +206,7 @@
             this.tabPage2.Controls.Add(this.label16);
             this.tabPage2.Controls.Add(this.lblPercentwithoutUseless);
             this.tabPage2.Controls.Add(this.lblBracketsClock);
+            this.tabPage2.Controls.Add(this.pictureBox2);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -384,16 +395,6 @@
             this.label5.TabIndex = 32;
             this.label5.Text = "בתים מלאים";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.ErrorImage = null;
-            this.pictureBox2.Image = global::Martial_Arts_league_Management2.Properties.Resources.ICON_BJJL231;
-            this.pictureBox2.Location = new System.Drawing.Point(3, 6);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(105, 96);
-            this.pictureBox2.TabIndex = 9;
-            this.pictureBox2.TabStop = false;
             // 
             // lblIsUselessContsCount
             // 
@@ -648,6 +649,8 @@
             this.FilesPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.FilesPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.FilesPanel.Controls.Add(this.panel1);
+            this.FilesPanel.Controls.Add(this.lblwaitClock);
             this.FilesPanel.Controls.Add(this.btnBrowse);
             this.FilesPanel.Controls.Add(this.checkBox1);
             this.FilesPanel.Controls.Add(this.checkBox2);
@@ -657,6 +660,7 @@
             this.FilesPanel.Controls.Add(this.numNumberOfContenders);
             this.FilesPanel.Controls.Add(this.txtPath);
             this.FilesPanel.Controls.Add(this.btnLoadFile);
+            this.FilesPanel.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.FilesPanel.Location = new System.Drawing.Point(3, 6);
             this.FilesPanel.Name = "FilesPanel";
             this.FilesPanel.Size = new System.Drawing.Size(1397, 118);
@@ -668,13 +672,13 @@
             this.btnBrowse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
             this.btnBrowse.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnBrowse.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.btnBrowse.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.btnBrowse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.btnBrowse.Location = new System.Drawing.Point(1306, 7);
+            this.btnBrowse.Location = new System.Drawing.Point(1317, 9);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(86, 38);
+            this.btnBrowse.Size = new System.Drawing.Size(64, 20);
             this.btnBrowse.TabIndex = 0;
-            this.btnBrowse.Text = "בחר קובץ";
+            this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = false;
             this.btnBrowse.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -684,11 +688,11 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.checkBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.checkBox1.Location = new System.Drawing.Point(931, 78);
+            this.checkBox1.Location = new System.Drawing.Point(731, 56);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(191, 19);
+            this.checkBox1.Size = new System.Drawing.Size(149, 19);
             this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "בדוק תאימות קטגורית משקל ומגדר";
+            this.checkBox1.Text = "בדוק תאימות משקל ומגדר";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // checkBox2
@@ -697,41 +701,12 @@
             this.checkBox2.AutoSize = true;
             this.checkBox2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.checkBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.checkBox2.Location = new System.Drawing.Point(728, 78);
+            this.checkBox2.Location = new System.Drawing.Point(741, 80);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(181, 19);
+            this.checkBox2.Size = new System.Drawing.Size(139, 19);
             this.checkBox2.TabIndex = 4;
-            this.checkBox2.Text = "בדוק תאימות גיל וקטגורית משקל";
+            this.checkBox2.Text = "בדוק תאימות גיל ומשקל";
             this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.ErrorImage = null;
-            this.pictureBox1.Image = global::Martial_Arts_league_Management2.Properties.Resources.ICON_BJJL231;
-            this.pictureBox1.Location = new System.Drawing.Point(8, 9);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(105, 95);
-            this.pictureBox1.TabIndex = 8;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // btnBuiledBrackets
-            // 
-            this.btnBuiledBrackets.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBuiledBrackets.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.btnBuiledBrackets.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnBuiledBrackets.Enabled = false;
-            this.btnBuiledBrackets.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnBuiledBrackets.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.btnBuiledBrackets.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.btnBuiledBrackets.Location = new System.Drawing.Point(618, 66);
-            this.btnBuiledBrackets.Name = "btnBuiledBrackets";
-            this.btnBuiledBrackets.Size = new System.Drawing.Size(86, 38);
-            this.btnBuiledBrackets.TabIndex = 2;
-            this.btnBuiledBrackets.Text = "צור בתים";
-            this.toolTip1.SetToolTip(this.btnBuiledBrackets, "האלגוריתם הסטטיסטי של המערכת ייצר בתים מתוך המשתתפים שנטענו");
-            this.btnBuiledBrackets.UseVisualStyleBackColor = false;
-            this.btnBuiledBrackets.Click += new System.EventHandler(this.btnBuiledBrackets_Click);
             // 
             // label1
             // 
@@ -739,7 +714,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label1.Location = new System.Drawing.Point(1193, 80);
+            this.label1.Location = new System.Drawing.Point(1163, 69);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(103, 15);
             this.label1.TabIndex = 7;
@@ -751,7 +726,7 @@
             this.numNumberOfContenders.BackColor = System.Drawing.Color.Maroon;
             this.numNumberOfContenders.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.numNumberOfContenders.ForeColor = System.Drawing.Color.White;
-            this.numNumberOfContenders.Location = new System.Drawing.Point(1140, 78);
+            this.numNumberOfContenders.Location = new System.Drawing.Point(1110, 67);
             this.numNumberOfContenders.Maximum = new decimal(new int[] {
             250,
             0,
@@ -780,11 +755,11 @@
             this.txtPath.BackColor = System.Drawing.Color.Maroon;
             this.txtPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPath.ForeColor = System.Drawing.Color.White;
-            this.txtPath.Location = new System.Drawing.Point(618, 18);
+            this.txtPath.Location = new System.Drawing.Point(618, 9);
             this.txtPath.Name = "txtPath";
             this.txtPath.ReadOnly = true;
             this.txtPath.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtPath.Size = new System.Drawing.Size(682, 20);
+            this.txtPath.Size = new System.Drawing.Size(693, 20);
             this.txtPath.TabIndex = 1;
             this.txtPath.TextChanged += new System.EventHandler(this.txtPath_TextChanged_1);
             // 
@@ -797,7 +772,7 @@
             this.btnLoadFile.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLoadFile.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.btnLoadFile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.btnLoadFile.Location = new System.Drawing.Point(1306, 66);
+            this.btnLoadFile.Location = new System.Drawing.Point(1295, 58);
             this.btnLoadFile.Name = "btnLoadFile";
             this.btnLoadFile.Size = new System.Drawing.Size(86, 38);
             this.btnLoadFile.TabIndex = 6;
@@ -869,6 +844,138 @@
             this.tabControl1.TabIndex = 1;
             this.tabControl1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tabControl1_KeyDown);
             // 
+            // radChild
+            // 
+            this.radChild.AutoSize = true;
+            this.radChild.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.radChild.Location = new System.Drawing.Point(71, 9);
+            this.radChild.Name = "radChild";
+            this.radChild.Size = new System.Drawing.Size(49, 18);
+            this.radChild.TabIndex = 4;
+            this.radChild.Text = "ילדים";
+            this.radChild.UseVisualStyleBackColor = true;
+            // 
+            // radAdult
+            // 
+            this.radAdult.AutoSize = true;
+            this.radAdult.Checked = true;
+            this.radAdult.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.radAdult.Location = new System.Drawing.Point(10, 9);
+            this.radAdult.Name = "radAdult";
+            this.radAdult.Size = new System.Drawing.Size(55, 18);
+            this.radAdult.TabIndex = 41;
+            this.radAdult.TabStop = true;
+            this.radAdult.Text = "בוגרים";
+            this.radAdult.UseVisualStyleBackColor = true;
+            // 
+            // lblwaitClock
+            // 
+            this.lblwaitClock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblwaitClock.BackColor = System.Drawing.Color.Transparent;
+            this.lblwaitClock.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lblwaitClock.ForeColor = System.Drawing.Color.Silver;
+            this.lblwaitClock.Location = new System.Drawing.Point(374, 18);
+            this.lblwaitClock.Name = "lblwaitClock";
+            this.lblwaitClock.Size = new System.Drawing.Size(86, 86);
+            this.lblwaitClock.TabIndex = 41;
+            this.lblwaitClock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.lblwaitClock, "אחוז המתחרים המשובצים מתוך כלל המשתתפים למעט משתתפים ללא התאמה לאף מתחרה באירוע ה" +
+        "נוכחי");
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.panel1.Controls.Add(this.radChild);
+            this.panel1.Controls.Add(this.radAdult);
+            this.panel1.Location = new System.Drawing.Point(931, 58);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(135, 35);
+            this.panel1.TabIndex = 42;
+            // 
+            // אפשרויותToolStripMenuItem
+            // 
+            this.אפשרויותToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItemCreateNewList,
+            this.הצגרשימהלדוגמאToolStripMenuItem});
+            this.אפשרויותToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.אפשרויותToolStripMenuItem.Name = "אפשרויותToolStripMenuItem";
+            this.אפשרויותToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
+            this.אפשרויותToolStripMenuItem.Text = "אפשרויות";
+            // 
+            // MenuItemCreateNewList
+            // 
+            this.MenuItemCreateNewList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.MenuItemCreateNewList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.MenuItemCreateNewList.Name = "MenuItemCreateNewList";
+            this.MenuItemCreateNewList.Size = new System.Drawing.Size(172, 22);
+            this.MenuItemCreateNewList.Text = "צור רשימה חדשה";
+            this.MenuItemCreateNewList.Click += new System.EventHandler(this.MenuItemCreateNewList_Click);
+            // 
+            // הצגרשימהלדוגמאToolStripMenuItem
+            // 
+            this.הצגרשימהלדוגמאToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.הצגרשימהלדוגמאToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.הצגרשימהלדוגמאToolStripMenuItem.Name = "הצגרשימהלדוגמאToolStripMenuItem";
+            this.הצגרשימהלדוגמאToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.הצגרשימהלדוגמאToolStripMenuItem.Text = "הצג רשימה לדוגמא";
+            this.הצגרשימהלדוגמאToolStripMenuItem.Click += new System.EventHandler(this.הצגרשימהלדוגמאToolStripMenuItem_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.ErrorImage = null;
+            this.pictureBox1.Image = global::Martial_Arts_league_Management2.Properties.Resources.ICON_BJJL231;
+            this.pictureBox1.Location = new System.Drawing.Point(8, 9);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(105, 95);
+            this.pictureBox1.TabIndex = 8;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // btnBuiledBrackets
+            // 
+            this.btnBuiledBrackets.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBuiledBrackets.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.btnBuiledBrackets.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBuiledBrackets.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBuiledBrackets.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.btnBuiledBrackets.ForeColor = System.Drawing.Color.Maroon;
+            this.btnBuiledBrackets.Image = global::Martial_Arts_league_Management2.Properties.Resources._148841HungarianYellow;
+            this.btnBuiledBrackets.Location = new System.Drawing.Point(618, 44);
+            this.btnBuiledBrackets.Name = "btnBuiledBrackets";
+            this.btnBuiledBrackets.Size = new System.Drawing.Size(84, 60);
+            this.btnBuiledBrackets.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.btnBuiledBrackets, "האלגוריתם הסטטיסטי של המערכת ייצר בתים מתוך המשתתפים שנטענו");
+            this.btnBuiledBrackets.UseVisualStyleBackColor = false;
+            this.btnBuiledBrackets.Click += new System.EventHandler(this.btnBuiledBrackets_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.ErrorImage = null;
+            this.pictureBox2.Image = global::Martial_Arts_league_Management2.Properties.Resources.ICON_BJJL231;
+            this.pictureBox2.Location = new System.Drawing.Point(3, 6);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(105, 96);
+            this.pictureBox2.TabIndex = 9;
+            this.pictureBox2.TabStop = false;
+            // 
+            // btnNewList
+            // 
+            this.btnNewList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNewList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.btnNewList.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNewList.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnNewList.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.btnNewList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.btnNewList.Image = global::Martial_Arts_league_Management2.Properties.Resources._48X48IBJJL_LIST_ICON78;
+            this.btnNewList.Location = new System.Drawing.Point(457, 90);
+            this.btnNewList.Name = "btnNewList";
+            this.btnNewList.Size = new System.Drawing.Size(64, 12);
+            this.btnNewList.TabIndex = 42;
+            this.toolTip1.SetToolTip(this.btnNewList, "צור רשימה חדשה להכנסת נתוני מתחרים");
+            this.btnNewList.UseVisualStyleBackColor = false;
+            this.btnNewList.Click += new System.EventHandler(this.btnNewList_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -891,7 +998,6 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -899,10 +1005,13 @@
             this.tabPage1.ResumeLayout(false);
             this.FilesPanel.ResumeLayout(false);
             this.FilesPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numNumberOfContenders)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -963,6 +1072,14 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem ייצארשימתבתיםלאקסלToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem קרדיטיםToolStripMenuItem1;
+        private System.Windows.Forms.Label lblwaitClock;
+        private System.Windows.Forms.RadioButton radAdult;
+        private System.Windows.Forms.RadioButton radChild;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ToolStripMenuItem אפשרויותToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemCreateNewList;
+        private System.Windows.Forms.ToolStripMenuItem הצגרשימהלדוגמאToolStripMenuItem;
+        private System.Windows.Forms.Button btnNewList;
     }
 }
 

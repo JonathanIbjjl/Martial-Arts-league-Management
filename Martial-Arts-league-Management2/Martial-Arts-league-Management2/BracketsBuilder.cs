@@ -382,7 +382,7 @@ namespace MartialArts
             {
                 if (c.IsPlaced == false)
                 {
-                    foreach (Contender.PotentialBrackets p in c.PbList)
+                    foreach (Contender.PotentialBrackets p in c.PbList.ToList())
                     {
                         if (p.Frquency == MartialArts.GeneralBracket.NumberOfContenders && p.StdDivision == 0 && p.OriginalScoresRating == 1)
                         {

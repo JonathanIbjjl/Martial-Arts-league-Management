@@ -189,7 +189,7 @@ namespace MartialArts
             }
         }
 
-        private bool IsChild(int AgeGrade)
+        public static bool IsChild(int AgeGrade)
         {
             return AgeGrade < 450;
         }

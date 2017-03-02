@@ -17,15 +17,12 @@ namespace MartialArts
 
     public partial class Form1 : Form
     {
+        public static bool ExampleListIsPresented = true;
         BracketsBuilder Brackets;
         public Form1()
         {
             InitializeComponent();
             this.BracktsFPanel.MouseWheel += FpPanel_MouseWheel;
-            //ExtensionMethods.DoubleBuffered_FlPanel(BracktsFPanel, true); TODO: DELETE
-            //ExtensionMethods.DoubleBuffered_FlPanel(UnPlacedFpanel, true);
-            //splitContainer1.DoubleBuffered_SplitContainer(true);
-            //splitContainer1.Panel2.DoubleBuffered_Panel(true);
         }
 
         public OpenFileDialog fd = null;
@@ -45,11 +42,6 @@ namespace MartialArts
 
         }
 
-
-
-
-
-
         private void Form1_Load(object sender, EventArgs e)
         {
             UpdateClocks(true);
@@ -65,6 +57,10 @@ namespace MartialArts
 
             // check files archive directory
             Helpers.checkPath();
+            // example table
+            DgvDefenitions();
+            // example with gracie family
+            DgvExample();
         }
 
         private void tp_Draw(object sender, System.Windows.Forms.DrawToolTipEventArgs e)
@@ -93,6 +89,34 @@ namespace MartialArts
             if (GlobalVars.IsLoading == true)
                 return;
 
+            /// 
+            /// safty checks
+            /// 
+
+            if (dgvMain.Rows.Count > 1 && ExampleListIsPresented ==false)
+            {
+                if (Helpers.PromtYesNowQuestion("שים לב!" + Environment.NewLine + "קיימים נתונים ברשימה, טעינת הקובץ תביא להחלפת הרשימה ומחיקתם אנא אשר?") == false)
+                    return;
+            }
+
+            if (GlobalVars.ListOfContenders.Count > 1)
+            {
+                Martial_Arts_league_Management2.PromtForm promt = new Martial_Arts_league_Management2.PromtForm("קיימת רשימת מתחרים בזיכרון המערכת, האם ברצונך להחליף אותם?");
+
+                if (promt.ShowDialog() == DialogResult.No)
+                    return;
+                else
+                {
+                    GlobalVars.ListOfContenders.Clear();
+                    dgvMain.DataSource = null;
+                }
+
+                promt.Dispose();
+            }
+
+            ///
+            ///
+            ///
             System.Threading.Thread waitThread = new System.Threading.Thread(LoadWaitClock);
             waitThread.Start();
 
@@ -137,20 +161,6 @@ namespace MartialArts
         private bool LoadFile()
         {
 
-            if (GlobalVars.ListOfContenders.Count > 1)
-            {
-                Martial_Arts_league_Management2.PromtForm promt = new Martial_Arts_league_Management2.PromtForm("קיימת רשימת מתחרים בזיכרון המערכת, האם ברצונך להחליף אותם?");
-
-                if (promt.ShowDialog() == DialogResult.No)
-                    return false;
-                else
-                {
-                    GlobalVars.ListOfContenders.Clear();
-                    dgvMain.DataSource = null;
-                }
-
-                promt.Dispose();
-            }
 
             GlobalVars.IsLoading = true;
 
@@ -184,6 +194,9 @@ namespace MartialArts
 
                 if (BuiletBracketsAgain() == true)
             {
+                // doing it still from main thread
+                dgvMain.AllowUserToAddRows = false; 
+
                 System.Threading.Thread waitThread = new System.Threading.Thread(LoadWaitClock);
                 waitThread.Start();
 
@@ -201,15 +214,30 @@ namespace MartialArts
                 this.Invoke(new Action(wClock.Dispose));
                 return;
             }
-            if (GlobalVars.ListOfContenders.Count < 2)
+            if (GlobalVars.ListOfContenders.Count < 2 && dgvMain.Rows.Count<2)
             {
-                this.Invoke(new Action(wClock.Dispose));
-                Helpers.DefaultMessegeBox("לא קיימים משתתפים לבניית בתים" + Environment.NewLine + "אנא טען קובץ", "חסרים נתונים", MessageBoxIcon.Warning);
+                Helpers.DefaultMessegeBox("לא קיימים משתתפים לבניית בתים" + Environment.NewLine + "אנא טען קובץ או ייצר רשימה", "חסרים נתונים", MessageBoxIcon.Warning);
                 GlobalVars.IsLoading = false;
                 this.Invoke(new Action(wClock.Dispose));
             }
             else
             {
+                // if MartialArts.GlobalVars.ListOfContenders is empty at this stage the data is not coming from excel, it comes from DgvMain
+                // in that case data will load here (in excel datasheet data loaded before via btnLoad button)
+                if (MartialArts.GlobalVars.ListOfContenders.Count <= 0)
+                {
+                    using (CreateContendersFromDgv createConts = new CreateContendersFromDgv(ref dgvMain))
+                    {
+                        if (createConts.Init() == false)
+                        {
+                            // something went wrong
+                            GlobalVars.IsLoading = false;
+                            this.Invoke(new Action(wClock.Dispose));
+                            return;
+                        }
+                    }
+                }
+
                 GlobalVars.IsLoading = true;
                 Brackets = new BracketsBuilder(MartialArts.GlobalVars.ListOfContenders, false);
                 Brackets.Init();               
@@ -229,11 +257,9 @@ namespace MartialArts
         private void AddClock()
         {
 
-            Int16 height = (Int16)((btnBuiledBrackets.Location.Y + btnBuiledBrackets.Height) - txtPath.Location.Y);
-            var x = btnBuiledBrackets.Location.X - 100 - 40;
-            var y = txtPath.Location.Y - 5;
+      
 
-            wClock = new WaitClock(100, 100, "...המתן");
+            wClock = new WaitClock(86, 86, "המתן");
             wClock.ClockBackGroundColor = FilesPanel.BackColor;
             wClock.LoadFont("ARIAL", 9, FontStyle.Bold);
             wClock.OuterCircleWeight = 10;
@@ -242,8 +268,8 @@ namespace MartialArts
             wClock.setArrayColors(new Color[] { Color.FromArgb(28, 28, 28), Color.Maroon });
 
             wClock.Create(true);
-            wClock.Clock.Location = new Point(x, y);
-            FilesPanel.Controls.Add(wClock.Clock);
+            wClock.Clock.Location = new Point(0, 0);
+            lblwaitClock.Controls.Add(wClock.Clock);
         }
 
 
@@ -259,11 +285,12 @@ namespace MartialArts
             dgvMain.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvMain.DoubleBuffered(true);
             dgvMain.EnableHeadersVisualStyles = false;
-
+            dgvMain.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvMain.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(28, 28, 28);
             dgvMain.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(227, 154, 44);
             this.dgvMain.RowHeadersWidth = 70;
             dgvMain.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
+            dgvMain.ReadOnly = true;
 
             if (GlobalVars.ListOfContenders.Count < 1)
                 return;
@@ -336,7 +363,7 @@ namespace MartialArts
             // sort
             this.dgvMain.Sort(this.dgvMain.Columns["HebrewBeltColor"], ListSortDirection.Ascending);
 
-
+            ExampleListIsPresented = false;
 
 
         }
@@ -344,7 +371,7 @@ namespace MartialArts
         private void dgvMain_DoubleClick(object sender, EventArgs e)
         {
 
-            Emails.OpenEmail(dgvMain.Rows[dgvMain.CurrentRow.Index].Cells[5].Value.ToString());
+          //  Emails.OpenEmail(dgvMain.Rows[dgvMain.CurrentRow.Index].Cells[5].Value.ToString());
         }
 
         private void dgvMain_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -395,7 +422,10 @@ namespace MartialArts
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            MoveCursor();
+            if (Environment.UserName == "john")
+            {
+                DgvDefenitions();
+            }
         }
 
         private void MoveCursor()
@@ -453,8 +483,59 @@ namespace MartialArts
             {
                 Brackets = null;
             }
+
+            
+
+            foreach (Control c in BracktsFPanel.Controls)
+            {
+                c.Dispose();
+
+                foreach (Control child in c.Controls)
+                {
+                    child.Dispose();
+
+                    foreach (Control grandChild in child.Controls)
+                    {
+                        grandChild.Dispose();
+                    }
+                }
+            }
+
+            foreach (Control c in UnPlacedFpanel.Controls)
+            {
+                c.Dispose();
+
+                foreach (Control child in c.Controls)
+                {
+                    child.Dispose();
+
+                    foreach (Control grandChild in child.Controls)
+                    {
+                        grandChild.Dispose();
+                    }
+                }
+            }
+
+
             BracktsFPanel.Controls.Clear();
             UnPlacedFpanel.Controls.Clear();
+
+            UnPlacedFpanel.Dispose();
+            UnPlacedFpanel = new FlowLayoutPanel();
+            UnPlacedFpanel.BackColor = Color.Black;
+            UnPlacedFpanel.Dock = DockStyle.Fill;
+            UnPlacedFpanel.AutoScroll = true;
+            UnPlacedFpanel.Location = new Point(0, 0);
+            splitContainer1.Panel1.Controls.Add(UnPlacedFpanel);
+
+            BracktsFPanel.Dispose();
+            BracktsFPanel = new FlowLayoutPanel();
+            BracktsFPanel.BackColor = Color.Black;
+            BracktsFPanel.Dock = DockStyle.Fill;
+            BracktsFPanel.AutoScroll = true;
+            BracktsFPanel.Location = new Point(0, 0);
+            splitContainer1.Panel2.Controls.Add(BracktsFPanel);
+
             Visual.VisualLeagueEvent.ClearClass();
 
             for (int i = 0; i < GlobalVars.ListOfContenders.Count; i++)
@@ -669,6 +750,63 @@ namespace MartialArts
         {
             // open archive folder
             Helpers.OpenArchiveFolder();
+        }
+
+     
+
+        private void btnNewList_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MenuItemCreateNewList_Click(object sender, EventArgs e)
+        {
+            if (dgvMain.Rows.Count > 1 && ExampleListIsPresented == false)
+            {
+                if (Helpers.PromtYesNowQuestion("שים לב!" + Environment.NewLine + "קיימים נתונים ברשימה, האם למחוק אותם ולייצר רשימה חדשה?") == false)
+                   
+                    return;
+            }
+
+            MartialArts.GlobalVars.ListOfContenders.Clear();
+            MartialArts.GlobalVars.ListOfContenders = null;
+            ClearExistingBrackets();
+            DgvDefenitions();
+        }
+
+        private void הצגרשימהלדוגמאToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvMain.Rows.Count > 1 && ExampleListIsPresented == false)
+            {
+                if (Helpers.PromtYesNowQuestion("שים לב!" + Environment.NewLine + "קיימים נתונים ברשימה, האם למחוק אותם ולהציג רשימה לדוגמא?") == false)
+
+                return;
+            }
+
+            MartialArts.GlobalVars.ListOfContenders.Clear();
+            MartialArts.GlobalVars.ListOfContenders = null;
+            ClearExistingBrackets();
+            DgvDefenitions();
+            DgvExample();
+        }
+
+        private void btnNewList_Click_1(object sender, EventArgs e)
+        {
+            UnPlacedFpanel.Dispose();
+            UnPlacedFpanel = new FlowLayoutPanel();
+            UnPlacedFpanel.BackColor = Color.Black;
+            UnPlacedFpanel.Dock = DockStyle.Fill;
+            UnPlacedFpanel.AutoScroll = true;
+            UnPlacedFpanel.Location = new Point(0, 0);
+            splitContainer1.Panel1.Controls.Add(UnPlacedFpanel);
+
+            BracktsFPanel.Dispose();
+            BracktsFPanel = new FlowLayoutPanel();
+            BracktsFPanel.BackColor = Color.Black;
+            BracktsFPanel.Dock = DockStyle.Fill;
+            BracktsFPanel.AutoScroll = true;
+            BracktsFPanel.Location = new Point(0, 0);
+            splitContainer1.Panel2.Controls.Add(BracktsFPanel);
         }
     }
 

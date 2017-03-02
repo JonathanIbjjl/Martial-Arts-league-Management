@@ -63,6 +63,76 @@ namespace Martial_Arts_league_Management2.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _1488412469_1 {
+            get {
+                object obj = ResourceManager.GetObject("1488412469_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1488413482_Technology77 {
+            get {
+                object obj = ResourceManager.GetObject("1488413482_Technology77", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _148841Hungarian {
+            get {
+                object obj = ResourceManager.GetObject("148841Hungarian", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _148841HungarianYellow {
+            get {
+                object obj = ResourceManager.GetObject("148841HungarianYellow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _48X48IBJJL_LIST_ICON78 {
+            get {
+                object obj = ResourceManager.GetObject("48X48IBJJL_LIST_ICON78", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap IBJJL_AlgoritmIcon462 {
+            get {
+                object obj = ResourceManager.GetObject("IBJJL_AlgoritmIcon462", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap IBJJL_AlgoritmIcon4621 {
+            get {
+                object obj = ResourceManager.GetObject("IBJJL_AlgoritmIcon4621", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ICON_BJJL_Small {
             get {
                 object obj = ResourceManager.GetObject("ICON_BJJL_Small", resourceCulture);

@@ -81,6 +81,34 @@ namespace Contenders
 
         }
 
+        public static List<string> GetAgeValues(bool childAges)
+        {
+            List<string> l = new List<string>();
+
+            if (childAges == true)
+            {
+                l.Add("4-5");
+                l.Add("6-7");
+                l.Add("8-9");
+                l.Add("10-11");
+                l.Add("12-13");
+                l.Add("14-15");
+                l.Add("16-17");
+            }
+            else
+            {
+                l.Add("18-30");
+                l.Add("31-35");
+                l.Add("36-40");
+                l.Add("41-45");
+                l.Add("46-50");
+                l.Add("51-55");
+                l.Add("56");
+            }
+
+            return l;
+        }
+
         private static Dictionary<string, int> _ChildWeightCat;
         public static Dictionary<string, int> ChildWeightCat
         {
@@ -170,6 +198,46 @@ namespace Contenders
 
         public virtual int FrequencyOfGrade { get; }
         public virtual double FinalGrade { get; }
+
+
+        public static int GetBelt(string color)
+        {
+
+            string result = color.Trim();
+            switch (result.Trim())
+            {
+                case "לבנה":
+                    return (int)Contenders.ContndersGeneral.BeltsEnum.white;
+
+                case "אפורה":
+                    return (int)Contenders.ContndersGeneral.BeltsEnum.gray;
+
+                case "צהובה":
+                    return (int)Contenders.ContndersGeneral.BeltsEnum.yellow;
+
+                case "כתומה":
+                    return (int)Contenders.ContndersGeneral.BeltsEnum.orange;
+
+                case "ירוקה":
+                    return (int)Contenders.ContndersGeneral.BeltsEnum.green;
+
+                case "כחולה":
+                    return (int)Contenders.ContndersGeneral.BeltsEnum.blue;
+
+                case "סגולה":
+                    return (int)Contenders.ContndersGeneral.BeltsEnum.purpule;
+
+                case "חומה":
+                    return (int)Contenders.ContndersGeneral.BeltsEnum.brown;
+
+                case "שחורה":
+                    return (int)Contenders.ContndersGeneral.BeltsEnum.black;
+
+                default:
+                    return 0;
+            }
+
+        }
 
         /// <summary>
         /// by exploring the numbers after decimal points, function will return a string with the explanation of the factor

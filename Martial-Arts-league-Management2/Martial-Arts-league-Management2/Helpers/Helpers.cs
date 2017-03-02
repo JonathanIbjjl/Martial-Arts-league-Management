@@ -35,6 +35,25 @@ namespace MartialArts
             }
         }
 
+        public static bool PromtYesNowQuestion(string txtMsg)
+        {
+
+            bool IsApproved = true;
+            Martial_Arts_league_Management2.PromtForm promt = new Martial_Arts_league_Management2.PromtForm(txtMsg);
+
+            if (promt.ShowDialog() == System.Windows.Forms.DialogResult.No)
+            {
+                IsApproved = false;
+            }
+            else
+            {
+                IsApproved = true;
+            }
+
+            promt.Dispose();
+            return IsApproved; 
+    }
+
         public static void DefaultMessegeBox(string txt, string caption,System.Windows.Forms.MessageBoxIcon icon)
         {
             System.Windows.Forms.MessageBox.Show(txt,
@@ -242,7 +261,7 @@ namespace MartialArts
                 case 1000:
                     return Color.FromArgb(248,248,248);
                 case 2000:
-                    return Color.Gray;
+                    return Color.FromArgb(200, 200, 200);
                 case 3000:
                  return   Color.Yellow;
                 case 4000:
@@ -261,5 +280,6 @@ namespace MartialArts
                    return Color.White;
             }
         }
+ 
     }
 }

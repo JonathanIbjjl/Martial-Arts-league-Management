@@ -87,6 +87,7 @@
     <Compile Include="BracketsBuilder.cs" />
     <Compile Include="BracketsCreator.cs" />
     <Compile Include="Contender.cs" />
+    <Compile Include="CreateContendersFromDgv.cs" />
     <Compile Include="Credits.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -243,6 +244,27 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1488412469_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\48X48IBJJL_LIST_ICON78.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IBJJL_AlgoritmIcon462.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IBJJL_AlgoritmIcon4621.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1488413482_Technology77.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\148841Hungarian.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\148841HungarianYellow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
