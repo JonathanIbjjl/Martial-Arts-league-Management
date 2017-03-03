@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Martial-Arts-league-Management2", "Martial-Arts-league-Management2\Martial-Arts-league-Management2.csproj", "{11FB8E87-24F8-4C45-A0F4-325DD1BBCB74}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IBJJL_App", "Martial-Arts-league-Management2\IBJJL_App.csproj", "{11FB8E87-24F8-4C45-A0F4-325DD1BBCB74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
