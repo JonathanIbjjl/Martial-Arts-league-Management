@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace MartialArts
 {
-
+    /// <summary>
+    /// 
+    /// </summary>
     class GeneralBracket
     {
         // set from GUI
