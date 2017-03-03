@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MartialArts
 {
     /// <summary>
-    /// /j
+    /// /jh
     /// </summary>
     class GeneralBracket
     {
