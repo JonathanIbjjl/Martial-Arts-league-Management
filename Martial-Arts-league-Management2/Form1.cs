@@ -50,6 +50,19 @@ namespace MartialArts
 
         private void LoadMe()
         {
+
+            // load version
+            Version myVersion;
+
+            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+            {
+                myVersion = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
+                this.Text = "מערכת ניהול ליגה IBJJL | גרסה " + myVersion.ToString();
+            }
+
+            
+        
+
             toolTip1.OwnerDraw = true;
             toolTip1.BackColor = MartialArts.GlobalVars.Sys_Red;
             toolTip1.ForeColor = Color.White;
