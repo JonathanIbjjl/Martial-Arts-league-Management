@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 namespace Contenders
-{//5g
+{//5gg
     class BracketsCreator
     {
         protected MartialArts.LeagueScattering ScatteringObj;
