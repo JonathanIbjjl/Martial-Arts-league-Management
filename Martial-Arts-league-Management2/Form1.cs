@@ -60,9 +60,6 @@ namespace MartialArts
                 this.Text = "מערכת ניהול ליגה IBJJL | גרסה " + myVersion.ToString();
             }
 
-            
-        
-
             toolTip1.OwnerDraw = true;
             toolTip1.BackColor = MartialArts.GlobalVars.Sys_Red;
             toolTip1.ForeColor = Color.White;
