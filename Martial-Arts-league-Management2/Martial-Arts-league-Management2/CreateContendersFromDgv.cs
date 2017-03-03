@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//
+/// <summary>
+/// 
+/// </summary>
 namespace MartialArts
 {
     class CreateContendersFromDgv : IDisposable
