@@ -25,6 +25,11 @@ namespace MartialArts
             ContendersList = cont.ToList();
         }
 
+        public BracketsBuilder()
+        {
+            // only for saved data!
+        }
+
         private void CreateScoreAndID()
         {
             if (ContendersList.Count <= 1)

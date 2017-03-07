@@ -75,6 +75,49 @@ namespace MartialArts
           
         }
 
+        /// <summary>
+        /// for saved data only
+        /// </summary>
+        /// <param name="savedData"></param>
+        private void CreateVisualBrackets(Visual.VisualLeagueEvent.UndoStruct savedData)
+        {
+            Visual.VisualLeagueEvent.FormObj = this;
+            try
+            {
+                Cursor.Hide();
+
+
+                foreach (Visual.VisualBracket b in savedData._VisualBracketsList)
+                {
+                    // add to GUI
+                    BracktsFPanel.Controls.Add(b.Vbracket);
+                }
+
+                // Uselesses / unplaced
+                foreach (Visual.VisualContender c in savedData._VisualUnplacedBracketsList)
+                {
+                    UnPlacedFpanel.Controls.Add(c.Vcontender);
+                }
+
+                // must merge all contenders in LeagueEvent instance
+                Visual.VisualLeagueEvent.MergeListsForSearch();
+                UpdateClocks();
+
+                System.Threading.Thread.Sleep(1000);
+                tabControl1.SelectedTab = tabPage2;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                Cursor.Show();
+                MoveCursor();
+            }
+
+        }
+
         public void UpdateClocks(bool FirstLoadWithoutPercent = false)
         {
             UpdateStatisticClocks(FirstLoadWithoutPercent);

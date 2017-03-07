@@ -8,9 +8,10 @@ using System.Windows.Forms;
 using MartialArts;
 namespace Visual
 {
-
+    [Serializable]
     class VisualElements
     {
+        [Serializable]
         protected struct BeltColors
         {
             public Color DarkColor;
@@ -93,7 +94,7 @@ namespace Visual
         }
     }
 
-   partial class VisualContender : VisualElements,IDisposable,Contenders.IContender
+    partial class VisualContender : VisualElements,IDisposable,Contenders.IContender
     {
         public Contenders.Contender Contender { get; set; }
         protected BeltColors BeltShapes;

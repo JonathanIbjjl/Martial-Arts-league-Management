@@ -52,8 +52,9 @@ namespace Martial_Arts_league_Management2
             LoadMe();
         }
 
-        private void LoadMe()
+        protected virtual void LoadMe()
         {
+            this.lblQuestion.DoubleClick += new EventHandler(ShowOnMsgBox);
             if (OnlyYesButton == true)
             {
                 btnYes.Size = new Size(lblQuestion.Width, btnYes.Height);
@@ -84,12 +85,17 @@ namespace Martial_Arts_league_Management2
 
         }
 
+        private void ShowOnMsgBox(Object sender, EventArgs e)
+        {
+            MartialArts.Helpers.DefaultMessegeBox(this.lblQuestion.Text, "IBJJL", MessageBoxIcon.Information);
+        }
+
         private void FormSize()
         {
     
         }
 
-        private void btnYes_Click(object sender, EventArgs e)
+        protected virtual void btnYes_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -104,6 +110,103 @@ namespace Martial_Arts_league_Management2
         private void lblQuestion_Click(object sender, EventArgs e)
         {
 
+        }
+    }
+
+    class GetProjectNameForm : PromtForm
+    {
+        public string ProjectName { get; set; }
+        public TextBox t;
+        public GetProjectNameForm() : base("",false,"בחירת שם לפרויקט")
+        { 
+
+        }
+
+        protected override void LoadMe()
+        {
+            this.Size = new Size(this.Width, (int)(this.Height / 1.2));
+            t = new TextBox();
+            t.Size = new Size(lblQuestion.Width, 30);
+            t.Location = new Point(lblQuestion.Location.X, 130);
+            lblQuestion.Size = new Size (lblQuestion.Width,50);
+            lblQuestion.Location = new Point(lblQuestion.Location.X, t.Location.Y - lblQuestion.Height - 5);
+            lblQuestion.Text = "אנא בחר שם לפרויקט:";
+            this.Controls.Add(t);
+         
+        }
+
+        protected override void btnYes_Click(object sender, EventArgs e)
+        {
+
+            // check length
+            if (t.Text.ToString().Length > 60)
+            {
+                MartialArts.Helpers.DefaultMessegeBox("שם פרויקט לא יכול להכיל יותר משישים תווים", "שם פרויקט לא חוקי", MessageBoxIcon.Stop);
+                return;
+            }
+
+            // check for iilegal chars for directory name
+            if (FilePathHasInvalidChars(t.Text.Trim().ToString()) == true)
+            {
+                MartialArts.Helpers.DefaultMessegeBox("שם הפרויקט מכיל תווים לא חוקיים", "שם פרויקט לא חוקי", MessageBoxIcon.Stop);
+                return;
+            }
+
+            ProjectName = t.Text.Trim();
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        public static bool FilePathHasInvalidChars(string path)
+        {
+            return (!string.IsNullOrEmpty(path) && path.IndexOfAny(System.IO.Path.GetInvalidPathChars()) >= 0);
+        }
+    }
+
+    class ChooseProjectToLoad : PromtForm
+    {
+        public string ProjectName { get; set; }
+        ListBox l = new ListBox();
+        public ChooseProjectToLoad() : base("", false, "בחר פרויקט לטעינה")
+        {
+
+        }
+
+        protected override void LoadMe()
+        {
+            l.Size = lblQuestion.Size;
+            l.Location = lblQuestion.Location;
+            l.BackColor = MartialArts.GlobalVars.Sys_DarkerGray;
+            l.ForeColor = MartialArts.GlobalVars.Sys_Yellow;
+            SetProjectNames();
+            lblQuestion.Dispose();
+            this.Controls.Add(l);
+        }
+
+        private void SetProjectNames()
+        {
+            List<string> projects = MartialArts.ProjectsSavedAsBinaryFiles.GetProjectNames();
+            if (projects.Count == 0)
+            {
+                MartialArts.Helpers.DefaultMessegeBox("לא קיימים פרויקטים", "אין פרויקטים שמורים", MessageBoxIcon.Stop);
+                return;
+            }
+
+            foreach (string name in projects)
+            {
+                l.Items.Add(name);
+            }
+        }
+
+        protected override void btnYes_Click(object sender, EventArgs e)
+        {
+            if (l.SelectedIndex == -1)
+                return;
+
+            ProjectName = l.SelectedItem.ToString();
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
     }
 }

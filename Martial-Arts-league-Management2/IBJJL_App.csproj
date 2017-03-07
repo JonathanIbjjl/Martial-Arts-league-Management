@@ -26,7 +26,7 @@
     <ProductName>IBJJL Software</ProductName>
     <PublisherName>IBJJL</PublisherName>
     <SuiteName>IBJJL App</SuiteName>
-    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationRevision>10</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -127,6 +127,7 @@
       <DependentUpon>PromtForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerializeData.cs" />
     <Compile Include="VisualElements\VisualBracket.cs" />
     <Compile Include="VisualElements\VisualContender.cs" />
     <Compile Include="VisualElements\VisualElementsEvents.cs" />

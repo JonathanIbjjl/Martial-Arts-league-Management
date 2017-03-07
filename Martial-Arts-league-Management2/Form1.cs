@@ -103,7 +103,7 @@ namespace MartialArts
             /// safty checks
             /// 
 
-            if (dgvMain.Rows.Count > 1 && ExampleListIsPresented ==false)
+            if (dgvMain.Rows.Count > 1 && ExampleListIsPresented == false)
             {
                 if (Helpers.PromtYesNowQuestion("שים לב!" + Environment.NewLine + "קיימים נתונים ברשימה, טעינת הקובץ תביא להחלפת הרשימה ומחיקתם אנא אשר?") == false)
                     return;
@@ -202,7 +202,7 @@ namespace MartialArts
             if (GlobalVars.IsLoading == true)
                 return;
 
-                if (BuiletBracketsAgain() == true)
+            if (BuiletBracketsAgain() == true)
             {
 
                 System.Threading.Thread waitThread = new System.Threading.Thread(LoadWaitClock);
@@ -222,7 +222,7 @@ namespace MartialArts
                 this.Invoke(new Action(wClock.Dispose));
                 return;
             }
-            if (GlobalVars.ListOfContenders.Count < 2 && dgvMain.Rows.Count<2)
+            if (GlobalVars.ListOfContenders.Count < 2 && dgvMain.Rows.Count < 2)
             {
                 Helpers.ShowGenericPromtForm("לא קיימים משתתפים לבניית בתים" + Environment.NewLine + "אנא טען קובץ או ייצר רשימה");
                 GlobalVars.IsLoading = false;
@@ -249,7 +249,7 @@ namespace MartialArts
                 if (MartialArts.GlobalVars.ListOfContenders.Count > 550)
                 {
                     // OS cant create more that 9998 user objects. 550 conts are 8653 user objects (safty range)
-                    Helpers.ShowGenericPromtForm("לא ניתן לטעון יותר מ550 מתחרים" +Environment.NewLine + "מאחר ומערכת ההפעלה מאפשרת יצירה של עד 9998 אוביקטיי משתמש");
+                    Helpers.ShowGenericPromtForm("לא ניתן לטעון יותר מ550 מתחרים" + Environment.NewLine + "מאחר ומערכת ההפעלה מאפשרת יצירה של עד 9998 אוביקטיי משתמש");
                     GlobalVars.IsLoading = false;
                     this.Invoke(new Action(wClock.Dispose));
                     return;
@@ -258,7 +258,7 @@ namespace MartialArts
                 // create graphical brackets
                 GlobalVars.IsLoading = true;
                 Brackets = new BracketsBuilder(MartialArts.GlobalVars.ListOfContenders, false);
-                Brackets.Init();               
+                Brackets.Init();
                 this.Invoke(new Action(wClock.Dispose));
                 this.Invoke(new Action(CreateVisualBrackets));
                 GlobalVars.IsLoading = false;
@@ -275,7 +275,7 @@ namespace MartialArts
         private void AddClock()
         {
 
-      
+
 
             wClock = new WaitClock(86, 86, "המתן");
             wClock.ClockBackGroundColor = FilesPanel.BackColor;
@@ -389,7 +389,7 @@ namespace MartialArts
         private void dgvMain_DoubleClick(object sender, EventArgs e)
         {
 
-          //  Emails.OpenEmail(dgvMain.Rows[dgvMain.CurrentRow.Index].Cells[5].Value.ToString());
+            //  Emails.OpenEmail(dgvMain.Rows[dgvMain.CurrentRow.Index].Cells[5].Value.ToString());
         }
 
         private void dgvMain_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -397,12 +397,13 @@ namespace MartialArts
 
         }
 
- 
+
 
         private void ייצארשימתמתחריםלאקסלToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-
+            if (GlobalVars.IsLoading == true)
+                return;
 
             if (dgvMain.RowCount > 0)
             {
@@ -442,7 +443,7 @@ namespace MartialArts
         {
             if (Environment.UserName == "john")
             {
-              
+
             }
         }
 
@@ -474,7 +475,7 @@ namespace MartialArts
 
         private bool BuiletBracketsAgain()
         {
-            if (Brackets != null)
+            if (Brackets != null || Visual.VisualLeagueEvent.AllVisualContenders != null)
             {
                 using (Martial_Arts_league_Management2.PromtForm promt = new Martial_Arts_league_Management2.PromtForm("כבר יצרת בתים האם לדרוס את הבתים הקיימים?"))
                 {
@@ -502,7 +503,7 @@ namespace MartialArts
                 Brackets = null;
             }
 
-            
+
             BracktsFPanel.Controls.Clear();
             UnPlacedFpanel.Controls.Clear();
 
@@ -631,7 +632,7 @@ namespace MartialArts
 
         #endregion
 
-     
+
         private void btnBW_Click(object sender, EventArgs e)
         {
             UnderConstruction();
@@ -672,7 +673,7 @@ namespace MartialArts
 
 
             this.tabControl1.SelectedTab = tabPage1;
-            
+
             System.Threading.Thread waitThread = new System.Threading.Thread(LoadWaitClock);
             waitThread.Start();
 
@@ -689,7 +690,7 @@ namespace MartialArts
 
         private void FpPanel_MouseWheel(object sender, MouseEventArgs e)
         {
-       
+
         }
 
         private void קרדיטיםToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -704,7 +705,7 @@ namespace MartialArts
             Helpers.OpenArchiveFolder();
         }
 
-     
+
 
         private void btnNewList_Click(object sender, EventArgs e)
         {
@@ -713,10 +714,14 @@ namespace MartialArts
 
         private void MenuItemCreateNewList_Click(object sender, EventArgs e)
         {
+
+            if (GlobalVars.IsLoading == true)
+                return;
+
             if (dgvMain.Rows.Count > 1 && ExampleListIsPresented == false)
             {
                 if (Helpers.PromtYesNowQuestion("שים לב!" + Environment.NewLine + "קיימים נתונים ברשימה, האם למחוק אותם ולייצר רשימה חדשה?") == false)
-                   
+
                     return;
             }
 
@@ -730,11 +735,14 @@ namespace MartialArts
 
         private void הצגרשימהלדוגמאToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (GlobalVars.IsLoading == true)
+                return;
+
             if (dgvMain.Rows.Count > 1 && ExampleListIsPresented == false)
             {
                 if (Helpers.PromtYesNowQuestion("שים לב!" + Environment.NewLine + "קיימים נתונים ברשימה, האם למחוק אותם ולהציג רשימה לדוגמא?") == false)
 
-                return;
+                    return;
             }
 
             MartialArts.GlobalVars.ListOfContenders.Clear();
@@ -749,6 +757,178 @@ namespace MartialArts
         {
             Helpers.ShowGenericPromtForm("IBJJL");
         }
+
+        private void tpSave_Click(object sender, EventArgs e)
+        {
+            if (GlobalVars.IsLoading == true)
+                return;
+
+            // check if there are objects
+            if (Visual.VisualLeagueEvent.AllVisualContenders == null || Visual.VisualLeagueEvent.AllVisualContenders.Count <= 0)
+            {
+                Helpers.ShowGenericPromtForm("עדיין לא יצרת אוביקטים של בתים");
+                return;
+            }
+
+            SerializeData save = new SerializeData(Visual.VisualLeagueEvent.GetUndoStruct());
+            save.Serialize();
+        }
+
+        private void tpOpen_Click(object sender, EventArgs e)
+        {
+            if (GlobalVars.IsLoading == true)
+                return;
+
+            string lastSaved = "";
+            if (MartialArts.BinaryFiles.SavedDataExist(MartialArts.BinaryFiles.SavedAllContsBinaryFilePath, out lastSaved) == false
+                || MartialArts.BinaryFiles.SavedDataExist(MartialArts.BinaryFiles.SavedUnplacedVcBinaryFilePath, out lastSaved) == false
+                || MartialArts.BinaryFiles.SavedDataExist(MartialArts.BinaryFiles.SavedVbBinaryFilePath, out lastSaved) == false)
+            {
+                Helpers.ShowGenericPromtForm("לא קיימים נתונים שמורים או שקרתה תקלה בשמירה האחרונה");
+                return;
+            }
+
+
+            try
+            {
+                // deSerialize
+                GlobalVars.IsLoading = true;
+                SerializeData load = new SerializeData();
+                bool Isok;
+                BracketsBuilder b = load.DeSerialize(out Isok);
+
+                // load list
+                GlobalVars.ListOfContenders.Clear();
+                // load saved contenders to list
+                GlobalVars.ListOfContenders = b.ContendersList.ToList();
+                foreach (Bracket br in b.BracketsList)
+                {
+                    foreach (Contenders.Contender c in br.ContendersList)
+                    {
+                        GlobalVars.ListOfContenders.Add(c);
+                    }
+                }
+
+                LoadDgv();
+
+                // load saved brackets and unplaced contenders
+                if (Isok == true)
+                {
+                    // load data
+                    if (BuiletBracketsAgain() == true)
+                    {
+                        Brackets = b;
+                        CreateVisualBrackets();
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                GlobalVars.IsLoading = false;
+            }
+        }
+
+        private void tpSaveAs_Click(object sender, EventArgs e)
+        {
+            if (GlobalVars.IsLoading == true)
+                return;
+
+            // check if there are objects
+            if (Visual.VisualLeagueEvent.AllVisualContenders == null || Visual.VisualLeagueEvent.AllVisualContenders.Count <= 0)
+            {
+                Helpers.ShowGenericPromtForm("עדיין לא יצרת אוביקטים של בתים");
+                return;
+            }
+
+            // promt the user to enter the name of the project
+            Martial_Arts_league_Management2.GetProjectNameForm promt = new Martial_Arts_league_Management2.GetProjectNameForm();
+            if (promt.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            // handle project path
+            MartialArts.ProjectsSavedAsBinaryFiles saveAsPath = new ProjectsSavedAsBinaryFiles(promt.ProjectName);
+            if (saveAsPath.CreateSubPath() == true)
+            {
+                SerializeDataSaveAs se = new SerializeDataSaveAs(Visual.VisualLeagueEvent.GetUndoStruct(), saveAsPath);
+                se.Serialize();
+            }
+
+            promt.Dispose();
+        }
+
+        private void tpOpenProject_Click(object sender, EventArgs e)
+        {
+            if (GlobalVars.IsLoading == true)
+                return;
+
+            if (ProjectsSavedAsBinaryFiles.IsProjectDirExist() == false)
+            {
+                Helpers.ShowGenericPromtForm("לא קיימת תיקיית פרויקטים");
+                return;
+            }
+
+            // show the user file to choose
+            Martial_Arts_league_Management2.ChooseProjectToLoad choose = new Martial_Arts_league_Management2.ChooseProjectToLoad();
+
+            if (choose.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            // create all files paths instance
+            MartialArts.ProjectsSavedAsBinaryFiles paths = new ProjectsSavedAsBinaryFiles(choose.ProjectName);
+            paths.SetFullDirWithoutCreating();
+
+            try
+            {
+                // deSerialize
+                GlobalVars.IsLoading = true;
+                SerializeDataSaveAs load = new SerializeDataSaveAs(new Visual.VisualLeagueEvent.UndoStruct(), paths);
+                bool Isok;
+                BracketsBuilder b = load.DeSerialize(out Isok);
+                // load list
+                GlobalVars.ListOfContenders.Clear();
+                // load saved contenders to list
+                GlobalVars.ListOfContenders = b.ContendersList.ToList();
+                foreach (Bracket br in b.BracketsList)
+                {
+                    foreach (Contenders.Contender c in br.ContendersList)
+                    {
+                        GlobalVars.ListOfContenders.Add(c);
+                    }
+                }
+
+                LoadDgv();
+
+                // load saved brackets and unplaced contenders
+                if (Isok == true)
+                {
+                    // load data
+                    if (BuiletBracketsAgain() == true)
+                    {
+                        Brackets = b;
+
+                        CreateVisualBrackets();
+                    }
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                GlobalVars.IsLoading = false;
+            }
+        }
+
     }
 
 

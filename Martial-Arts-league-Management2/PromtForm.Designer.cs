@@ -72,7 +72,7 @@
             // 
             // btnNo
             // 
-            this.btnNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.btnNo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnNo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -149,12 +149,11 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lblQuestion;
         private System.Windows.Forms.Button btnYes;
         private System.Windows.Forms.Button btnNo;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblHeader;
+        protected System.Windows.Forms.Label lblQuestion;
     }
 }

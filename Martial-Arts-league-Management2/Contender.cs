@@ -8,7 +8,7 @@ using MartialArts;
 
 namespace Contenders
 {
-
+   
     interface IContender
     {
         int SystemID { get; set; }
@@ -17,7 +17,7 @@ namespace Contenders
     }
 
 
-
+    [Serializable]
     class ContndersGeneral
     {
         // hash table for excel column names (keys) and column number (value)
@@ -283,7 +283,7 @@ namespace Contenders
         }
     }
 
-
+    [Serializable]
     class Contender : ContndersGeneral, IContender, System.Collections.IEnumerable
     {
         private static int IdentityNumber = 999;
@@ -709,7 +709,7 @@ namespace Contenders
             PotentialBracetNum += 1;
         }
 
-
+        [Serializable]
         public struct PotentialBrackets
         {
             public byte BracketID;

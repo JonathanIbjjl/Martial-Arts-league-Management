@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 // GIT HUB Branch: https://github.com/Jonathan435/Martial-Arts-league-Management/tree/IBJJL2
 namespace MartialArts
 {
-    /// <summary>
-    /// /jh
-    /// </summary>
+   [Serializable]
     class GeneralBracket
     {
         // set from GUI
@@ -40,7 +38,7 @@ namespace MartialArts
                 NumberOfContenders = numberOfContenders;
         }
     }
-
+    [Serializable]
     class Bracket
     {
         private static int _BracketNumber = 0;
