@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using MartialArts;
 namespace  Visual
 {
-
+    //
     [Serializable]
     class VisualBracket: VisualElements,ICloneable,IDisposable
     {
