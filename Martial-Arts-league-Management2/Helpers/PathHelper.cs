@@ -241,5 +241,16 @@ namespace MartialArts
 
             return result;
         }
+
+        public void DeleteProject()
+        {
+            if (ProjectFullDir == "")
+                throw new Exception("you must use the method SetFullDirWithoutCreating() before deleting");
+
+            if (MartialArts.Helpers.YesNoMessegeBox("האם אתה בטוח שברצונך למחוק את הפרויקט " + Environment.NewLine + ProjectDirName, "מחיקת פרויקט", System.Windows.Forms.MessageBoxIcon.Question) == true)
+            {
+                Directory.Delete(ProjectFullDir,true);
+            }
+        }
     } 
 }

@@ -166,6 +166,9 @@ namespace Martial_Arts_league_Management2
 
     class ChooseProjectToLoad : PromtForm
     {
+
+        private string _selectedMenuItem;
+        private ContextMenuStrip collectionRoundMenuStrip;
         public string ProjectName { get; set; }
         ListBox l = new ListBox();
         public ChooseProjectToLoad() : base("", false, "בחר פרויקט לטעינה")
@@ -182,10 +185,60 @@ namespace Martial_Arts_league_Management2
             SetProjectNames();
             lblQuestion.Dispose();
             this.Controls.Add(l);
+
+            var toolStripMenuItem1 = new ToolStripMenuItem { Text = "מחק פרויקט" };
+            toolStripMenuItem1.Click += toolStripMenuItem1_Click;
+
+            collectionRoundMenuStrip = new ContextMenuStrip();
+            collectionRoundMenuStrip.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1});
+            l.MouseDown +=new  MouseEventHandler(listBoxCollectionRounds_MouseDown);
+
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+            if (l.SelectedIndex == -1)
+                return;
+
+            _selectedMenuItem = (l.SelectedItem.ToString());
+            // delete project (promt is in the instance)
+            MartialArts.ProjectsSavedAsBinaryFiles del = new MartialArts.ProjectsSavedAsBinaryFiles(_selectedMenuItem);
+            del.SetFullDirWithoutCreating();
+            del.DeleteProject();
+
+            // refresh listbox
+            SetProjectNames();
+
+        }
+
+        private void DeleteProject()
+        {
+
+        }
+
+        private void listBoxCollectionRounds_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (l.SelectedIndex == -1)
+                return;
+
+            if (e.Button != MouseButtons.Right) return;
+            var index = l.IndexFromPoint(e.Location);
+            if (index != ListBox.NoMatches)
+            {
+                _selectedMenuItem = l.Items[index].ToString();
+                collectionRoundMenuStrip.Show(Cursor.Position);
+                collectionRoundMenuStrip.Visible = true;
+            }
+            else
+            {
+                collectionRoundMenuStrip.Visible = false;
+            }
         }
 
         private void SetProjectNames()
         {
+            l.Items.Clear();
             List<string> projects = MartialArts.ProjectsSavedAsBinaryFiles.GetProjectNames();
             if (projects.Count == 0)
             {
@@ -207,6 +260,8 @@ namespace Martial_Arts_league_Management2
             ProjectName = l.SelectedItem.ToString();
             this.DialogResult = DialogResult.OK;
             this.Close();
+
+
         }
     }
 }
