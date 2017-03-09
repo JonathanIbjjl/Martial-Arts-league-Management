@@ -38,6 +38,7 @@
             this.tpSave = new System.Windows.Forms.ToolStripMenuItem();
             this.tpSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.tpOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.tpOpenProject = new System.Windows.Forms.ToolStripMenuItem();
             this.ArchiveFiles = new System.Windows.Forms.ToolStripMenuItem();
             this.קרדיטיםToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.עריכהToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -95,7 +96,7 @@
             this.dgvMain = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tpOpenProject = new System.Windows.Forms.ToolStripMenuItem();
+            this.tpNew = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -132,6 +133,7 @@
             // 
             this.קובץToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.קובץToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tpNew,
             this.tpSave,
             this.tpSaveAs,
             this.tpOpen,
@@ -170,6 +172,15 @@
             this.tpOpen.Size = new System.Drawing.Size(215, 22);
             this.tpOpen.Text = "טען בתים שנשמרו לאחרונה";
             this.tpOpen.Click += new System.EventHandler(this.tpOpen_Click);
+            // 
+            // tpOpenProject
+            // 
+            this.tpOpenProject.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.tpOpenProject.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.tpOpenProject.Name = "tpOpenProject";
+            this.tpOpenProject.Size = new System.Drawing.Size(215, 22);
+            this.tpOpenProject.Text = "פתח פרויקט";
+            this.tpOpenProject.Click += new System.EventHandler(this.tpOpenProject_Click);
             // 
             // ArchiveFiles
             // 
@@ -975,14 +986,15 @@
             this.tabControl1.TabIndex = 1;
             this.tabControl1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tabControl1_KeyDown);
             // 
-            // tpOpenProject
+            // tpNew
             // 
-            this.tpOpenProject.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.tpOpenProject.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.tpOpenProject.Name = "tpOpenProject";
-            this.tpOpenProject.Size = new System.Drawing.Size(215, 22);
-            this.tpOpenProject.Text = "פתח פרויקט";
-            this.tpOpenProject.Click += new System.EventHandler(this.tpOpenProject_Click);
+            this.tpNew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.tpNew.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.tpNew.Name = "tpNew";
+            this.tpNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.tpNew.Size = new System.Drawing.Size(215, 22);
+            this.tpNew.Text = "חדש";
+            this.tpNew.Click += new System.EventHandler(this.tpNew_Click);
             // 
             // Form1
             // 
@@ -1090,6 +1102,7 @@
         private System.Windows.Forms.ToolStripMenuItem tpOpen;
         private System.Windows.Forms.ToolStripMenuItem tpSaveAs;
         private System.Windows.Forms.ToolStripMenuItem tpOpenProject;
+        private System.Windows.Forms.ToolStripMenuItem tpNew;
     }
 }
 

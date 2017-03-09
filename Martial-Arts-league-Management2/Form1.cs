@@ -51,14 +51,7 @@ namespace MartialArts
         private void LoadMe()
         {
 
-            // load version
-            Version myVersion;
-
-            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
-            {
-                myVersion = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
-                this.Text = "מערכת ניהול ליגה IBJJL | גרסה " + myVersion.ToString();
-            }
+            header();
 
             toolTip1.OwnerDraw = true;
             toolTip1.BackColor = MartialArts.GlobalVars.Sys_Red;
@@ -71,6 +64,28 @@ namespace MartialArts
             DgvDefenitions();
             // example with gracie family
             DgvExample();
+        }
+
+        public void header(string ProjectName = "")
+        {
+            // load version
+            Version myVersion;
+
+            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+            {
+                myVersion = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
+                this.Text = "מערכת ניהול ליגה IBJJL | גרסה " + myVersion.ToString();
+            }
+            else
+            {
+                this.Text = "IBJJL | מערכת ניהול ליגה";
+            }
+
+            if (ProjectName != "")
+            {
+                this.Text = this.Text + " | " + ProjectName;
+            }
+
         }
 
         private void tp_Draw(object sender, System.Windows.Forms.DrawToolTipEventArgs e)
@@ -124,9 +139,10 @@ namespace MartialArts
                 promt.Dispose();
             }
 
-            ///
-            ///
-            ///
+            // now its new project
+            GlobalVars.CurrentProject = null;
+            header("");
+
             System.Threading.Thread waitThread = new System.Threading.Thread(LoadWaitClock);
             waitThread.Start();
 
@@ -212,6 +228,9 @@ namespace MartialArts
                 load.Start();
             }
 
+            // now its new project
+            GlobalVars.CurrentProject = null;
+            header("");
         }
 
         private void BuiledBrackets()
@@ -714,7 +733,11 @@ namespace MartialArts
 
         private void MenuItemCreateNewList_Click(object sender, EventArgs e)
         {
+            NewProject();
+        }
 
+        public void NewProject()
+        {
             if (GlobalVars.IsLoading == true)
                 return;
 
@@ -731,6 +754,10 @@ namespace MartialArts
             DgvDefenitions();
             dgvMain.Rows[0].Cells[0].Selected = true;
             this.tabControl1.SelectedTab = tabPage1;
+
+            // now its new project
+            GlobalVars.CurrentProject = null;
+            header("");
         }
 
         private void הצגרשימהלדוגמאToolStripMenuItem_Click(object sender, EventArgs e)
@@ -751,6 +778,10 @@ namespace MartialArts
             DgvDefenitions();
             DgvExample();
             this.tabControl1.SelectedTab = tabPage1;
+
+            // now its new project
+            GlobalVars.CurrentProject = null;
+            header("");
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -772,6 +803,14 @@ namespace MartialArts
 
             SerializeData save = new SerializeData(Visual.VisualLeagueEvent.GetUndoStruct());
             save.Serialize();
+
+            // if it is saved project save also the changes made in the saved project
+            if (GlobalVars.CurrentProject != null)
+            {
+                // handle project path
+                    SerializeDataSaveAs se = new SerializeDataSaveAs(Visual.VisualLeagueEvent.GetUndoStruct(), GlobalVars.CurrentProject);
+                    se.Serialize();
+            }
         }
 
         private void tpOpen_Click(object sender, EventArgs e)
@@ -915,6 +954,10 @@ namespace MartialArts
                         Brackets = b;
 
                         CreateVisualBrackets();
+                        // set current project
+                        GlobalVars.CurrentProject = paths;
+                        // set header with project name
+                        header(choose.ProjectName);
                     }
                 }
 
@@ -929,6 +972,10 @@ namespace MartialArts
             }
         }
 
+        private void tpNew_Click(object sender, EventArgs e)
+        {
+            NewProject();
+        }
     }
 
 

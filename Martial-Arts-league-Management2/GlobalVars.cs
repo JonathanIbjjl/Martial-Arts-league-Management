@@ -9,7 +9,8 @@ namespace MartialArts
 
     class GlobalVars
     {
-    
+
+        public static MartialArts.ProjectsSavedAsBinaryFiles CurrentProject { get; set; }
 
         public static bool IsLoading;
         public static int NumOfContendersInLeuge
