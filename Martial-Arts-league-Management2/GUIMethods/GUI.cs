@@ -23,8 +23,8 @@ namespace MartialArts
             {
                 Cursor.Hide();
 
-                // sort by Bracket Size
-                Brackets.BracketsList = Brackets.BracketsList.AsEnumerable().OrderByDescending(x => x.NumberOfContenders).ToList();
+                // sort by Bracket grade
+                Brackets.BracketsList = Brackets.BracketsList.AsEnumerable().OrderBy(x => x.AverageGrade).ToList();
 
                 foreach (MartialArts.Bracket b in Brackets.BracketsList)
                 {
@@ -157,7 +157,7 @@ namespace MartialArts
                 _MatchClock.InnerCircleColor = GlobalVars.Sys_Yellow;
                 _MatchClock.OuterCircleColor = Color.FromArgb(78, 78, 78);
                 _MatchClock.FontColor = GlobalVars.Sys_LabelGray;
-                _MatchClock.ClockBackGroundColor = splitContainer1.Panel1.BackColor;
+                _MatchClock.ClockBackGroundColor = panelStatistics.BackColor;
                 _MatchClock.Create(false);
                 _MatchClock.Clock.Anchor = AnchorStyles.Right | AnchorStyles.Top;
 
@@ -195,7 +195,7 @@ namespace MartialArts
                 _MatchWithoutUselessClock.InnerCircleColor = GlobalVars.Sys_Yellow;
                 _MatchWithoutUselessClock.OuterCircleColor = Color.FromArgb(78, 78, 78);
                 _MatchWithoutUselessClock.FontColor = GlobalVars.Sys_LabelGray;
-                _MatchWithoutUselessClock.ClockBackGroundColor = splitContainer1.Panel1.BackColor;
+                _MatchWithoutUselessClock.ClockBackGroundColor = panelStatistics.BackColor;
                 _MatchWithoutUselessClock.Create(false);
                 _MatchWithoutUselessClock.Clock.Anchor = AnchorStyles.Right | AnchorStyles.Top;
 
@@ -228,7 +228,7 @@ namespace MartialArts
                 _BracketsClock.InnerCircleColor = GlobalVars.Sys_Yellow;
                 _BracketsClock.OuterCircleColor = Color.FromArgb(78, 78, 78);
                 _BracketsClock.FontColor = GlobalVars.Sys_LabelGray;
-                _BracketsClock.ClockBackGroundColor = splitContainer1.Panel1.BackColor;
+                _BracketsClock.ClockBackGroundColor = panelStatistics.BackColor;
                 _BracketsClock.Create(false);
                 _BracketsClock.Clock.Anchor = AnchorStyles.Right | AnchorStyles.Top;
                 _BracketsClock.Clock.Location = new Point(0, 0);
@@ -646,5 +646,6 @@ namespace MartialArts
             }
         }
 
+     
     }
 }

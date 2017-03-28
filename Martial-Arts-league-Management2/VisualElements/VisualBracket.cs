@@ -62,7 +62,9 @@ namespace  Visual
                     cm.Items.Add("הדבק מתחרה");
                     cm.ItemClicked += new ToolStripItemClickedEventHandler(contexMenuuu_ItemClicked);
                     _Header.ContextMenuStrip = cm;
-
+                    // hide button 
+                    btnHideBracket.Location = new Point(_Header.Width- btnHideBracket.Width - 3, 1);
+                    _Header.Controls.Add(btnHideBracket);
                     return _Header;
                 }
                 else
@@ -97,7 +99,62 @@ namespace  Visual
             set { _Vbracket = value; }
         }
 
+        #region "Hide Bracket"
+        private Label _btnHideBracket;
+        public Label btnHideBracket
+        {
+            get
+            {
+                if (_btnHideBracket == null)
+                {
+                    _btnHideBracket = new Label();
+                    _btnHideBracket.Size = new Size(20,18);
+                    _btnHideBracket.Font = new Font("ARIAL", 10, FontStyle.Bold);
+                    _btnHideBracket.TextAlign = ContentAlignment.MiddleCenter;
+                    _btnHideBracket.BackColor = GlobalVars.Sys_Red;
+                    _btnHideBracket.BorderStyle = BorderStyle.FixedSingle;
+                    _btnHideBracket.ForeColor = Color.White;
+                    _btnHideBracket.FlatStyle = FlatStyle.Flat;
+                    _btnHideBracket.Cursor = Cursors.Hand;
+                    _btnHideBracket.Text = "-";
+                    _btnHideBracket.Click += new EventHandler(btnHide_Click);
+                    return _btnHideBracket;
+                }
+                else
+                {
+                    return _btnHideBracket;
+                }
+            }
+        }
+        #endregion
 
+        private void btnHide_Click(object sender, EventArgs e)
+        {
+            if (((Label)sender).Text == "-")
+            {
+                // hide
+                ((Label)sender).Text = "+";
+                Vbracket.Size = new Size(Vbracket.Width, Header.Size.Height+6);
+                // change to unactive colors
+                _Header.BackColor = Color.FromArgb(40,40,40);
+                _Header.ForeColor = Color.FromArgb(70, 70, 70);
+                // disable drag events
+                _Header.DragOver -= new DragEventHandler(Vbracket_DragOver);
+                _Header.DragDrop -= new DragEventHandler(Vbracket_DragDrop);
+            }
+            else
+            {
+                // unhide
+                ((Label)sender).Text = "-";
+                Vbracket.Size = new Size(Vbracket.Width, ((VisualContender.ContMainPanel_Size.Height + 6) * Bracket.ContendersList.Count) + 26);
+                // returen to active colors
+                _Header.BackColor = MartialArts.GlobalVars.Sys_LighterGray;
+                _Header.ForeColor = MartialArts.GlobalVars.Sys_Yellow;
+                // enable drag events
+                _Header.DragOver += new DragEventHandler(Vbracket_DragOver);
+                _Header.DragDrop += new DragEventHandler(Vbracket_DragDrop);
+            }
+        }
         public VisualBracket(MartialArts.Bracket bracket)
         {
             this.Bracket = bracket;

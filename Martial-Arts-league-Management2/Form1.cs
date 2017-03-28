@@ -668,17 +668,9 @@ namespace MartialArts
         #endregion
 
 
-        private void btnBW_Click(object sender, EventArgs e)
-        {
-            UnderConstruction();
-        }
+    
 
-        private void btnFW_Click(object sender, EventArgs e)
-        {
-            UnderConstruction();
-        }
-
-        public static void UnderConstruction()
+        public  void UnderConstruction()
         {
             Helpers.ShowGenericPromtForm("UNDER CONSTRUCTION");
         }
@@ -702,7 +694,6 @@ namespace MartialArts
                 {
                     return;
                 }
-
 
             }
 
@@ -1151,8 +1142,66 @@ namespace MartialArts
             }
         }
 
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
-      
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnFW_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void radioAsc_CheckedChanged(object sender, EventArgs e)
+        {
+            SortCheckedChanged();
+        }
+
+        private void radioDesc_CheckedChanged(object sender, EventArgs e)
+        {
+            SortCheckedChanged();
+        }
+
+        private void SortCheckedChanged()
+        {
+            if (radioAsc.Checked == true)
+            {
+                btnAsc.Visible = true;
+                btnAsc.Enabled = true;
+                btnDesc.Visible = false;
+                btnDesc.Enabled = false;
+            }
+            else
+            {
+                btnAsc.Visible = false;
+                btnAsc.Enabled = false;
+                btnDesc.Visible = true;
+                btnDesc.Enabled = true;
+            }
+        }
+
+        private void btnAsc_Click(object sender, EventArgs e)
+        {
+            sortVisualBrackets(false);
+        }
+
+        private void btnDesc_Click(object sender, EventArgs e)
+        {
+            sortVisualBrackets(true);
+        }
+
+        private void sortVisualBrackets(bool Desc)
+        {
+            if (radSortAvgGrade.Checked == true)
+            {
+                SortingMethods.SortByAvgGrade(this, Desc);
+            }
+        }
     }
 
 

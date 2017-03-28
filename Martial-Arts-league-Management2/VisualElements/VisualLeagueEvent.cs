@@ -80,8 +80,6 @@ namespace Visual
             }
         }
 
-        public static bool IsScrolling;
-
         public static MartialArts.Form1 FormObj;
         // used for copy contenders, the property will save the system id of the copied contender
         public static int ClipBoardValue { get; set; }
