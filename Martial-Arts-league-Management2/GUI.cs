@@ -335,19 +335,19 @@ namespace MartialArts
             //
             DataGridViewTextBoxColumn ID = new DataGridViewTextBoxColumn();
             ID.HeaderText = "ת.ז";
-            ID.DataPropertyName = "ID";
+            ID.Name = "ID";
             // 
             // Column1
             //
             DataGridViewTextBoxColumn FirstName = new DataGridViewTextBoxColumn();
             FirstName.HeaderText = "שם פרטי";
-            FirstName.DataPropertyName = "FirstName";
+            FirstName.Name = "FirstName";
             // 
             // Column2
             //
             DataGridViewTextBoxColumn LastName = new DataGridViewTextBoxColumn();
             LastName.HeaderText = "שם משפחה";
-            LastName.DataPropertyName = "LastName";
+            LastName.Name = "LastName";
             // 
             // Column3
             //
@@ -355,7 +355,7 @@ namespace MartialArts
             var beltList = new List<string>() { "לבנה", "אפורה", "צהובה", "כתומה","ירוקה","כחולה","סגולה","חומה" ,"שחורה"};
             Belt.DataSource = beltList;
             Belt.HeaderText = "חגורה";
-            Belt.DataPropertyName = "Belt";
+            Belt.Name = "Belt";
             Belt.FlatStyle = FlatStyle.Flat;
             // 
             // Column4
@@ -368,14 +368,14 @@ namespace MartialArts
             weightList = Contenders.ContndersGeneral.AdultWeightCat.Keys.ToList();
             weightCat.DataSource = weightList;
             weightCat.HeaderText = "קטגוריית משקל";
-            weightCat.DataPropertyName = "weightCat";
+            weightCat.Name = "weightCat";
             weightCat.FlatStyle = FlatStyle.Flat;
             // 
             // Column5
             //
             DataGridViewTextBoxColumn weight = new DataGridViewTextBoxColumn();
             weight.HeaderText = "משקל מדוייק";
-            weight.DataPropertyName = "weight";
+            weight.Name = "weight";
             // 
             // Column6
             //
@@ -384,20 +384,20 @@ namespace MartialArts
             ageList = Contenders.ContndersGeneral.GetAgeValues(radChild.Checked);
             age.DataSource = ageList;
             age.HeaderText = "קטגוריית גיל";
-            age.DataPropertyName = "ageCat";
+            age.Name = "ageCat";
             age.FlatStyle = FlatStyle.Flat;
             // 
             // Column7
             //
             DataGridViewTextBoxColumn email = new DataGridViewTextBoxColumn();
             email.HeaderText = "אימייל";
-            email.DataPropertyName = "Email";
+            email.Name = "Email";
             // 
             // Column8
             //
             DataGridViewTextBoxColumn phone = new DataGridViewTextBoxColumn();
             phone.HeaderText = "טלפון";
-            phone.DataPropertyName = "phone";
+            phone.Name = "phone";
             // 
             // Column9
             //
@@ -407,20 +407,20 @@ namespace MartialArts
                 academyList.Add("אקדמיה" + " " + i.ToString());
             AcademyName.DataSource = academyList;
             AcademyName.HeaderText = "אקדמיה";
-            AcademyName.DataPropertyName = "AcademyName";
+            AcademyName.Name = "AcademyName";
             AcademyName.FlatStyle = FlatStyle.Flat;
             // 
             // Column10
             //
             DataGridViewTextBoxColumn coach = new DataGridViewTextBoxColumn();
             coach.HeaderText = "שם מאמן";
-            coach.DataPropertyName = "coach";
+            coach.Name = "coach";
             // 
             // Column11
             //
             DataGridViewTextBoxColumn coachPhone = new DataGridViewTextBoxColumn();
             coachPhone.HeaderText = "טלפון מאמן";
-            coachPhone.DataPropertyName = "coachPhone";
+            coachPhone.Name = "coachPhone";
             // 
             // Column12
             //
@@ -428,32 +428,32 @@ namespace MartialArts
             var genderList = new List<string>() { "זכר","נקבה"};
             gender.DataSource = genderList;
             gender.HeaderText = "מגדר";
-            gender.DataPropertyName = "gender";
+            gender.Name = "gender";
             gender.FlatStyle = FlatStyle.Flat;
             // 
             // Column12
             //
             DataGridViewCheckBoxColumn IsAllowedVersusMan = new DataGridViewCheckBoxColumn();
             IsAllowedVersusMan.HeaderText = "פקטור מגדר";
-            IsAllowedVersusMan.DataPropertyName = "IsAllowedVersusMan";
+            IsAllowedVersusMan.Name = "IsAllowedVersusMan";
             // 
             // Column13
             //
             DataGridViewCheckBoxColumn IsAllowedAgeGradeAbove = new DataGridViewCheckBoxColumn();
             IsAllowedAgeGradeAbove.HeaderText = "פקטור גיל";
-            IsAllowedAgeGradeAbove.DataPropertyName = "IsAllowedAgeGradeAbove";
+            IsAllowedAgeGradeAbove.Name = "IsAllowedAgeGradeAbove";
             // 
             // Column14
             //
             DataGridViewCheckBoxColumn IsAllowedBeltGradeAbove = new DataGridViewCheckBoxColumn();
             IsAllowedBeltGradeAbove.HeaderText = "פקטור חגורה";
-            IsAllowedBeltGradeAbove.DataPropertyName = "IsAllowedBeltGradeAbove";
+            IsAllowedBeltGradeAbove.Name = "IsAllowedBeltGradeAbove";
             // 
             // Column15
             //
             DataGridViewCheckBoxColumn IsAllowedWeightGradeAbove = new DataGridViewCheckBoxColumn();
             IsAllowedWeightGradeAbove.HeaderText = "פקטור משקל";
-            IsAllowedWeightGradeAbove.DataPropertyName = "IsAllowedWeightGradeAbove";
+            IsAllowedWeightGradeAbove.Name = "IsAllowedWeightGradeAbove";
 
             dgvMain.Columns.AddRange(ID,FirstName, LastName,Belt,weightCat,weight,age,email,phone 
                 ,AcademyName,coach,coachPhone, gender,IsAllowedVersusMan,IsAllowedAgeGradeAbove,IsAllowedBeltGradeAbove,IsAllowedWeightGradeAbove);

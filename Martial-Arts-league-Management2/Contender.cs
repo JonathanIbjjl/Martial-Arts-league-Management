@@ -297,6 +297,7 @@ namespace Contenders
             IsPlaced = false;
         }
 
+        public bool SourceIsFromSystemList { get; set; } = false;
         public int SystemID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

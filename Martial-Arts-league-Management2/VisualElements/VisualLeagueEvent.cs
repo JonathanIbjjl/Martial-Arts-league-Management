@@ -486,7 +486,7 @@ namespace Visual
             public List<VisualBracket> _VisualBracketsList;
             public List<VisualContender> _VisualUnplacedBracketsList;
             public List<VisualContender> AllVisualContenders;
-
+            public bool IsFakeStructForSavingEditingList;
         }
 
         internal static void MoveBw()

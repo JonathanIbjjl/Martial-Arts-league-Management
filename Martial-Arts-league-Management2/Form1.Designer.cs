@@ -35,6 +35,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.קובץToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tpNew = new System.Windows.Forms.ToolStripMenuItem();
             this.tpSave = new System.Windows.Forms.ToolStripMenuItem();
             this.tpSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.tpOpen = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,6 +80,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.FilesPanel = new System.Windows.Forms.Panel();
+            this.btnEditList = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.radChild = new System.Windows.Forms.RadioButton();
             this.radAdult = new System.Windows.Forms.RadioButton();
@@ -96,7 +98,6 @@
             this.dgvMain = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tpNew = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -145,13 +146,23 @@
             this.קובץToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.קובץToolStripMenuItem.Text = "קובץ";
             // 
+            // tpNew
+            // 
+            this.tpNew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.tpNew.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.tpNew.Name = "tpNew";
+            this.tpNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.tpNew.Size = new System.Drawing.Size(217, 22);
+            this.tpNew.Text = "חדש";
+            this.tpNew.Click += new System.EventHandler(this.tpNew_Click);
+            // 
             // tpSave
             // 
             this.tpSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.tpSave.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
             this.tpSave.Name = "tpSave";
             this.tpSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.tpSave.Size = new System.Drawing.Size(215, 22);
+            this.tpSave.Size = new System.Drawing.Size(217, 22);
             this.tpSave.Text = "שמור";
             this.tpSave.Click += new System.EventHandler(this.tpSave_Click);
             // 
@@ -160,7 +171,7 @@
             this.tpSaveAs.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.tpSaveAs.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
             this.tpSaveAs.Name = "tpSaveAs";
-            this.tpSaveAs.Size = new System.Drawing.Size(215, 22);
+            this.tpSaveAs.Size = new System.Drawing.Size(217, 22);
             this.tpSaveAs.Text = "שמור בשם";
             this.tpSaveAs.Click += new System.EventHandler(this.tpSaveAs_Click);
             // 
@@ -169,8 +180,8 @@
             this.tpOpen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.tpOpen.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
             this.tpOpen.Name = "tpOpen";
-            this.tpOpen.Size = new System.Drawing.Size(215, 22);
-            this.tpOpen.Text = "טען בתים שנשמרו לאחרונה";
+            this.tpOpen.Size = new System.Drawing.Size(217, 22);
+            this.tpOpen.Text = "טען נתונים אחרונים שנשמרו";
             this.tpOpen.Click += new System.EventHandler(this.tpOpen_Click);
             // 
             // tpOpenProject
@@ -178,7 +189,7 @@
             this.tpOpenProject.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.tpOpenProject.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
             this.tpOpenProject.Name = "tpOpenProject";
-            this.tpOpenProject.Size = new System.Drawing.Size(215, 22);
+            this.tpOpenProject.Size = new System.Drawing.Size(217, 22);
             this.tpOpenProject.Text = "פתח פרויקט";
             this.tpOpenProject.Click += new System.EventHandler(this.tpOpenProject_Click);
             // 
@@ -187,7 +198,7 @@
             this.ArchiveFiles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.ArchiveFiles.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
             this.ArchiveFiles.Name = "ArchiveFiles";
-            this.ArchiveFiles.Size = new System.Drawing.Size(215, 22);
+            this.ArchiveFiles.Size = new System.Drawing.Size(217, 22);
             this.ArchiveFiles.Text = "פתח תקיית קבצי ארכיון";
             this.ArchiveFiles.Click += new System.EventHandler(this.ArchiveFiles_Click);
             // 
@@ -196,7 +207,7 @@
             this.קרדיטיםToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.קרדיטיםToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
             this.קרדיטיםToolStripMenuItem1.Name = "קרדיטיםToolStripMenuItem1";
-            this.קרדיטיםToolStripMenuItem1.Size = new System.Drawing.Size(215, 22);
+            this.קרדיטיםToolStripMenuItem1.Size = new System.Drawing.Size(217, 22);
             this.קרדיטיםToolStripMenuItem1.Text = "קרדיטים";
             this.קרדיטיםToolStripMenuItem1.Click += new System.EventHandler(this.קרדיטיםToolStripMenuItem1_Click);
             // 
@@ -714,6 +725,7 @@
             this.FilesPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.FilesPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.FilesPanel.Controls.Add(this.btnEditList);
             this.FilesPanel.Controls.Add(this.panel1);
             this.FilesPanel.Controls.Add(this.lblwaitClock);
             this.FilesPanel.Controls.Add(this.btnBrowse);
@@ -730,6 +742,23 @@
             this.FilesPanel.Name = "FilesPanel";
             this.FilesPanel.Size = new System.Drawing.Size(1397, 118);
             this.FilesPanel.TabIndex = 9;
+            // 
+            // btnEditList
+            // 
+            this.btnEditList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.btnEditList.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEditList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditList.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.btnEditList.ForeColor = System.Drawing.Color.Maroon;
+            this.btnEditList.Location = new System.Drawing.Point(572, 55);
+            this.btnEditList.Name = "btnEditList";
+            this.btnEditList.Size = new System.Drawing.Size(40, 60);
+            this.btnEditList.TabIndex = 43;
+            this.toolTip1.SetToolTip(this.btnEditList, "האלגוריתם הסטטיסטי של המערכת ייצר בתים מתוך המשתתפים שנטענו");
+            this.btnEditList.UseVisualStyleBackColor = false;
+            this.btnEditList.Visible = false;
+            this.btnEditList.Click += new System.EventHandler(this.btnEditList_Click);
             // 
             // panel1
             // 
@@ -986,16 +1015,6 @@
             this.tabControl1.TabIndex = 1;
             this.tabControl1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tabControl1_KeyDown);
             // 
-            // tpNew
-            // 
-            this.tpNew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.tpNew.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.tpNew.Name = "tpNew";
-            this.tpNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.tpNew.Size = new System.Drawing.Size(215, 22);
-            this.tpNew.Text = "חדש";
-            this.tpNew.Click += new System.EventHandler(this.tpNew_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1103,6 +1122,7 @@
         private System.Windows.Forms.ToolStripMenuItem tpSaveAs;
         private System.Windows.Forms.ToolStripMenuItem tpOpenProject;
         private System.Windows.Forms.ToolStripMenuItem tpNew;
+        private System.Windows.Forms.Button btnEditList;
     }
 }
 

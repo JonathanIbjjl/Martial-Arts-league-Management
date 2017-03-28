@@ -82,7 +82,7 @@ namespace  Visual
                     // will be used in drag and drop
                     _Vbracket.Name = "Bracket " + Bracket.BracketNumber.ToString();
                     _Vbracket.AllowDrop = true;
-                    //_Vbracket.DoubleBuffered_FlPanel(true); TODO: DELETE
+                
                     _Vbracket.Size = new Size(VisualContender.ContMainPanel_Size.Width + 4, ((VisualContender.ContMainPanel_Size.Height + 6) * Bracket.ContendersList.Count ) +26); // ontMainPanel_Size.Height + 6 is the margin beetween contenders,last digit:  Header And Margin
                     _Vbracket.BackColor = Color.Black;
                     _Vbracket.Margin = new Padding(6, 6, 6, 6);
@@ -199,9 +199,9 @@ namespace  Visual
                 // if VisualLeague Event Changed Visual ContenderLIst from out side the resize will take effect 
                 Vbracket.Size = new Size(VisualContender.ContMainPanel_Size.Width + 4, ((VisualContender.ContMainPanel_Size.Height + 6) * VisualCont.Count) + 26); // ontMainPanel_Size.Height + 6 is the margin beetween contenders,last digit:  Header And Margin
 
-                // refresh header
-                Bracket.RefreshBracketInfo();
-                Header.Text = Bracket.ToString();
+                // refresh header (moty asked to cancel the new brackets info i want to preserve the original bracket header)
+               // Bracket.RefreshBracketInfo();
+               // Header.Text = Bracket.ToString();
                 return null;
             }
         }

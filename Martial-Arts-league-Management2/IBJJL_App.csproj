@@ -26,7 +26,7 @@
     <ProductName>IBJJL Software</ProductName>
     <PublisherName>IBJJL</PublisherName>
     <SuiteName>IBJJL App</SuiteName>
-    <ApplicationRevision>11</ApplicationRevision>
+    <ApplicationRevision>13</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -130,6 +130,7 @@
     <Compile Include="SerializeData.cs" />
     <Compile Include="VisualElements\VisualBracket.cs" />
     <Compile Include="VisualElements\VisualContender.cs" />
+    <Compile Include="VisualElements\VisualContenderNew.cs" />
     <Compile Include="VisualElements\VisualElementsEvents.cs" />
     <Compile Include="VisualElements\VisualLeagueEvent.cs" />
     <EmbeddedResource Include="Credits.resx">

@@ -94,17 +94,17 @@ namespace Visual
         }
     }
 
-    partial class VisualContender : VisualElements,IDisposable,Contenders.IContender
+    partial class VisualContender2 : VisualElements, IDisposable, Contenders.IContender
     {
         public Contenders.Contender Contender { get; set; }
         protected BeltColors BeltShapes;
-        public VisualContender(Contenders.Contender contender)
+        public VisualContender2(Contenders.Contender contender)
         {
             this.Contender = contender;
             // init belt shapes object
             BeltShapes = GetBeltShades((Contenders.ContndersGeneral.BeltsEnum)contender.Belt);
         }
-        
+
         // genral properties
         private Color ForeColor
         {
@@ -120,7 +120,7 @@ namespace Visual
                 }
             }
         }
-        
+
         // Cont main panel
         protected FlowLayoutPanel _ContMainPanel;
         public FlowLayoutPanel Vcontender
@@ -134,11 +134,11 @@ namespace Visual
                     // tha name will be used in drag and drop
                     _ContMainPanel.Name = "Cont " + Contender.SystemID.ToString();
                     _ContMainPanel.AllowDrop = true;
-                    _ContMainPanel.MouseDown += new MouseEventHandler(Vcont_MouseDown);
-                    _ContMainPanel.DragEnter += new DragEventHandler(Vcont_DragEnter);
+                 //   _ContMainPanel.MouseDown += new MouseEventHandler(Vcont_MouseDown);
+                 //   _ContMainPanel.DragEnter += new DragEventHandler(Vcont_DragEnter);
                     _ContMainPanel.Size = ContMainPanel_Size;
                     _ContMainPanel.BackColor = BeltShapes.MediumColor;
-                 //   _ContMainPanel.Margin = new Padding(6, 6, 6, 6);
+                    //   _ContMainPanel.Margin = new Padding(6, 6, 6, 6);
                     _ContMainPanel.RightToLeft = RightToLeft.Yes;
                     return _ContMainPanel;
                 }
@@ -169,7 +169,7 @@ namespace Visual
                     if (Contender.IsAllowedBeltGradeAbove == true && (Contenders.ContndersGeneral.BeltsEnum)Contender.Belt != Contenders.ContndersGeneral.BeltsEnum.black)
                     {
                         var ColorAbove = new BeltColors();
-                        ColorAbove = GetBeltShades((Contenders.ContndersGeneral.BeltsEnum)Contender.Belt+1000);
+                        ColorAbove = GetBeltShades((Contenders.ContndersGeneral.BeltsEnum)Contender.Belt + 1000);
                         _BeltFactorShape.BackColor = ColorAbove.DarkColor;
                         _BeltFactorShape.Text = FactorSign;
                     }
@@ -218,18 +218,18 @@ namespace Visual
                 _ExactWeightShape = value;
             }
         }
-        public Size ExactWeightShape_Size { get; private set; } = new Size(50,31);
+        public Size ExactWeightShape_Size { get; private set; } = new Size(50, 31);
 
         // Cont Weight Category panel
         protected FlowLayoutPanel _WeightCatPanel;
-             public FlowLayoutPanel WeightCatPanel
+        public FlowLayoutPanel WeightCatPanel
         {
             get
             {
                 if (_WeightCatPanel == null)
                 {
                     _WeightCatPanel = GetFpanel();
-                    _WeightCatPanel.Size = new Size(100,31);
+                    _WeightCatPanel.Size = new Size(100, 31);
                     AddControlsToWeightCatPanel(ref _WeightCatPanel);
                     return _WeightCatPanel;
                 }
@@ -274,7 +274,7 @@ namespace Visual
             get
             {
                 if (_PersonalDataPanel == null)
-                {                  
+                {
                     _PersonalDataPanel = GetFpanel();
                     //_PersonalDataPanel.DoubleBuffered_FlPanel(true); TODO: DELETE
                     _PersonalDataPanel.Size = new Size(177, 31);
@@ -304,16 +304,16 @@ namespace Visual
                     _BtnShowContData.FlatStyle = FlatStyle.Popup;
                     _BtnShowContData.BackColor = BeltShapes.LightColor;
 
-                    _BtnShowContData.Size = new Size(26,31);
+                    _BtnShowContData.Size = new Size(26, 31);
                     _BtnShowContData.Font = new Font("ARIAL", 16, FontStyle.Bold);
                     _BtnShowContData.Text = "⁞";
                     _BtnShowContData.Cursor = Cursors.Hand;
-                    if(Contender.IsUseless== false)
+                    if (Contender.IsUseless == false)
                         _BtnShowContData.ForeColor = MartialArts.GlobalVars.Sys_DarkerGray;
                     else
                         _BtnShowContData.BackColor = Color.Red;
 
-                    _BtnShowContData.Click += new EventHandler(ShowContData_Click);
+                 //   _BtnShowContData.Click += new EventHandler(ShowContData_Click);
 
                     ContextMenuStrip cm = new ContextMenuStrip();
                     cm.Show();
@@ -325,7 +325,7 @@ namespace Visual
                     cm.Items[0].Name = Contender.SystemID.ToString();
                     cm.Items[1].Name = Contender.SystemID.ToString() + " ";
                     cm.Items[2].Name = Contender.SystemID.ToString() + "  ";
-                    cm.ItemClicked += new ToolStripItemClickedEventHandler(contexMenuuu_ItemClicked);
+                 //   cm.ItemClicked += new ToolStripItemClickedEventHandler(contexMenuuu_ItemClicked);
                     _BtnShowContData.ContextMenuStrip = cm;
 
                     ToolTip tp = new ToolTip();
@@ -333,7 +333,7 @@ namespace Visual
                     tp.OwnerDraw = true;
                     tp.BackColor = MartialArts.GlobalVars.Sys_Red;
                     tp.ForeColor = Color.White;
-                    tp.Draw += new DrawToolTipEventHandler(tp_Draw);
+                //    tp.Draw += new DrawToolTipEventHandler(tp_Draw);
 
                     return _BtnShowContData;
                 }
@@ -379,7 +379,7 @@ namespace Visual
         {
             get
             {
-               return Contender.IsPlaced;
+                return Contender.IsPlaced;
             }
 
             set
@@ -409,8 +409,8 @@ namespace Visual
             lbl.TextAlign = ContentAlignment.MiddleCenter;
             lbl.ForeColor = ForeColor;
             lbl.AllowDrop = true;
-            lbl.DragEnter += new DragEventHandler(Vcont_DragEnter);
-            lbl.MouseDown += new MouseEventHandler(Vcont_MouseDown);
+          //  lbl.DragEnter += new DragEventHandler(Vcont_DragEnter);
+          //  lbl.MouseDown += new MouseEventHandler(Vcont_MouseDown);
             return lbl;
         }
 
@@ -428,7 +428,7 @@ namespace Visual
         {
             // factor label
             Label Factor = GetLabel();
-            Factor.Size = new Size(15,26);
+            Factor.Size = new Size(15, 26);
             Factor.Font = new Font("Microsoft Sans Serif", 9, FontStyle.Regular);
             Factor.BackColor = BeltShapes.MediumColor;
             if (Contender.IsAllowedWeightGradeAbove == true)
@@ -487,9 +487,9 @@ namespace Visual
 
 
 
-       
-        // Private and Family name
-        Label name = GetLabel();
+
+            // Private and Family name
+            Label name = GetLabel();
             name.Size = new Size(151, 12);
             name.Text = Contender.FirstName + " " + Contender.LastName;
             name.Margin = new Padding(1, 1, 1, 1);
@@ -498,8 +498,8 @@ namespace Visual
             if (Contender.IsMale == true)
                 name.BackColor = BeltShapes.LightColor;
             else
-                name.BackColor = Color.FromArgb(255,0,127);
- 
+                name.BackColor = Color.FromArgb(255, 0, 127);
+
             fp.Controls.Add(name);
 
             // Academy
@@ -531,7 +531,7 @@ namespace Visual
             {
                 return true;
             }
-             
+
         }
 
         public void CancelShadow()
