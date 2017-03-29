@@ -51,7 +51,6 @@
             this.lblQuestion.TabIndex = 12;
             this.lblQuestion.Text = "שאלה!!!!!";
             this.lblQuestion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblQuestion.Click += new System.EventHandler(this.lblQuestion_Click);
             // 
             // btnYes
             // 

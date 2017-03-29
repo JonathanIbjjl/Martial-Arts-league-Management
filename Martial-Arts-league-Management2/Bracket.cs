@@ -68,6 +68,13 @@ namespace MartialArts
             WeightGrade = ContendersList.Max(x => x.WeightCategory);
         }
 
+        public void RefreshBracketInfo(int ageGrade, int BeltGrade, int WeightGrade)
+        {
+            this.AgeGrade = ageGrade;
+            this.WeightGrade = WeightGrade;
+            this.BeltGrade = BeltGrade;
+        }
+
         public double AverageGrade
         {
             get

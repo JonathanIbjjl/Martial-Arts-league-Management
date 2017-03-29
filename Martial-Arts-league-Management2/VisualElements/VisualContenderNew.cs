@@ -54,6 +54,21 @@ namespace Visual
                     _ContMainPanel.BackColor = BeltShapes.MediumColor;
                     _ContMainPanel.RightToLeft = RightToLeft.Yes;
                     _ContMainPanel.Paint += new PaintEventHandler(Vcont_Paint);
+
+
+                    ContextMenuStrip cm = new ContextMenuStrip();
+                    cm.Show();
+                    cm.BackColor = MartialArts.GlobalVars.Sys_Yellow;
+                    cm.ForeColor = MartialArts.GlobalVars.Sys_DarkerGray;
+                    cm.Items.Add("העתק מתחרה");
+                    cm.Items.Add("צור בית חדש");
+                    cm.Items.Add("בדוק פקטור בבית");
+                    cm.Items[0].Name = Contender.SystemID.ToString();
+                    cm.Items[1].Name = Contender.SystemID.ToString() + " ";
+                    cm.Items[2].Name = Contender.SystemID.ToString() + "  ";
+                    cm.ItemClicked += new ToolStripItemClickedEventHandler(contexMenuuu_ItemClicked);
+                    _ContMainPanel.ContextMenuStrip = cm;
+
                     return _ContMainPanel;
                 }
                 else
@@ -126,14 +141,19 @@ namespace Visual
 
                     _BtnShowContData.Size = new Size(26, 31);
                     _BtnShowContData.Location = new Point(4, 2);
-                    _BtnShowContData.Font = new Font("ARIAL", 16, FontStyle.Bold);
-                    _BtnShowContData.Text = "⁞";
+                    _BtnShowContData.Font = new Font("ARIAL", 13, FontStyle.Bold);
+                    _BtnShowContData.Text = "≡";
                     _BtnShowContData.Cursor = Cursors.Hand;
                     if (Contender.IsUseless == false)
-                        _BtnShowContData.ForeColor = MartialArts.GlobalVars.Sys_DarkerGray;
+                    {
+                        _BtnShowContData.ForeColor = MartialArts.GlobalVars.Sys_Yellow;
+                        _BtnShowContData.BackColor = MartialArts.GlobalVars.Sys_DarkerGray;
+                    }
                     else
+                    {
                         _BtnShowContData.BackColor = Color.Red;
-
+                        _BtnShowContData.ForeColor = Color.White;
+                    }
                     _BtnShowContData.Click += new EventHandler(ShowContData_Click);
 
                     ContextMenuStrip cm = new ContextMenuStrip();

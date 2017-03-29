@@ -107,10 +107,6 @@ namespace Martial_Arts_league_Management2
             this.Close();
         }
 
-        private void lblQuestion_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 
     class GetProjectNameForm : PromtForm
@@ -263,5 +259,110 @@ namespace Martial_Arts_league_Management2
 
 
         }
+    }
+
+    class ChangeVisualBracketDesc : PromtForm
+    {
+
+        public ComboBox ComboWeight = new ComboBox();
+        public ComboBox ComboAge = new ComboBox();
+        public ComboBox ComboBelt = new ComboBox();
+
+        public Label lblAge = new Label();
+        public Label  lblWeight = new Label();
+        public Label lblBelt = new Label();
+
+        public bool IsChild;
+        public int Age;
+        public int Weight;
+        public int Belt;
+
+
+        public ChangeVisualBracketDesc(bool isChild,int age,int weight,int belt) : base("", false, "עריכת תיאור בית")
+        {
+            this.IsChild = isChild;
+            this.Weight = weight;
+            this.Belt = belt;
+            this.Age = age;
+        }
+
+        protected override void LoadMe()
+        {
+            lblQuestion.Dispose();
+            LblDefenitions(lblAge, "גיל:");
+            LblDefenitions(lblBelt,"חגורה:");
+            LblDefenitions(lblWeight, "משקל:");
+
+            ComboDefenitions(new ComboBox[] { ComboWeight, ComboAge, ComboBelt });
+
+            lblAge.Location = new Point(270, 85);
+            lblBelt.Location = new Point(270, 130);
+            lblWeight.Location = new Point(270, 175);
+
+            ComboAge.Location = new Point(lblAge.Location.X -  ComboAge.Width-5, 85-3);
+            ComboBelt.Location = new Point(lblAge.Location.X -  ComboAge.Width - 5, 130-3);
+            ComboWeight.Location = new Point(lblAge.Location.X -  ComboAge.Width - 5, 175-3);
+
+            LoadCombos();
+
+        }
+
+        private void ComboDefenitions(ComboBox[] com)
+        {
+            for(int i = 0; i< com.Length;i++)
+            {
+                com[i].Size = new Size(150, 30);
+                com[i].BackColor = MartialArts.GlobalVars.Sys_Red;
+                com[i].ForeColor = MartialArts.GlobalVars.Sys_White;
+                com[i].FlatStyle = FlatStyle.Flat;
+                com[i].RightToLeft = RightToLeft.Yes;
+                this.Controls.Add(com[i]);
+            }
+        }
+
+        private void LblDefenitions(Label lbl,string text)
+        {
+            lbl.AutoSize = true;
+            lbl.Text = text;
+            lbl.RightToLeft = RightToLeft.Yes;
+            lbl.TextAlign = ContentAlignment.MiddleRight;
+            lbl.Font = new Font("ARIAL", 9, FontStyle.Bold);
+            this.Controls.Add(lbl);
+        }
+
+        private void LoadCombos()
+        {
+            // age
+                foreach(String a in Contenders.ContndersGeneral.GetAgeValues(IsChild))
+                {
+                    ComboAge.Items.Add(a);
+                }
+            // weight
+            if (IsChild)
+            {
+                foreach (KeyValuePair<string,int> a in Contenders.ContndersGeneral.ChildWeightCat)
+                {
+                    ComboWeight.Items.Add(a.Key);
+                }
+            }
+            else
+            {
+                foreach (KeyValuePair<string, int> a in Contenders.ContndersGeneral.AdultWeightCat)
+                {
+                    ComboWeight.Items.Add(a.Key);
+                }
+            }
+
+            // belt
+            var beltList = new List<string>() { "לבנה", "אפורה", "צהובה", "כתומה", "ירוקה", "כחולה", "סגולה", "חומה", "שחורה" };
+            foreach (string a in beltList)
+            {
+                ComboBelt.Items.Add(a);
+            }
+
+
+
+        }
+
     }
 }

@@ -1201,6 +1201,51 @@ namespace MartialArts
             {
                 SortingMethods.SortByAvgGrade(this, Desc);
             }
+            else if (radSortWeight.Checked == true)
+            {
+                SortingMethods.SortByWeight(this, Desc);
+            }
+
+            else if (radSortAge.Checked == true)
+            {
+                SortingMethods.SortByAge(this, Desc);
+            }
+        }
+
+        private void radSortAge_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radSortAge.Checked == true)
+            {
+                radSortAge.ForeColor = Color.White;
+            }
+            else
+            {
+                radSortAge.ForeColor = Color.FromArgb(200,200,200);
+            }
+        }
+
+        private void radSortWeight_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radSortWeight.Checked == true)
+            {
+                radSortWeight.ForeColor = Color.White;
+            }
+            else
+            {
+                radSortWeight.ForeColor = Color.FromArgb(200, 200, 200);
+            }
+        }
+
+        private void radSortAvgGrade_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radSortAvgGrade.Checked == true)
+            {
+                radSortAvgGrade.ForeColor = Color.White;
+            }
+            else
+            {
+                radSortAvgGrade.ForeColor = Color.FromArgb(200, 200, 200);
+            }
         }
     }
 

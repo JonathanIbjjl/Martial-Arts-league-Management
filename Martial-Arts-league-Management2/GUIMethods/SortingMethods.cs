@@ -31,5 +31,53 @@ namespace MartialArts
                 }
             }
         }
+
+        public static void SortByWeight(Form1 f, bool Desc)
+        {
+            if (Desc == true)
+            {
+                f.BracktsFPanel.Controls.Clear();
+                // sort by Bracket age
+                Visual.VisualLeagueEvent.VisualBracketsList = Visual.VisualLeagueEvent.VisualBracketsList.AsEnumerable().OrderByDescending(x => x.Bracket.WeightGrade).ToList();
+                foreach (Visual.VisualBracket vb in Visual.VisualLeagueEvent.VisualBracketsList)
+                {
+                    f.BracktsFPanel.Controls.Add(vb.Vbracket);
+                }
+            }
+            else
+            {
+                f.BracktsFPanel.Controls.Clear();
+                // sort by Bracket age
+                Visual.VisualLeagueEvent.VisualBracketsList = Visual.VisualLeagueEvent.VisualBracketsList.AsEnumerable().OrderBy(x => x.Bracket.WeightGrade).ToList();
+                foreach (Visual.VisualBracket vb in Visual.VisualLeagueEvent.VisualBracketsList)
+                {
+                    f.BracktsFPanel.Controls.Add(vb.Vbracket);
+                }
+            }
+        }
+
+        public static void SortByAge(Form1 f, bool Desc)
+        {
+            if (Desc == true)
+            {
+                f.BracktsFPanel.Controls.Clear();
+                // sort by Bracket grade
+                Visual.VisualLeagueEvent.VisualBracketsList = Visual.VisualLeagueEvent.VisualBracketsList.AsEnumerable().OrderByDescending(x => x.Bracket.AgeGrade).ToList();
+                foreach (Visual.VisualBracket vb in Visual.VisualLeagueEvent.VisualBracketsList)
+                {
+                    f.BracktsFPanel.Controls.Add(vb.Vbracket);
+                }
+            }
+            else
+            {
+                f.BracktsFPanel.Controls.Clear();
+                // sort by Bracket grade
+                Visual.VisualLeagueEvent.VisualBracketsList = Visual.VisualLeagueEvent.VisualBracketsList.AsEnumerable().OrderBy(x => x.Bracket.AgeGrade).ToList();
+                foreach (Visual.VisualBracket vb in Visual.VisualLeagueEvent.VisualBracketsList)
+                {
+                    f.BracktsFPanel.Controls.Add(vb.Vbracket);
+                }
+            }
+        }
     }
 }

@@ -83,8 +83,11 @@ namespace Visual
         private void Vcont_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
 
         {
-            System.Windows.Forms.Control c = sender as System.Windows.Forms.Control;
-            c.Invoke(new Action<System.Windows.Forms.Control>(DoEffect), c);
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                System.Windows.Forms.Control c = sender as System.Windows.Forms.Control;
+                c.Invoke(new Action<System.Windows.Forms.Control>(DoEffect), c);
+            }
         }
 
         private void DoEffect(System.Windows.Forms.Control c)

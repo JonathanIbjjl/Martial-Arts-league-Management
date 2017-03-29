@@ -65,6 +65,9 @@ namespace  Visual
                     // hide button 
                     btnHideBracket.Location = new Point(_Header.Width- btnHideBracket.Width - 3, 1);
                     _Header.Controls.Add(btnHideBracket);
+                    // change description button
+                    btnChangeDescription.Location = new Point(6, 1);
+                    _Header.Controls.Add(btnChangeDescription);
                     return _Header;
                 }
                 else
@@ -126,7 +129,6 @@ namespace  Visual
                 }
             }
         }
-        #endregion
 
         private void btnHide_Click(object sender, EventArgs e)
         {
@@ -134,9 +136,9 @@ namespace  Visual
             {
                 // hide
                 ((Label)sender).Text = "+";
-                Vbracket.Size = new Size(Vbracket.Width, Header.Size.Height+6);
+                Vbracket.Size = new Size(Vbracket.Width, Header.Size.Height + 6);
                 // change to unactive colors
-                _Header.BackColor = Color.FromArgb(40,40,40);
+                _Header.BackColor = Color.FromArgb(40, 40, 40);
                 _Header.ForeColor = Color.FromArgb(70, 70, 70);
                 // disable drag events
                 _Header.DragOver -= new DragEventHandler(Vbracket_DragOver);
@@ -155,6 +157,50 @@ namespace  Visual
                 _Header.DragDrop += new DragEventHandler(Vbracket_DragDrop);
             }
         }
+        #endregion
+
+        #region "Change Bracket Description"
+        private Label _btnChangeDescription;
+        public Label btnChangeDescription
+        {
+            get
+            {
+                if (_btnChangeDescription == null)
+                {
+                   _btnChangeDescription = new Label();
+                   _btnChangeDescription.Size = new Size(22, 17);
+                   _btnChangeDescription.Font = new Font("ARIAL", 10, FontStyle.Regular);
+                   _btnChangeDescription.TextAlign = ContentAlignment.MiddleCenter;
+                   _btnChangeDescription.BackColor = GlobalVars.Sys_DarkerGray;
+                   _btnChangeDescription.BorderStyle = BorderStyle.FixedSingle;
+                   _btnChangeDescription.ForeColor = GlobalVars.Sys_Yellow;
+                   _btnChangeDescription.FlatStyle = FlatStyle.Flat;
+                   _btnChangeDescription.Cursor = Cursors.Hand;
+                   _btnChangeDescription.Text = "≡";
+                    _btnChangeDescription.Click += new EventHandler(btnDescription_Click);
+                    return _btnChangeDescription;
+                }
+                else
+                {
+                    return _btnChangeDescription;
+                }
+            }
+        }
+
+        private void btnDescription_Click(object sender, EventArgs e)
+        {
+            Martial_Arts_league_Management2.ChangeVisualBracketDesc desc = new Martial_Arts_league_Management2.ChangeVisualBracketDesc(Bracket.IsChild,Bracket.AgeGrade,Bracket.WeightGrade,Bracket.BeltGrade);
+            desc.ShowDialog();
+
+            Bracket.RefreshBracketInfo(100, 1000, 1);
+            Header.Text = Bracket.ToString();
+        }
+
+        #endregion
+
+
+
+
         public VisualBracket(MartialArts.Bracket bracket)
         {
             this.Bracket = bracket;
@@ -257,7 +303,7 @@ namespace  Visual
                 Vbracket.Size = new Size(VisualContender.ContMainPanel_Size.Width + 4, ((VisualContender.ContMainPanel_Size.Height + 6) * VisualCont.Count) + 26); // ontMainPanel_Size.Height + 6 is the margin beetween contenders,last digit:  Header And Margin
 
                 // refresh header (moty asked to cancel the new brackets info i want to preserve the original bracket header)
-               // Bracket.RefreshBracketInfo();
+            //   Bracket.RefreshBracketInfo();
                // Header.Text = Bracket.ToString();
                 return null;
             }

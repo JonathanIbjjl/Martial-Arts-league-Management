@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.קובץToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tpNew = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,36 +49,40 @@
             this.MenuItemCreateNewList = new System.Windows.Forms.ToolStripMenuItem();
             this.הצגרשימהלדוגמאToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblSearchMsg = new System.Windows.Forms.Label();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnAsc = new System.Windows.Forms.Button();
             this.radSortWeight = new System.Windows.Forms.RadioButton();
-            this.radSortBelt = new System.Windows.Forms.RadioButton();
+            this.btnDesc = new System.Windows.Forms.Button();
             this.radSortAge = new System.Windows.Forms.RadioButton();
             this.radSortAvgGrade = new System.Windows.Forms.RadioButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.radioDesc = new System.Windows.Forms.RadioButton();
             this.radioAsc = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblSearchMsg = new System.Windows.Forms.Label();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
+            this.panelStatistics = new System.Windows.Forms.Panel();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.lblAllContsCount = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.lblAllUnplacedContsCount = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.lblPlacedContsCount = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.lblIsUselessContsCount = new System.Windows.Forms.Label();
+            this.lblPercent = new System.Windows.Forms.Label();
+            this.lblPercentwithoutUseless = new System.Windows.Forms.Label();
+            this.lblBracketsClock = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.UnPlacedFpanel = new System.Windows.Forms.FlowLayoutPanel();
             this.BracktsFPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.label13 = new System.Windows.Forms.Label();
-            this.lblPlacedContsCount = new System.Windows.Forms.Label();
-            this.lblAllUnplacedContsCount = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.lblAllContsCount = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.lblPercent = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.lblPercentwithoutUseless = new System.Windows.Forms.Label();
-            this.lblBracketsClock = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -91,6 +95,8 @@
             this.btnBrowse = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnBuiledBrackets = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.numNumberOfContenders = new System.Windows.Forms.NumericUpDown();
             this.txtPath = new System.Windows.Forms.TextBox();
@@ -99,32 +105,25 @@
             this.dgvMain = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.panelStatistics = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnBuiledBrackets = new System.Windows.Forms.Button();
-            this.btnAsc = new System.Windows.Forms.Button();
-            this.btnDesc = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.panelStatistics.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.tabPage1.SuspendLayout();
             this.FilesPanel.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numNumberOfContenders)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
             this.tabControl1.SuspendLayout();
-            this.panelStatistics.SuspendLayout();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -280,7 +279,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
             this.tabPage2.Controls.Add(this.panel3);
             this.tabPage2.Controls.Add(this.panelStatistics);
             this.tabPage2.Controls.Add(this.label8);
@@ -293,114 +292,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "בתים";
             // 
-            // groupBox2
+            // panel3
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.btnAsc);
-            this.groupBox2.Controls.Add(this.radSortWeight);
-            this.groupBox2.Controls.Add(this.btnDesc);
-            this.groupBox2.Controls.Add(this.radSortBelt);
-            this.groupBox2.Controls.Add(this.radSortAge);
-            this.groupBox2.Controls.Add(this.radSortAvgGrade);
-            this.groupBox2.Controls.Add(this.panel2);
-            this.groupBox2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.groupBox2.Location = new System.Drawing.Point(16, 4);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(251, 93);
-            this.groupBox2.TabIndex = 41;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "מיון";
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
-            // 
-            // radSortWeight
-            // 
-            this.radSortWeight.AutoSize = true;
-            this.radSortWeight.Checked = true;
-            this.radSortWeight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.radSortWeight.Location = new System.Drawing.Point(115, 70);
-            this.radSortWeight.Name = "radSortWeight";
-            this.radSortWeight.Size = new System.Drawing.Size(52, 18);
-            this.radSortWeight.TabIndex = 47;
-            this.radSortWeight.TabStop = true;
-            this.radSortWeight.Text = "משקל";
-            this.radSortWeight.UseVisualStyleBackColor = true;
-            // 
-            // radSortBelt
-            // 
-            this.radSortBelt.AutoSize = true;
-            this.radSortBelt.Checked = true;
-            this.radSortBelt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.radSortBelt.Location = new System.Drawing.Point(56, 70);
-            this.radSortBelt.Name = "radSortBelt";
-            this.radSortBelt.Size = new System.Drawing.Size(53, 18);
-            this.radSortBelt.TabIndex = 46;
-            this.radSortBelt.TabStop = true;
-            this.radSortBelt.Text = "חגורה";
-            this.radSortBelt.UseVisualStyleBackColor = true;
-            // 
-            // radSortAge
-            // 
-            this.radSortAge.AutoSize = true;
-            this.radSortAge.Checked = true;
-            this.radSortAge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.radSortAge.Location = new System.Drawing.Point(12, 70);
-            this.radSortAge.Name = "radSortAge";
-            this.radSortAge.Size = new System.Drawing.Size(38, 18);
-            this.radSortAge.TabIndex = 45;
-            this.radSortAge.TabStop = true;
-            this.radSortAge.Text = "גיל";
-            this.radSortAge.UseVisualStyleBackColor = true;
-            // 
-            // radSortAvgGrade
-            // 
-            this.radSortAvgGrade.AutoSize = true;
-            this.radSortAvgGrade.Checked = true;
-            this.radSortAvgGrade.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.radSortAvgGrade.Location = new System.Drawing.Point(173, 68);
-            this.radSortAvgGrade.Name = "radSortAvgGrade";
-            this.radSortAvgGrade.Size = new System.Drawing.Size(72, 18);
-            this.radSortAvgGrade.TabIndex = 44;
-            this.radSortAvgGrade.TabStop = true;
-            this.radSortAvgGrade.Text = "ציון ממוצע";
-            this.radSortAvgGrade.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.panel2.Controls.Add(this.radioDesc);
-            this.panel2.Controls.Add(this.radioAsc);
-            this.panel2.Location = new System.Drawing.Point(92, 15);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(153, 22);
-            this.panel2.TabIndex = 43;
-            // 
-            // radioDesc
-            // 
-            this.radioDesc.AutoSize = true;
-            this.radioDesc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.radioDesc.Location = new System.Drawing.Point(85, 2);
-            this.radioDesc.Name = "radioDesc";
-            this.radioDesc.Size = new System.Drawing.Size(65, 18);
-            this.radioDesc.TabIndex = 4;
-            this.radioDesc.Text = "סדר יורד";
-            this.radioDesc.UseVisualStyleBackColor = true;
-            this.radioDesc.CheckedChanged += new System.EventHandler(this.radioDesc_CheckedChanged);
-            // 
-            // radioAsc
-            // 
-            this.radioAsc.AutoSize = true;
-            this.radioAsc.Checked = true;
-            this.radioAsc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.radioAsc.Location = new System.Drawing.Point(3, 2);
-            this.radioAsc.Name = "radioAsc";
-            this.radioAsc.Size = new System.Drawing.Size(68, 18);
-            this.radioAsc.TabIndex = 41;
-            this.radioAsc.TabStop = true;
-            this.radioAsc.Text = "סדר עולה";
-            this.radioAsc.UseVisualStyleBackColor = true;
-            this.radioAsc.CheckedChanged += new System.EventHandler(this.radioAsc_CheckedChanged);
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.panel3.Controls.Add(this.groupBox1);
+            this.panel3.Controls.Add(this.groupBox2);
+            this.panel3.Location = new System.Drawing.Point(454, 5);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(432, 104);
+            this.panel3.TabIndex = 43;
             // 
             // groupBox1
             // 
@@ -445,11 +346,11 @@
             // btnSearch
             // 
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
             this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSearch.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.btnSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.btnSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
             this.btnSearch.Location = new System.Drawing.Point(7, 41);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(116, 28);
@@ -458,16 +359,219 @@
             this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click_1);
             // 
-            // label8
+            // groupBox2
             // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.label8.Location = new System.Drawing.Point(3, 113);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(1397, 6);
-            this.label8.TabIndex = 35;
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.btnAsc);
+            this.groupBox2.Controls.Add(this.radSortWeight);
+            this.groupBox2.Controls.Add(this.btnDesc);
+            this.groupBox2.Controls.Add(this.radSortAge);
+            this.groupBox2.Controls.Add(this.radSortAvgGrade);
+            this.groupBox2.Controls.Add(this.panel2);
+            this.groupBox2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.groupBox2.Location = new System.Drawing.Point(16, 4);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(251, 93);
+            this.groupBox2.TabIndex = 41;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "מיון";
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            // 
+            // btnAsc
+            // 
+            this.btnAsc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAsc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.btnAsc.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAsc.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAsc.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.btnAsc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.btnAsc.Image = ((System.Drawing.Image)(resources.GetObject("btnAsc.Image")));
+            this.btnAsc.Location = new System.Drawing.Point(12, 15);
+            this.btnAsc.Name = "btnAsc";
+            this.btnAsc.Size = new System.Drawing.Size(58, 52);
+            this.btnAsc.TabIndex = 45;
+            this.toolTip1.SetToolTip(this.btnAsc, "מיין בסדר עולה");
+            this.btnAsc.UseVisualStyleBackColor = false;
+            this.btnAsc.Click += new System.EventHandler(this.btnAsc_Click);
+            // 
+            // radSortWeight
+            // 
+            this.radSortWeight.AutoSize = true;
+            this.radSortWeight.Checked = true;
+            this.radSortWeight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.radSortWeight.Location = new System.Drawing.Point(85, 70);
+            this.radSortWeight.Name = "radSortWeight";
+            this.radSortWeight.Size = new System.Drawing.Size(52, 18);
+            this.radSortWeight.TabIndex = 47;
+            this.radSortWeight.TabStop = true;
+            this.radSortWeight.Text = "משקל";
+            this.radSortWeight.UseVisualStyleBackColor = true;
+            this.radSortWeight.CheckedChanged += new System.EventHandler(this.radSortWeight_CheckedChanged);
+            // 
+            // btnDesc
+            // 
+            this.btnDesc.AllowDrop = true;
+            this.btnDesc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDesc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.btnDesc.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDesc.Enabled = false;
+            this.btnDesc.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDesc.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.btnDesc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.btnDesc.Image = ((System.Drawing.Image)(resources.GetObject("btnDesc.Image")));
+            this.btnDesc.Location = new System.Drawing.Point(12, 15);
+            this.btnDesc.Name = "btnDesc";
+            this.btnDesc.Size = new System.Drawing.Size(58, 52);
+            this.btnDesc.TabIndex = 44;
+            this.toolTip1.SetToolTip(this.btnDesc, "מיין בסדר יורד");
+            this.btnDesc.UseVisualStyleBackColor = false;
+            this.btnDesc.Visible = false;
+            this.btnDesc.Click += new System.EventHandler(this.btnDesc_Click);
+            // 
+            // radSortAge
+            // 
+            this.radSortAge.AutoSize = true;
+            this.radSortAge.Checked = true;
+            this.radSortAge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.radSortAge.Location = new System.Drawing.Point(12, 70);
+            this.radSortAge.Name = "radSortAge";
+            this.radSortAge.Size = new System.Drawing.Size(38, 18);
+            this.radSortAge.TabIndex = 45;
+            this.radSortAge.TabStop = true;
+            this.radSortAge.Text = "גיל";
+            this.radSortAge.UseVisualStyleBackColor = true;
+            this.radSortAge.CheckedChanged += new System.EventHandler(this.radSortAge_CheckedChanged);
+            // 
+            // radSortAvgGrade
+            // 
+            this.radSortAvgGrade.AutoSize = true;
+            this.radSortAvgGrade.Checked = true;
+            this.radSortAvgGrade.ForeColor = System.Drawing.Color.White;
+            this.radSortAvgGrade.Location = new System.Drawing.Point(172, 68);
+            this.radSortAvgGrade.Name = "radSortAvgGrade";
+            this.radSortAvgGrade.Size = new System.Drawing.Size(72, 18);
+            this.radSortAvgGrade.TabIndex = 44;
+            this.radSortAvgGrade.TabStop = true;
+            this.radSortAvgGrade.Text = "ציון ממוצע";
+            this.radSortAvgGrade.UseVisualStyleBackColor = true;
+            this.radSortAvgGrade.CheckedChanged += new System.EventHandler(this.radSortAvgGrade_CheckedChanged);
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.panel2.Controls.Add(this.radioDesc);
+            this.panel2.Controls.Add(this.radioAsc);
+            this.panel2.Location = new System.Drawing.Point(92, 15);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(153, 22);
+            this.panel2.TabIndex = 43;
+            // 
+            // radioDesc
+            // 
+            this.radioDesc.AutoSize = true;
+            this.radioDesc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.radioDesc.Location = new System.Drawing.Point(85, 2);
+            this.radioDesc.Name = "radioDesc";
+            this.radioDesc.Size = new System.Drawing.Size(65, 18);
+            this.radioDesc.TabIndex = 4;
+            this.radioDesc.Text = "סדר יורד";
+            this.radioDesc.UseVisualStyleBackColor = true;
+            this.radioDesc.CheckedChanged += new System.EventHandler(this.radioDesc_CheckedChanged);
+            // 
+            // radioAsc
+            // 
+            this.radioAsc.AutoSize = true;
+            this.radioAsc.Checked = true;
+            this.radioAsc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.radioAsc.Location = new System.Drawing.Point(3, 2);
+            this.radioAsc.Name = "radioAsc";
+            this.radioAsc.Size = new System.Drawing.Size(68, 18);
+            this.radioAsc.TabIndex = 41;
+            this.radioAsc.TabStop = true;
+            this.radioAsc.Text = "סדר עולה";
+            this.radioAsc.UseVisualStyleBackColor = true;
+            this.radioAsc.CheckedChanged += new System.EventHandler(this.radioAsc_CheckedChanged);
+            // 
+            // panelStatistics
+            // 
+            this.panelStatistics.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelStatistics.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.panelStatistics.Controls.Add(this.label16);
+            this.panelStatistics.Controls.Add(this.label14);
+            this.panelStatistics.Controls.Add(this.lblAllContsCount);
+            this.panelStatistics.Controls.Add(this.label15);
+            this.panelStatistics.Controls.Add(this.label7);
+            this.panelStatistics.Controls.Add(this.lblAllUnplacedContsCount);
+            this.panelStatistics.Controls.Add(this.label6);
+            this.panelStatistics.Controls.Add(this.lblPlacedContsCount);
+            this.panelStatistics.Controls.Add(this.label5);
+            this.panelStatistics.Controls.Add(this.label13);
+            this.panelStatistics.Controls.Add(this.lblIsUselessContsCount);
+            this.panelStatistics.Controls.Add(this.lblPercent);
+            this.panelStatistics.Controls.Add(this.lblPercentwithoutUseless);
+            this.panelStatistics.Controls.Add(this.lblBracketsClock);
+            this.panelStatistics.Location = new System.Drawing.Point(917, 5);
+            this.panelStatistics.Name = "panelStatistics";
+            this.panelStatistics.Size = new System.Drawing.Size(480, 104);
+            this.panelStatistics.TabIndex = 42;
+            // 
+            // label16
+            // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label16.AutoEllipsis = true;
+            this.label16.AutoSize = true;
+            this.label16.BackColor = System.Drawing.Color.Transparent;
+            this.label16.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.label16.Location = new System.Drawing.Point(369, 54);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(108, 15);
+            this.label16.TabIndex = 27;
+            this.label16.Text = "מתחרים לא משובצים:";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.Transparent;
+            this.label14.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.label14.Location = new System.Drawing.Point(358, 30);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(119, 15);
+            this.label14.TabIndex = 25;
+            this.label14.Text = "סה\"כ מתחרים משובצים:";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblAllContsCount
+            // 
+            this.lblAllContsCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAllContsCount.BackColor = System.Drawing.Color.Transparent;
+            this.lblAllContsCount.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lblAllContsCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.lblAllContsCount.Location = new System.Drawing.Point(350, 6);
+            this.lblAllContsCount.Name = "lblAllContsCount";
+            this.lblAllContsCount.Size = new System.Drawing.Size(46, 16);
+            this.lblAllContsCount.TabIndex = 28;
+            this.lblAllContsCount.Text = "000";
+            this.lblAllContsCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label15
+            // 
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label15.AutoSize = true;
+            this.label15.BackColor = System.Drawing.Color.Transparent;
+            this.label15.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.label15.Location = new System.Drawing.Point(335, 78);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(142, 15);
+            this.label15.TabIndex = 26;
+            this.label15.Text = "מתחרים ללא אפשרות שיבוץ:";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label7
             // 
@@ -482,6 +586,19 @@
             this.label7.Text = "התאמות ברוטו";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblAllUnplacedContsCount
+            // 
+            this.lblAllUnplacedContsCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAllUnplacedContsCount.BackColor = System.Drawing.Color.Transparent;
+            this.lblAllUnplacedContsCount.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lblAllUnplacedContsCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.lblAllUnplacedContsCount.Location = new System.Drawing.Point(317, 54);
+            this.lblAllUnplacedContsCount.Name = "lblAllUnplacedContsCount";
+            this.lblAllUnplacedContsCount.Size = new System.Drawing.Size(46, 16);
+            this.lblAllUnplacedContsCount.TabIndex = 30;
+            this.lblAllUnplacedContsCount.Text = "000";
+            this.lblAllUnplacedContsCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // label6
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -494,6 +611,19 @@
             this.label6.TabIndex = 33;
             this.label6.Text = "התאמות נטו";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblPlacedContsCount
+            // 
+            this.lblPlacedContsCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPlacedContsCount.BackColor = System.Drawing.Color.Transparent;
+            this.lblPlacedContsCount.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lblPlacedContsCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.lblPlacedContsCount.Location = new System.Drawing.Point(287, 30);
+            this.lblPlacedContsCount.Name = "lblPlacedContsCount";
+            this.lblPlacedContsCount.Size = new System.Drawing.Size(65, 16);
+            this.lblPlacedContsCount.TabIndex = 29;
+            this.lblPlacedContsCount.Text = "000";
+            this.lblPlacedContsCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label5
             // 
@@ -508,6 +638,20 @@
             this.label5.Text = "בתים מלאים";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label13
+            // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.Transparent;
+            this.label13.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.label13.Location = new System.Drawing.Point(402, 6);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(75, 15);
+            this.label13.TabIndex = 24;
+            this.label13.Text = "סה\"כ מתחרים:";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // lblIsUselessContsCount
             // 
             this.lblIsUselessContsCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -520,6 +664,57 @@
             this.lblIsUselessContsCount.TabIndex = 31;
             this.lblIsUselessContsCount.Text = "000";
             this.lblIsUselessContsCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblPercent
+            // 
+            this.lblPercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPercent.BackColor = System.Drawing.Color.Transparent;
+            this.lblPercent.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lblPercent.ForeColor = System.Drawing.Color.Silver;
+            this.lblPercent.Location = new System.Drawing.Point(199, 30);
+            this.lblPercent.Name = "lblPercent";
+            this.lblPercent.Size = new System.Drawing.Size(70, 70);
+            this.lblPercent.TabIndex = 18;
+            this.lblPercent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.lblPercent, "אחוז המתחרים המשובצים מתוך כלל המשתתפים");
+            // 
+            // lblPercentwithoutUseless
+            // 
+            this.lblPercentwithoutUseless.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPercentwithoutUseless.BackColor = System.Drawing.Color.Transparent;
+            this.lblPercentwithoutUseless.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lblPercentwithoutUseless.ForeColor = System.Drawing.Color.Silver;
+            this.lblPercentwithoutUseless.Location = new System.Drawing.Point(109, 30);
+            this.lblPercentwithoutUseless.Name = "lblPercentwithoutUseless";
+            this.lblPercentwithoutUseless.Size = new System.Drawing.Size(70, 70);
+            this.lblPercentwithoutUseless.TabIndex = 19;
+            this.lblPercentwithoutUseless.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.lblPercentwithoutUseless, "אחוז המתחרים המשובצים מתוך כלל המשתתפים למעט משתתפים ללא התאמה לאף מתחרה באירוע ה" +
+        "נוכחי");
+            // 
+            // lblBracketsClock
+            // 
+            this.lblBracketsClock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblBracketsClock.BackColor = System.Drawing.Color.Transparent;
+            this.lblBracketsClock.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lblBracketsClock.ForeColor = System.Drawing.Color.Silver;
+            this.lblBracketsClock.Location = new System.Drawing.Point(19, 30);
+            this.lblBracketsClock.Name = "lblBracketsClock";
+            this.lblBracketsClock.Size = new System.Drawing.Size(70, 70);
+            this.lblBracketsClock.TabIndex = 20;
+            this.lblBracketsClock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.lblBracketsClock, "אחוז הבתים ששווים או גבוהים ממספר המשתתפים המבוקש לבית");
+            // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.label8.Location = new System.Drawing.Point(3, 113);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(1397, 6);
+            this.label8.TabIndex = 35;
             // 
             // splitContainer1
             // 
@@ -580,141 +775,16 @@
             this.BracktsFPanel.TabIndex = 0;
             this.BracktsFPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BracktsFPanel_MouseClick);
             // 
-            // label13
+            // pictureBox2
             // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.AutoSize = true;
-            this.label13.BackColor = System.Drawing.Color.Transparent;
-            this.label13.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label13.Location = new System.Drawing.Point(402, 6);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(75, 15);
-            this.label13.TabIndex = 24;
-            this.label13.Text = "סה\"כ מתחרים:";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblPlacedContsCount
-            // 
-            this.lblPlacedContsCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPlacedContsCount.BackColor = System.Drawing.Color.Transparent;
-            this.lblPlacedContsCount.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.lblPlacedContsCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.lblPlacedContsCount.Location = new System.Drawing.Point(287, 30);
-            this.lblPlacedContsCount.Name = "lblPlacedContsCount";
-            this.lblPlacedContsCount.Size = new System.Drawing.Size(65, 16);
-            this.lblPlacedContsCount.TabIndex = 29;
-            this.lblPlacedContsCount.Text = "000";
-            this.lblPlacedContsCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblAllUnplacedContsCount
-            // 
-            this.lblAllUnplacedContsCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAllUnplacedContsCount.BackColor = System.Drawing.Color.Transparent;
-            this.lblAllUnplacedContsCount.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.lblAllUnplacedContsCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.lblAllUnplacedContsCount.Location = new System.Drawing.Point(317, 54);
-            this.lblAllUnplacedContsCount.Name = "lblAllUnplacedContsCount";
-            this.lblAllUnplacedContsCount.Size = new System.Drawing.Size(46, 16);
-            this.lblAllUnplacedContsCount.TabIndex = 30;
-            this.lblAllUnplacedContsCount.Text = "000";
-            this.lblAllUnplacedContsCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label15
-            // 
-            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label15.AutoSize = true;
-            this.label15.BackColor = System.Drawing.Color.Transparent;
-            this.label15.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label15.Location = new System.Drawing.Point(335, 78);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(142, 15);
-            this.label15.TabIndex = 26;
-            this.label15.Text = "מתחרים ללא אפשרות שיבוץ:";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblAllContsCount
-            // 
-            this.lblAllContsCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAllContsCount.BackColor = System.Drawing.Color.Transparent;
-            this.lblAllContsCount.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.lblAllContsCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.lblAllContsCount.Location = new System.Drawing.Point(350, 6);
-            this.lblAllContsCount.Name = "lblAllContsCount";
-            this.lblAllContsCount.Size = new System.Drawing.Size(46, 16);
-            this.lblAllContsCount.TabIndex = 28;
-            this.lblAllContsCount.Text = "000";
-            this.lblAllContsCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label14
-            // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label14.AutoSize = true;
-            this.label14.BackColor = System.Drawing.Color.Transparent;
-            this.label14.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label14.Location = new System.Drawing.Point(358, 30);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(119, 15);
-            this.label14.TabIndex = 25;
-            this.label14.Text = "סה\"כ מתחרים משובצים:";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblPercent
-            // 
-            this.lblPercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPercent.BackColor = System.Drawing.Color.Transparent;
-            this.lblPercent.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.lblPercent.ForeColor = System.Drawing.Color.Silver;
-            this.lblPercent.Location = new System.Drawing.Point(199, 30);
-            this.lblPercent.Name = "lblPercent";
-            this.lblPercent.Size = new System.Drawing.Size(70, 70);
-            this.lblPercent.TabIndex = 18;
-            this.lblPercent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.lblPercent, "אחוז המתחרים המשובצים מתוך כלל המשתתפים");
-            // 
-            // label16
-            // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label16.AutoEllipsis = true;
-            this.label16.AutoSize = true;
-            this.label16.BackColor = System.Drawing.Color.Transparent;
-            this.label16.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label16.Location = new System.Drawing.Point(369, 54);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(108, 15);
-            this.label16.TabIndex = 27;
-            this.label16.Text = "מתחרים לא משובצים:";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblPercentwithoutUseless
-            // 
-            this.lblPercentwithoutUseless.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPercentwithoutUseless.BackColor = System.Drawing.Color.Transparent;
-            this.lblPercentwithoutUseless.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.lblPercentwithoutUseless.ForeColor = System.Drawing.Color.Silver;
-            this.lblPercentwithoutUseless.Location = new System.Drawing.Point(109, 30);
-            this.lblPercentwithoutUseless.Name = "lblPercentwithoutUseless";
-            this.lblPercentwithoutUseless.Size = new System.Drawing.Size(70, 70);
-            this.lblPercentwithoutUseless.TabIndex = 19;
-            this.lblPercentwithoutUseless.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.lblPercentwithoutUseless, "אחוז המתחרים המשובצים מתוך כלל המשתתפים למעט משתתפים ללא התאמה לאף מתחרה באירוע ה" +
-        "נוכחי");
-            // 
-            // lblBracketsClock
-            // 
-            this.lblBracketsClock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblBracketsClock.BackColor = System.Drawing.Color.Transparent;
-            this.lblBracketsClock.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.lblBracketsClock.ForeColor = System.Drawing.Color.Silver;
-            this.lblBracketsClock.Location = new System.Drawing.Point(19, 30);
-            this.lblBracketsClock.Name = "lblBracketsClock";
-            this.lblBracketsClock.Size = new System.Drawing.Size(70, 70);
-            this.lblBracketsClock.TabIndex = 20;
-            this.lblBracketsClock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.lblBracketsClock, "אחוז הבתים ששווים או גבוהים ממספר המשתתפים המבוקש לבית");
+            this.pictureBox2.ErrorImage = null;
+            this.pictureBox2.Image = global::Martial_Arts_league_Management2.Properties.Resources.ICON_BJJL231;
+            this.pictureBox2.Location = new System.Drawing.Point(3, 6);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(105, 96);
+            this.pictureBox2.TabIndex = 9;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // tabPage1
             // 
@@ -887,6 +957,34 @@
             this.checkBox2.Text = "בדוק תאימות גיל ומשקל";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.ErrorImage = null;
+            this.pictureBox1.Image = global::Martial_Arts_league_Management2.Properties.Resources.ICON_BJJL231;
+            this.pictureBox1.Location = new System.Drawing.Point(8, 9);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(105, 95);
+            this.pictureBox1.TabIndex = 8;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // btnBuiledBrackets
+            // 
+            this.btnBuiledBrackets.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBuiledBrackets.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.btnBuiledBrackets.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBuiledBrackets.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBuiledBrackets.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.btnBuiledBrackets.ForeColor = System.Drawing.Color.Maroon;
+            this.btnBuiledBrackets.Image = global::Martial_Arts_league_Management2.Properties.Resources._148841HungarianYellow;
+            this.btnBuiledBrackets.Location = new System.Drawing.Point(618, 47);
+            this.btnBuiledBrackets.Name = "btnBuiledBrackets";
+            this.btnBuiledBrackets.Size = new System.Drawing.Size(84, 60);
+            this.btnBuiledBrackets.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.btnBuiledBrackets, "האלגוריתם הסטטיסטי של המערכת ייצר בתים מתוך המשתתפים שנטענו");
+            this.btnBuiledBrackets.UseVisualStyleBackColor = false;
+            this.btnBuiledBrackets.Click += new System.EventHandler(this.btnBuiledBrackets_Click);
+            // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -981,29 +1079,29 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvMain.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
             this.dgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMain.Location = new System.Drawing.Point(3, 136);
             this.dgvMain.MultiSelect = false;
             this.dgvMain.Name = "dgvMain";
             this.dgvMain.ReadOnly = true;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvMain.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.dgvMain.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvMain.RowHeadersDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.dgvMain.RowsDefaultCellStyle = dataGridViewCellStyle21;
             this.dgvMain.Size = new System.Drawing.Size(1397, 413);
             this.dgvMain.TabIndex = 3;
             this.dgvMain.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMain_CellContentClick);
@@ -1024,116 +1122,6 @@
             this.tabControl1.TabIndex = 1;
             this.tabControl1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tabControl1_KeyDown);
             // 
-            // panelStatistics
-            // 
-            this.panelStatistics.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelStatistics.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.panelStatistics.Controls.Add(this.label16);
-            this.panelStatistics.Controls.Add(this.label14);
-            this.panelStatistics.Controls.Add(this.lblAllContsCount);
-            this.panelStatistics.Controls.Add(this.label15);
-            this.panelStatistics.Controls.Add(this.label7);
-            this.panelStatistics.Controls.Add(this.lblAllUnplacedContsCount);
-            this.panelStatistics.Controls.Add(this.label6);
-            this.panelStatistics.Controls.Add(this.lblPlacedContsCount);
-            this.panelStatistics.Controls.Add(this.label5);
-            this.panelStatistics.Controls.Add(this.label13);
-            this.panelStatistics.Controls.Add(this.lblIsUselessContsCount);
-            this.panelStatistics.Controls.Add(this.lblPercent);
-            this.panelStatistics.Controls.Add(this.lblPercentwithoutUseless);
-            this.panelStatistics.Controls.Add(this.lblBracketsClock);
-            this.panelStatistics.Location = new System.Drawing.Point(917, 5);
-            this.panelStatistics.Name = "panelStatistics";
-            this.panelStatistics.Size = new System.Drawing.Size(480, 104);
-            this.panelStatistics.TabIndex = 42;
-            // 
-            // panel3
-            // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.panel3.Controls.Add(this.groupBox1);
-            this.panel3.Controls.Add(this.groupBox2);
-            this.panel3.Location = new System.Drawing.Point(454, 5);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(432, 104);
-            this.panel3.TabIndex = 43;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.ErrorImage = null;
-            this.pictureBox1.Image = global::Martial_Arts_league_Management2.Properties.Resources.ICON_BJJL231;
-            this.pictureBox1.Location = new System.Drawing.Point(8, 9);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(105, 95);
-            this.pictureBox1.TabIndex = 8;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // btnBuiledBrackets
-            // 
-            this.btnBuiledBrackets.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBuiledBrackets.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.btnBuiledBrackets.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnBuiledBrackets.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBuiledBrackets.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.btnBuiledBrackets.ForeColor = System.Drawing.Color.Maroon;
-            this.btnBuiledBrackets.Image = global::Martial_Arts_league_Management2.Properties.Resources._148841HungarianYellow;
-            this.btnBuiledBrackets.Location = new System.Drawing.Point(618, 47);
-            this.btnBuiledBrackets.Name = "btnBuiledBrackets";
-            this.btnBuiledBrackets.Size = new System.Drawing.Size(84, 60);
-            this.btnBuiledBrackets.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.btnBuiledBrackets, "האלגוריתם הסטטיסטי של המערכת ייצר בתים מתוך המשתתפים שנטענו");
-            this.btnBuiledBrackets.UseVisualStyleBackColor = false;
-            this.btnBuiledBrackets.Click += new System.EventHandler(this.btnBuiledBrackets_Click);
-            // 
-            // btnAsc
-            // 
-            this.btnAsc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAsc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-            this.btnAsc.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAsc.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAsc.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.btnAsc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.btnAsc.Image = ((System.Drawing.Image)(resources.GetObject("btnAsc.Image")));
-            this.btnAsc.Location = new System.Drawing.Point(12, 15);
-            this.btnAsc.Name = "btnAsc";
-            this.btnAsc.Size = new System.Drawing.Size(58, 52);
-            this.btnAsc.TabIndex = 45;
-            this.toolTip1.SetToolTip(this.btnAsc, "מיין בסדר עולה");
-            this.btnAsc.UseVisualStyleBackColor = false;
-            this.btnAsc.Click += new System.EventHandler(this.btnAsc_Click);
-            // 
-            // btnDesc
-            // 
-            this.btnDesc.AllowDrop = true;
-            this.btnDesc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDesc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-            this.btnDesc.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDesc.Enabled = false;
-            this.btnDesc.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDesc.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.btnDesc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.btnDesc.Image = ((System.Drawing.Image)(resources.GetObject("btnDesc.Image")));
-            this.btnDesc.Location = new System.Drawing.Point(12, 15);
-            this.btnDesc.Name = "btnDesc";
-            this.btnDesc.Size = new System.Drawing.Size(58, 52);
-            this.btnDesc.TabIndex = 44;
-            this.toolTip1.SetToolTip(this.btnDesc, "מיין בסדר יורד");
-            this.btnDesc.UseVisualStyleBackColor = false;
-            this.btnDesc.Visible = false;
-            this.btnDesc.Click += new System.EventHandler(this.btnDesc_Click);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.ErrorImage = null;
-            this.pictureBox2.Image = global::Martial_Arts_league_Management2.Properties.Resources.ICON_BJJL231;
-            this.pictureBox2.Location = new System.Drawing.Point(3, 6);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(105, 96);
-            this.pictureBox2.TabIndex = 9;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1152,29 +1140,29 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.panelStatistics.ResumeLayout(false);
+            this.panelStatistics.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.FilesPanel.ResumeLayout(false);
             this.FilesPanel.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numNumberOfContenders)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).EndInit();
             this.tabControl1.ResumeLayout(false);
-            this.panelStatistics.ResumeLayout(false);
-            this.panelStatistics.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1248,7 +1236,6 @@
         private System.Windows.Forms.RadioButton radioDesc;
         private System.Windows.Forms.RadioButton radioAsc;
         private System.Windows.Forms.RadioButton radSortWeight;
-        private System.Windows.Forms.RadioButton radSortBelt;
         private System.Windows.Forms.RadioButton radSortAge;
         private System.Windows.Forms.RadioButton radSortAvgGrade;
         private System.Windows.Forms.Button btnAsc;
