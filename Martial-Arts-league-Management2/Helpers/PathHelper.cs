@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Drawing;
+
 namespace MartialArts
 {
     partial class Helpers
@@ -12,15 +14,22 @@ namespace MartialArts
 
         public static string RootPath = "C:\\Users\\" + Environment.UserName.ToString() + "\\IBJJL_Application_Files\\";
         public static string SavedProjects = AppDomain.CurrentDomain.BaseDirectory + "\\Projects\\";
+        public static string SysData = AppDomain.CurrentDomain.BaseDirectory + "SysData\\";
 
         public static bool IsDirExist;
         public static void checkPath()
         {
             Init(SavedProjects);
             // root path must be the last because IsDirExist is representing only that path
-            Init(RootPath);
+            Init(RootPath);  
+            Init(SysData);
+        
         }
 
+
+     
+            
+       
         protected static void Init(string path)
         {
             if (Directory.Exists(path) == false)
@@ -29,6 +38,11 @@ namespace MartialArts
                 try
                 {
                     CreateDir(path);
+                    // in the first time the app loads create desktop shortcut
+                    if (path == SysData)
+                    {
+                        // do something in the future
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -71,6 +85,8 @@ namespace MartialArts
 
             }
         }
+
+      
     }
 
     class BinaryFiles : Helpers
@@ -252,5 +268,6 @@ namespace MartialArts
                 Directory.Delete(ProjectFullDir,true);
             }
         }
-    } 
+
+    }
 }

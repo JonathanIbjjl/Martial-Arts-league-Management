@@ -299,12 +299,12 @@ namespace MartialArts
 
 
             wClock = new WaitClock(86, 86, "המתן");
-            wClock.ClockBackGroundColor = FilesPanel.BackColor;
+            wClock.ClockBackGroundColor = tabPage1.BackColor;
             wClock.LoadFont("ARIAL", 9, FontStyle.Bold);
             wClock.OuterCircleWeight = 10;
             wClock.InnerCircleWeight = 5;
-            wClock.OuterCircleColor = Color.FromArgb(227, 154, 44);
-            wClock.setArrayColors(new Color[] { Color.FromArgb(28, 28, 28), Color.Maroon });
+            wClock.OuterCircleColor = Color.FromArgb(70,70,70);
+            wClock.setArrayColors(new Color[] {Color.Red });
 
             wClock.Create(true);
             wClock.Clock.Location = new Point(0, 0);
@@ -796,7 +796,7 @@ namespace MartialArts
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            Helpers.ShowGenericPromtForm("IBJJL");
+            Helpers.ShowGenericPromtForm("IBJJL" + " beta 2.0");
         }
 
         private void tpSave_Click(object sender, EventArgs e)

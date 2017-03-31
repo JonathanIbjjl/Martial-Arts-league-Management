@@ -1,20 +1,51 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IBJJL_App", "Martial-Arts-league-Management2\IBJJL_App.csproj", "{11FB8E87-24F8-4C45-A0F4-325DD1BBCB74}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "IBJJL Application", "SetupBJJ\SetupBJJ.vdproj", "{7212D68B-2668-4C4F-8B5A-8986C3B11EA2}"
+EndProject
+Project("{911E67C6-3D85-4FCE-B560-20A9C3E3FF48}") = "setup", "SetupBJJ\Debug\setup.exe", "{766A60C5-85D4-4959-9A88-2052106EFFCB}"
+	ProjectSection(DebuggerProjectSystem) = preProject
+		PortSupplier = 00000000-0000-0000-0000-000000000000
+		Executable = 
+		RemoteMachine = JONATHAN_PC
+		StartingDirectory = C:\Users\john\Desktop\IBJJL Projects\ClickOnce_Compiled
+		Environment = Default
+		LaunchingEngine = 00000000-0000-0000-0000-000000000000
+		UseLegacyDebugEngines = No
+		LaunchSQLEngine = No
+		AttachLaunchAction = No
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{11FB8E87-24F8-4C45-A0F4-325DD1BBCB74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{11FB8E87-24F8-4C45-A0F4-325DD1BBCB74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11FB8E87-24F8-4C45-A0F4-325DD1BBCB74}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{11FB8E87-24F8-4C45-A0F4-325DD1BBCB74}.Debug|x86.Build.0 = Debug|Any CPU
 		{11FB8E87-24F8-4C45-A0F4-325DD1BBCB74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11FB8E87-24F8-4C45-A0F4-325DD1BBCB74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11FB8E87-24F8-4C45-A0F4-325DD1BBCB74}.Release|x86.ActiveCfg = Release|Any CPU
+		{11FB8E87-24F8-4C45-A0F4-325DD1BBCB74}.Release|x86.Build.0 = Release|Any CPU
+		{7212D68B-2668-4C4F-8B5A-8986C3B11EA2}.Debug|Any CPU.ActiveCfg = Debug
+		{7212D68B-2668-4C4F-8B5A-8986C3B11EA2}.Debug|x86.ActiveCfg = Debug
+		{7212D68B-2668-4C4F-8B5A-8986C3B11EA2}.Debug|x86.Build.0 = Debug
+		{7212D68B-2668-4C4F-8B5A-8986C3B11EA2}.Release|Any CPU.ActiveCfg = Release
+		{7212D68B-2668-4C4F-8B5A-8986C3B11EA2}.Release|x86.ActiveCfg = Release
+		{7212D68B-2668-4C4F-8B5A-8986C3B11EA2}.Release|x86.Build.0 = Release
+		{766A60C5-85D4-4959-9A88-2052106EFFCB}.Debug|Any CPU.ActiveCfg = Release|x86
+		{766A60C5-85D4-4959-9A88-2052106EFFCB}.Debug|x86.ActiveCfg = Release|x86
+		{766A60C5-85D4-4959-9A88-2052106EFFCB}.Release|Any CPU.ActiveCfg = Release|x86
+		{766A60C5-85D4-4959-9A88-2052106EFFCB}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,6 +11,7 @@ namespace MartialArts
     class ExportBrackets: ExcelOperations
     {
         Visual.VisualLeagueEvent.UndoStruct LeagueEventData;
+        private const byte NUMOFCOLUMS = 10;
         public ExportBrackets(string path,Visual.VisualLeagueEvent.UndoStruct LeagueEventData) : base(path)
         {
             this.LeagueEventData = LeagueEventData;
@@ -47,7 +48,7 @@ namespace MartialArts
             int counter = 5;
             BracketHeader(counter, "מתחרים שלא שובצו על ידי המערכת");
             // fix the last column header
-            ExWs.Cells[counter + 1, 9] = "ללא מתחרים מתאימים באירוע";
+            ExWs.Cells[counter + 1, 10] = "ללא מתחרים מתאימים באירוע";
             counter+=2;
 
             foreach (Visual.VisualContender c in LeagueEventData._VisualUnplacedBracketsList)
@@ -59,7 +60,8 @@ namespace MartialArts
                 ExWs.Cells[counter, 6] = c.Contender.GetWeightValue;
                 ExWs.Cells[counter, 7] = " " + c.Contender.GetAgeValue + " ";
                 ExWs.Cells[counter, 8] = c.Contender.AcademyName;
-                ExWs.Cells[counter, 9] = (c.IsUseless == true) ? "כן" : "לא";
+                ExWs.Cells[counter, 9] = c.Contender.CoachName;
+                ExWs.Cells[counter, 10] = (c.IsUseless == true) ? "כן" : "לא";
 
 
                 RowsDesign(counter);
@@ -98,7 +100,8 @@ namespace MartialArts
                     ExWs.Cells[counter, 6] = c.Contender.GetWeightValue;
                     ExWs.Cells[counter, 7] = " " + c.Contender.GetAgeValue + " " ;
                     ExWs.Cells[counter, 8] = c.Contender.AcademyName;
-                    ExWs.Cells[counter, 9] = Contenders.ContndersGeneral.GetFactorExplanation(c,vb);
+                    ExWs.Cells[counter, 9] = c.Contender.CoachName;
+                    ExWs.Cells[counter, 10] = Contenders.ContndersGeneral.GetFactorExplanation(c,vb);
 
                     RowsDesign(counter);
                     counter++;
@@ -120,19 +123,19 @@ namespace MartialArts
             // bracket description
             ExWs.Cells[counter, 2] = header;
             // merge 
-            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, 9]].Merge();
+            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, NUMOFCOLUMS]].Merge();
             // back color
-            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, 9]].interior.color = GlobalVars.Sys_Red;
+            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, NUMOFCOLUMS]].interior.color = GlobalVars.Sys_Red;
             // foreground
-            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, 9]].font.color = Color.White;
+            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, NUMOFCOLUMS]].font.color = Color.White;
             // font
-            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, 9]].font.bold = true;
+            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, NUMOFCOLUMS]].font.bold = true;
             // aligment
-            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, 9]].HorizontalAlignment = XlHAlign.xlHAlignCenter;
-            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, 9]].VerticalAlignment = XlVAlign.xlVAlignCenter;
+            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, NUMOFCOLUMS]].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, NUMOFCOLUMS]].VerticalAlignment = XlVAlign.xlVAlignCenter;
             // borders
-            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, 9]].borders.weight = 3;
-            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, 9]].borders.color = Color.FromArgb(10, 10, 10);
+            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, NUMOFCOLUMS]].borders.weight = 3;
+            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, NUMOFCOLUMS]].borders.color = Color.FromArgb(10, 10, 10);
 
             // parameter headers
             ExWs.Cells[counter + 1, 2] = "ת.ז";
@@ -142,34 +145,35 @@ namespace MartialArts
             ExWs.Cells[counter + 1, 6] = "קטגוריית משקל";
             ExWs.Cells[counter + 1, 7] = "קטגוריית גיל";
             ExWs.Cells[counter + 1, 8] = "אקדמיה";
-            ExWs.Cells[counter + 1, 9] = "פקטור";
+            ExWs.Cells[counter + 1, 9] = "מאמן";
+            ExWs.Cells[counter + 1, 10] = "פקטור";
 
             // back color
-            ExWs.Range[ExWs.Cells[counter+1, 2], ExWs.Cells[counter+1, 9]].interior.color = GlobalVars.Sys_DarkerGray;
+            ExWs.Range[ExWs.Cells[counter+1, 2], ExWs.Cells[counter+1, NUMOFCOLUMS]].interior.color = GlobalVars.Sys_DarkerGray;
             // foreground
-            ExWs.Range[ExWs.Cells[counter+1, 2], ExWs.Cells[counter+1, 9]].font.color = Color.White;
+            ExWs.Range[ExWs.Cells[counter+1, 2], ExWs.Cells[counter+1, NUMOFCOLUMS]].font.color = Color.White;
             // font                                                
-            ExWs.Range[ExWs.Cells[counter+1, 2], ExWs.Cells[counter+1, 9]].font.bold = true;
+            ExWs.Range[ExWs.Cells[counter+1, 2], ExWs.Cells[counter+1, NUMOFCOLUMS]].font.bold = true;
             // aligment                                            
-            ExWs.Range[ExWs.Cells[counter+1, 2], ExWs.Cells[counter+1, 9]].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+            ExWs.Range[ExWs.Cells[counter+1, 2], ExWs.Cells[counter+1, NUMOFCOLUMS]].HorizontalAlignment = XlHAlign.xlHAlignCenter;
             ExWs.Range[ExWs.Cells[counter + 1, 2], ExWs.Cells[counter + 1, 9]].VerticalAlignment = XlVAlign.xlVAlignCenter;
             // borders                                             
-            ExWs.Range[ExWs.Cells[counter+1, 2], ExWs.Cells[counter+1, 9]].borders.weight = 3;
+            ExWs.Range[ExWs.Cells[counter+1, 2], ExWs.Cells[counter+1, NUMOFCOLUMS]].borders.weight = 3;
 
         }
 
         void RowsDesign(int counter)
         {
             // back color
-            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, 9]].interior.color = GlobalVars.Sys_DarkerGray;
+            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, NUMOFCOLUMS]].interior.color = GlobalVars.Sys_DarkerGray;
             // foreground
-            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, 9]].font.color = GlobalVars.Sys_Yellow;
+            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, NUMOFCOLUMS]].font.color = GlobalVars.Sys_Yellow;
             // aligment
-            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, 9]].HorizontalAlignment = XlHAlign.xlHAlignCenter;
-            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, 9]].VerticalAlignment = XlVAlign.xlVAlignCenter;
+            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, NUMOFCOLUMS]].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, NUMOFCOLUMS]].VerticalAlignment = XlVAlign.xlVAlignCenter;
             // borders
-            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, 9]].borders.weight = 3;
-            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, 9]].borders.color = Color.FromArgb(10, 10, 10);
+            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, NUMOFCOLUMS]].borders.weight = 3;
+            ExWs.Range[ExWs.Cells[counter, 2], ExWs.Cells[counter, NUMOFCOLUMS]].borders.color = Color.FromArgb(10, 10, 10);
         }
 
         void sheetHeader(Range rng, string text)

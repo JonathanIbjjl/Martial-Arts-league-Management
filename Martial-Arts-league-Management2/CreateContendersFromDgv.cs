@@ -150,7 +150,7 @@ namespace MartialArts
                 return string.Empty;
             }
 
-            if (s == "")
+            if ((string)s == "")
             {
                 // Helpers.DefaultMessegeBox(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "לא יכול להיות ריק" + Environment.NewLine + "התוכנית תפסיק את פעולתה", "נתון חסר", System.Windows.Forms.MessageBoxIcon.Warning);
                 Defects.Add(" השדה " + HebparameterName + " " + " בשורה " + row + " " + "לא יכול להיות ריק" + Environment.NewLine);

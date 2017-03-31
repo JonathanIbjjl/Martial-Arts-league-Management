@@ -59,7 +59,12 @@ namespace MartialArts
                     {
                         // woman factor is canceled vs man
                         ScoreAndID si = new ScoreAndID();
-                        si.Score = c.Grade;
+                        // if is not allowed to participate vs man the score will be zoro
+                        if (c.IsAllowedVersusMan == true)
+                            si.Score = c.Grade;
+                        else
+                            si.Score = 0;
+
                         si.SystemID = c.SystemID;
                         si.IsMale = c.IsMale;
                         l.Add(si);
@@ -603,7 +608,7 @@ namespace MartialArts
                             c.AddPotentialBracket(p.Score, freq, Statistics, OriginalRating, ProximityToNumOfConts, bracketIds, IdAndScore, gender);
                             c.CreateRanks();
 
-                            // add only for the first time, to use in GUI for recomdations
+                            // add only for the first time, to use in GUI for recommondations
                             if (UpdateArchive == true)
                                 c.AddPotentialBracketToArchive(p.Score, freq, Statistics, OriginalRating, ProximityToNumOfConts, bracketIds, IdAndScore, gender);
                         }

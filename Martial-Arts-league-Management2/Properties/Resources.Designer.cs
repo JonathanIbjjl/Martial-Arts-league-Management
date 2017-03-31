@@ -199,5 +199,15 @@ namespace Martial_Arts_league_Management2.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon sys_ico_13 {
+            get {
+                object obj = ResourceManager.GetObject("sys_ico_13", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }
