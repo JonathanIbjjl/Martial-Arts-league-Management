@@ -262,9 +262,9 @@ namespace Visual
             return result;
         }
 
-        internal static void CreateNewBracket(int ContID)
+        internal static VisualBracket CreateNewBracket(int ContID)
         {
-
+            
             // first check unplacedList to remove
             if (VisualUnplacedBracketsList.Any(x => x.SystemID == ContID) == true)
             {
@@ -280,9 +280,10 @@ namespace Visual
 
             // the old visual contender will be disposd in order to remove from GUI
             var NewBracketVisualContToDispose = AllVisualContenders.Where(x => x.SystemID == ContID).Select(c => c).Single();
+            NewBracketVisualContToDispose.IsMarked = false; // only for safty
             // new visual contender will be created for the new bracket
             var NewBracketCont = AllVisualContenders.Where(x => x.SystemID == ContID).Select(c => c.Contender).Single();
-
+       
             // remove from AllvisualContenders list (will be created again later)
             AllVisualContenders.Remove(NewBracketVisualContToDispose);
             // dispose old visual contender and he will dissapear from his old place in GUI
@@ -306,8 +307,19 @@ namespace Visual
             FormObj.BracktsFPanel.VerticalScroll.Value = FormObj.BracktsFPanel.VerticalScroll.Maximum;
             // refresh clocks
             FormObj.UpdateClocks();
+            return newVisualBracket;
         }
 
+       
+        public static void Mark(int ContID,bool mark)
+        {
+            if (AllVisualContenders.Any(x => x.SystemID == ContID) == true)
+            {
+                var cont = AllVisualContenders.Where(x => x.SystemID == ContID).Select(c => c).Single();
+                cont.IsMarked = mark;
+            }
+
+        }
         public static void MergeListsForSearch()
         {
 
@@ -357,6 +369,22 @@ namespace Visual
             if (found == false)
             {
                 CancelAllShadowsOfSearch();
+            }
+            else
+            {
+                // cancel the shadow in the brackets that the desiered contender was found
+                foreach (VisualBracket vb in VisualBracketsList)
+                {
+                    if (vb.VisualCont.Any(x => x.IsShadowed == false))
+                    {
+                        // show all contenders of this bracket
+                        foreach (VisualContender vc in vb.VisualCont)
+                        {
+                            if(vc.IsShadowed == true) // we dont want to refresh the mark of the contender that was found
+                            vc.CancelShadow();
+                        }
+                    }
+                }
             }
 
             return 0;

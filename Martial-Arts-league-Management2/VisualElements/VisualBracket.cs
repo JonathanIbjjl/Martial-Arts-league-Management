@@ -190,10 +190,11 @@ namespace  Visual
         private void btnDescription_Click(object sender, EventArgs e)
         {
             Martial_Arts_league_Management2.ChangeVisualBracketDesc desc = new Martial_Arts_league_Management2.ChangeVisualBracketDesc(Bracket.IsChild,Bracket.AgeGrade,Bracket.WeightGrade,Bracket.BeltGrade);
-            desc.ShowDialog();
-
-            Bracket.RefreshBracketInfo(100, 1000, 1);
-            Header.Text = Bracket.ToString();
+            if (desc.ShowDialog() == DialogResult.OK)
+            {
+                Bracket.RefreshBracketInfo(desc.Age,desc.Belt,desc.Weight);
+                Header.Text = Bracket.ToString();
+            }
         }
 
         #endregion
@@ -261,7 +262,6 @@ namespace  Visual
 
             VisualLeagueEvent.AddContender(ContID,this);
 
-   
         }
 
         private bool CheckContTransffer(VisualContender vis)

@@ -1247,6 +1247,17 @@ namespace MartialArts
                 radSortAvgGrade.ForeColor = Color.FromArgb(200, 200, 200);
             }
         }
+
+        private void btnRemoveAllMarks_Click(object sender, EventArgs e)
+        {
+            if (Visual.VisualLeagueEvent.AllVisualContenders == null)
+                return;
+
+            foreach (Visual.VisualContender vc in Visual.VisualLeagueEvent.AllVisualContenders)
+            {
+                vc.IsMarked = false;
+            }
+        }
     }
 
 

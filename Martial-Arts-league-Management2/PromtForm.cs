@@ -271,11 +271,12 @@ namespace Martial_Arts_league_Management2
         public Label lblAge = new Label();
         public Label  lblWeight = new Label();
         public Label lblBelt = new Label();
+        public Label lblMsg = new Label();
 
         public bool IsChild;
-        public int Age;
-        public int Weight;
-        public int Belt;
+        public int Age { get; set; }
+        public int Weight { get; set; }
+        public int Belt { get; set; }
 
 
         public ChangeVisualBracketDesc(bool isChild,int age,int weight,int belt) : base("", false, "עריכת תיאור בית")
@@ -295,16 +296,78 @@ namespace Martial_Arts_league_Management2
 
             ComboDefenitions(new ComboBox[] { ComboWeight, ComboAge, ComboBelt });
 
-            lblAge.Location = new Point(270, 85);
-            lblBelt.Location = new Point(270, 130);
-            lblWeight.Location = new Point(270, 175);
+            lblAge.Location = new Point(270, 100);
+            lblBelt.Location = new Point(270, 145);
+            lblWeight.Location = new Point(270, 190);
 
-            ComboAge.Location = new Point(lblAge.Location.X -  ComboAge.Width-5, 85-3);
-            ComboBelt.Location = new Point(lblAge.Location.X -  ComboAge.Width - 5, 130-3);
-            ComboWeight.Location = new Point(lblAge.Location.X -  ComboAge.Width - 5, 175-3);
+            ComboAge.Location = new Point(lblAge.Location.X -  ComboAge.Width-5, 100-3);
+            ComboBelt.Location = new Point(lblAge.Location.X -  ComboAge.Width - 5, 145-3);
+            ComboWeight.Location = new Point(lblAge.Location.X -  ComboAge.Width - 5, 190-3);
 
             LoadCombos();
 
+            // add the original values
+
+            // age
+            foreach (KeyValuePair<string,int> k in Contenders.ContndersGeneral.AgeGrades)
+            {
+                if (k.Value == this.Age)
+                {
+                    ComboAge.SelectedItem = k.Key;
+                    break;
+                }
+            }
+
+            // weight
+            if (IsChild)
+            {
+
+                foreach (KeyValuePair<string, int> k in Contenders.ContndersGeneral.ChildWeightCat)
+                {
+                    if (k.Value == this.Weight)
+                    {
+                        ComboWeight.SelectedItem = k.Key;
+                        break;
+                    }
+                }
+
+            }
+            else
+            {
+
+                foreach (KeyValuePair<string, int> k in Contenders.ContndersGeneral.AdultWeightCat)
+                {
+                    if (k.Value == this.Weight)
+                    {
+                        ComboWeight.SelectedItem = k.Key;
+                        break;
+                    }
+                }
+            }
+
+            // belt
+            ComboBelt.SelectedItem = MartialArts.Helpers.GetHebBeltName((Contenders.ContndersGeneral.BeltsEnum)Belt);
+
+            // original bracket description
+            var orgdesc = "חגורה: " + ComboBelt.SelectedItem.ToString() + " " + "גילאי: " + ComboAge.SelectedItem.ToString() + " " + "קטגוריית משקל: " + ComboWeight.SelectedItem.ToString();
+            Label lblOrgDesc = new Label();
+            lblOrgDesc.Text = orgdesc;
+            lblOrgDesc.Size = new Size(this.Width, 20);
+            lblOrgDesc.TextAlign = ContentAlignment.MiddleCenter;
+            lblOrgDesc.RightToLeft = RightToLeft.Yes;
+            lblOrgDesc.Location = new Point(0, 60);
+            lblOrgDesc.Font = new Font("ARIAL", 8, FontStyle.Bold | FontStyle.Underline);
+            this.Controls.Add(lblOrgDesc);
+
+            // lbl for msg
+
+            lblMsg.ForeColor = Color.Red;
+            lblMsg.Size = new Size(this.Width, 20);
+            lblMsg.TextAlign = ContentAlignment.MiddleCenter;
+            lblMsg.RightToLeft = RightToLeft.Yes;
+            lblMsg.Location = new Point(0, ComboWeight.Location.Y + ComboWeight.Height + 10);
+            lblMsg.Font = new Font("ARIAL", 8, FontStyle.Bold);
+            this.Controls.Add(lblMsg);
         }
 
         private void ComboDefenitions(ComboBox[] com)
@@ -360,9 +423,61 @@ namespace Martial_Arts_league_Management2
                 ComboBelt.Items.Add(a);
             }
 
+        }
 
+        protected override void btnYes_Click(object sender, EventArgs e)
+        {
+            // check if filled data correct
+            if (ValidData() == true)
+            {
+                // new description
+                Age = Contenders.ContndersGeneral.AgeGrades[ComboAge.SelectedItem.ToString()];
+                Belt = Contenders.ContndersGeneral.GetBelt(ComboBelt.SelectedItem.ToString());
+                if (IsChild)
+                {
+                    Weight = Contenders.ContndersGeneral.ChildWeightCat[ComboWeight.SelectedItem.ToString()];
+                }
+                else
+                {
+                    Weight = Contenders.ContndersGeneral.AdultWeightCat[ComboWeight.SelectedItem.ToString()];
+                }
+  
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+           
 
         }
 
+        private bool ValidData()
+        {
+            // role back error signals
+            ComboWeight.BackColor = MartialArts.GlobalVars.Sys_Red;
+            ComboAge.BackColor = MartialArts.GlobalVars.Sys_Red;
+            ComboBelt.BackColor = MartialArts.GlobalVars.Sys_Red;
+            lblMsg.Text = "";
+            var isvalid = true;
+
+            if (ComboWeight.SelectedIndex == -1)
+            {
+                lblMsg.Text = "יש לבחור קטגוריית משקל מרשימת הגלילה בלבד";
+                ComboWeight.BackColor = Color.Red;
+                isvalid = false;
+            }
+            else if (ComboAge.SelectedIndex == -1)
+            {
+                lblMsg.Text = "יש לבחור גיל מרשימת הגלילה בלבד";
+                ComboAge.BackColor = Color.Red;
+                isvalid = false;
+            }
+            else if (ComboBelt.SelectedIndex == -1)
+            {
+                lblMsg.Text = "יש לבחור חגורה מרשימת הגלילה בלבד";
+                ComboBelt.BackColor = Color.Red;
+                isvalid = false;
+            }
+
+            return isvalid;
+        }
     }
 }

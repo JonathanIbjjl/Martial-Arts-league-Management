@@ -126,7 +126,7 @@ namespace Visual
                 {
 
                     // promt the user to permit
-                    using (var promt = new Martial_Arts_league_Management2.PromtForm("המתחרה יימחק מהבית הנוכחי ויפתח בית חדש שייצג את ציון החגורה הגיל והמשקל שלו" + Environment.NewLine + "אנא אשר על מנת להמשיך"))
+                    using (var promt = new Martial_Arts_league_Management2.PromtForm("המתחרה יימחק מהבית הנוכחי ויפתח בית חדש עם כל המתחרים המסומנים " + Environment.NewLine + "אנא אשר על מנת להמשיך"))
                     {
                         var result = promt.ShowDialog();
                         if (result == System.Windows.Forms.DialogResult.No)
@@ -135,7 +135,17 @@ namespace Visual
                         }
                     }
 
-                    VisualLeagueEvent.CreateNewBracket(int.Parse(e.ClickedItem.Name.ToString().Trim()));
+                 var b = VisualLeagueEvent.CreateNewBracket(int.Parse(e.ClickedItem.Name.ToString().Trim()));
+                    // add marked contenders
+                    foreach (Visual.VisualContender c in VisualLeagueEvent.AllVisualContenders)
+                    {
+                        if (c.IsMarked)
+                        {
+                            c.IsMarked = false;
+                            b.Vbracket.Controls.Add(c.Vcontender);
+                            VisualLeagueEvent.AddContender(c.SystemID, b);
+                        }
+                    }
                 }
             }
 
@@ -145,6 +155,26 @@ namespace Visual
                 {
 
                     FactorCheck(int.Parse(e.ClickedItem.Name));
+
+                }
+            }
+
+            else if (item.Text == "סמן")
+            {
+                if (e.ClickedItem.Name.ToString().Trim().IsNumeric() == true)
+                {
+
+                    VisualLeagueEvent.Mark(int.Parse(e.ClickedItem.Name.ToString().Trim()),true);
+
+                }
+            }
+
+            else if (item.Text == "הסר סימון")
+            {
+                if (e.ClickedItem.Name.ToString().Trim().IsNumeric() == true)
+                {
+
+                    VisualLeagueEvent.Mark(int.Parse(e.ClickedItem.Name.ToString().Trim()),false);
 
                 }
             }

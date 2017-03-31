@@ -63,9 +63,13 @@ namespace Visual
                     cm.Items.Add("העתק מתחרה");
                     cm.Items.Add("צור בית חדש");
                     cm.Items.Add("בדוק פקטור בבית");
+                    cm.Items.Add("סמן");
+                    cm.Items.Add("הסר סימון");
                     cm.Items[0].Name = Contender.SystemID.ToString();
                     cm.Items[1].Name = Contender.SystemID.ToString() + " ";
                     cm.Items[2].Name = Contender.SystemID.ToString() + "  ";
+                    cm.Items[3].Name = Contender.SystemID.ToString() + "   ";
+                    cm.Items[4].Name = Contender.SystemID.ToString() + "    ";
                     cm.ItemClicked += new ToolStripItemClickedEventHandler(contexMenuuu_ItemClicked);
                     _ContMainPanel.ContextMenuStrip = cm;
 
@@ -80,6 +84,46 @@ namespace Visual
             {
                 _ContMainPanel = value;
             }
+        }
+
+        public bool _IsMarked;
+        public bool IsMarked
+        {
+            get { return _IsMarked; }
+
+            set
+            {
+                if (value == true)
+                {
+                    _IsMarked = true;
+                    Mark();
+                }
+                else
+                {
+                    _IsMarked = false;
+                    UnMark();
+                }
+            }
+
+        }
+
+        private void Mark()
+        {
+            Vcontender.Paint += new PaintEventHandler(Mark_Paint);
+            Vcontender.Refresh();
+        }
+
+        private void Mark_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            g.DrawRectangle(new Pen(new SolidBrush(Color.Red), 6), new Rectangle(new Point(0, 0), Vcontender.Size));
+        }
+
+        private void UnMark()
+        {
+            Vcontender.Paint -= new PaintEventHandler(Mark_Paint);
+            Vcontender.Refresh();
         }
 
 
@@ -163,9 +207,13 @@ namespace Visual
                     cm.Items.Add("העתק מתחרה");
                     cm.Items.Add("צור בית חדש");
                     cm.Items.Add("בדוק פקטור בבית");
+                    cm.Items.Add("סמן");
+                    cm.Items.Add("הסר סימון");
                     cm.Items[0].Name = Contender.SystemID.ToString();
                     cm.Items[1].Name = Contender.SystemID.ToString() + " ";
                     cm.Items[2].Name = Contender.SystemID.ToString() + "  ";
+                    cm.Items[3].Name = Contender.SystemID.ToString() + "   ";
+                    cm.Items[4].Name = Contender.SystemID.ToString() + "    ";
                     cm.ItemClicked += new ToolStripItemClickedEventHandler(contexMenuuu_ItemClicked);
                     _BtnShowContData.ContextMenuStrip = cm;
 
@@ -234,7 +282,7 @@ namespace Visual
             Vcontender.Controls.Add(BtnShowContData);
         }
 
-       
+       public bool IsShadowed { get;private set; }
 
 
         public bool MakeShadow(string UnshadowString)
@@ -248,19 +296,39 @@ namespace Visual
             string FirstAndLastName = Contender.FirstName.Trim() + " " + Contender.LastName.Trim();
             if (FirstAndLastName.Contains(UnshadowString) == false)
             {
+                IsShadowed = true;
                 Vcontender.Visible = false;
                 return isTarget;
             }
             else
             {
+                // that is the target mark it
+                Vcontender.Paint += new PaintEventHandler(Found_Paint);
+                Vcontender.Refresh();
                 return true;
             }
 
         }
 
+
+        private void Found_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            g.DrawRectangle(new Pen(new SolidBrush(Color.Red), 6), new Rectangle(new Point(0, 0), Vcontender.Size));
+        }
+
         public void CancelShadow()
         {
+            // remove mark if it is not shdowed (the search target that was in the last search)
+            if (IsShadowed == false)
+            {
+                Vcontender.Paint -= new PaintEventHandler(Found_Paint);
+                Vcontender.Refresh();
+            }
+
             Vcontender.Visible = true;
+            IsShadowed = false;
         }
 
         public void Dispose()
@@ -372,8 +440,8 @@ namespace Visual
 
             if (Contender.IsUseless == true)
                 {
-                Rectangle UselessRect = new Rectangle(0, 0, Vcontender.Width - 1, Vcontender.Height - 1);
-                g.DrawRectangle(new Pen(new SolidBrush(Color.Red)), UselessRect);
+                //Rectangle UselessRect = new Rectangle(0, 0, Vcontender.Width - 1, Vcontender.Height - 1);
+                //g.DrawRectangle(new Pen(new SolidBrush(Color.Red)), UselessRect); // TODO DELETE 
             }
 
         }
