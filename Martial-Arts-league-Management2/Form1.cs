@@ -1258,6 +1258,16 @@ namespace MartialArts
                 vc.IsMarked = false;
             }
         }
+
+        private void BracktsFPanel_MouseEnter(object sender, EventArgs e)
+        {
+            BracktsFPanel.Focus();
+        }
+
+        private void UnPlacedFpanel_MouseEnter(object sender, EventArgs e)
+        {
+            UnPlacedFpanel.Focus();
+        }
     }
 
 
