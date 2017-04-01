@@ -1290,12 +1290,18 @@ namespace MartialArts
 
         private void BracktsFPanel_MouseEnter(object sender, EventArgs e)
         {
-            BracktsFPanel.Focus();
+            if (Martial_Arts_league_Management2.PromtForm.FormIsShown == false)
+            {
+                BracktsFPanel.Focus();
+            }
         }
 
         private void UnPlacedFpanel_MouseEnter(object sender, EventArgs e)
         {
-            UnPlacedFpanel.Focus();
+            if (Martial_Arts_league_Management2.PromtForm.FormIsShown == false)
+            {
+                UnPlacedFpanel.Focus();
+            }
         }
 
 
@@ -1360,6 +1366,11 @@ namespace MartialArts
                 {
                     vb.Hide();
                 }
+        }
+
+        private void pictureBox2_MouseEnter(object sender, EventArgs e)
+        {
+
         }
     }
 

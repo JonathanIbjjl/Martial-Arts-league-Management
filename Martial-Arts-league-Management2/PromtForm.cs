@@ -12,6 +12,7 @@ namespace Martial_Arts_league_Management2
 {
     public partial class PromtForm : Form
     {
+        public static bool FormIsShown = false;
         public String text;
         public bool LongText;
         public bool OnlyYesButton;
@@ -19,7 +20,7 @@ namespace Martial_Arts_league_Management2
         public PromtForm(string txt,bool LongText = false,string Header = "הודעה ממערכת IBJJL",bool OnlyYesButton=false,string btnYesText = "אישור",string btnNoText = "ביטול")
         {
             InitializeComponent();
-
+            FormIsShown = true;
             this.text = txt;
             this.lblHeader.Text = Header;
             this.LongText = LongText;
@@ -31,6 +32,7 @@ namespace Martial_Arts_league_Management2
         public PromtForm(Size FormSize,string txt, bool LongText = false, string Header = "הודעה ממערכת IBJJL", bool OnlyYesButton = false, string btnYesText = "אישור", string btnNoText = "ביטול")
         {
             InitializeComponent();
+            FormIsShown = true;
             this.Size = FormSize;
             this.text = txt;
             this.lblHeader.Text = Header;
@@ -42,6 +44,7 @@ namespace Martial_Arts_league_Management2
 
         public void MakeBtnsChanges(string btnYesText = "אישור", string btnNoText = "ביטול")
         {
+
             this.btnYes.Text = btnYesText;
             this.btnNo.Text = btnNoText;
         }
@@ -52,6 +55,11 @@ namespace Martial_Arts_league_Management2
             LoadMe();
         }
 
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            FormIsShown = false;
+        }
         protected virtual void LoadMe()
         {
             this.lblQuestion.DoubleClick += new EventHandler(ShowOnMsgBox);
