@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.קובץToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tpNew = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,8 +50,8 @@
             this.הצגרשימהלדוגמאToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnExpandAll = new System.Windows.Forms.Button();
             this.btnRemoveAllMarks = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -125,6 +125,8 @@
             this.lblwaitClock = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnCollapseAll = new System.Windows.Forms.Button();
+            this.btnLoad = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -318,43 +320,49 @@
             // 
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.panel4.Controls.Add(this.button3);
-            this.panel4.Controls.Add(this.button2);
+            this.panel4.Controls.Add(this.btnLoad);
+            this.panel4.Controls.Add(this.btnCollapseAll);
+            this.panel4.Controls.Add(this.btnSave);
+            this.panel4.Controls.Add(this.btnExpandAll);
             this.panel4.Controls.Add(this.btnRemoveAllMarks);
             this.panel4.Location = new System.Drawing.Point(363, 5);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(110, 104);
             this.panel4.TabIndex = 44;
             // 
-            // button3
+            // btnSave
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.button3.Location = new System.Drawing.Point(14, 70);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(84, 27);
-            this.button3.TabIndex = 41;
-            this.button3.Text = "----";
-            this.button3.UseVisualStyleBackColor = false;
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSave.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.btnSave.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.Location = new System.Drawing.Point(58, 70);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(40, 27);
+            this.btnSave.TabIndex = 41;
+            this.toolTip1.SetToolTip(this.btnSave, "שמור");
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // button2
+            // btnExpandAll
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.button2.Location = new System.Drawing.Point(14, 37);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(84, 27);
-            this.button2.TabIndex = 40;
-            this.button2.Text = "----";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnExpandAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExpandAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.btnExpandAll.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnExpandAll.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnExpandAll.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.btnExpandAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.btnExpandAll.Image = ((System.Drawing.Image)(resources.GetObject("btnExpandAll.Image")));
+            this.btnExpandAll.Location = new System.Drawing.Point(58, 37);
+            this.btnExpandAll.Name = "btnExpandAll";
+            this.btnExpandAll.Size = new System.Drawing.Size(40, 27);
+            this.btnExpandAll.TabIndex = 40;
+            this.toolTip1.SetToolTip(this.btnExpandAll, "הרחב הכל");
+            this.btnExpandAll.UseVisualStyleBackColor = false;
+            this.btnExpandAll.Click += new System.EventHandler(this.btnExpandAll_Click);
             // 
             // btnRemoveAllMarks
             // 
@@ -364,11 +372,11 @@
             this.btnRemoveAllMarks.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnRemoveAllMarks.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.btnRemoveAllMarks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.btnRemoveAllMarks.Image = ((System.Drawing.Image)(resources.GetObject("btnRemoveAllMarks.Image")));
             this.btnRemoveAllMarks.Location = new System.Drawing.Point(14, 4);
             this.btnRemoveAllMarks.Name = "btnRemoveAllMarks";
             this.btnRemoveAllMarks.Size = new System.Drawing.Size(84, 27);
             this.btnRemoveAllMarks.TabIndex = 39;
-            this.btnRemoveAllMarks.Text = "בטל סימונים";
             this.toolTip1.SetToolTip(this.btnRemoveAllMarks, "ביטול סימון כל המתחרים המסומנים");
             this.btnRemoveAllMarks.UseVisualStyleBackColor = false;
             this.btnRemoveAllMarks.Click += new System.EventHandler(this.btnRemoveAllMarks_Click);
@@ -1413,6 +1421,41 @@
             this.tabControl1.TabIndex = 1;
             this.tabControl1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tabControl1_KeyDown);
             // 
+            // btnCollapseAll
+            // 
+            this.btnCollapseAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCollapseAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.btnCollapseAll.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCollapseAll.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCollapseAll.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.btnCollapseAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.btnCollapseAll.Image = ((System.Drawing.Image)(resources.GetObject("btnCollapseAll.Image")));
+            this.btnCollapseAll.Location = new System.Drawing.Point(14, 37);
+            this.btnCollapseAll.Name = "btnCollapseAll";
+            this.btnCollapseAll.Size = new System.Drawing.Size(40, 27);
+            this.btnCollapseAll.TabIndex = 42;
+            this.toolTip1.SetToolTip(this.btnCollapseAll, "מזער הכל");
+            this.btnCollapseAll.UseVisualStyleBackColor = false;
+            this.btnCollapseAll.Click += new System.EventHandler(this.btnCollapseAll_Click);
+            // 
+            // btnLoad
+            // 
+            this.btnLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLoad.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.btnLoad.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLoad.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.btnLoad.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.btnLoad.Image = ((System.Drawing.Image)(resources.GetObject("btnLoad.Image")));
+            this.btnLoad.Location = new System.Drawing.Point(14, 70);
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Size = new System.Drawing.Size(40, 27);
+            this.btnLoad.TabIndex = 43;
+            this.btnLoad.Text = "----";
+            this.toolTip1.SetToolTip(this.btnLoad, "טען פרויקט");
+            this.btnLoad.UseVisualStyleBackColor = false;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1535,8 +1578,8 @@
         private System.Windows.Forms.Panel panelStatistics;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnExpandAll;
         private System.Windows.Forms.Button btnRemoveAllMarks;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
@@ -1554,6 +1597,8 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Button btnCollapseAll;
+        private System.Windows.Forms.Button btnLoad;
     }
 }
 

@@ -157,6 +157,33 @@ namespace  Visual
                 _Header.DragDrop += new DragEventHandler(Vbracket_DragDrop);
             }
         }
+
+        // method to call from outside the class
+        public void Hide()
+        {
+            // hide
+            btnHideBracket.Text = "+";
+            Vbracket.Size = new Size(Vbracket.Width, Header.Size.Height + 6);
+            // change to unactive colors
+            _Header.BackColor = Color.FromArgb(40, 40, 40);
+            _Header.ForeColor = Color.FromArgb(70, 70, 70);
+            // disable drag events
+            _Header.DragOver -= new DragEventHandler(Vbracket_DragOver);
+            _Header.DragDrop -= new DragEventHandler(Vbracket_DragDrop);
+        }
+
+        public void Expand()
+        {
+            btnHideBracket.Text = "-";
+            Vbracket.Size = new Size(Vbracket.Width, ((VisualContender.ContMainPanel_Size.Height + 6) * Bracket.ContendersList.Count) + 26);
+            // returen to active colors
+            _Header.BackColor = MartialArts.GlobalVars.Sys_LighterGray;
+            _Header.ForeColor = MartialArts.GlobalVars.Sys_Yellow;
+            // enable drag events
+            _Header.DragOver += new DragEventHandler(Vbracket_DragOver);
+            _Header.DragDrop += new DragEventHandler(Vbracket_DragDrop);
+        }
+
         #endregion
 
         #region "Change Bracket Description"

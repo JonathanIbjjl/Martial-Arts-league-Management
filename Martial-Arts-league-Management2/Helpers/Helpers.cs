@@ -127,7 +127,7 @@ namespace MartialArts
             ExcelColumnsRecognition[3, 1] = "אימייל";
             ExcelColumnsRecognition[4, 1] = "טלפון נייד";
             ExcelColumnsRecognition[5, 1] = "תאריך לידה";
-            ExcelColumnsRecognition[6, 1] = "פחות שנת הלידה";
+            ExcelColumnsRecognition[6, 1] = "קטגורית גיל";
             ExcelColumnsRecognition[7, 1] = "מגדר";
             ExcelColumnsRecognition[8, 1] = "משקל אמיתי כולל חליפה";
             ExcelColumnsRecognition[9, 1] = "קטגורית משקל";
@@ -138,7 +138,7 @@ namespace MartialArts
             ExcelColumnsRecognition[14, 1] = "במידה ולא ימצא מתחרה בקטגורית משקל";
             ExcelColumnsRecognition[15, 1] = "קטגורית גיל אחת גבוהה יותר";
             ExcelColumnsRecognition[16, 1] = "דרגת חגורה אחת גבוהה יותר";
-            ExcelColumnsRecognition[17, 1] = "האם ניתן לשבץ בקטגוריה מעורבת";
+            ExcelColumnsRecognition[17, 1] = "להתחרות בקטגוריה מעורבת";
             ExcelColumnsRecognition[18, 1] = "אם האקדמיה אינה מופיעה ברשימה";
 
             // column is for promting the user what header is missing in the input this array and headersForContaines indexes must be equal and
@@ -149,7 +149,7 @@ namespace MartialArts
             ExcelColumnsRecognition[3, 2] = "אימייל";
             ExcelColumnsRecognition[4, 2] = "טלפון נייד";
             ExcelColumnsRecognition[5, 2] = "תאריך לידה";
-            ExcelColumnsRecognition[6, 2] = "קטגורית גיל"  + "(" + DateTime.Now.Year.ToString() + "פחות שנת הלידה" + ")";
+            ExcelColumnsRecognition[6, 2] = "קטגורית גיל" ;
             ExcelColumnsRecognition[7, 2] = "מגדר";
             ExcelColumnsRecognition[8, 2] = "משקל אמיתי כולל חליפה ( שקילה לפי חוקי IBJJF)";
             ExcelColumnsRecognition[9, 2] = "קטגורית משקל.( לפי קטגוריות משקל IBJJF)";
@@ -160,7 +160,7 @@ namespace MartialArts
             ExcelColumnsRecognition[14, 2] = "במידה ולא ימצא מתחרה בקטגורית משקל -מעונין\\ת להתחרות בקטגורית משקל אחת גבוהה יותר.";
             ExcelColumnsRecognition[15, 2] = "במידה ולא ימצא מתחרה מאותה קטגורית גיל - מעונין\\ת להתחרות בקטגורית גיל אחת גבוהה יותר.";
             ExcelColumnsRecognition[16, 2] = "במידה ולא ימצא מתחרה מאותה דרגת חגורה- מעונין\\ת להתחרות בדרגת חגורה אחת גבוהה יותר.";
-            ExcelColumnsRecognition[17, 2] = "אם בחרת נקבה האם ניתן לשבץ בקטגוריה מעורבת?";
+            ExcelColumnsRecognition[17, 2] = "מאשר\\ת להתחרות בקטגוריה מעורבת";
             ExcelColumnsRecognition[18, 2] = "אם האקדמיה אינה מופיעה ברשימה - יש לרשום אותה";
 
             return ExcelColumnsRecognition;

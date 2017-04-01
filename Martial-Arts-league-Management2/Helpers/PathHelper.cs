@@ -13,8 +13,8 @@ namespace MartialArts
         
 
         public static string RootPath = "C:\\Users\\" + Environment.UserName.ToString() + "\\IBJJL_Application_Files\\";
-        public static string SavedProjects = AppDomain.CurrentDomain.BaseDirectory + "\\Projects\\";
-        public static string SysData = AppDomain.CurrentDomain.BaseDirectory + "SysData\\";
+        public static string SavedProjects = RootPath + "Projects\\";
+        public static string SysData = RootPath + "SysData\\";
 
         public static bool IsDirExist;
         public static void checkPath()
@@ -96,7 +96,7 @@ namespace MartialArts
             get
             {
                 string filename = "AllVcSaveddata.bin";
-                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename);
+                return Path.Combine(SavedProjects, filename);
             }
         }
 
@@ -105,7 +105,7 @@ namespace MartialArts
             get
             {
                 string filename = "VbSaveddata.bin";
-                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename);
+                return Path.Combine(SavedProjects, filename);
             }
         }
 
@@ -114,7 +114,7 @@ namespace MartialArts
             get
             {
                 string filename = "UnplacedVcSaveddata.bin";
-                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename);
+                return Path.Combine(SavedProjects, filename);
             }
         }
 

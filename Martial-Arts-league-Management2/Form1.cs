@@ -80,7 +80,7 @@ namespace MartialArts
             }
             else
             {
-                this.Text = "IBJJL | מערכת ניהול ליגה";
+                this.Text = "IBJJL | מערכת ניהול ליגה" + " " + GlobalVars.VerNum;
             }
 
             if (ProjectName != "")
@@ -572,6 +572,13 @@ namespace MartialArts
 
         private void btnSearch_Click_1(object sender, EventArgs e)
         {
+
+            if (Visual.VisualLeagueEvent.AllVisualContenders == null || Visual.VisualLeagueEvent.AllVisualContenders.Count <= 0)
+            {
+                // objects has not been created yet
+                return;
+            }
+
             if (btnSearch.Text != "אפס חיפוש (Esc)")
             {
                 MakeASearch();
@@ -605,7 +612,8 @@ namespace MartialArts
             {
                 lblSearchMsg.Text = "";
                 int numberOfResults;
-                Visual.VisualLeagueEvent.Search(txtSearch.Text, out numberOfResults);
+                var SearchText = txtSearch.Text.ToString().ToLower().Trim();
+                Visual.VisualLeagueEvent.Search(SearchText, out numberOfResults);
                 txtSearch.Text = "";
                 if (numberOfResults == 0)
                 {
@@ -794,12 +802,18 @@ namespace MartialArts
             header("");
         }
 
+
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            Helpers.ShowGenericPromtForm("IBJJL" + " beta 2.0");
+            Helpers.ShowGenericPromtForm("IBJJL" + " " + GlobalVars.VerNum);
         }
 
         private void tpSave_Click(object sender, EventArgs e)
+        {
+            Save();
+        }
+
+        private void Save()
         {
             if (GlobalVars.IsLoading == true)
                 return;
@@ -819,6 +833,7 @@ namespace MartialArts
                 //}
                 //return;
             }
+
 
 
             // check if there are objects
@@ -841,7 +856,6 @@ namespace MartialArts
                 save.Serialize();
             }
         }
-
         private void SaveEditingList()
         {
 
@@ -1045,6 +1059,11 @@ namespace MartialArts
 
         private void tpOpenProject_Click(object sender, EventArgs e)
         {
+            LoadProject();
+        }
+
+        private void LoadProject()
+        {
             if (GlobalVars.IsLoading == true)
                 return;
 
@@ -1113,7 +1132,6 @@ namespace MartialArts
                 GlobalVars.IsLoading = false;
             }
         }
-
         private void tpNew_Click(object sender, EventArgs e)
         {
             NewProject();
@@ -1187,6 +1205,13 @@ namespace MartialArts
 
         private void btnAsc_Click(object sender, EventArgs e)
         {
+
+            if (Visual.VisualLeagueEvent.AllVisualContenders == null || Visual.VisualLeagueEvent.AllVisualContenders.Count <= 0)
+            {
+                // objects has not been created yet
+                return;
+            }
+
             sortVisualBrackets(false);
         }
 
@@ -1250,8 +1275,12 @@ namespace MartialArts
 
         private void btnRemoveAllMarks_Click(object sender, EventArgs e)
         {
-            if (Visual.VisualLeagueEvent.AllVisualContenders == null)
+            
+            if (Visual.VisualLeagueEvent.AllVisualContenders == null || Visual.VisualLeagueEvent.AllVisualContenders.Count <= 0)
+            {
+                // objects has not been created yet
                 return;
+            }
 
             foreach (Visual.VisualContender vc in Visual.VisualLeagueEvent.AllVisualContenders)
             {
@@ -1267,6 +1296,70 @@ namespace MartialArts
         private void UnPlacedFpanel_MouseEnter(object sender, EventArgs e)
         {
             UnPlacedFpanel.Focus();
+        }
+
+
+        // the GUI is not stuck
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+            if (Visual.VisualLeagueEvent.AllVisualContenders == null || Visual.VisualLeagueEvent.AllVisualContenders.Count <= 0)
+            {
+             // objects has not been created yet
+                return;
+            }
+
+            Save();
+            System.Threading.Thread t1 = new System.Threading.Thread(SaveAnimationThread);
+            t1.Start();
+        }
+
+        private void SaveAnimationThread()
+        {
+            btnSave.Invoke(new Action(AnimateSave));
+            System.Threading.Thread.Sleep(1000);
+            btnSave.BackColor = btnLoad.BackColor;
+        }
+
+        private void AnimateSave()
+        {
+            btnSave.BackColor = GlobalVars.Sys_Red;
+            Application.DoEvents();
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            LoadProject();
+        }
+
+        private void btnExpandAll_Click(object sender, EventArgs e)
+        {
+
+            if (Visual.VisualLeagueEvent.AllVisualContenders == null || Visual.VisualLeagueEvent.AllVisualContenders.Count <= 0)
+            {
+                // objects has not been created yet
+                return;
+            }
+
+            foreach (Visual.VisualBracket vb in Visual.VisualLeagueEvent.VisualBracketsList)
+            {
+                vb.Expand();
+            }
+        }
+
+        private void btnCollapseAll_Click(object sender, EventArgs e)
+        {
+
+            if (Visual.VisualLeagueEvent.AllVisualContenders == null || Visual.VisualLeagueEvent.AllVisualContenders.Count <= 0)
+            {
+                // objects has not been created yet
+                return;
+            }
+
+                foreach (Visual.VisualBracket vb in Visual.VisualLeagueEvent.VisualBracketsList)
+                {
+                    vb.Hide();
+                }
         }
     }
 

@@ -293,7 +293,7 @@ namespace Visual
                 return isTarget;
             }
 
-            string FirstAndLastName = Contender.FirstName.Trim() + " " + Contender.LastName.Trim();
+            string FirstAndLastName = Contender.FirstName.Trim().ToLower() + " " + Contender.LastName.Trim().ToLower();
             if (FirstAndLastName.Contains(UnshadowString) == false)
             {
                 IsShadowed = true;

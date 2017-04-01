@@ -9,7 +9,7 @@ namespace MartialArts
 
     class GlobalVars
     {
-
+        public const string VerNum = "Beta 2.2";
         public static MartialArts.ProjectsSavedAsBinaryFiles CurrentProject { get; set; }
 
         public static bool IsLoading;
