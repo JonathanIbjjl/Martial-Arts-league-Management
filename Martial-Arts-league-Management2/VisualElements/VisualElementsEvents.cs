@@ -199,7 +199,8 @@ namespace Visual
             var vb = VisualLeagueEvent.VisualBracketsList.Where(x => x.Bracket.BracketNumber == vbNum).Select(b => b).Single();
             // get the factor string
             string factor = Contenders.ContndersGeneral.GetFactorExplanation(cont, vb);
-            if (factor == "")
+           
+                if (factor == "")
                 factor = "לא הופעל אף פקטור עבור " + cont.Contender.FirstName + " " + cont.Contender.LastName;
 
             // show the factor

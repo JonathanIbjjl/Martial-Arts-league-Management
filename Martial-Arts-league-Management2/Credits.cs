@@ -19,7 +19,7 @@ namespace Martial_Arts_league_Management2
 
         private void Credits_Load(object sender, EventArgs e)
         {
-
+            lblVerNum.Text = "Version " + MartialArts.GlobalVars.VerNum;
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

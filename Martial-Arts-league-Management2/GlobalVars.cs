@@ -9,8 +9,22 @@ namespace MartialArts
 
     class GlobalVars
     {
-        public const string VerNum = "Beta 2.2";
-        public static MartialArts.ProjectsSavedAsBinaryFiles CurrentProject { get; set; }
+       
+        public  const string VerNum = "Beta 2.23";
+
+        private static MartialArts.ProjectsSavedAsBinaryFiles _CurrentProject;
+        public static  MartialArts.ProjectsSavedAsBinaryFiles CurrentProject
+        {
+            get { return _CurrentProject; }
+            set
+            {
+                _CurrentProject = value;
+                
+             
+            }
+        }
+
+
 
         public static bool IsLoading;
         public static int NumOfContendersInLeuge

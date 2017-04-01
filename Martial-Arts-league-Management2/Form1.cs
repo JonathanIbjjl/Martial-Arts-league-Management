@@ -18,6 +18,8 @@ namespace MartialArts
 
     public partial class Form1 : Form
     {
+      
+
         public static bool ExampleListIsPresented = true;
         public static bool EditingList = false;
 
@@ -66,6 +68,8 @@ namespace MartialArts
             DgvDefenitions();
             // example with gracie family
             DgvExample();
+
+           
         }
 
         public void header(string ProjectName = "")
@@ -1052,6 +1056,12 @@ namespace MartialArts
             {
                 SerializeDataSaveAs se = new SerializeDataSaveAs(Visual.VisualLeagueEvent.GetUndoStruct(), saveAsPath);
                 se.Serialize();
+
+                // create all files paths instance immideatly if the user will use save() method
+                MartialArts.ProjectsSavedAsBinaryFiles paths = new ProjectsSavedAsBinaryFiles(promt.ProjectName);
+                paths.SetFullDirWithoutCreating();
+                GlobalVars.CurrentProject = paths;
+
             }
 
             promt.Dispose();

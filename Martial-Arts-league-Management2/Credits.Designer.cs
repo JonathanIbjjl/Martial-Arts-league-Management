@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Credits));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblVerNum = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
@@ -56,16 +56,16 @@
             this.label2.Text = "IBJJL League Managment Software";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label3
+            // lblVerNum
             // 
-            this.label3.Font = new System.Drawing.Font("Castellar", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.DimGray;
-            this.label3.Location = new System.Drawing.Point(1, -1);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(106, 33);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Version 1.0";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblVerNum.Font = new System.Drawing.Font("Castellar", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVerNum.ForeColor = System.Drawing.Color.DimGray;
+            this.lblVerNum.Location = new System.Drawing.Point(12, 9);
+            this.lblVerNum.Name = "lblVerNum";
+            this.lblVerNum.Size = new System.Drawing.Size(238, 23);
+            this.lblVerNum.TabIndex = 2;
+            this.lblVerNum.Text = "Version 1.0";
+            this.lblVerNum.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // linkLabel1
             // 
@@ -87,7 +87,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.ClientSize = new System.Drawing.Size(679, 174);
             this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblVerNum);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
@@ -108,7 +108,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblVerNum;
         private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

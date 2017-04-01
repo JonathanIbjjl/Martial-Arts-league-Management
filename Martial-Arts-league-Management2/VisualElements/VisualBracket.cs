@@ -121,6 +121,7 @@ namespace  Visual
                     _btnHideBracket.Cursor = Cursors.Hand;
                     _btnHideBracket.Text = "-";
                     _btnHideBracket.Click += new EventHandler(btnHide_Click);
+                    tp.SetToolTip(_btnHideBracket, "מזער בית");
                     return _btnHideBracket;
                 }
                 else
@@ -186,6 +187,13 @@ namespace  Visual
 
         #endregion
 
+        private void tp_Draw(object sender, System.Windows.Forms.DrawToolTipEventArgs e)
+        {
+            e.DrawBackground();
+            e.DrawBorder();
+            e.DrawText();
+        }
+
         #region "Change Bracket Description"
         private Label _btnChangeDescription;
         public Label btnChangeDescription
@@ -205,6 +213,7 @@ namespace  Visual
                    _btnChangeDescription.Cursor = Cursors.Hand;
                    _btnChangeDescription.Text = "≡";
                     _btnChangeDescription.Click += new EventHandler(btnDescription_Click);
+                    tp.SetToolTip(_btnChangeDescription, "ערוך את כותרת הבית");
                     return _btnChangeDescription;
                 }
                 else
@@ -228,10 +237,15 @@ namespace  Visual
 
 
 
-
+        ToolTip tp;
         public VisualBracket(MartialArts.Bracket bracket)
         {
             this.Bracket = bracket;
+            tp = new ToolTip();
+            tp.OwnerDraw = true;
+            tp.ForeColor = GlobalVars.Sys_White;
+            tp.BackColor = MartialArts.GlobalVars.Sys_Red;
+            tp.Draw += new DrawToolTipEventHandler(tp_Draw);
         }
 
         public void Init()
@@ -296,25 +310,71 @@ namespace  Visual
             double finalgrade;
             if (VisualLeagueEvent.IsSutibleForBracket(vis, this,out finalgrade) == false)
             {
-
-                using (Martial_Arts_league_Management2.PromtForm promt= new Martial_Arts_league_Management2.PromtForm("המתחרה שברצונך להעביר לבית זה אינו מתאים לציון הממוצע של הבית, אנא אשר על מנת להעבירו", false))
-                {
-                    if (promt.ShowDialog() == DialogResult.OK)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-
+                showAninMatedPromt("מתחרה זה אינו מתאים לציון הממוצע של הבית");
+                //using (Martial_Arts_league_Management2.PromtForm promt= new Martial_Arts_league_Management2.PromtForm("המתחרה שברצונך להעביר לבית זה אינו מתאים לציון הממוצע של הבית, אנא אשר על מנת להעבירו", false))
+                //{
+                //    if (promt.ShowDialog() == DialogResult.OK)
+                //    {
+                //        return true;
+                //    }
+                //    else
+                //    {
+                //        return false;
+                //    }
+                //} // TODO: DELETE AFTER NEXT VERSION (01-04-2017)
+                return true;
             }
             else
             {
                 return true;
             }
         }
+
+        public string HeaderTempTextForMsg;
+        private void showAninMatedPromt(string txt)
+        {
+            HeaderTempTextForMsg = txt;
+            System.Threading.Thread t1 = new System.Threading.Thread(BeginAnimate);
+            t1.Start();
+        }
+
+        private void BeginAnimate()
+        {
+            Header.Invoke(new Action(Animating));
+            System.Threading.Thread.Sleep(1500);
+            Header.Invoke(new Action(RoleBackHeader));
+        }
+
+        private void RoleBackHeader()
+        {
+            Header.Text = Bracket.ToString();
+            Header.ForeColor = MartialArts.GlobalVars.Sys_Yellow;
+        }
+
+        private void Animating()
+        {
+
+
+            Header.Text = "";
+            foreach (char l in HeaderTempTextForMsg)
+            {
+                if (Header.ForeColor == Color.FromArgb(0, 255, 255))
+                {
+                    Header.ForeColor = GlobalVars.Sys_White;                   
+                }
+                else
+                {
+                    Header.ForeColor = Color.FromArgb(0, 255, 255);
+                }
+                Header.Text = Header.Text + l;
+                System.Threading.Thread.Sleep(10);
+                Application.DoEvents();
+
+            }
+
+           
+        }
+
 
         public VisualBracket Refresh()
         {
