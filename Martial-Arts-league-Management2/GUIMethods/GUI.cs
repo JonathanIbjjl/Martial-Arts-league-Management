@@ -289,6 +289,11 @@ namespace MartialArts
                 dgvMain.Rows[i].Cells[14].Value = r.Next(2);
                 dgvMain.Rows[i].Cells[15].Value = r.Next(2);
                 dgvMain.Rows[i].Cells[16].Value = r.Next(2);
+
+
+
+                this.dgvMain.Rows[i].HeaderCell.Value = (i+1).ToString();
+
             }
 
             ExampleListIsPresented = true;
@@ -310,9 +315,6 @@ namespace MartialArts
 
             dgvMain.DoubleBuffered(true);
             dgvMain.EnableHeadersVisualStyles = false;
-            dgvMain.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(28, 28, 28);
-            dgvMain.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(227, 154, 44);
-            dgvMain.DefaultCellStyle.BackColor = Color.FromArgb(200, 200, 200);
             EndVer();
             this.dgvMain.RowHeadersWidth = 70;
         

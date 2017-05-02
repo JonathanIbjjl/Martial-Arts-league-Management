@@ -199,11 +199,11 @@ namespace MartialArts
                 return 0;
             }
         }
-
-        public static bool IsChild(int AgeGrade)
+   public static bool IsChild(int AgeGrade)
         {
             return AgeGrade < 450;
         }
+     
 
         private int GetWeightCategory(int row, int col, string HebparameterName,bool IsChild, out bool isok)
         {

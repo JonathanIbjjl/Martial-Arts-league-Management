@@ -138,7 +138,7 @@ namespace MartialArts
             ExcelColumnsRecognition[14, 1] = "במידה ולא ימצא מתחרה בקטגורית משקל";
             ExcelColumnsRecognition[15, 1] = "קטגורית גיל אחת גבוהה יותר";
             ExcelColumnsRecognition[16, 1] = "דרגת חגורה אחת גבוהה יותר";
-            ExcelColumnsRecognition[17, 1] = "להתחרות בקטגוריה מעורבת";
+            ExcelColumnsRecognition[17, 1] = "קטגוריה מעורבת";
             ExcelColumnsRecognition[18, 1] = "אם האקדמיה אינה מופיעה ברשימה";
 
             // column is for promting the user what header is missing in the input this array and headersForContaines indexes must be equal and
@@ -259,23 +259,23 @@ namespace MartialArts
 
             {
                 case 1000:
-                    return Color.FromArgb(248,248,248);
+                    return Color.FromArgb(255, 255, 255);
                 case 2000:
-                    return Color.FromArgb(200, 200, 200);
+                    return Color.FromArgb(160, 160, 160);
                 case 3000:
-                 return   Color.Yellow;
+                    return Color.FromArgb(255, 255, 51);
                 case 4000:
-                    return Color.Orange;
+                    return Color.FromArgb(255, 153, 51);
                 case 5000:
-                    return Color.Green;
+                    return Color.FromArgb(0, 255, 0);
                 case 6000:
-                    return Color.FromArgb(27, 133, 184);
+                    return Color.FromArgb(0, 0, 102);
                 case 7000:
-                    return Color.Purple;
+                    return Color.FromArgb(51, 0, 51);
                 case 8000:
-                    return Color.FromArgb(139, 69, 19);
+                    return Color.FromArgb(51, 25, 0);
                 case 9000:
-                   return Color.FromArgb(20,20,20);
+                    return Color.FromArgb(10, 10, 10);
                 default:
                    return Color.White;
             }

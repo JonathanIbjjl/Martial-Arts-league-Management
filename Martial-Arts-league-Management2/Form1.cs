@@ -50,6 +50,7 @@ namespace MartialArts
         {
             UpdateClocks(true);
             LoadMe();
+            dgvColors();
         }
 
         private void LoadMe()
@@ -315,10 +316,24 @@ namespace MartialArts
             lblwaitClock.Controls.Add(wClock.Clock);
         }
 
-
+        private void dgvColors()
+        {
+            dgvMain.BackgroundColor = GlobalVars.Sys_LighterGray;
+            dgvMain.DefaultCellStyle.BackColor = Color.FromArgb(15,15,15);
+            dgvMain.DefaultCellStyle.ForeColor = Color.FromArgb(200, 200, 200);
+            dgvMain.Font = new Font("ARIAL", 8, FontStyle.Regular);
+            dgvMain.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(15, 15, 15); 
+            dgvMain.ColumnHeadersDefaultCellStyle.BackColor = GlobalVars.Sys_Yellow;
+            dgvMain.RowHeadersDefaultCellStyle.BackColor = GlobalVars.Sys_Yellow;
+            dgvMain.RowHeadersDefaultCellStyle.ForeColor = Color.FromArgb(15, 15, 15);
+            dgvMain.RowsDefaultCellStyle.SelectionBackColor = GlobalVars.Sys_Red;
+            dgvMain.RowsDefaultCellStyle.SelectionForeColor = GlobalVars.Sys_White;
+            dgvMain.ColumnHeadersDefaultCellStyle.Font = new Font("ARIAL", 9, FontStyle.Bold);
+        }
 
         private void LoadDgv()
         {
+      
             if (dgvMain.Rows.Count > 0)
             {
                 dgvMain.Rows.Clear();
@@ -335,15 +350,15 @@ namespace MartialArts
             dgvMain.DoubleBuffered(true);
             dgvMain.EnableHeadersVisualStyles = false;
             dgvMain.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvMain.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(28, 28, 28);
-            dgvMain.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(227, 154, 44);
             this.dgvMain.RowHeadersWidth = 70;
             dgvMain.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
             dgvMain.ReadOnly = true;
+            dgvMain.AllowUserToAddRows = false;
 
             if (GlobalVars.ListOfContenders.Count < 1)
                 return;
 
+            dgvMain.Columns.Add("ID", "ת.ז");
             dgvMain.Columns.Add("FirstName", "שם");
             dgvMain.Columns.Add("LastName", "שם משפחה");
             dgvMain.Columns.Add("HebrewBeltColor", "חגורה");
@@ -362,11 +377,24 @@ namespace MartialArts
             dgvMain.Columns.Add("IsAllowedWeightGradeAbove", "פקטור משקל");
 
 
+            dgvMain.Columns["ID"].Width = 70;
+            dgvMain.Columns["HebrewBeltColor"].Width = 70;
+            dgvMain.Columns["GetWeightValue"].Width = 70;
+            dgvMain.Columns["Weight"].Width = 70;
+            dgvMain.Columns["GetAgeValue"].Width = 70;
+
+            dgvMain.Columns["IsMale"].Width = 50;
+            dgvMain.Columns["IsAllowedVersusMan"].Width = 50;
+            dgvMain.Columns["IsAllowedAgeGradeAbove"].Width = 50;
+            dgvMain.Columns["IsAllowedBeltGradeAbove"].Width = 50;
+            dgvMain.Columns["IsAllowedWeightGradeAbove"].Width = 50;
+
 
             // add rows
             dgvMain.Rows.Add(GlobalVars.ListOfContenders.Count);
             for (int i = 0; i < GlobalVars.ListOfContenders.Count; i++)
             {
+                dgvMain.Rows[i].Cells["ID"].Value = GlobalVars.ListOfContenders[i].ID;
                 dgvMain.Rows[i].Cells["FirstName"].Value = GlobalVars.ListOfContenders[i].FirstName;
                 dgvMain.Rows[i].Cells["LastName"].Value = GlobalVars.ListOfContenders[i].LastName;
 
@@ -396,9 +424,9 @@ namespace MartialArts
                 dgvMain.Rows[i].Cells["IsAllowedWeightGradeAbove"].Value = (GlobalVars.ListOfContenders[i].IsAllowedWeightGradeAbove == true) ? "כן" : "לא";
 
                 // color
-                dgvMain.Rows[i].DefaultCellStyle.BackColor = GlobalVars.ListOfContenders[i].GetBeltColorValue;
-                if (GlobalVars.ListOfContenders[i].Belt == 9000)
-                    dgvMain.Rows[i].DefaultCellStyle.ForeColor = Color.White;
+                dgvMain.Rows[i].Cells[3].Style.BackColor = GlobalVars.ListOfContenders[i].GetBeltColorValue;
+                if (GlobalVars.ListOfContenders[i].Belt < (int)Contenders.ContndersGeneral.BeltsEnum.blue)
+                    dgvMain.Rows[i].Cells[3].Style.ForeColor = Color.Black;
 
                 this.dgvMain.Rows[i].HeaderCell.Value = GlobalVars.ListOfContenders[i].SystemID.ToString();
 
@@ -409,14 +437,86 @@ namespace MartialArts
             dgvMain.Columns["AcademyName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
 
-            // sort
-            this.dgvMain.Sort(this.dgvMain.Columns["HebrewBeltColor"], ListSortDirection.Ascending);
-
             ExampleListIsPresented = false;
             EditingList = false;
 
         }
 
+        // TODO: delete  LoadDgvNew() after 30/04/2017 if not in use
+        private void LoadDgvNew()
+        {
+            if (dgvMain.Rows.Count > 0)
+            {
+                dgvMain.Rows.Clear();
+                dgvMain.Columns.Clear();
+            }
+
+            DgvDefenitions();
+            ((DataGridViewComboBoxColumn)(dgvMain.Columns["AcademyName"])).DataSource = GlobalVars.ListOfContenders.Select(x => x.AcademyName).Distinct().ToArray();
+            ((DataGridViewComboBoxColumn)(dgvMain.Columns["weightCat"])).DataSource = GlobalVars.ListOfContenders.Select(x => x.GetWeightValue).Distinct().ToArray();
+            ((DataGridViewComboBoxColumn)(dgvMain.Columns["ageCat"])).DataSource = GlobalVars.ListOfContenders.Select(x => x.GetAgeValue).Distinct().ToArray();
+            // determine if child or adult and change radiobutton if needed
+            if (GlobalVars.ListOfContenders[0].IsChild == true)
+                radChild.Checked = true;
+            else
+                radAdult.Checked = true;
+
+
+            if (GlobalVars.ListOfContenders.Count < 1)
+                return;
+
+
+            // add rows
+            dgvMain.Rows.Add(GlobalVars.ListOfContenders.Count);
+            for (int i = 0; i < GlobalVars.ListOfContenders.Count; i++)
+            {
+                dgvMain.Rows[i].Cells["ID"].Value = GlobalVars.ListOfContenders[i].ID;
+                dgvMain.Rows[i].Cells["FirstName"].Value = GlobalVars.ListOfContenders[i].FirstName;
+                dgvMain.Rows[i].Cells["LastName"].Value = GlobalVars.ListOfContenders[i].LastName;
+
+                dgvMain.Rows[i].Cells["Belt"].Value = GlobalVars.ListOfContenders[i].HebrewBeltColor;
+
+                dgvMain.Rows[i].Cells["weightCat"].Value = GlobalVars.ListOfContenders[i].GetWeightValue;
+                dgvMain.Rows[i].Cells["weight"].Value = GlobalVars.ListOfContenders[i].Weight;
+                dgvMain.Rows[i].Cells["ageCat"].Value = GlobalVars.ListOfContenders[i].GetAgeValue;
+                dgvMain.Rows[i].Cells["Email"].Value = GlobalVars.ListOfContenders[i].Email;
+                dgvMain.Rows[i].Cells["phone"].Value = GlobalVars.ListOfContenders[i].PhoneNumber;
+                dgvMain.Rows[i].Cells["AcademyName"].Value = GlobalVars.ListOfContenders[i].AcademyName;
+                dgvMain.Rows[i].Cells["coach"].Value = GlobalVars.ListOfContenders[i].CoachName;
+                dgvMain.Rows[i].Cells["coachPhone"].Value = GlobalVars.ListOfContenders[i].CoachPhone;
+
+                if (GlobalVars.ListOfContenders[i].IsMale == true)
+                    dgvMain.Rows[i].Cells["gender"].Value = "זכר";
+                else
+                    dgvMain.Rows[i].Cells["gender"].Value = "נקבה";
+
+                if (GlobalVars.ListOfContenders[i].IsMale == false && GlobalVars.ListOfContenders[i].IsAllowedVersusMan == true)
+                    dgvMain.Rows[i].Cells["IsAllowedVersusMan"].Value = 1;
+                else
+                    dgvMain.Rows[i].Cells["IsAllowedVersusMan"].Value = 0;
+
+                dgvMain.Rows[i].Cells["IsAllowedAgeGradeAbove"].Value = (GlobalVars.ListOfContenders[i].IsAllowedAgeGradeAbove == true) ? 1 : 0;
+                dgvMain.Rows[i].Cells["IsAllowedBeltGradeAbove"].Value = (GlobalVars.ListOfContenders[i].IsAllowedBeltGradeAbove == true) ? 1 : 0;
+                dgvMain.Rows[i].Cells["IsAllowedWeightGradeAbove"].Value = (GlobalVars.ListOfContenders[i].IsAllowedWeightGradeAbove == true) ? 1 : 0;
+
+                // color
+                dgvMain.Rows[i].Cells[2].Style.BackColor = GlobalVars.ListOfContenders[i].GetBeltColorValue;
+                if (GlobalVars.ListOfContenders[i].Belt < (int)Contenders.ContndersGeneral.BeltsEnum.blue)
+                    dgvMain.Rows[i].Cells[2].Style.ForeColor = Color.Black;
+
+                this.dgvMain.Rows[i].HeaderCell.Value = GlobalVars.ListOfContenders[i].SystemID.ToString();
+
+
+            }
+
+            dgvMain.Columns["Email"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dgvMain.Columns["AcademyName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+
+            ExampleListIsPresented = false;
+            EditingList = false;
+
+        }
 
         private void dgvMain_DoubleClick(object sender, EventArgs e)
         {
@@ -1381,6 +1481,16 @@ namespace MartialArts
         private void pictureBox2_MouseEnter(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            // extract academies
+            var academies = Visual.VisualLeagueEvent.AllVisualContenders.AsEnumerable().Select(x => x.Contender.AcademyName).Distinct().OrderBy(x => x).ToList();
+            using (AddContender a = new AddContender((radAdult.Checked == true ? false : true),academies))
+            {
+                a.ShowDialog();
+            }
         }
     }
 

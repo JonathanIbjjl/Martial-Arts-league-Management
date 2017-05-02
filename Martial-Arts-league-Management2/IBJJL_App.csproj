@@ -97,6 +97,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddContender.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddContender.Designer.cs">
+      <DependentUpon>AddContender.cs</DependentUpon>
+    </Compile>
     <Compile Include="Bracket.cs" />
     <Compile Include="BracketsBuilder.cs" />
     <Compile Include="BracketsCreator.cs" />
@@ -142,6 +148,9 @@
     <Compile Include="VisualElements\VisualContenderNew.cs" />
     <Compile Include="VisualElements\VisualElementsEvents.cs" />
     <Compile Include="VisualElements\VisualLeagueEvent.cs" />
+    <EmbeddedResource Include="AddContender.resx">
+      <DependentUpon>AddContender.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Credits.resx">
       <DependentUpon>Credits.cs</DependentUpon>
     </EmbeddedResource>
@@ -161,6 +170,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Martial-Arts-league-Management2_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
