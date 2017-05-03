@@ -12,6 +12,9 @@ namespace MartialArts
 {
     public partial class AddContender : Form
     {
+        // the new contender object to use outside the class if it is valid it will not be null and dialiogResult will be OK
+        public Contenders.Contender NewContender { get; set; }
+        protected bool EditContMode { get; set; } = false;
         private bool IsChild;
         public List<string> AcademiesListNames;
         public AddContender(bool ischild,List<string> Academies)
@@ -21,12 +24,55 @@ namespace MartialArts
             this.AcademiesListNames = Academies;
         }
 
+        public AddContender(bool ischild, List<string> Academies,Contenders.Contender contenderToEdit)
+        {
+            InitializeComponent();
+            this.IsChild = ischild;
+            this.AcademiesListNames = Academies;
+            this.EditContMode = true;
+            NewContender = contenderToEdit;
+        }
+
         private void AddContender_Load(object sender, EventArgs e)
         {
             ColorControls();
             LoadComboBoxes();
             GeneralLook();
+            if (EditContMode == true)
+            {
+                LoadContenderToEdit();
+            }
+        }
 
+        private void LoadContenderToEdit()
+        {
+            try
+            {
+                txtFirstName.Text = NewContender.FirstName;
+                txtLastName.Text = NewContender.LastName;
+                txtID.Text = NewContender.ID;
+                txtEmail.Text = NewContender.Email;
+                txtPhone.Text = NewContender.PhoneNumber;
+                ComboAge.SelectedItem = NewContender.GetAgeValue;
+                radMale.Checked = NewContender.IsMale;
+                txtWeight.Text = NewContender.Weight.ToString();
+                comboWeight.SelectedItem = NewContender.GetWeightValue;
+                comboBelt.SelectedItem = NewContender.HebrewBeltColor;
+                ComboAcademy.Text = NewContender.AcademyName;
+                txtCoachName.Text = NewContender.CoachName;
+                txtCoachPhone.Text = NewContender.CoachPhone;
+                chWeightFac.Checked = NewContender.IsAllowedWeightGradeAbove;
+                chkAgeFac.Checked = NewContender.IsAllowedAgeGradeAbove;
+                chkBeltFac.Checked = NewContender.IsAllowedBeltGradeAbove;
+                chkSexFac.Checked = NewContender.IsAllowedVersusMan;
+            }
+
+            catch
+            {
+                // for safty only
+                Helpers.ShowGenericPromtForm("המתחרה שברצונך לערוך מכיל נתונים לא חוקיים");
+                this.Close();
+            }
         }
 
         private void GeneralLook()
@@ -125,8 +171,21 @@ namespace MartialArts
             ColorControls();
             Contenders.Contender cont = new Contenders.Contender();
             if (CreateAndValidateContender(ref cont) == false)
+            {
+                NewContender = null;
                 return;
+            }
+            else
+            {
+                NewContender = cont;
+                this.DialogResult = DialogResult.OK;
+                if(EditContMode != true)
+                Helpers.ShowGenericPromtForm("המתחרה החדש נוצר בהצלחה");
+                else
+                    Helpers.ShowGenericPromtForm("המתחרה נערך בהצלחה");
 
+                this.Close();
+            }
 
         }
 
@@ -242,7 +301,7 @@ namespace MartialArts
             contender.AcademyName = ComboAcademy.Text.ToString().Trim();
 
             // coach name
-            contender.CoachName = txtCoachName.ToString().Trim();
+            contender.CoachName = txtCoachName.Text.ToString().Trim();
 
             // coach phone
             contender.CoachPhone = GetMixedString(txtCoachPhone.Text.Trim(), "טלפון מאמן", out isok);

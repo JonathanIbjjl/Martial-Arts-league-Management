@@ -9,7 +9,7 @@ using MartialArts;
 
 namespace Visual
 {
-    partial class VisualContender : VisualElements, IDisposable, Contenders.IContender
+  public  partial class VisualContender : VisualElements, IDisposable, Contenders.IContender
     {
         public Contenders.Contender Contender { get; set; }
         protected BeltColors BeltShapes;

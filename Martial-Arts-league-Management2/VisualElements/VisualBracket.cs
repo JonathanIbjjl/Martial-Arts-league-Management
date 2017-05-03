@@ -10,7 +10,7 @@ namespace  Visual
 {
     //
     [Serializable]
-    class VisualBracket: VisualElements,ICloneable,IDisposable
+   public class VisualBracket: VisualElements,ICloneable,IDisposable
     {
        public MartialArts.Bracket Bracket;
        private  FlowLayoutPanel _Vbracket;

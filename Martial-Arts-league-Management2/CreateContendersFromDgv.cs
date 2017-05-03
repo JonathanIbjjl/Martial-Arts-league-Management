@@ -15,11 +15,11 @@ namespace MartialArts
             this.dgvMain = Dgv;
         }
 
-
+  
 
         private void AllowUserAddRows()
         {
-            dgvMain.AllowUserToAddRows = true;
+            dgvMain.AllowUserToAddRows = false;
         }
 
         private void DontAllowUserAddRows()
@@ -90,25 +90,25 @@ namespace MartialArts
             {
                 Contenders.Contender con = new Contenders.Contender();
                 con.SourceIsFromSystemList = true;
-                con.FirstName = GetPureStringField(dgvMain.Rows[i].Cells[1].Value, "שם פרטי", out isok,i);
-                con.LastName = GetPureStringField(dgvMain.Rows[i].Cells[2].Value, "שם משפחה", out isok,i);
-                con.ID = GetMixedString(dgvMain.Rows[i].Cells[0].Value, "תעודת זהות", out isok,i);
-                con.Email = GetPureStringField(dgvMain.Rows[i].Cells[7].Value, "אימייל", out isok,i);
-                con.PhoneNumber = GetMixedString(dgvMain.Rows[i].Cells[8].Value, "מספר טלפון", out isok,i);
+                con.FirstName = GetPureStringField(dgvMain.Rows[i].Cells["FirstName"].Value, "שם פרטי", out isok,i);
+                con.LastName = GetPureStringField(dgvMain.Rows[i].Cells["LastName"].Value, "שם משפחה", out isok,i);
+                con.ID = GetMixedString(dgvMain.Rows[i].Cells["ID"].Value, "תעודת זהות", out isok,i);
+                con.Email = GetPureStringField(dgvMain.Rows[i].Cells["Email"].Value, "אימייל", out isok,i);
+                con.PhoneNumber = GetMixedString(dgvMain.Rows[i].Cells["PhoneNumber"].Value, "מספר טלפון", out isok,i);
                 con.DateOfBirth = "28/10/1980";
-                con.AgeCategory = GetAgeCategory(dgvMain.Rows[i].Cells[6].Value, "קטגורית גיל", out isok,i);
-                con.IsMale = GetGender(dgvMain.Rows[i].Cells[12].Value, "מגדר", out isok,i);
-                con.Weight = GetWeight(dgvMain.Rows[i].Cells[5].Value, "משקל", out isok,i);
+                con.AgeCategory = GetAgeCategory(dgvMain.Rows[i].Cells["GetAgeValue"].Value, "קטגורית גיל", out isok,i);
+                con.IsMale = GetGender(dgvMain.Rows[i].Cells["IsMale"].Value, "מגדר", out isok,i);
+                con.Weight = GetWeight(dgvMain.Rows[i].Cells["Weight"].Value, "משקל", out isok,i);
                 con.IsChild = MartialArts.ExcelOperations.IsChild(con.AgeCategory);
-                con.WeightCategory = GetWeightCategory(dgvMain.Rows[i].Cells[4].Value, "קטגורית משקל", con.IsChild, out isok,i);
-                con.Belt = GetBelt(dgvMain.Rows[i].Cells[3].Value, "חגורה", out isok,i);
-                con.AcademyName = GetFieldCanBeNull(dgvMain.Rows[i].Cells[9].Value, "אקדמיה", out isok);
-                con.CoachName = GetFieldCanBeNull(dgvMain.Rows[i].Cells[10].Value, "מאמן", out isok);
-                con.CoachPhone = GetFieldCanBeNull(dgvMain.Rows[i].Cells[11].Value, "טלפון מאמן", out isok);
-                con.IsAllowedWeightGradeAbove = Convert.ToBoolean(dgvMain.Rows[i].Cells[16].Value);
-                con.IsAllowedAgeGradeAbove = Convert.ToBoolean(dgvMain.Rows[i].Cells[14].Value);
-                con.IsAllowedBeltGradeAbove = Convert.ToBoolean(dgvMain.Rows[i].Cells[15].Value);
-                con.IsAllowedVersusMan = Convert.ToBoolean(dgvMain.Rows[i].Cells[13].Value);
+                con.WeightCategory = GetWeightCategory(dgvMain.Rows[i].Cells["GetWeightValue"].Value, "קטגורית משקל", con.IsChild, out isok,i);
+                con.Belt = GetBelt(dgvMain.Rows[i].Cells["HebrewBeltColor"].Value, "חגורה", out isok,i);
+                con.AcademyName = GetFieldCanBeNull(dgvMain.Rows[i].Cells["AcademyName"].Value, "אקדמיה", out isok);
+                con.CoachName = GetFieldCanBeNull(dgvMain.Rows[i].Cells["CoachName"].Value, "מאמן", out isok);
+                con.CoachPhone = GetFieldCanBeNull(dgvMain.Rows[i].Cells["CoachPhone"].Value, "טלפון מאמן", out isok);
+                con.IsAllowedWeightGradeAbove =(dgvMain.Rows[i].Cells["IsAllowedWeightGradeAbove"].Value.ToString() == "כן") ? true : false;
+                con.IsAllowedAgeGradeAbove = (dgvMain.Rows[i].Cells["IsAllowedAgeGradeAbove"].Value.ToString() == "כן") ? true : false;
+                con.IsAllowedBeltGradeAbove = (dgvMain.Rows[i].Cells["IsAllowedBeltGradeAbove"].Value.ToString() == "כן") ? true : false;
+                con.IsAllowedVersusMan = (dgvMain.Rows[i].Cells["IsAllowedVersusMan"].Value.ToString() == "כן") ? true : false;
                 GlobalVars.ListOfContenders.Add(con);
             }
 
@@ -136,6 +136,41 @@ namespace MartialArts
             }
         }
 
+        public Contenders.Contender GetContenderFromDGV(int i)
+        {
+            bool isok = true;
+
+            Contenders.Contender con = new Contenders.Contender();
+            con.SystemID =Int32.Parse( dgvMain.Rows[i].HeaderCell.Value.ToString());
+            con.FirstName = GetPureStringField(dgvMain.Rows[i].Cells["FirstName"].Value, "שם פרטי", out isok, i);
+            con.LastName = GetPureStringField(dgvMain.Rows[i].Cells["LastName"].Value, "שם משפחה", out isok, i);
+            con.ID = GetMixedString(dgvMain.Rows[i].Cells["ID"].Value, "תעודת זהות", out isok, i);
+            con.Email = GetPureStringField(dgvMain.Rows[i].Cells["Email"].Value, "אימייל", out isok, i);
+            con.PhoneNumber = GetMixedString(dgvMain.Rows[i].Cells["PhoneNumber"].Value, "מספר טלפון", out isok, i);
+            con.DateOfBirth = "28/10/1980";
+            con.AgeCategory = GetAgeCategory(dgvMain.Rows[i].Cells["GetAgeValue"].Value, "קטגורית גיל", out isok, i);
+            con.IsMale = GetGender(dgvMain.Rows[i].Cells["IsMale"].Value, "מגדר", out isok, i);
+            con.Weight = GetWeight(dgvMain.Rows[i].Cells["Weight"].Value, "משקל", out isok, i);
+            con.IsChild = MartialArts.ExcelOperations.IsChild(con.AgeCategory);
+            con.WeightCategory = GetWeightCategory(dgvMain.Rows[i].Cells["GetWeightValue"].Value, "קטגורית משקל", con.IsChild, out isok, i);
+            con.Belt = GetBelt(dgvMain.Rows[i].Cells["HebrewBeltColor"].Value, "חגורה", out isok, i);
+            con.AcademyName = GetFieldCanBeNull(dgvMain.Rows[i].Cells["AcademyName"].Value, "אקדמיה", out isok);
+            con.CoachName = GetFieldCanBeNull(dgvMain.Rows[i].Cells["CoachName"].Value, "מאמן", out isok);
+            con.CoachPhone = GetFieldCanBeNull(dgvMain.Rows[i].Cells["CoachPhone"].Value, "טלפון מאמן", out isok);
+            con.IsAllowedWeightGradeAbove = (dgvMain.Rows[i].Cells["IsAllowedWeightGradeAbove"].Value.ToString() == "כן") ? true : false;
+            con.IsAllowedAgeGradeAbove = (dgvMain.Rows[i].Cells["IsAllowedAgeGradeAbove"].Value.ToString() == "כן") ? true : false;
+            con.IsAllowedBeltGradeAbove = (dgvMain.Rows[i].Cells["IsAllowedBeltGradeAbove"].Value.ToString() == "כן") ? true : false;
+            con.IsAllowedVersusMan = (dgvMain.Rows[i].Cells["IsAllowedVersusMan"].Value.ToString() == "כן") ? true : false;
+
+            if (isok == true)
+            {
+                return con;
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         private string GetPureStringField(object value, string HebparameterName, out bool isok,int row)
         {

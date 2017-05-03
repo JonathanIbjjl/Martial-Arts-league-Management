@@ -39,7 +39,7 @@ namespace MartialArts
         }
     }
     [Serializable]
-    class Bracket
+  public class Bracket
     {
         private static int _BracketNumber = 0;
         public int BracketNumber { get; private set; }

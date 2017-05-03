@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MartialArts
 {
 
-    class GlobalVars
+  public  class GlobalVars
     {
        
         public  const string VerNum = "Beta 2.23";

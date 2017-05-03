@@ -256,11 +256,9 @@ namespace MartialArts
             }
             else
             {
-                // if MartialArts.GlobalVars.ListOfContenders is empty at this stage the data is not coming from excel, it comes from DgvMain
-                // in that case data will load here (in excel datasheet data loaded before via btnLoad button)
-                if (MartialArts.GlobalVars.ListOfContenders.Count <= 0)
-                {
-                    using (CreateContendersFromDgv createConts = new CreateContendersFromDgv(ref dgvMain))
+
+                // create GlobalVars.ListOfContenders again (if its excel it will be the second time) for case that user added or edited contenders via AddContenders form
+                using (CreateContendersFromDgv createConts = new CreateContendersFromDgv(ref dgvMain))
                     {
                         if (createConts.Init() == false)
                         {
@@ -270,7 +268,6 @@ namespace MartialArts
                             return;
                         }
                     }
-                }
 
                 if (MartialArts.GlobalVars.ListOfContenders.Count > 2300)
                 {
@@ -351,44 +348,46 @@ namespace MartialArts
             dgvMain.EnableHeadersVisualStyles = false;
             dgvMain.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.dgvMain.RowHeadersWidth = 70;
-            dgvMain.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
+           // dgvMain.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
             dgvMain.ReadOnly = true;
             dgvMain.AllowUserToAddRows = false;
 
             if (GlobalVars.ListOfContenders.Count < 1)
                 return;
 
-            dgvMain.Columns.Add("ID", "ת.ז");
-            dgvMain.Columns.Add("FirstName", "שם");
-            dgvMain.Columns.Add("LastName", "שם משפחה");
-            dgvMain.Columns.Add("HebrewBeltColor", "חגורה");
-            dgvMain.Columns.Add("GetWeightValue", "קטגוריית משקל");
-            dgvMain.Columns.Add("Weight", "משקל מדוייק");
-            dgvMain.Columns.Add("GetAgeValue", "קטגוריית גיל");
-            dgvMain.Columns.Add("Email", "אימייל");
-            dgvMain.Columns.Add("PhoneNumber", "טלפון");
-            dgvMain.Columns.Add("AcademyName", "אקדמיה");
-            dgvMain.Columns.Add("CoachName", "שם מאמן");
-            dgvMain.Columns.Add("CoachPhone", "טלפון מאמן");
-            dgvMain.Columns.Add("IsMale", "מגדר");
-            dgvMain.Columns.Add("IsAllowedVersusMan", "פקטור מגדר");
-            dgvMain.Columns.Add("IsAllowedAgeGradeAbove", "פקטור גיל");
-            dgvMain.Columns.Add("IsAllowedBeltGradeAbove", "פקטור חגורה");
-            dgvMain.Columns.Add("IsAllowedWeightGradeAbove", "פקטור משקל");
+            if (dgvMain.Columns.Count <= 3) // only for safty
+            {
+                dgvMain.Columns.Add("ID", "ת.ז");
+                dgvMain.Columns.Add("FirstName", "שם");
+                dgvMain.Columns.Add("LastName", "שם משפחה");
+                dgvMain.Columns.Add("HebrewBeltColor", "חגורה");
+                dgvMain.Columns.Add("GetWeightValue", "קטגוריית משקל");
+                dgvMain.Columns.Add("Weight", "משקל מדוייק");
+                dgvMain.Columns.Add("GetAgeValue", "קטגוריית גיל");
+                dgvMain.Columns.Add("Email", "אימייל");
+                dgvMain.Columns.Add("PhoneNumber", "טלפון");
+                dgvMain.Columns.Add("AcademyName", "אקדמיה");
+                dgvMain.Columns.Add("CoachName", "שם מאמן");
+                dgvMain.Columns.Add("CoachPhone", "טלפון מאמן");
+                dgvMain.Columns.Add("IsMale", "מגדר");
+                dgvMain.Columns.Add("IsAllowedVersusMan", "פקטור מגדר");
+                dgvMain.Columns.Add("IsAllowedAgeGradeAbove", "פקטור גיל");
+                dgvMain.Columns.Add("IsAllowedBeltGradeAbove", "פקטור חגורה");
+                dgvMain.Columns.Add("IsAllowedWeightGradeAbove", "פקטור משקל");
 
 
-            dgvMain.Columns["ID"].Width = 70;
-            dgvMain.Columns["HebrewBeltColor"].Width = 70;
-            dgvMain.Columns["GetWeightValue"].Width = 70;
-            dgvMain.Columns["Weight"].Width = 70;
-            dgvMain.Columns["GetAgeValue"].Width = 70;
+                dgvMain.Columns["ID"].Width = 70;
+                dgvMain.Columns["HebrewBeltColor"].Width = 70;
+                dgvMain.Columns["GetWeightValue"].Width = 70;
+                dgvMain.Columns["Weight"].Width = 70;
+                dgvMain.Columns["GetAgeValue"].Width = 70;
 
-            dgvMain.Columns["IsMale"].Width = 50;
-            dgvMain.Columns["IsAllowedVersusMan"].Width = 50;
-            dgvMain.Columns["IsAllowedAgeGradeAbove"].Width = 50;
-            dgvMain.Columns["IsAllowedBeltGradeAbove"].Width = 50;
-            dgvMain.Columns["IsAllowedWeightGradeAbove"].Width = 50;
-
+                dgvMain.Columns["IsMale"].Width = 50;
+                dgvMain.Columns["IsAllowedVersusMan"].Width = 50;
+                dgvMain.Columns["IsAllowedAgeGradeAbove"].Width = 50;
+                dgvMain.Columns["IsAllowedBeltGradeAbove"].Width = 50;
+                dgvMain.Columns["IsAllowedWeightGradeAbove"].Width = 50;
+            }
 
             // add rows
             dgvMain.Rows.Add(GlobalVars.ListOfContenders.Count);
@@ -871,7 +870,7 @@ namespace MartialArts
             MartialArts.GlobalVars.ListOfContenders = null;
             ClearExistingBrackets();
             DgvDefenitions();
-            dgvMain.Rows[0].Cells[0].Selected = true;
+       //     dgvMain.Rows[0].Cells[0].Selected = true;
             this.tabControl1.SelectedTab = tabPage1;
 
             // now its new project
@@ -991,9 +990,6 @@ namespace MartialArts
                     // handle project path
                     SerializeData save = new SerializeData(fakeUndoStruct);
                     save.Serialize();
-
-                    // retun to edit mode
-                    dgvMain.AllowUserToAddRows = true;
 
                     GlobalVars.ListOfContenders.Clear();
                     GlobalVars.ListOfContenders = null;
@@ -1247,28 +1243,7 @@ namespace MartialArts
             NewProject();
         }
 
-        private void btnEditList_Click(object sender, EventArgs e)
-        {
-            dgvMain.Rows.Add(5);
-
-            for (int i = 0; i < dgvMain.Rows.Count; i++)
-            {
-                dgvMain.Rows[i].Cells[0].Value = "44444444444" + i.ToString();
-                dgvMain.Rows[i].Cells[1].Value = "44444444444" + i.ToString();
-                dgvMain.Rows[i].Cells[2].Value = "44444444444" + i.ToString();
-                dgvMain.Rows[i].Cells[3].Value = "כתומה";
-                dgvMain.Rows[i].Cells[4].Value = "עד 70";
-                dgvMain.Rows[i].Cells[5].Value = 70;
-                dgvMain.Rows[i].Cells[6].Value = "36-40";
-                dgvMain.Rows[i].Cells[7].Value = "JJJJJJJJ@";
-                dgvMain.Rows[i].Cells[8].Value = "0549000406";
-                dgvMain.Rows[i].Cells[9].Value = "אקדמיה 1";
-                dgvMain.Rows[i].Cells[10].Value = "asdasdasd";
-                dgvMain.Rows[i].Cells[11].Value = "054095995955";
-                dgvMain.Rows[i].Cells[12].Value = "זכר";
-
-            }
-        }
+      
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1486,10 +1461,175 @@ namespace MartialArts
         private void button1_Click_2(object sender, EventArgs e)
         {
             // extract academies
-            var academies = Visual.VisualLeagueEvent.AllVisualContenders.AsEnumerable().Select(x => x.Contender.AcademyName).Distinct().OrderBy(x => x).ToList();
-            using (AddContender a = new AddContender((radAdult.Checked == true ? false : true),academies))
+            if (Visual.VisualLeagueEvent.IsBracketsAndEventCreated == true)
             {
-                a.ShowDialog();
+                if (Helpers.PromtYesNowQuestion("הבתים של האירוע כבר נוצרו, במידה ותיצור מתחרה חדש לא יחושבו עבורו מדדים סטטיסטיים ותידרש לשבץ אותו באופן ידני, האם להמשיך?") == false)
+                    return;
+
+                var academies = Visual.VisualLeagueEvent.AllVisualContenders.AsEnumerable().Select(x => x.Contender.AcademyName).Distinct().OrderBy(x => x).ToList();
+                using (AddContender a = new AddContender((radAdult.Checked == true ? false : true), academies))
+                {
+                    if (a.ShowDialog() == DialogResult.OK)
+                    {
+                        AddNewContenderToDgv(a.NewContender);
+                        // add visual contender to UnPlacedFpanel panel
+                        // create visual contender
+                        Visual.VisualContender newVisContender = new Visual.VisualContender(a.NewContender);
+                        newVisContender.Init();
+                        // add to VisualLeagueEvent
+                        Visual.VisualLeagueEvent.AllVisualContenders.Add(newVisContender);
+                        // add to unplaced list
+                        Visual.VisualLeagueEvent.AddUnplacedContender(newVisContender);
+                        // add to panel
+                        UnPlacedFpanel.Controls.Add(newVisContender.Vcontender);
+                    }
+                }
+            }
+        }
+
+        private void btnAddContenderToDgv_Click(object sender, EventArgs e)
+        {
+            var academies = dgvMain.Rows.Cast<DataGridViewRow>()
+                           .Where(x => !x.IsNewRow)                 
+                           .Where(x => x.Cells["AcademyName"].Value != null) 
+                           .Select(x => x.Cells["AcademyName"].Value.ToString())
+                           .Distinct()
+                           .ToList();
+
+            using (AddContender a = new AddContender((radAdult.Checked == true ? false : true), academies))
+            {
+                if (a.ShowDialog() == DialogResult.OK)
+                {
+                    AddNewContenderToDgv(a.NewContender);
+                }
+            }
+        }
+
+
+        public void AddNewContenderToDgv(Contenders.Contender contender)
+        {
+            dgvMain.Rows.Add(1);
+            var i = dgvMain.Rows.Count - 1;
+
+            dgvMain.Rows[i].Cells["ID"].Value = contender.ID;
+            dgvMain.Rows[i].Cells["FirstName"].Value = contender.FirstName;
+            dgvMain.Rows[i].Cells["LastName"].Value = contender.LastName;
+
+            dgvMain.Rows[i].Cells["HebrewBeltColor"].Value = contender.HebrewBeltColor;
+
+            dgvMain.Rows[i].Cells["GetWeightValue"].Value = contender.GetWeightValue;
+            dgvMain.Rows[i].Cells["Weight"].Value = contender.Weight;
+            dgvMain.Rows[i].Cells["GetAgeValue"].Value = contender.GetAgeValue;
+            dgvMain.Rows[i].Cells["Email"].Value = contender.Email;
+            dgvMain.Rows[i].Cells["PhoneNumber"].Value = contender.PhoneNumber;
+            dgvMain.Rows[i].Cells["AcademyName"].Value = contender.AcademyName;
+            dgvMain.Rows[i].Cells["CoachName"].Value = contender.CoachName;
+            dgvMain.Rows[i].Cells["CoachPhone"].Value = contender.CoachPhone;
+
+            if (contender.IsMale == true)
+                dgvMain.Rows[i].Cells["IsMale"].Value = "זכר";
+            else
+                dgvMain.Rows[i].Cells["IsMale"].Value = "נקבה";
+
+            if (contender.IsMale == false && contender.IsAllowedVersusMan == true)
+                dgvMain.Rows[i].Cells["IsAllowedVersusMan"].Value = "כן";
+            else
+                dgvMain.Rows[i].Cells["IsAllowedVersusMan"].Value = "לא";
+
+            dgvMain.Rows[i].Cells["IsAllowedAgeGradeAbove"].Value = (contender.IsAllowedAgeGradeAbove == true) ? "כן" : "לא";
+            dgvMain.Rows[i].Cells["IsAllowedBeltGradeAbove"].Value = (contender.IsAllowedBeltGradeAbove == true) ? "כן" : "לא";
+            dgvMain.Rows[i].Cells["IsAllowedWeightGradeAbove"].Value = (contender.IsAllowedWeightGradeAbove == true) ? "כן" : "לא";
+
+            // color
+            dgvMain.Rows[i].Cells[3].Style.BackColor = contender.GetBeltColorValue;
+            if (contender.Belt < (int)Contenders.ContndersGeneral.BeltsEnum.blue)
+                dgvMain.Rows[i].Cells[3].Style.ForeColor = Color.Black;
+
+            this.dgvMain.Rows[i].HeaderCell.Value = contender.SystemID.ToString();
+
+        }
+
+        public void EditExistingContender(Contenders.Contender contender,int i)
+        {
+
+
+            dgvMain.Rows[i].Cells["ID"].Value = contender.ID;
+            dgvMain.Rows[i].Cells["FirstName"].Value = contender.FirstName;
+            dgvMain.Rows[i].Cells["LastName"].Value = contender.LastName;
+
+            dgvMain.Rows[i].Cells["HebrewBeltColor"].Value = contender.HebrewBeltColor;
+
+            dgvMain.Rows[i].Cells["GetWeightValue"].Value = contender.GetWeightValue;
+            dgvMain.Rows[i].Cells["Weight"].Value = contender.Weight;
+            dgvMain.Rows[i].Cells["GetAgeValue"].Value = contender.GetAgeValue;
+            dgvMain.Rows[i].Cells["Email"].Value = contender.Email;
+            dgvMain.Rows[i].Cells["PhoneNumber"].Value = contender.PhoneNumber;
+            dgvMain.Rows[i].Cells["AcademyName"].Value = contender.AcademyName;
+            dgvMain.Rows[i].Cells["CoachName"].Value = contender.CoachName;
+            dgvMain.Rows[i].Cells["CoachPhone"].Value = contender.CoachPhone;
+
+            if (contender.IsMale == true)
+                dgvMain.Rows[i].Cells["IsMale"].Value = "זכר";
+            else
+                dgvMain.Rows[i].Cells["IsMale"].Value = "נקבה";
+
+            if (contender.IsMale == false && contender.IsAllowedVersusMan == true)
+                dgvMain.Rows[i].Cells["IsAllowedVersusMan"].Value = "כן";
+            else
+                dgvMain.Rows[i].Cells["IsAllowedVersusMan"].Value = "לא";
+
+            dgvMain.Rows[i].Cells["IsAllowedAgeGradeAbove"].Value = (contender.IsAllowedAgeGradeAbove == true) ? "כן" : "לא";
+            dgvMain.Rows[i].Cells["IsAllowedBeltGradeAbove"].Value = (contender.IsAllowedBeltGradeAbove == true) ? "כן" : "לא";
+            dgvMain.Rows[i].Cells["IsAllowedWeightGradeAbove"].Value = (contender.IsAllowedWeightGradeAbove == true) ? "כן" : "לא";
+
+            // color
+            dgvMain.Rows[i].Cells[3].Style.BackColor = contender.GetBeltColorValue;
+            if (contender.Belt < (int)Contenders.ContndersGeneral.BeltsEnum.blue)
+                dgvMain.Rows[i].Cells[3].Style.ForeColor = Color.Black;
+
+            this.dgvMain.Rows[i].HeaderCell.Value = contender.SystemID.ToString();
+
+        }
+
+
+
+        private void StripEditCont_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // row index 
+                if ((this.dgvMain.CurrentRow == null))
+                {
+                    //No row selected
+                    Helpers.ShowGenericPromtForm("לא נבחר מתחרה ברשימה");
+                    return;
+                }
+                else
+                {
+                    var academies = dgvMain.Rows.Cast<DataGridViewRow>()
+                           .Where(x => !x.IsNewRow)
+                           .Where(x => x.Cells["AcademyName"].Value != null)
+                           .Select(x => x.Cells["AcademyName"].Value.ToString())
+                           .Distinct()
+                           .ToList();
+
+                    CreateContendersFromDgv ce = new CreateContendersFromDgv(ref dgvMain);
+
+                    using (AddContender a = new AddContender((radAdult.Checked == true ? false : true), academies,ce.GetContenderFromDGV(dgvMain.CurrentRow.Index)))
+                    {
+                        if (a.ShowDialog() == DialogResult.OK)
+                        {
+                            EditExistingContender(a.NewContender,dgvMain.CurrentRow.Index);
+                        }
+                    }
+                }
+            }
+
+
+
+            catch
+            {
+
             }
         }
     }

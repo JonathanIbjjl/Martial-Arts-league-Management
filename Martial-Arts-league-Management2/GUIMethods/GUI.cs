@@ -267,13 +267,13 @@ namespace MartialArts
                 "צהובה", "צהובה", "צהובה", "כתומה", "כתומה", "כתומה", "כתומה",
                 "ירוקה", "ירוקה", "ירוקה", "ירוקה", "כחולה", "כחולה", "כחולה",
                 "כחולה", "סגולה", "סגולה", "סגולה", "חומה", "חומה", "חומה", "שחורה", "שחורה" };
-    
-            dgvMain.Rows.Add(names.Length-1);
+
+            dgvMain.Rows.Add(names.Length);
             Random r = new Random();
             for (int i = 0; i < names.Length; i++)
             {
                 dgvMain.Rows[i].Cells[0].Value = "040364487";
-                dgvMain.Rows[i].Cells[1].Value =names[i];
+                dgvMain.Rows[i].Cells[1].Value = names[i];
                 dgvMain.Rows[i].Cells[2].Value = "Gracie";
                 dgvMain.Rows[i].Cells[3].Value = belts[i];
 
@@ -282,187 +282,255 @@ namespace MartialArts
                 dgvMain.Rows[i].Cells[6].Value = "36-40";
                 dgvMain.Rows[i].Cells[7].Value = "Gracie@IBJJL.COM";
                 dgvMain.Rows[i].Cells[8].Value = "05488888888";
-                dgvMain.Rows[i].Cells[9].Value = "אקדמיה" + " " + (i+1).ToString();
+                dgvMain.Rows[i].Cells[9].Value = "אקדמיה" + " " + (i + 1).ToString();
                 dgvMain.Rows[i].Cells[10].Value = "משה רובינוב";
                 dgvMain.Rows[i].Cells[11].Value = "05488888888";
                 dgvMain.Rows[i].Cells[12].Value = "זכר";
-                dgvMain.Rows[i].Cells[14].Value = r.Next(2);
-                dgvMain.Rows[i].Cells[15].Value = r.Next(2);
-                dgvMain.Rows[i].Cells[16].Value = r.Next(2);
+                dgvMain.Rows[i].Cells[13].Value = "לא";
+                dgvMain.Rows[i].Cells[14].Value =  (r.Next(2))== 0 ? "לא": "כן";
+                dgvMain.Rows[i].Cells[15].Value = (r.Next(2)) == 0 ? "לא" : "כן";
+                dgvMain.Rows[i].Cells[16].Value = (r.Next(2)) == 0 ? "לא" : "כן";
 
 
 
-                this.dgvMain.Rows[i].HeaderCell.Value = (i+1).ToString();
+                this.dgvMain.Rows[i].HeaderCell.Value = (i + 1).ToString();
 
             }
 
             ExampleListIsPresented = true;
         }
 
-        void DgvDefenitions()
+        private void DgvDefenitions()
         {
             if (dgvMain.Rows.Count > 0)
             {
-                dgvMain.Rows.Clear();             
-            }
-
-            if (dgvMain.Columns.Count > 0)
-            {
+                dgvMain.Rows.Clear();
                 dgvMain.Columns.Clear();
             }
 
 
-
+            dgvMain.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvMain.DoubleBuffered(true);
             dgvMain.EnableHeadersVisualStyles = false;
-            EndVer();
+            dgvMain.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.dgvMain.RowHeadersWidth = 70;
-        
-            dgvMain.SelectionMode = DataGridViewSelectionMode.RowHeaderSelect;
-      
+            dgvMain.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
+            dgvMain.ReadOnly = true;
+            dgvMain.AllowUserToAddRows = false;
 
-            dgvMain.ReadOnly = false;
-            dgvMain.AllowUserToAddRows = true;
-            dgvMain.AllowUserToDeleteRows = true;
-            // dgvMain.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
-
-            this.dgvMain.CellValidating += new
-              DataGridViewCellValidatingEventHandler(dgvMain_CellValidating);
-              this.dgvMain.CellEndEdit += new
-              DataGridViewCellEventHandler(dgvMain_CellEndEdit);
-
-
-            // 
-            // Column0
-            //
-            DataGridViewTextBoxColumn ID = new DataGridViewTextBoxColumn();
-            ID.HeaderText = "ת.ז";
-            ID.Name = "ID";
-            // 
-            // Column1
-            //
-            DataGridViewTextBoxColumn FirstName = new DataGridViewTextBoxColumn();
-            FirstName.HeaderText = "שם פרטי";
-            FirstName.Name = "FirstName";
-            // 
-            // Column2
-            //
-            DataGridViewTextBoxColumn LastName = new DataGridViewTextBoxColumn();
-            LastName.HeaderText = "שם משפחה";
-            LastName.Name = "LastName";
-            // 
-            // Column3
-            //
-            DataGridViewComboBoxColumn Belt = new DataGridViewComboBoxColumn();
-            var beltList = new List<string>() { "לבנה", "אפורה", "צהובה", "כתומה","ירוקה","כחולה","סגולה","חומה" ,"שחורה"};
-            Belt.DataSource = beltList;
-            Belt.HeaderText = "חגורה";
-            Belt.Name = "Belt";
-            Belt.FlatStyle = FlatStyle.Flat;
-            // 
-            // Column4
-            //
-            DataGridViewComboBoxColumn weightCat = new DataGridViewComboBoxColumn();
-            var weightList = new List<string>();
-            if(radChild.Checked == true)
-            weightList = Contenders.ContndersGeneral.ChildWeightCat.Keys.ToList();
-            else
-            weightList = Contenders.ContndersGeneral.AdultWeightCat.Keys.ToList();
-            weightCat.DataSource = weightList;
-            weightCat.HeaderText = "קטגוריית משקל";
-            weightCat.Name = "weightCat";
-            weightCat.FlatStyle = FlatStyle.Flat;
-            // 
-            // Column5
-            //
-            DataGridViewTextBoxColumn weight = new DataGridViewTextBoxColumn();
-            weight.HeaderText = "משקל מדוייק";
-            weight.Name = "weight";
-            // 
-            // Column6
-            //
-            DataGridViewComboBoxColumn age = new DataGridViewComboBoxColumn();
-            var ageList = new List<string>();
-            ageList = Contenders.ContndersGeneral.GetAgeValues(radChild.Checked);
-            age.DataSource = ageList;
-            age.HeaderText = "קטגוריית גיל";
-            age.Name = "ageCat";
-            age.FlatStyle = FlatStyle.Flat;
-            // 
-            // Column7
-            //
-            DataGridViewTextBoxColumn email = new DataGridViewTextBoxColumn();
-            email.HeaderText = "אימייל";
-            email.Name = "Email";
-            // 
-            // Column8
-            //
-            DataGridViewTextBoxColumn phone = new DataGridViewTextBoxColumn();
-            phone.HeaderText = "טלפון";
-            phone.Name = "phone";
-            // 
-            // Column9
-            //
-            DataGridViewComboBoxColumn AcademyName = new DataGridViewComboBoxColumn();
-            var academyList = new List<string>();
-            for (int i = 1; i < 100; i++)
-                academyList.Add("אקדמיה" + " " + i.ToString());
-            AcademyName.DataSource = academyList;
-            AcademyName.HeaderText = "אקדמיה";
-            AcademyName.Name = "AcademyName";
-            AcademyName.FlatStyle = FlatStyle.Flat;
-            // 
-            // Column10
-            //
-            DataGridViewTextBoxColumn coach = new DataGridViewTextBoxColumn();
-            coach.HeaderText = "שם מאמן";
-            coach.Name = "coach";
-            // 
-            // Column11
-            //
-            DataGridViewTextBoxColumn coachPhone = new DataGridViewTextBoxColumn();
-            coachPhone.HeaderText = "טלפון מאמן";
-            coachPhone.Name = "coachPhone";
-            // 
-            // Column12
-            //
-            DataGridViewComboBoxColumn gender = new DataGridViewComboBoxColumn();
-            var genderList = new List<string>() { "זכר","נקבה"};
-            gender.DataSource = genderList;
-            gender.HeaderText = "מגדר";
-            gender.Name = "gender";
-            gender.FlatStyle = FlatStyle.Flat;
-            // 
-            // Column12
-            //
-            DataGridViewCheckBoxColumn IsAllowedVersusMan = new DataGridViewCheckBoxColumn();
-            IsAllowedVersusMan.HeaderText = "פקטור מגדר";
-            IsAllowedVersusMan.Name = "IsAllowedVersusMan";
-            // 
-            // Column13
-            //
-            DataGridViewCheckBoxColumn IsAllowedAgeGradeAbove = new DataGridViewCheckBoxColumn();
-            IsAllowedAgeGradeAbove.HeaderText = "פקטור גיל";
-            IsAllowedAgeGradeAbove.Name = "IsAllowedAgeGradeAbove";
-            // 
-            // Column14
-            //
-            DataGridViewCheckBoxColumn IsAllowedBeltGradeAbove = new DataGridViewCheckBoxColumn();
-            IsAllowedBeltGradeAbove.HeaderText = "פקטור חגורה";
-            IsAllowedBeltGradeAbove.Name = "IsAllowedBeltGradeAbove";
-            // 
-            // Column15
-            //
-            DataGridViewCheckBoxColumn IsAllowedWeightGradeAbove = new DataGridViewCheckBoxColumn();
-            IsAllowedWeightGradeAbove.HeaderText = "פקטור משקל";
-            IsAllowedWeightGradeAbove.Name = "IsAllowedWeightGradeAbove";
-
-            dgvMain.Columns.AddRange(ID,FirstName, LastName,Belt,weightCat,weight,age,email,phone 
-                ,AcademyName,coach,coachPhone, gender,IsAllowedVersusMan,IsAllowedAgeGradeAbove,IsAllowedBeltGradeAbove,IsAllowedWeightGradeAbove);
+            dgvMain.Columns.Add("ID", "ת.ז");
+            dgvMain.Columns.Add("FirstName", "שם");
+            dgvMain.Columns.Add("LastName", "שם משפחה");
+            dgvMain.Columns.Add("HebrewBeltColor", "חגורה");
+            dgvMain.Columns.Add("GetWeightValue", "קטגוריית משקל");
+            dgvMain.Columns.Add("Weight", "משקל מדוייק");
+            dgvMain.Columns.Add("GetAgeValue", "קטגוריית גיל");
+            dgvMain.Columns.Add("Email", "אימייל");
+            dgvMain.Columns.Add("PhoneNumber", "טלפון");
+            dgvMain.Columns.Add("AcademyName", "אקדמיה");
+            dgvMain.Columns.Add("CoachName", "שם מאמן");
+            dgvMain.Columns.Add("CoachPhone", "טלפון מאמן");
+            dgvMain.Columns.Add("IsMale", "מגדר");
+            dgvMain.Columns.Add("IsAllowedVersusMan", "פקטור מגדר");
+            dgvMain.Columns.Add("IsAllowedAgeGradeAbove", "פקטור גיל");
+            dgvMain.Columns.Add("IsAllowedBeltGradeAbove", "פקטור חגורה");
+            dgvMain.Columns.Add("IsAllowedWeightGradeAbove", "פקטור משקל");
 
 
-            ExampleListIsPresented = false;
+            dgvMain.Columns["ID"].Width = 70;
+            dgvMain.Columns["HebrewBeltColor"].Width = 70;
+            dgvMain.Columns["GetWeightValue"].Width = 70;
+            dgvMain.Columns["Weight"].Width = 70;
+            dgvMain.Columns["GetAgeValue"].Width = 70;
+
+            dgvMain.Columns["IsMale"].Width = 50;
+            dgvMain.Columns["IsAllowedVersusMan"].Width = 50;
+            dgvMain.Columns["IsAllowedAgeGradeAbove"].Width = 50;
+            dgvMain.Columns["IsAllowedBeltGradeAbove"].Width = 50;
+            dgvMain.Columns["IsAllowedWeightGradeAbove"].Width = 50;
+            
+            // add click event
+            dgvMain.MouseDown += new MouseEventHandler(dgv_Click);
         }
+
+        private void dgv_Click(object sender, MouseEventArgs e)
+        {
+            try
+            {
+
+                if (e.Button == MouseButtons.Right)
+                {
+                    contextMenuStrip1.Show(dgvMain,new Point(e.X,e.Y));
+                }
+            }
+            catch { }
+        }
+
+        // TODO: DELETE 
+        //void DgvDefenitions()
+        //{
+        //    if (dgvMain.Rows.Count > 0)
+        //    {
+        //        dgvMain.Rows.Clear();             
+        //    }
+
+        //    if (dgvMain.Columns.Count > 0)
+        //    {
+        //        dgvMain.Columns.Clear();
+        //    }
+
+
+
+        //    dgvMain.DoubleBuffered(true);
+        //    dgvMain.EnableHeadersVisualStyles = false;
+        //    EndVer();
+        //    this.dgvMain.RowHeadersWidth = 70;
+
+        //    dgvMain.SelectionMode = DataGridViewSelectionMode.RowHeaderSelect;
+
+
+        //    dgvMain.ReadOnly = false;
+        //    dgvMain.AllowUserToAddRows = true;
+        //    dgvMain.AllowUserToDeleteRows = true;
+        //    // dgvMain.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
+
+        //    this.dgvMain.CellValidating += new
+        //      DataGridViewCellValidatingEventHandler(dgvMain_CellValidating);
+        //      this.dgvMain.CellEndEdit += new
+        //      DataGridViewCellEventHandler(dgvMain_CellEndEdit);
+
+
+        //    // 
+        //    // Column0
+        //    //
+        //    DataGridViewTextBoxColumn ID = new DataGridViewTextBoxColumn();
+        //    ID.HeaderText = "ת.ז";
+        //    ID.Name = "ID";
+        //    // 
+        //    // Column1
+        //    //
+        //    DataGridViewTextBoxColumn FirstName = new DataGridViewTextBoxColumn();
+        //    FirstName.HeaderText = "שם פרטי";
+        //    FirstName.Name = "FirstName";
+        //    // 
+        //    // Column2
+        //    //
+        //    DataGridViewTextBoxColumn LastName = new DataGridViewTextBoxColumn();
+        //    LastName.HeaderText = "שם משפחה";
+        //    LastName.Name = "LastName";
+        //    // 
+        //    // Column3
+        //    //
+        //    DataGridViewComboBoxColumn Belt = new DataGridViewComboBoxColumn();
+        //    var beltList = new List<string>() { "לבנה", "אפורה", "צהובה", "כתומה","ירוקה","כחולה","סגולה","חומה" ,"שחורה"};
+        //    Belt.DataSource = beltList;
+        //    Belt.HeaderText = "חגורה";
+        //    Belt.Name = "Belt";
+        //    Belt.FlatStyle = FlatStyle.Flat;
+        //    // 
+        //    // Column4
+        //    //
+        //    DataGridViewComboBoxColumn weightCat = new DataGridViewComboBoxColumn();
+        //    var weightList = new List<string>();
+        //    if(radChild.Checked == true)
+        //    weightList = Contenders.ContndersGeneral.ChildWeightCat.Keys.ToList();
+        //    else
+        //    weightList = Contenders.ContndersGeneral.AdultWeightCat.Keys.ToList();
+        //    weightCat.DataSource = weightList;
+        //    weightCat.HeaderText = "קטגוריית משקל";
+        //    weightCat.Name = "weightCat";
+        //    weightCat.FlatStyle = FlatStyle.Flat;
+        //    // 
+        //    // Column5
+        //    //
+        //    DataGridViewTextBoxColumn weight = new DataGridViewTextBoxColumn();
+        //    weight.HeaderText = "משקל מדוייק";
+        //    weight.Name = "weight";
+        //    // 
+        //    // Column6
+        //    //
+        //    DataGridViewComboBoxColumn age = new DataGridViewComboBoxColumn();
+        //    var ageList = new List<string>();
+        //    ageList = Contenders.ContndersGeneral.GetAgeValues(radChild.Checked);
+        //    age.DataSource = ageList;
+        //    age.HeaderText = "קטגוריית גיל";
+        //    age.Name = "ageCat";
+        //    age.FlatStyle = FlatStyle.Flat;
+        //    // 
+        //    // Column7
+        //    //
+        //    DataGridViewTextBoxColumn email = new DataGridViewTextBoxColumn();
+        //    email.HeaderText = "אימייל";
+        //    email.Name = "Email";
+        //    // 
+        //    // Column8
+        //    //
+        //    DataGridViewTextBoxColumn phone = new DataGridViewTextBoxColumn();
+        //    phone.HeaderText = "טלפון";
+        //    phone.Name = "phone";
+        //    // 
+        //    // Column9
+        //    //
+        //    DataGridViewComboBoxColumn AcademyName = new DataGridViewComboBoxColumn();
+        //    var academyList = new List<string>();
+        //    for (int i = 1; i < 100; i++)
+        //        academyList.Add("אקדמיה" + " " + i.ToString());
+        //    AcademyName.DataSource = academyList;
+        //    AcademyName.HeaderText = "אקדמיה";
+        //    AcademyName.Name = "AcademyName";
+        //    AcademyName.FlatStyle = FlatStyle.Flat;
+        //    // 
+        //    // Column10
+        //    //
+        //    DataGridViewTextBoxColumn coach = new DataGridViewTextBoxColumn();
+        //    coach.HeaderText = "שם מאמן";
+        //    coach.Name = "coach";
+        //    // 
+        //    // Column11
+        //    //
+        //    DataGridViewTextBoxColumn coachPhone = new DataGridViewTextBoxColumn();
+        //    coachPhone.HeaderText = "טלפון מאמן";
+        //    coachPhone.Name = "coachPhone";
+        //    // 
+        //    // Column12
+        //    //
+        //    DataGridViewComboBoxColumn gender = new DataGridViewComboBoxColumn();
+        //    var genderList = new List<string>() { "זכר","נקבה"};
+        //    gender.DataSource = genderList;
+        //    gender.HeaderText = "מגדר";
+        //    gender.Name = "gender";
+        //    gender.FlatStyle = FlatStyle.Flat;
+        //    // 
+        //    // Column12
+        //    //
+        //    DataGridViewCheckBoxColumn IsAllowedVersusMan = new DataGridViewCheckBoxColumn();
+        //    IsAllowedVersusMan.HeaderText = "פקטור מגדר";
+        //    IsAllowedVersusMan.Name = "IsAllowedVersusMan";
+        //    // 
+        //    // Column13
+        //    //
+        //    DataGridViewCheckBoxColumn IsAllowedAgeGradeAbove = new DataGridViewCheckBoxColumn();
+        //    IsAllowedAgeGradeAbove.HeaderText = "פקטור גיל";
+        //    IsAllowedAgeGradeAbove.Name = "IsAllowedAgeGradeAbove";
+        //    // 
+        //    // Column14
+        //    //
+        //    DataGridViewCheckBoxColumn IsAllowedBeltGradeAbove = new DataGridViewCheckBoxColumn();
+        //    IsAllowedBeltGradeAbove.HeaderText = "פקטור חגורה";
+        //    IsAllowedBeltGradeAbove.Name = "IsAllowedBeltGradeAbove";
+        //    // 
+        //    // Column15
+        //    //
+        //    DataGridViewCheckBoxColumn IsAllowedWeightGradeAbove = new DataGridViewCheckBoxColumn();
+        //    IsAllowedWeightGradeAbove.HeaderText = "פקטור משקל";
+        //    IsAllowedWeightGradeAbove.Name = "IsAllowedWeightGradeAbove";
+
+        //    dgvMain.Columns.AddRange(ID,FirstName, LastName,Belt,weightCat,weight,age,email,phone 
+        //        ,AcademyName,coach,coachPhone, gender,IsAllowedVersusMan,IsAllowedAgeGradeAbove,IsAllowedBeltGradeAbove,IsAllowedWeightGradeAbove);
+
+
+        //    ExampleListIsPresented = false;
+        //}
 
         private void dgvMain_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {

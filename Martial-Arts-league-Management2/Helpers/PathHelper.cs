@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace MartialArts
 {
-    partial class Helpers
+  public  partial class Helpers
     {
         
 
@@ -89,7 +89,7 @@ namespace MartialArts
       
     }
 
-    class BinaryFiles : Helpers
+  public  class BinaryFiles : Helpers
     {
         public static string SavedAllContsBinaryFilePath
         {
@@ -133,7 +133,7 @@ namespace MartialArts
         }
     }
 
-    class ProjectsSavedAsBinaryFiles : BinaryFiles
+   public class ProjectsSavedAsBinaryFiles : BinaryFiles
     {
         public string ProjectDirName = "";
         public string ProjectFullDir { get; set; } = "";

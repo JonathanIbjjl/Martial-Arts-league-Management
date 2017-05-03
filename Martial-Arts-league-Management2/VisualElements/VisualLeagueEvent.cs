@@ -10,6 +10,21 @@ namespace Visual
 {
     class VisualLeagueEvent : VisualElements
     {
+        public static bool IsBracketsAndEventCreated
+        {
+            get
+            {
+                if (AllVisualContenders != null && AllVisualContenders.Count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
         private static List<VisualBracket> _VisualBracketsList;
         public static List<VisualBracket> VisualBracketsList
         {

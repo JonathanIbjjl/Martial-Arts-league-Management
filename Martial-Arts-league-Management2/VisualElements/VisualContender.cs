@@ -9,7 +9,7 @@ using MartialArts;
 namespace Visual
 {
     [Serializable]
-    class VisualElements
+ public   class VisualElements
     {
         [Serializable]
         protected struct BeltColors

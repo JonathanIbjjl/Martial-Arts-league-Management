@@ -18,7 +18,7 @@ namespace Contenders
 
 
     [Serializable]
-    class ContndersGeneral
+   public class ContndersGeneral
     {
         // hash table for excel column names (keys) and column number (value)
         private Dictionary<string, int> _HeadersDictionary;
@@ -289,7 +289,7 @@ namespace Contenders
     }
 
     [Serializable]
-    class Contender : ContndersGeneral, IContender, System.Collections.IEnumerable
+   public class Contender : ContndersGeneral, IContender, System.Collections.IEnumerable
     {
         private static int IdentityNumber = 999;
         public Contender()
