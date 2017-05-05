@@ -118,6 +118,16 @@ namespace MartialArts
             }
         }
 
+        public static string ContendersFilePath
+        {
+            get
+            {
+
+                string filename = "Contenders.bin";
+                return Path.Combine(SavedProjects, filename);
+            }
+        }
+
         public static bool SavedDataExist(string filePath,out string LastSaved)
         {
             if (System.IO.File.Exists(filePath))
@@ -222,6 +232,18 @@ namespace MartialArts
                     throw new Exception("Parent Directory is not Exist you must use bool CreateSubPath() to check if parent and child derectories created succesfuly");
 
                 string filename = "UnplacedVcSaveddata.bin";
+                return Path.Combine(ProjectFullDir, filename);
+            }
+        }
+
+        public new string ContendersFilePath
+        {
+            get
+            {
+                if (ProjectFullDir == "")
+                    throw new Exception("Parent Directory is not Exist you must use bool CreateSubPath() to check if parent and child derectories created succesfuly");
+
+                string filename = "Contenders.bin";
                 return Path.Combine(ProjectFullDir, filename);
             }
         }

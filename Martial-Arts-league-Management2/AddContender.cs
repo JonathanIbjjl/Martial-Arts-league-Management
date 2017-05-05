@@ -41,6 +41,9 @@ namespace MartialArts
             if (EditContMode == true)
             {
                 LoadContenderToEdit();
+                btnSave.Image = null;
+                btnSave.Text = "שמור שינויים";
+                this.Text = "עריכת מתחרה";
             }
         }
 
@@ -172,17 +175,23 @@ namespace MartialArts
             Contenders.Contender cont = new Contenders.Contender();
             if (CreateAndValidateContender(ref cont) == false)
             {
-                NewContender = null;
                 return;
             }
             else
             {
-                NewContender = cont;
+               
                 this.DialogResult = DialogResult.OK;
-                if(EditContMode != true)
-                Helpers.ShowGenericPromtForm("המתחרה החדש נוצר בהצלחה");
+                if (EditContMode != true)
+                {
+                    NewContender = cont;
+                    Helpers.ShowGenericPromtForm("המתחרה החדש נוצר בהצלחה");
+                }
                 else
+                {
+                    cont.SystemID = NewContender.SystemID; // take the old system id from the list
+                    NewContender = cont;
                     Helpers.ShowGenericPromtForm("המתחרה נערך בהצלחה");
+                }
 
                 this.Close();
             }
@@ -318,6 +327,10 @@ namespace MartialArts
             contender.IsAllowedAgeGradeAbove = chkAgeFac.Checked;
             contender.IsAllowedBeltGradeAbove = chkBeltFac.Checked;
             contender.IsAllowedVersusMan = chkSexFac.Checked;
+
+            // for new contenders only
+            if (EditContMode == false)
+                contender.CreatedAfterBracketBuilder = true;
 
             return true;
         }

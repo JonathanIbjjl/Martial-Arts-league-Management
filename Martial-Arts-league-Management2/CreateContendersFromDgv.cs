@@ -89,7 +89,12 @@ namespace MartialArts
             for (int i = 0; i < dgvMain.Rows.Count; i++)
             {
                 Contenders.Contender con = new Contenders.Contender();
-                con.SourceIsFromSystemList = true;
+                // there is allready system id overide the system id that the constructor created
+                if (dgvMain.Rows[i].HeaderCell.Value != null && dgvMain.Rows[i].HeaderCell.Value.ToString().IsNumeric())
+                {   
+                    con.SystemID = Int32.Parse( dgvMain.Rows[i].HeaderCell.Value.ToString());
+                }
+
                 con.FirstName = GetPureStringField(dgvMain.Rows[i].Cells["FirstName"].Value, "שם פרטי", out isok,i);
                 con.LastName = GetPureStringField(dgvMain.Rows[i].Cells["LastName"].Value, "שם משפחה", out isok,i);
                 con.ID = GetMixedString(dgvMain.Rows[i].Cells["ID"].Value, "תעודת זהות", out isok,i);

@@ -291,7 +291,24 @@ namespace Contenders
     [Serializable]
    public class Contender : ContndersGeneral, IContender, System.Collections.IEnumerable
     {
-        private static int IdentityNumber = 999;
+        public static void RoleBackSystemIds()
+        {
+            IdentityNumber = 999;
+        }
+
+        public static int IdentityNumber
+        {
+            get
+            {
+                return _IdentityNumber;
+            }
+            set
+            {
+                _IdentityNumber = value;
+            }
+        }
+
+        private static int _IdentityNumber = 999;
         public Contender()
         {
             // create uniq identity
@@ -302,7 +319,7 @@ namespace Contenders
             IsPlaced = false;
         }
 
-        public bool SourceIsFromSystemList { get; set; } = false;
+        public bool CreatedAfterBracketBuilder { get; set; } = false;
         public int SystemID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

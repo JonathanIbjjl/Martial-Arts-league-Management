@@ -276,6 +276,10 @@ namespace MartialArts
                 dgvMain.Rows[i].Cells[1].Value = names[i];
                 dgvMain.Rows[i].Cells[2].Value = "Gracie";
                 dgvMain.Rows[i].Cells[3].Value = belts[i];
+                // color
+                dgvMain.Rows[i].Cells[3].Style.BackColor = Helpers.GetBeltColor(Contenders.ContndersGeneral.GetBelt(belts[i]));
+                if (Contenders.ContndersGeneral.GetBelt(belts[i]) < (int)Contenders.ContndersGeneral.BeltsEnum.blue)
+                    dgvMain.Rows[i].Cells[3].Style.ForeColor = Color.Black;
 
                 dgvMain.Rows[i].Cells[4].Value = Contenders.ContndersGeneral.AdultWeightCat.Keys.ToList()[r.Next(2, 8)].ToString();
                 dgvMain.Rows[i].Cells[5].Value = Helpers.extractNumberFromString(dgvMain.Rows[i].Cells[4].Value.ToString());
@@ -308,7 +312,7 @@ namespace MartialArts
                 dgvMain.Columns.Clear();
             }
 
-
+            dgvMain.MouseDown -= new MouseEventHandler(dgv_Click);
             dgvMain.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvMain.DoubleBuffered(true);
             dgvMain.EnableHeadersVisualStyles = false;

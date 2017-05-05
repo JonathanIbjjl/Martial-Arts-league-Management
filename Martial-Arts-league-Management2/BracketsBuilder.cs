@@ -15,7 +15,8 @@ namespace MartialArts
         protected List<ScoreAndID> PotentialScores = new List<ScoreAndID>();
         public List<Contenders.Contender> UselessContenders = new List<Contenders.Contender>();
         public List<MartialArts.Bracket> BracketsList = new List<MartialArts.Bracket>();
-
+        // used only for binary files to save data
+        public List<Contenders.Contender> ContendersFromDgvMain;
         protected double AllPotentialBracketsAverage { get; set; }
         protected double AllPotentialBracketsStdDivision;
 

@@ -8,7 +8,7 @@ using MartialArts;
 
 namespace Visual
 {
-    class VisualLeagueEvent : VisualElements
+  public  class VisualLeagueEvent : VisualElements
     {
         public static bool IsBracketsAndEventCreated
         {
@@ -527,7 +527,8 @@ namespace Visual
             public List<VisualBracket> _VisualBracketsList;
             public List<VisualContender> _VisualUnplacedBracketsList;
             public List<VisualContender> AllVisualContenders;
-            public bool IsFakeStructForSavingEditingList;
+            // list contenders must save seperataly because the user can edit data inside dgvmain
+            public List<Contenders.Contender> ContendersInsideDgvMain;
         }
 
         internal static void MoveBw()

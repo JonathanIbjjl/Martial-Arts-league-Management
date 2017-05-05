@@ -235,9 +235,6 @@ namespace MartialArts
                 load.Start();
             }
 
-            // now its new project
-            GlobalVars.CurrentProject = null;
-            header("");
         }
 
         private void BuiledBrackets()
@@ -280,6 +277,7 @@ namespace MartialArts
 
                 // create graphical brackets
                 GlobalVars.IsLoading = true;
+                ReportStatiticsWasMade();
                 Brackets = new BracketsBuilder(MartialArts.GlobalVars.ListOfContenders, false);
                 Brackets.Init();
                 this.Invoke(new Action(wClock.Dispose));
@@ -288,6 +286,14 @@ namespace MartialArts
             }
         }
 
+        // in order to inditify contenders that was created without statistics after brackets where builed via btnBuiledBrackets button)
+        private void ReportStatiticsWasMade()
+        {
+            for (int i = 0; i < MartialArts.GlobalVars.ListOfContenders.Count; i++)
+            {
+                MartialArts.GlobalVars.ListOfContenders[i].CreatedAfterBracketBuilder = false;
+            }
+        }
 
         private BusinessClocks.ExecutiveClocks.WaitClock wClock;
         private void LoadWaitClock()
@@ -428,83 +434,6 @@ namespace MartialArts
                     dgvMain.Rows[i].Cells[3].Style.ForeColor = Color.Black;
 
                 this.dgvMain.Rows[i].HeaderCell.Value = GlobalVars.ListOfContenders[i].SystemID.ToString();
-
-
-            }
-
-            dgvMain.Columns["Email"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dgvMain.Columns["AcademyName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-
-
-            ExampleListIsPresented = false;
-            EditingList = false;
-
-        }
-
-        // TODO: delete  LoadDgvNew() after 30/04/2017 if not in use
-        private void LoadDgvNew()
-        {
-            if (dgvMain.Rows.Count > 0)
-            {
-                dgvMain.Rows.Clear();
-                dgvMain.Columns.Clear();
-            }
-
-            DgvDefenitions();
-            ((DataGridViewComboBoxColumn)(dgvMain.Columns["AcademyName"])).DataSource = GlobalVars.ListOfContenders.Select(x => x.AcademyName).Distinct().ToArray();
-            ((DataGridViewComboBoxColumn)(dgvMain.Columns["weightCat"])).DataSource = GlobalVars.ListOfContenders.Select(x => x.GetWeightValue).Distinct().ToArray();
-            ((DataGridViewComboBoxColumn)(dgvMain.Columns["ageCat"])).DataSource = GlobalVars.ListOfContenders.Select(x => x.GetAgeValue).Distinct().ToArray();
-            // determine if child or adult and change radiobutton if needed
-            if (GlobalVars.ListOfContenders[0].IsChild == true)
-                radChild.Checked = true;
-            else
-                radAdult.Checked = true;
-
-
-            if (GlobalVars.ListOfContenders.Count < 1)
-                return;
-
-
-            // add rows
-            dgvMain.Rows.Add(GlobalVars.ListOfContenders.Count);
-            for (int i = 0; i < GlobalVars.ListOfContenders.Count; i++)
-            {
-                dgvMain.Rows[i].Cells["ID"].Value = GlobalVars.ListOfContenders[i].ID;
-                dgvMain.Rows[i].Cells["FirstName"].Value = GlobalVars.ListOfContenders[i].FirstName;
-                dgvMain.Rows[i].Cells["LastName"].Value = GlobalVars.ListOfContenders[i].LastName;
-
-                dgvMain.Rows[i].Cells["Belt"].Value = GlobalVars.ListOfContenders[i].HebrewBeltColor;
-
-                dgvMain.Rows[i].Cells["weightCat"].Value = GlobalVars.ListOfContenders[i].GetWeightValue;
-                dgvMain.Rows[i].Cells["weight"].Value = GlobalVars.ListOfContenders[i].Weight;
-                dgvMain.Rows[i].Cells["ageCat"].Value = GlobalVars.ListOfContenders[i].GetAgeValue;
-                dgvMain.Rows[i].Cells["Email"].Value = GlobalVars.ListOfContenders[i].Email;
-                dgvMain.Rows[i].Cells["phone"].Value = GlobalVars.ListOfContenders[i].PhoneNumber;
-                dgvMain.Rows[i].Cells["AcademyName"].Value = GlobalVars.ListOfContenders[i].AcademyName;
-                dgvMain.Rows[i].Cells["coach"].Value = GlobalVars.ListOfContenders[i].CoachName;
-                dgvMain.Rows[i].Cells["coachPhone"].Value = GlobalVars.ListOfContenders[i].CoachPhone;
-
-                if (GlobalVars.ListOfContenders[i].IsMale == true)
-                    dgvMain.Rows[i].Cells["gender"].Value = "זכר";
-                else
-                    dgvMain.Rows[i].Cells["gender"].Value = "נקבה";
-
-                if (GlobalVars.ListOfContenders[i].IsMale == false && GlobalVars.ListOfContenders[i].IsAllowedVersusMan == true)
-                    dgvMain.Rows[i].Cells["IsAllowedVersusMan"].Value = 1;
-                else
-                    dgvMain.Rows[i].Cells["IsAllowedVersusMan"].Value = 0;
-
-                dgvMain.Rows[i].Cells["IsAllowedAgeGradeAbove"].Value = (GlobalVars.ListOfContenders[i].IsAllowedAgeGradeAbove == true) ? 1 : 0;
-                dgvMain.Rows[i].Cells["IsAllowedBeltGradeAbove"].Value = (GlobalVars.ListOfContenders[i].IsAllowedBeltGradeAbove == true) ? 1 : 0;
-                dgvMain.Rows[i].Cells["IsAllowedWeightGradeAbove"].Value = (GlobalVars.ListOfContenders[i].IsAllowedWeightGradeAbove == true) ? 1 : 0;
-
-                // color
-                dgvMain.Rows[i].Cells[2].Style.BackColor = GlobalVars.ListOfContenders[i].GetBeltColorValue;
-                if (GlobalVars.ListOfContenders[i].Belt < (int)Contenders.ContndersGeneral.BeltsEnum.blue)
-                    dgvMain.Rows[i].Cells[2].Style.ForeColor = Color.Black;
-
-                this.dgvMain.Rows[i].HeaderCell.Value = GlobalVars.ListOfContenders[i].SystemID.ToString();
-
 
             }
 
@@ -820,7 +749,7 @@ namespace MartialArts
 
         private void ExportBracketsToExcel()
         {
-            ExportBrackets export = new ExportBrackets("", Visual.VisualLeagueEvent.GetUndoStruct());
+            ExportBrackets export = new ExportBrackets("",GetUndoStruct());
             export.init();
             this.Invoke(new Action(wClock.Dispose));
         }
@@ -868,9 +797,10 @@ namespace MartialArts
 
             MartialArts.GlobalVars.ListOfContenders.Clear();
             MartialArts.GlobalVars.ListOfContenders = null;
+            Contenders.Contender.RoleBackSystemIds();
             ClearExistingBrackets();
             DgvDefenitions();
-       //     dgvMain.Rows[0].Cells[0].Selected = true;
+
             this.tabControl1.SelectedTab = tabPage1;
 
             // now its new project
@@ -916,113 +846,83 @@ namespace MartialArts
             Save();
         }
 
-        private void Save()
+        private bool Save()
         {
             if (GlobalVars.IsLoading == true)
-                return;
+                return false;
 
-            // special case of saving the system list even if there are no brackets
-            if (EditingList == true)
+
+
+            // if it is saved project save also the changes made in the saved project
+            if (GlobalVars.CurrentProject != null)
             {
-                // there is only a list brackets has not created yet
+
                 if (Visual.VisualLeagueEvent.AllVisualContenders == null || Visual.VisualLeagueEvent.AllVisualContenders.Count <= 0)
                 {
-                    SaveEditingList();
-                }
-                //// brackets has been created TODO: save as systemlist and also save the brackets
-                //else
-                //{
-                //    SaveEditingListAndBrackets();
-                //}
-                //return;
-            }
-
-
-
-            // check if there are objects
-            if (Visual.VisualLeagueEvent.AllVisualContenders == null || Visual.VisualLeagueEvent.AllVisualContenders.Count <= 0)
-            {
-                Helpers.ShowGenericPromtForm("עדיין לא יצרת אוביקטים של בתים");
-                return;
-            }
-
-            // if it is saved project save also the changes made in the saved project
-            if (GlobalVars.CurrentProject != null)
-            {
-                // handle project path
-                SerializeDataSaveAs se = new SerializeDataSaveAs(Visual.VisualLeagueEvent.GetUndoStruct(), GlobalVars.CurrentProject);
-                se.Serialize();
-            }
-            else
-            {
-                SerializeData save = new SerializeData(Visual.VisualLeagueEvent.GetUndoStruct());
-                save.Serialize();
-            }
-        }
-        private void SaveEditingList()
-        {
-
-
-            using (CreateContendersFromDgv createConts = new CreateContendersFromDgv(ref dgvMain))
-            {
-                if (createConts.Init() == true) // list is intact for saving
-                {
-                    // create empty UNDOstruct only with contenders for the list
-                    Visual.VisualLeagueEvent.UndoStruct fakeUndoStruct = new Visual.VisualLeagueEvent.UndoStruct();
-                    fakeUndoStruct.IsFakeStructForSavingEditingList = true;
-
-                    fakeUndoStruct.AllVisualContenders = new List<Visual.VisualContender>();
-                    fakeUndoStruct._VisualBracketsList = new List<Visual.VisualBracket>();
-                    fakeUndoStruct._VisualUnplacedBracketsList = new List<Visual.VisualContender>();
-                    // close the editing just for saving to prevent the last empt row being serialize
-                    dgvMain.AllowUserToAddRows = false;
-
-                    // create visual contenders just for saving
-                    foreach (Contenders.Contender c in GlobalVars.ListOfContenders)
+                    // load only the contenders from the list
+                    using (CreateContendersFromDgv createConts = new CreateContendersFromDgv(ref dgvMain))
                     {
-                        Visual.VisualContender visualcont = new Visual.VisualContender(c);
-                        visualcont.Init();
-                        fakeUndoStruct.AllVisualContenders.Add(visualcont);
-                        fakeUndoStruct._VisualUnplacedBracketsList.Add(visualcont);
+                        if (createConts.Init() == false)
+                        {
+                            // something went wrong
+                            GlobalVars.IsLoading = false;
+                            this.Invoke(new Action(wClock.Dispose));
+                            return false;
+                        }
+                        else
+                        {
+                            // serilize only the contenders
+                            SerializeDataSaveAs save = new SerializeDataSaveAs(new Visual.VisualLeagueEvent.UndoStruct(), GlobalVars.CurrentProject);
+                            save.Serialize(GlobalVars.ListOfContenders);
+                        }
                     }
-
-
-                    // handle project path
-                    SerializeData save = new SerializeData(fakeUndoStruct);
-                    save.Serialize();
-
-                    GlobalVars.ListOfContenders.Clear();
-                    GlobalVars.ListOfContenders = null;
                 }
-            }
+                else
+                {
+                    // handle project path
+                    SerializeDataSaveAs se = new SerializeDataSaveAs(GetUndoStruct(), GlobalVars.CurrentProject);
+                    if (se.Serialize() == false)
+                        return false;
+                }
 
+
+            }
+      
+
+                // save data to the "last saved files"
+                // check if there are objects
+                if (Visual.VisualLeagueEvent.AllVisualContenders == null || Visual.VisualLeagueEvent.AllVisualContenders.Count <= 0)
+                {
+                    // load only the contenders from the list
+                    using (CreateContendersFromDgv createConts = new CreateContendersFromDgv(ref dgvMain))
+                    {
+                        if (createConts.Init() == false)
+                        {
+                            // something went wrong
+                            GlobalVars.IsLoading = false;
+                            this.Invoke(new Action(wClock.Dispose));
+                            return false;
+                        }
+                        else
+                        {
+                            // serilize only the contenders
+                            SerializeData save = new SerializeData();
+                            save.Serialize(GlobalVars.ListOfContenders);
+                        }
+                    }
+                }
+                else
+                {
+                    SerializeData save = new SerializeData(GetUndoStruct());
+                if (save.Serialize() == false)
+                    return false;
+                }
+            
+
+            GlobalVars.IsLoading = false;
+            return true;
         }
-
-        private void SaveEditingListAndBrackets()
-        {
-            var Undo = Visual.VisualLeagueEvent.GetUndoStruct();
-
-            // declare the source came from system list
-            for (int i = 0; i < Undo.AllVisualContenders.Count; i++)
-            {
-                Undo.AllVisualContenders[i].Contender.SourceIsFromSystemList = true;
-            }
-
-            // if it is saved project save also the changes made in the saved project
-            if (GlobalVars.CurrentProject != null)
-            {
-                // handle project path
-                SerializeDataSaveAs se = new SerializeDataSaveAs(Visual.VisualLeagueEvent.GetUndoStruct(), GlobalVars.CurrentProject);
-                se.Serialize();
-            }
-
-            else
-            {
-                SerializeData se = new SerializeData(Undo);
-                se.Serialize();
-            }
-        }
-
+     
         private void tpOpen_Click(object sender, EventArgs e)
         {
             if (GlobalVars.IsLoading == true)
@@ -1048,32 +948,30 @@ namespace MartialArts
 
                 // load list
                 GlobalVars.ListOfContenders.Clear();
-                // load saved contenders to list
-                GlobalVars.ListOfContenders = b.ContendersList.ToList();
-                foreach (Bracket br in b.BracketsList)
+
+                // if null that means that only contenders from list was saved and the visual brackets was not created
+                if (b.ContendersList == null)
                 {
-                    foreach (Contenders.Contender c in br.ContendersList)
+                    // load onlt DGVmain 
+                    List<Contenders.Contender> cont;
+                    load.DeSerialize(out Isok,out cont);
+                    if (Isok)
                     {
-                        GlobalVars.ListOfContenders.Add(c);
+                        // load dgvmain
+                        GlobalVars.ListOfContenders = cont;
+                        LoadDgv();
                     }
+                    GlobalVars.ListOfContenders.Clear();
+                    GlobalVars.IsLoading = false;
+                    return;
                 }
 
-                // discover if the contenders came from system list (and brackets has not created yet) if so the list must be system list with ability to edit
-                if (b.ContendersList.Count > 0 && b.ContendersList[0].SourceIsFromSystemList == true)
-                {
-                    LoadFromSystemList(ref b);
-                }
-                // discover if the contenders came from system list (and brackets created) if so the list must be system list with ability to edit
-                else if (b.BracketsList.Count > 0 && b.BracketsList[0].ContendersList.Count> 0 && b.BracketsList[0].ContendersList[0].SourceIsFromSystemList == true)
-                {
-                    LoadFromSystemList(ref b);
-                }
-                // contenders did not came from system list, they came from excel
-                else
-                {
-                    LoadDgv();
-                }
-
+                // load saved contenders to list
+                GlobalVars.ListOfContenders = b.ContendersFromDgvMain;
+                // load contenders to dgv
+                LoadDgv();
+      
+           
                 // load saved brackets and unplaced contenders
                 if (Isok == true)
                 {
@@ -1095,50 +993,12 @@ namespace MartialArts
             }
         }
 
-        private void LoadFromSystemList(ref BracketsBuilder b)
-        {
-            DgvDefenitions();
-            dgvMain.Rows.Add(GlobalVars.ListOfContenders.Count());
-            int counter = 0;
-            foreach (Contenders.Contender c in GlobalVars.ListOfContenders)
-            {
-                dgvMain.Rows[counter].Cells["ID"].Value = c.ID;
-                dgvMain.Rows[counter].Cells["FirstName"].Value = c.FirstName;
-                dgvMain.Rows[counter].Cells["LastName"].Value = c.LastName;
-                dgvMain.Rows[counter].Cells["Belt"].Value = c.HebrewBeltColor;
-                dgvMain.Rows[counter].Cells["WeightCat"].Value = c.GetWeightValue;
-                dgvMain.Rows[counter].Cells["Weight"].Value = c.Weight;
-                dgvMain.Rows[counter].Cells["ageCat"].Value = c.GetAgeValue;
-                dgvMain.Rows[counter].Cells["Email"].Value = c.Email;
-                dgvMain.Rows[counter].Cells["phone"].Value = c.PhoneNumber;
-                dgvMain.Rows[counter].Cells["AcademyName"].Value = c.AcademyName;
-                dgvMain.Rows[counter].Cells["coach"].Value = c.CoachName;
-                dgvMain.Rows[counter].Cells["coachPhone"].Value = c.CoachPhone;
-                dgvMain.Rows[counter].Cells["gender"].Value = (c.IsMale == true) ? "זכר" : "נקבה";
-                dgvMain.Rows[counter].Cells["IsAllowedVersusMan"].Value = c.IsAllowedVersusMan;
-                dgvMain.Rows[counter].Cells["IsAllowedAgeGradeAbove"].Value = c.IsAllowedAgeGradeAbove;
-                dgvMain.Rows[counter].Cells["IsAllowedBeltGradeAbove"].Value = c.IsAllowedBeltGradeAbove;
-                dgvMain.Rows[counter].Cells["IsAllowedWeightGradeAbove"].Value = c.IsAllowedWeightGradeAbove;
-                counter++;
-            }
-
-            EditingList = true;
-            GlobalVars.ListOfContenders.Clear();
-            GlobalVars.ListOfContenders = null;
-        }
-
         private void tpSaveAs_Click(object sender, EventArgs e)
         {
             if (GlobalVars.IsLoading == true)
                 return;
 
-            // check if there are objects
-            if (Visual.VisualLeagueEvent.AllVisualContenders == null || Visual.VisualLeagueEvent.AllVisualContenders.Count <= 0)
-            {
-                Helpers.ShowGenericPromtForm("עדיין לא יצרת אוביקטים של בתים");
-                return;
-            }
-
+          
             // promt the user to enter the name of the project
             Martial_Arts_league_Management2.GetProjectNameForm promt = new Martial_Arts_league_Management2.GetProjectNameForm();
             if (promt.ShowDialog() != DialogResult.OK)
@@ -1150,14 +1010,18 @@ namespace MartialArts
             MartialArts.ProjectsSavedAsBinaryFiles saveAsPath = new ProjectsSavedAsBinaryFiles(promt.ProjectName);
             if (saveAsPath.CreateSubPath() == true)
             {
-                SerializeDataSaveAs se = new SerializeDataSaveAs(Visual.VisualLeagueEvent.GetUndoStruct(), saveAsPath);
-                se.Serialize();
 
                 // create all files paths instance immideatly if the user will use save() method
                 MartialArts.ProjectsSavedAsBinaryFiles paths = new ProjectsSavedAsBinaryFiles(promt.ProjectName);
                 paths.SetFullDirWithoutCreating();
                 GlobalVars.CurrentProject = paths;
-
+                header(promt.ProjectName);
+                if (Save() == false)
+                {
+                 // something went wrong the file was not upload
+                    GlobalVars.CurrentProject = null;
+                    header();
+                }
             }
 
             promt.Dispose();
@@ -1200,16 +1064,31 @@ namespace MartialArts
                 BracketsBuilder b = load.DeSerialize(out Isok);
                 // load list
                 GlobalVars.ListOfContenders.Clear();
-                // load saved contenders to list
-                GlobalVars.ListOfContenders = b.ContendersList.ToList();
-                foreach (Bracket br in b.BracketsList)
+                
+                // if null that means that only contenders from list was saved and the visual brackets was not created
+                if (b.ContendersList == null)
                 {
-                    foreach (Contenders.Contender c in br.ContendersList)
+                    // load onlt DGVmain 
+                    List<Contenders.Contender> cont;
+                    load.DeSerialize(out Isok, out cont);
+                    if (Isok)
                     {
-                        GlobalVars.ListOfContenders.Add(c);
+                        // load dgvmain
+                        GlobalVars.ListOfContenders = cont;
+                        LoadDgv();
                     }
+
+                    GlobalVars.ListOfContenders.Clear();
+                    GlobalVars.IsLoading = false;
+                    // set current project
+                    GlobalVars.CurrentProject = paths;
+                    // set header with project name
+                    header(choose.ProjectName);
+                    return;
                 }
 
+                // load saved contenders to list
+                GlobalVars.ListOfContenders = b.ContendersFromDgvMain;
                 LoadDgv();
 
                 // load saved brackets and unplaced contenders
@@ -1467,6 +1346,10 @@ namespace MartialArts
                     return;
 
                 var academies = Visual.VisualLeagueEvent.AllVisualContenders.AsEnumerable().Select(x => x.Contender.AcademyName).Distinct().OrderBy(x => x).ToList();
+                // set identity system id to be bigger then the max system id
+                var max = GetNextAvilableSysIdNumFromDGV();
+                Contenders.Contender.IdentityNumber = max;
+
                 using (AddContender a = new AddContender((radAdult.Checked == true ? false : true), academies))
                 {
                     if (a.ShowDialog() == DialogResult.OK)
@@ -1498,6 +1381,10 @@ namespace MartialArts
 
             using (AddContender a = new AddContender((radAdult.Checked == true ? false : true), academies))
             {
+                // set identity system id to be bigger then the max system id
+                var max = GetNextAvilableSysIdNumFromDGV();
+                Contenders.Contender.IdentityNumber = max;
+
                 if (a.ShowDialog() == DialogResult.OK)
                 {
                     AddNewContenderToDgv(a.NewContender);
@@ -1505,6 +1392,27 @@ namespace MartialArts
             }
         }
 
+        public int GetNextAvilableSysIdNumFromDGV()
+        {
+            var nextID = 0;
+
+            if (dgvMain != null & dgvMain.RowCount > 0)
+            {
+                for (int i = 0; i < dgvMain.RowCount; i++)
+                {
+                    if (dgvMain.Rows[i].HeaderCell.Value != null && dgvMain.Rows[i].HeaderCell.Value.ToString().IsNumeric())
+                    {
+                        if (Int32.Parse(dgvMain.Rows[i].HeaderCell.Value.ToString()) > nextID)
+                        {
+                            nextID = Int32.Parse(dgvMain.Rows[i].HeaderCell.Value.ToString());
+                        } 
+                    }
+                }
+            }
+
+            nextID+=1;
+            return nextID;
+        }
 
         public void AddNewContenderToDgv(Contenders.Contender contender)
         {
@@ -1591,8 +1499,29 @@ namespace MartialArts
 
         }
 
+        public List<Contenders.Contender> GetContendersFromDgv()
+        {
+            
+            using (CreateContendersFromDgv createConts = new CreateContendersFromDgv(ref dgvMain))
+            {
+                if (createConts.Init() == false)
+                {
+                    return GlobalVars.ListOfContenders;
+                }
+                else
+                {
+                    return GlobalVars.ListOfContenders;
+                }
+            }
+        }
 
-
+        public Visual.VisualLeagueEvent.UndoStruct GetUndoStruct()
+        {
+            var undo = Visual.VisualLeagueEvent.GetUndoStruct();
+            // add the data from DGV
+            undo.ContendersInsideDgvMain = GetContendersFromDgv();
+            return undo;
+        }
         private void StripEditCont_Click(object sender, EventArgs e)
         {
             try
@@ -1630,6 +1559,22 @@ namespace MartialArts
             catch
             {
 
+            }
+        }
+
+        private void StripDeleteContender_Click(object sender, EventArgs e)
+        {
+            if ((this.dgvMain.CurrentRow == null))
+            {
+                //No row selected
+                Helpers.ShowGenericPromtForm("לא נבחר מתחרה ברשימה");
+                return;
+            }
+
+            var name = dgvMain.Rows[dgvMain.CurrentRow.Index].Cells["FirstName"].Value.ToString() + " " + dgvMain.Rows[dgvMain.CurrentRow.Index].Cells["LastName"].Value.ToString();
+            if (Helpers.PromtYesNowQuestion("האם אתה בטוח שברצונך להסיר את " + name + " " + "מהרשימה?") == true)
+            {
+                dgvMain.Rows.RemoveAt(dgvMain.CurrentRow.Index);
             }
         }
     }

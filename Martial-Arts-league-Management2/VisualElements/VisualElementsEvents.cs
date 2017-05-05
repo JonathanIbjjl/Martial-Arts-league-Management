@@ -45,7 +45,11 @@ namespace Visual
             s.Append(Environment.NewLine);
             s.Append(Environment.NewLine);
 
-            if (Contender.PbListArchive.Count <= 0)
+            if (Contender.CreatedAfterBracketBuilder == true)
+            {
+                s.Append("מתחרה זה נוצר לאחר בניית הבתים ולכן לא קיימת עבורו סטטיסטיקה, במידה ותיצור את הבתים מחדש תחושב עבורו סטטיסטיקה ואז יתאפשר להציג עבורו מתחרים אפשריים");
+            }
+            else if (Contender.PbListArchive.Count <= 0)
             {
                 s.Append("אין צירופים אפשרים עבור מתחרה זה!");
             }
