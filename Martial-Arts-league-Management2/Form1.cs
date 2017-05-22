@@ -503,9 +503,24 @@ namespace MartialArts
         {
             if (Environment.UserName == "john")
             {
-
+                //dgvMain.Rows.Cast<DataGridViewRow>()
+                //           .Where(x => !x.IsNewRow)
+                //           .Where(x => x.Cells["AcademyName"].Value != null)
+                //           .Select(x => x.Cells["AcademyName"].Value.ToString())
+                //           .Distinct()
+                //           .ToList();
+                //dgvMain.Columns[dgvMain.Columns.Count - 1].Width = 10;
+                //dgvMain.Columns[dgvMain.Columns.Count - 1].Visible = false;
+                Label l = new Label();
+                l.Size = new Size(100, 100);
+                l.Margin = new Padding(3, 3, 3, 3);
+                l.BackColor = Color.Cyan;
+                l.Location = new Point(0, 0);
+                dgvMain.EditingPanel.Padding = new Padding(100, 100, 100, 100);
+                
             }
         }
+
 
         private void MoveCursor()
         {
@@ -838,7 +853,7 @@ namespace MartialArts
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            Helpers.ShowGenericPromtForm("IBJJL" + " " + GlobalVars.VerNum);
+            
         }
 
         private void tpSave_Click(object sender, EventArgs e)
@@ -1577,12 +1592,8 @@ namespace MartialArts
                 dgvMain.Rows.RemoveAt(dgvMain.CurrentRow.Index);
             }
         }
+
     }
-
-
-
-
-
 
 
     public static class ExtensionMethods
@@ -1595,41 +1606,6 @@ namespace MartialArts
             pi.SetValue(dgv, setting, null);
         }
 
-        // TODO: DELETE
-        //public static void DoubleBuffered_FlPanel(this FlowLayoutPanel fp, bool setting)
-        //{
-        //    Type dgvType = fp.GetType();
-        //    PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
-        //        BindingFlags.Instance | BindingFlags.NonPublic);
-        //    pi.SetValue(fp, setting, null);
-        //}
-
-        //public static void DoubleBuffered_Label(this Label lbl, bool setting)
-        //{
-        //    Type dgvType = lbl.GetType();
-        //    PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
-        //        BindingFlags.Instance | BindingFlags.NonPublic);
-        //    pi.SetValue(lbl, setting, null);
-        //}
-
-        //public static void DoubleBuffered_SplitContainer(this SplitContainer sp, bool setting)
-        //{
-        //    Type dgvType = sp.GetType();
-        //    PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
-        //        BindingFlags.Instance | BindingFlags.NonPublic);
-        //    pi.SetValue(sp, setting, null);
-        //}
-
-        //public static void DoubleBuffered_Panel(this Panel panel, bool setting)
-        //{
-        //    Type dgvType = panel.GetType();
-        //    PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
-        //        BindingFlags.Instance | BindingFlags.NonPublic);
-        //    pi.SetValue(panel, setting, null);
-        //}
-
-
-
         public static bool IsNumeric(this string s)
         {
             float output;
@@ -1641,5 +1617,9 @@ namespace MartialArts
         {
             return listToClone.Select(item => (T)item.Clone()).ToList();
         }
+
+        
     }
+
+   
 }

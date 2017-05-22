@@ -302,6 +302,7 @@
             this.radMale.TabStop = true;
             this.radMale.Text = "זכר";
             this.radMale.UseVisualStyleBackColor = true;
+            this.radMale.CheckedChanged += new System.EventHandler(this.radMale_CheckedChanged);
             // 
             // radFemale
             // 
@@ -494,6 +495,7 @@
             this.Controls.Add(this.txtFirstName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtID);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddContender";
             this.Text = "הוספת מתחרה";
             this.Load += new System.EventHandler(this.AddContender_Load);

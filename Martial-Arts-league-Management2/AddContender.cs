@@ -566,5 +566,18 @@ namespace MartialArts
         }
 
         #endregion
+
+        private void radMale_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radMale.Checked == true)
+            {
+                chkSexFac.Checked = false;
+                chkSexFac.Enabled = false;
+            }
+            else
+            {
+                chkSexFac.Enabled = true;
+            }
+        }
     }
 }
