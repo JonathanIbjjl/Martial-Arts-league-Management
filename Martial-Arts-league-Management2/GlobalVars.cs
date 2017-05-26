@@ -127,6 +127,35 @@ namespace MartialArts
             }
         }
         #endregion
+      public static System.Drawing.Font BaseSystemFont
+        {
+            get
+            {
+                return new System.Drawing.Font("ARIAL", 9, System.Drawing.FontStyle.Regular);
+            }
+        }
 
+        /*
+         this propery will determine the weight category of new event from system list or excel file
+         this property will be passed to the constructor of the Contender instance that created and from their to 
+         the base class of contender (ContenderGeneral class) the constructor in ContenderGeneral will set the
+         static property WeightCatEnum.
+
+         the options to change this propert is only:
+         1. when creating a new system list.
+         2. when loading excel.
+         3. when loading saved data.
+        */
+        private static Contenders.WeightCategiries.WeightCatEnum _ChoosenWeightCategory = Contenders.WeightCategiries.WeightCatEnum.IBJJL; // default is basic
+        public static Contenders.WeightCategiries.WeightCatEnum ChoosenWeightCategory
+        {
+            get { return _ChoosenWeightCategory;}
+            set
+            {
+                _ChoosenWeightCategory = value;
+                Contenders.ContndersGeneral.WeightCatEnum = value;
+                Contenders.ContndersGeneral.SetWeightDictionariesToNull();
+            }
+        }
     }
 }

@@ -129,7 +129,7 @@ namespace MartialArts
             ExcelColumnsRecognition[5, 1] = "תאריך לידה";
             ExcelColumnsRecognition[6, 1] = "קטגורית גיל";
             ExcelColumnsRecognition[7, 1] = "מגדר";
-            ExcelColumnsRecognition[8, 1] = "משקל אמיתי כולל חליפה";
+            ExcelColumnsRecognition[8, 1] = "משקל אמיתי";
             ExcelColumnsRecognition[9, 1] = "קטגורית משקל";
             ExcelColumnsRecognition[10, 1] = "דרגת חגורה";
             ExcelColumnsRecognition[11, 1] = "שם אקדמיה";
@@ -151,7 +151,7 @@ namespace MartialArts
             ExcelColumnsRecognition[5, 2] = "תאריך לידה";
             ExcelColumnsRecognition[6, 2] = "קטגורית גיל" ;
             ExcelColumnsRecognition[7, 2] = "מגדר";
-            ExcelColumnsRecognition[8, 2] = "משקל אמיתי כולל חליפה ( שקילה לפי חוקי IBJJF)";
+            ExcelColumnsRecognition[8, 2] = "משקל אמיתי";
             ExcelColumnsRecognition[9, 2] = "קטגורית משקל.( לפי קטגוריות משקל IBJJF)";
             ExcelColumnsRecognition[10, 2] = "דרגת חגורה לפי IBJJF בלבד";
             ExcelColumnsRecognition[11, 2] = "שם אקדמיה";

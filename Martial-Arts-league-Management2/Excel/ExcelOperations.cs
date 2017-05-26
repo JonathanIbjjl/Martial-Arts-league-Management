@@ -96,7 +96,7 @@ namespace MartialArts
         private bool IsExcelIsLegal()
         {
             // init contender object
-            ContenderObj = new Contenders.ContndersGeneral();
+            ContenderObj = new Contenders.ContndersGeneral(GlobalVars.ChoosenWeightCategory);
             // check column names
             if (CheckExcelColsExist() == false)
             {

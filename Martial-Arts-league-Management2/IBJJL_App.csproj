@@ -131,8 +131,14 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUIMethods\SortingMethods.cs" />
+    <Compile Include="HelperForms\WeightCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperForms\WeightCategoryForm.Designer.cs">
+      <DependentUpon>WeightCategoryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\Helpers.cs" />
-    <Compile Include="Helpers\PathHelper.cs" />
+    <Compile Include="HelperForms\PathHelper.cs" />
     <Compile Include="LeagueScattering.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="PromtForm.cs">
@@ -148,6 +154,7 @@
     <Compile Include="VisualElements\VisualContenderNew.cs" />
     <Compile Include="VisualElements\VisualElementsEvents.cs" />
     <Compile Include="VisualElements\VisualLeagueEvent.cs" />
+    <Compile Include="WeightCategiries.cs" />
     <EmbeddedResource Include="AddContender.resx">
       <DependentUpon>AddContender.cs</DependentUpon>
     </EmbeddedResource>
@@ -156,6 +163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperForms\WeightCategoryForm.resx">
+      <DependentUpon>WeightCategoryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PromtForm.resx">
       <DependentUpon>PromtForm.cs</DependentUpon>

@@ -20,6 +20,11 @@ namespace Contenders
     [Serializable]
    public class ContndersGeneral
     {
+
+        public ContndersGeneral(Contenders.WeightCategiries.WeightCatEnum WeightCatEnumValue)
+        {
+            WeightCatEnum = WeightCatEnumValue;
+        }
         // hash table for excel column names (keys) and column number (value)
         private Dictionary<string, int> _HeadersDictionary;
         public Dictionary<string, int> HeadersDictionary
@@ -109,6 +114,44 @@ namespace Contenders
             return l;
         }
 
+        private static WeightCategiries.WeightCatEnum _WeightCatEnum= WeightCategiries.WeightCatEnum.IBJJL;
+        public static WeightCategiries.WeightCatEnum WeightCatEnum
+        {
+            get { return _WeightCatEnum; }
+            set
+            {
+                // clear old data if the value is different from current value, for efficiancy reason only if it is different value
+                if (value != _WeightCatEnum)
+                {
+                    ClearWeightDictionaries();
+                }
+                _WeightCatEnum = value;
+            }
+        }
+
+        private static void ClearWeightDictionaries()
+        {
+            if (_ChildWeightCat != null )
+            {
+                _ChildWeightCat.Clear();
+                _ChildWeightCat = null;
+            }
+
+            if (_AdultWeightCat != null)
+            {
+                _AdultWeightCat.Clear();
+                _AdultWeightCat = null;
+            }
+        }
+
+        /// <summary>
+        /// used to change weight categories from outside the class
+        /// </summary>
+        public static void SetWeightDictionariesToNull()
+        {
+            _ChildWeightCat = null;
+            _AdultWeightCat = null;
+        }
         private static Dictionary<string, int> _ChildWeightCat;
         public static Dictionary<string, int> ChildWeightCat
         {
@@ -117,30 +160,7 @@ namespace Contenders
                 if (_ChildWeightCat == null)
                 {
                     _ChildWeightCat = new Dictionary<string, int>();
-
-                    ChildWeightCat.Add("עד 21", 1);
-                    ChildWeightCat.Add("מעל 21", 2);
-                    ChildWeightCat.Add("עד 24", 3);
-                    ChildWeightCat.Add("עד 27", 4);
-                    ChildWeightCat.Add("עד 30", 5);
-                    ChildWeightCat.Add("מעל 30", 6);
-                    ChildWeightCat.Add("עד 34", 7);
-                    ChildWeightCat.Add("עד 38", 8);
-                    ChildWeightCat.Add("מעל 38", 9);
-                    ChildWeightCat.Add("עד 42", 10);
-                    ChildWeightCat.Add("עד 46", 11);
-                    ChildWeightCat.Add("עד 50", 12);
-                    ChildWeightCat.Add("מעל 50", 13);
-                    ChildWeightCat.Add("עד 55", 14);
-                    ChildWeightCat.Add("מעל 55", 15);
-                    ChildWeightCat.Add("עד 60", 16);
-                    ChildWeightCat.Add("עד 65", 17);
-                    ChildWeightCat.Add("מעל 65", 18);
-                    ChildWeightCat.Add("עד 70", 19);
-                    ChildWeightCat.Add("עד 75", 20);
-                    ChildWeightCat.Add("עד 80", 21);
-                    ChildWeightCat.Add("מעל 80", 22);
-
+                    _ChildWeightCat = WeightCategiries.GetWeightCategory(WeightCatEnum, true);
                     return _ChildWeightCat;
                 }
                 else
@@ -159,21 +179,7 @@ namespace Contenders
                 {
                     _AdultWeightCat = new Dictionary<string, int>();
 
-                    AdultWeightCat.Add("עד 53.5", 14);
-                    AdultWeightCat.Add("עד 58.5", 15);
-                    AdultWeightCat.Add("עד 60", 16);
-                    AdultWeightCat.Add("עד 64", 17);
-                    AdultWeightCat.Add("עד 69", 18);
-                    AdultWeightCat.Add("עד 70", 19);
-                    AdultWeightCat.Add("עד 74", 20);
-                    AdultWeightCat.Add("מעל 74", 21);
-                    AdultWeightCat.Add("עד 76", 22);
-                    AdultWeightCat.Add("עד 82", 23);
-                    AdultWeightCat.Add("עד 88", 24);
-                    AdultWeightCat.Add("עד 94", 25);
-                    AdultWeightCat.Add("עד 100", 26);
-                    AdultWeightCat.Add("מעל 100", 27);
-
+                    _AdultWeightCat = WeightCategiries.GetWeightCategory(WeightCatEnum, false);
                     return _AdultWeightCat;
                 }
                 else
@@ -309,7 +315,7 @@ namespace Contenders
         }
 
         private static int _IdentityNumber = 999;
-        public Contender()
+        public Contender(Contenders.WeightCategiries.WeightCatEnum weightCatEnum_): base(weightCatEnum_)
         {
             // create uniq identity
             IdentityNumber += 1;
@@ -796,7 +802,6 @@ namespace Contenders
             get
             {
                 return Grade + Factor;
-
             }
         }
 
@@ -805,7 +810,7 @@ namespace Contenders
         /// </summary>
         /// <param name="contender">contender object</param>
         /// <param name="LeagueToCompare">league of all contenders to compare</param>
-        public ContenderLeague(Contender contender, MartialArts.LeagueScattering LeagueToCompare)
+        public ContenderLeague(Contender contender, MartialArts.LeagueScattering LeagueToCompare): base(GlobalVars.ChoosenWeightCategory)
         {
             this._Contender = contender;
             this.League = LeagueToCompare;

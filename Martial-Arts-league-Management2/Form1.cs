@@ -150,6 +150,16 @@ namespace MartialArts
             GlobalVars.CurrentProject = null;
             header("");
 
+            // promt the user to choose weight category
+            using (Martial_Arts_league_Management2.HelperForms.WeightCategoryForm f = new Martial_Arts_league_Management2.HelperForms.WeightCategoryForm())
+            {
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    lblWeightCat.Text = f.ChoosenWeight;
+                }
+            }
+            
+
             System.Threading.Thread waitThread = new System.Threading.Thread(LoadWaitClock);
             waitThread.Start();
 
@@ -511,13 +521,9 @@ namespace MartialArts
                 //           .ToList();
                 //dgvMain.Columns[dgvMain.Columns.Count - 1].Width = 10;
                 //dgvMain.Columns[dgvMain.Columns.Count - 1].Visible = false;
-                Label l = new Label();
-                l.Size = new Size(100, 100);
-                l.Margin = new Padding(3, 3, 3, 3);
-                l.BackColor = Color.Cyan;
-                l.Location = new Point(0, 0);
-                dgvMain.EditingPanel.Padding = new Padding(100, 100, 100, 100);
-                
+
+                Martial_Arts_league_Management2.HelperForms.WeightCategoryForm f = new Martial_Arts_league_Management2.HelperForms.WeightCategoryForm();
+                f.Show();
             }
         }
 

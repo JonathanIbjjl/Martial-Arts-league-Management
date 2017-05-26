@@ -88,7 +88,7 @@ namespace MartialArts
             // itirate and add contenders to list
             for (int i = 0; i < dgvMain.Rows.Count; i++)
             {
-                Contenders.Contender con = new Contenders.Contender();
+                Contenders.Contender con = new Contenders.Contender(GlobalVars.ChoosenWeightCategory);
                 // there is allready system id overide the system id that the constructor created
                 if (dgvMain.Rows[i].HeaderCell.Value != null && dgvMain.Rows[i].HeaderCell.Value.ToString().IsNumeric())
                 {   
@@ -145,7 +145,7 @@ namespace MartialArts
         {
             bool isok = true;
 
-            Contenders.Contender con = new Contenders.Contender();
+            Contenders.Contender con = new Contenders.Contender(GlobalVars.ChoosenWeightCategory);
             con.SystemID =Int32.Parse( dgvMain.Rows[i].HeaderCell.Value.ToString());
             con.FirstName = GetPureStringField(dgvMain.Rows[i].Cells["FirstName"].Value, "שם פרטי", out isok, i);
             con.LastName = GetPureStringField(dgvMain.Rows[i].Cells["LastName"].Value, "שם משפחה", out isok, i);

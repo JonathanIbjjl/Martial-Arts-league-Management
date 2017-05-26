@@ -14,7 +14,7 @@ namespace MartialArts
         List<string> Defects = new List<string>();
         private bool SetContender()
         {
-            
+
             GlobalVars.ListOfContenders = new List<Contenders.Contender>();
             // for out parameter
             bool isok = true;
@@ -23,7 +23,7 @@ namespace MartialArts
                 // itirate and add contenders to list
                 for (int i = 2; i <= LastRow; i++)
                 {
-                    Contenders.Contender con = new Contenders.Contender();
+                    Contenders.Contender con = new Contenders.Contender(GlobalVars.ChoosenWeightCategory);
 
                     con.FirstName = GetPureStringField(i, ContenderObj.HeadersDictionary["FirstName"], "שם פרטי", out isok);
                     con.LastName = GetPureStringField(i, ContenderObj.HeadersDictionary["LastName"], "שם משפחה", out isok);

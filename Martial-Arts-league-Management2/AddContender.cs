@@ -172,7 +172,7 @@ namespace MartialArts
         {
             // role back control error signs
             ColorControls();
-            Contenders.Contender cont = new Contenders.Contender();
+            Contenders.Contender cont = new Contenders.Contender(GlobalVars.ChoosenWeightCategory);
             if (CreateAndValidateContender(ref cont) == false)
             {
                 return;
