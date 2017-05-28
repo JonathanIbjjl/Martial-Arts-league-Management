@@ -14,10 +14,14 @@ namespace Martial_Arts_league_Management2.HelperForms
     {
         Dictionary<string, int> WeightsEnumDictionary = new Dictionary<string, int>();
         public string ChoosenWeight;
-        public WeightCategoryForm()
+        private string CurrentCategory = "IBJJL";
+        private bool IsChild = true;
+        public WeightCategoryForm(string CurrentCategory,bool ischild)
         {
             InitializeComponent();
             LoadWeightDictionary();
+            this.IsChild = ischild;
+            this.CurrentCategory = CurrentCategory;
         }
 
         private void LoadWeightDictionary()
@@ -33,6 +37,22 @@ namespace Martial_Arts_league_Management2.HelperForms
         {
             LoadColorsAndDesign();
             LoadPickWeightList();
+            LoadCurrentVars();
+        }
+
+        private void LoadCurrentVars()
+        {
+            // for safty check that category exist in enum dictionary
+            if (WeightsEnumDictionary.ContainsKey(CurrentCategory))
+            {
+                lblCurrentCategory.Text = CurrentCategory;
+                ListPickWeight.SelectedItem = CurrentCategory;
+            }
+
+            if (IsChild)
+                radChild.Checked = true;
+            else
+                radAdult.Checked = true;
         }
 
         private void LoadColorsAndDesign()
@@ -46,7 +66,7 @@ namespace Martial_Arts_league_Management2.HelperForms
             btnCancel.ForeColor = MartialArts.GlobalVars.Sys_White;
             btnOK.BackColor = MartialArts.GlobalVars.Sys_Red;
             btnOK.ForeColor = MartialArts.GlobalVars.Sys_White;
-
+            lblCurrentCategory.ForeColor = MartialArts.GlobalVars.Sys_Red;
             // font 
             this.Font = MartialArts.GlobalVars.BaseSystemFont;
 

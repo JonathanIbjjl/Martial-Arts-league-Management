@@ -183,6 +183,26 @@ namespace Visual
                 }
             }
 
+            else if (item.Text == "הסתר מתחרה")
+            {
+                if (e.ClickedItem.Name.ToString().Trim().IsNumeric() == true)
+                {
+
+                    VisualLeagueEvent.Hide(int.Parse(e.ClickedItem.Name.ToString().Trim()), true);
+
+                }
+            }
+
+            else if (item.Text == "בטל הסתרה")
+            {
+                if (e.ClickedItem.Name.ToString().Trim().IsNumeric() == true)
+                {
+
+                    VisualLeagueEvent.Hide(int.Parse(e.ClickedItem.Name.ToString().Trim()), false);
+
+                }
+            }
+
         }
 
 

@@ -20,9 +20,13 @@ namespace Contenders
     [Serializable]
    public class ContndersGeneral
     {
-
+        /// <summary>
+        /// this property is for saved data
+        /// </summary>
+        public Contenders.WeightCategiries.WeightCatEnum InstanceWeightCategory { get; set; }
         public ContndersGeneral(Contenders.WeightCategiries.WeightCatEnum WeightCatEnumValue)
         {
+            InstanceWeightCategory = WeightCatEnumValue;
             WeightCatEnum = WeightCatEnumValue;
         }
         // hash table for excel column names (keys) and column number (value)

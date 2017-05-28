@@ -69,9 +69,20 @@ namespace MartialArts
             DgvDefenitions();
             // example with gracie family
             DgvExample();
-
-           
+            // add context menue strip to UnPlacedFpanel
+            AddCmToUnplacedPanel();
+             
         }
+
+        private void AddCmToUnplacedPanel()
+        {
+            ContextMenuStrip cm = new ContextMenuStrip();
+            cm.Items.Add("בטל הסתרת מתחרים");
+            cm.BackColor = GlobalVars.Sys_Yellow;
+            UnPlacedFpanel.ContextMenuStrip = cm;
+            cm.ItemClicked += new ToolStripItemClickedEventHandler(UnPlacedFpanelCm_ItemClicked);
+        }
+
 
         public void header(string ProjectName = "")
         {
@@ -150,14 +161,7 @@ namespace MartialArts
             GlobalVars.CurrentProject = null;
             header("");
 
-            // promt the user to choose weight category
-            using (Martial_Arts_league_Management2.HelperForms.WeightCategoryForm f = new Martial_Arts_league_Management2.HelperForms.WeightCategoryForm())
-            {
-                if (f.ShowDialog() == DialogResult.OK)
-                {
-                    lblWeightCat.Text = f.ChoosenWeight;
-                }
-            }
+            PromtToChooseWeightCat();
             
 
             System.Threading.Thread waitThread = new System.Threading.Thread(LoadWaitClock);
@@ -168,6 +172,17 @@ namespace MartialArts
 
         }
 
+        private void PromtToChooseWeightCat()
+        {
+            // promt the user to choose weight category
+            using (Martial_Arts_league_Management2.HelperForms.WeightCategoryForm f = new Martial_Arts_league_Management2.HelperForms.WeightCategoryForm(lblWeightCat.Text,radChild.Checked))
+            {
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    lblWeightCat.Text = f.ChoosenWeight;
+                }
+            }
+        }
 
         private void LoadFileThread()
         {
@@ -522,7 +537,7 @@ namespace MartialArts
                 //dgvMain.Columns[dgvMain.Columns.Count - 1].Width = 10;
                 //dgvMain.Columns[dgvMain.Columns.Count - 1].Visible = false;
 
-                Martial_Arts_league_Management2.HelperForms.WeightCategoryForm f = new Martial_Arts_league_Management2.HelperForms.WeightCategoryForm();
+                Martial_Arts_league_Management2.HelperForms.WeightCategoryForm f = new Martial_Arts_league_Management2.HelperForms.WeightCategoryForm(lblWeightCat.Text, radChild.Checked);
                 f.Show();
             }
         }
@@ -816,6 +831,8 @@ namespace MartialArts
                     return;
             }
 
+            PromtToChooseWeightCat();
+
             MartialArts.GlobalVars.ListOfContenders.Clear();
             MartialArts.GlobalVars.ListOfContenders = null;
             Contenders.Contender.RoleBackSystemIds();
@@ -978,6 +995,8 @@ namespace MartialArts
                     load.DeSerialize(out Isok,out cont);
                     if (Isok)
                     {
+                        // load event weight category
+                        LoadWeightCategoryFromSavedFiles(cont[0].InstanceWeightCategory);
                         // load dgvmain
                         GlobalVars.ListOfContenders = cont;
                         LoadDgv();
@@ -987,6 +1006,8 @@ namespace MartialArts
                     return;
                 }
 
+                // load event weight category
+                LoadWeightCategoryFromSavedFiles(b.ContendersFromDgvMain[0].InstanceWeightCategory);
                 // load saved contenders to list
                 GlobalVars.ListOfContenders = b.ContendersFromDgvMain;
                 // load contenders to dgv
@@ -1085,15 +1106,18 @@ namespace MartialArts
                 BracketsBuilder b = load.DeSerialize(out Isok);
                 // load list
                 GlobalVars.ListOfContenders.Clear();
+
                 
                 // if null that means that only contenders from list was saved and the visual brackets was not created
                 if (b.ContendersList == null)
                 {
-                    // load onlt DGVmain 
+                    // load only DGVmain 
                     List<Contenders.Contender> cont;
                     load.DeSerialize(out Isok, out cont);
                     if (Isok)
                     {
+                        // find the weight category of that event
+                        LoadWeightCategoryFromSavedFiles( cont[0].InstanceWeightCategory);
                         // load dgvmain
                         GlobalVars.ListOfContenders = cont;
                         LoadDgv();
@@ -1108,6 +1132,8 @@ namespace MartialArts
                     return;
                 }
 
+                // find the weight category of that event
+                LoadWeightCategoryFromSavedFiles(b.ContendersFromDgvMain[0].InstanceWeightCategory);
                 // load saved contenders to list
                 GlobalVars.ListOfContenders = b.ContendersFromDgvMain;
                 LoadDgv();
@@ -1143,6 +1169,13 @@ namespace MartialArts
             NewProject();
         }
 
+        private void LoadWeightCategoryFromSavedFiles(Contenders.WeightCategiries.WeightCatEnum cat)
+        {
+
+            // find the weight category of that event
+            GlobalVars.ChoosenWeightCategory = cat;
+            lblWeightCat.Text = cat.ToString();
+        }
       
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)

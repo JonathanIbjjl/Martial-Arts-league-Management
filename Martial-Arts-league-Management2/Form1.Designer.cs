@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.קובץToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tpNew = new System.Windows.Forms.ToolStripMenuItem();
@@ -98,6 +98,15 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.FilesPanel = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.numNumberOfContenders = new System.Windows.Forms.NumericUpDown();
+            this.lblWeightCat = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.radChild = new System.Windows.Forms.RadioButton();
+            this.radAdult = new System.Windows.Forms.RadioButton();
             this.btnAddContenderToDgv = new System.Windows.Forms.Button();
             this.label28 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
@@ -109,7 +118,6 @@
             this.label17 = new System.Windows.Forms.Label();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.btnBuiledBrackets = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.txtPath = new System.Windows.Forms.TextBox();
             this.btnLoadFile = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -121,14 +129,6 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.StripEditCont = new System.Windows.Forms.ToolStripMenuItem();
             this.StripDeleteContender = new System.Windows.Forms.ToolStripMenuItem();
-            this.numNumberOfContenders = new System.Windows.Forms.NumericUpDown();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.radAdult = new System.Windows.Forms.RadioButton();
-            this.radChild = new System.Windows.Forms.RadioButton();
-            this.label29 = new System.Windows.Forms.Label();
-            this.lblWeightCat = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -144,14 +144,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.tabPage1.SuspendLayout();
             this.FilesPanel.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numNumberOfContenders)).BeginInit();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numNumberOfContenders)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -1055,6 +1055,129 @@
             this.FilesPanel.Size = new System.Drawing.Size(797, 115);
             this.FilesPanel.TabIndex = 9;
             // 
+            // panel5
+            // 
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.panel5.Controls.Add(this.label1);
+            this.panel5.Controls.Add(this.panel6);
+            this.panel5.Controls.Add(this.lblWeightCat);
+            this.panel5.Controls.Add(this.label29);
+            this.panel5.Controls.Add(this.panel1);
+            this.panel5.Location = new System.Drawing.Point(393, 35);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(296, 75);
+            this.panel5.TabIndex = 62;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.label1.Location = new System.Drawing.Point(69, 39);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(76, 15);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "מתחרים בבית:";
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.Red;
+            this.panel6.Controls.Add(this.numNumberOfContenders);
+            this.panel6.Location = new System.Drawing.Point(7, 33);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(56, 28);
+            this.panel6.TabIndex = 63;
+            // 
+            // numNumberOfContenders
+            // 
+            this.numNumberOfContenders.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.numNumberOfContenders.BackColor = System.Drawing.Color.Maroon;
+            this.numNumberOfContenders.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numNumberOfContenders.ForeColor = System.Drawing.Color.White;
+            this.numNumberOfContenders.Location = new System.Drawing.Point(5, 4);
+            this.numNumberOfContenders.Maximum = new decimal(new int[] {
+            250,
+            0,
+            0,
+            0});
+            this.numNumberOfContenders.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numNumberOfContenders.Name = "numNumberOfContenders";
+            this.numNumberOfContenders.ReadOnly = true;
+            this.numNumberOfContenders.Size = new System.Drawing.Size(47, 20);
+            this.numNumberOfContenders.TabIndex = 5;
+            this.numNumberOfContenders.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numNumberOfContenders.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.numNumberOfContenders.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // lblWeightCat
+            // 
+            this.lblWeightCat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblWeightCat.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lblWeightCat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.lblWeightCat.Location = new System.Drawing.Point(56, 12);
+            this.lblWeightCat.Name = "lblWeightCat";
+            this.lblWeightCat.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblWeightCat.Size = new System.Drawing.Size(144, 15);
+            this.lblWeightCat.TabIndex = 60;
+            this.lblWeightCat.Text = "IBJJL";
+            this.lblWeightCat.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label29
+            // 
+            this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label29.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.label29.Location = new System.Drawing.Point(198, 12);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(88, 15);
+            this.label29.TabIndex = 59;
+            this.label29.Text = "קטגוריית משקל:";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.panel1.Controls.Add(this.radChild);
+            this.panel1.Controls.Add(this.radAdult);
+            this.panel1.Location = new System.Drawing.Point(151, 30);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(135, 35);
+            this.panel1.TabIndex = 42;
+            // 
+            // radChild
+            // 
+            this.radChild.AutoSize = true;
+            this.radChild.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.radChild.Location = new System.Drawing.Point(71, 9);
+            this.radChild.Name = "radChild";
+            this.radChild.Size = new System.Drawing.Size(49, 18);
+            this.radChild.TabIndex = 4;
+            this.radChild.Text = "ילדים";
+            this.radChild.UseVisualStyleBackColor = true;
+            // 
+            // radAdult
+            // 
+            this.radAdult.AutoSize = true;
+            this.radAdult.Checked = true;
+            this.radAdult.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.radAdult.Location = new System.Drawing.Point(10, 9);
+            this.radAdult.Name = "radAdult";
+            this.radAdult.Size = new System.Drawing.Size(55, 18);
+            this.radAdult.TabIndex = 41;
+            this.radAdult.TabStop = true;
+            this.radAdult.Text = "בוגרים";
+            this.radAdult.UseVisualStyleBackColor = true;
+            // 
             // btnAddContenderToDgv
             // 
             this.btnAddContenderToDgv.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1202,18 +1325,6 @@
             this.btnBuiledBrackets.UseVisualStyleBackColor = false;
             this.btnBuiledBrackets.Click += new System.EventHandler(this.btnBuiledBrackets_Click);
             // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label1.Location = new System.Drawing.Point(69, 39);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 15);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "מתחרים בבית:";
-            // 
             // txtPath
             // 
             this.txtPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1267,29 +1378,29 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvMain.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMain.Location = new System.Drawing.Point(11, 136);
             this.dgvMain.MultiSelect = false;
             this.dgvMain.Name = "dgvMain";
             this.dgvMain.ReadOnly = true;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvMain.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.dgvMain.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvMain.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.dgvMain.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvMain.Size = new System.Drawing.Size(1397, 413);
             this.dgvMain.TabIndex = 3;
             this.dgvMain.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMain_CellContentClick);
@@ -1358,117 +1469,6 @@
             this.StripDeleteContender.Text = "מחק מתחרה";
             this.StripDeleteContender.Click += new System.EventHandler(this.StripDeleteContender_Click);
             // 
-            // numNumberOfContenders
-            // 
-            this.numNumberOfContenders.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.numNumberOfContenders.BackColor = System.Drawing.Color.Maroon;
-            this.numNumberOfContenders.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numNumberOfContenders.ForeColor = System.Drawing.Color.White;
-            this.numNumberOfContenders.Location = new System.Drawing.Point(5, 4);
-            this.numNumberOfContenders.Maximum = new decimal(new int[] {
-            250,
-            0,
-            0,
-            0});
-            this.numNumberOfContenders.Minimum = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.numNumberOfContenders.Name = "numNumberOfContenders";
-            this.numNumberOfContenders.ReadOnly = true;
-            this.numNumberOfContenders.Size = new System.Drawing.Size(47, 20);
-            this.numNumberOfContenders.TabIndex = 5;
-            this.numNumberOfContenders.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numNumberOfContenders.Value = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-            this.numNumberOfContenders.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.panel1.Controls.Add(this.radChild);
-            this.panel1.Controls.Add(this.radAdult);
-            this.panel1.Location = new System.Drawing.Point(151, 30);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(135, 35);
-            this.panel1.TabIndex = 42;
-            // 
-            // radAdult
-            // 
-            this.radAdult.AutoSize = true;
-            this.radAdult.Checked = true;
-            this.radAdult.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.radAdult.Location = new System.Drawing.Point(10, 9);
-            this.radAdult.Name = "radAdult";
-            this.radAdult.Size = new System.Drawing.Size(55, 18);
-            this.radAdult.TabIndex = 41;
-            this.radAdult.TabStop = true;
-            this.radAdult.Text = "בוגרים";
-            this.radAdult.UseVisualStyleBackColor = true;
-            // 
-            // radChild
-            // 
-            this.radChild.AutoSize = true;
-            this.radChild.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.radChild.Location = new System.Drawing.Point(71, 9);
-            this.radChild.Name = "radChild";
-            this.radChild.Size = new System.Drawing.Size(49, 18);
-            this.radChild.TabIndex = 4;
-            this.radChild.Text = "ילדים";
-            this.radChild.UseVisualStyleBackColor = true;
-            // 
-            // label29
-            // 
-            this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label29.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label29.Location = new System.Drawing.Point(198, 12);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(88, 15);
-            this.label29.TabIndex = 59;
-            this.label29.Text = "קטגוריית משקל:";
-            // 
-            // lblWeightCat
-            // 
-            this.lblWeightCat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblWeightCat.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.lblWeightCat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.lblWeightCat.Location = new System.Drawing.Point(56, 12);
-            this.lblWeightCat.Name = "lblWeightCat";
-            this.lblWeightCat.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblWeightCat.Size = new System.Drawing.Size(144, 15);
-            this.lblWeightCat.TabIndex = 60;
-            this.lblWeightCat.Text = "IBJJL";
-            this.lblWeightCat.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // panel5
-            // 
-            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.panel5.Controls.Add(this.label1);
-            this.panel5.Controls.Add(this.panel6);
-            this.panel5.Controls.Add(this.lblWeightCat);
-            this.panel5.Controls.Add(this.label29);
-            this.panel5.Controls.Add(this.panel1);
-            this.panel5.Location = new System.Drawing.Point(393, 35);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(296, 75);
-            this.panel5.TabIndex = 62;
-            // 
-            // panel6
-            // 
-            this.panel6.BackColor = System.Drawing.Color.Red;
-            this.panel6.Controls.Add(this.numNumberOfContenders);
-            this.panel6.Location = new System.Drawing.Point(7, 33);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(56, 28);
-            this.panel6.TabIndex = 63;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1505,16 +1505,16 @@
             this.tabPage1.ResumeLayout(false);
             this.FilesPanel.ResumeLayout(false);
             this.FilesPanel.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numNumberOfContenders)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numNumberOfContenders)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            this.panel6.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

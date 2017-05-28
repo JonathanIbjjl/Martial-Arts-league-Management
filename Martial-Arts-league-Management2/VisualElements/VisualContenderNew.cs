@@ -65,11 +65,15 @@ namespace Visual
                     cm.Items.Add("בדוק פקטור בבית");
                     cm.Items.Add("סמן");
                     cm.Items.Add("הסר סימון");
+                    cm.Items.Add("הסתר מתחרה");
+                    cm.Items.Add("בטל הסתרה");
                     cm.Items[0].Name = Contender.SystemID.ToString();
                     cm.Items[1].Name = Contender.SystemID.ToString() + " ";
                     cm.Items[2].Name = Contender.SystemID.ToString() + "  ";
                     cm.Items[3].Name = Contender.SystemID.ToString() + "   ";
                     cm.Items[4].Name = Contender.SystemID.ToString() + "    ";
+                    cm.Items[5].Name = Contender.SystemID.ToString() + "     ";
+                    cm.Items[6].Name = Contender.SystemID.ToString() + "      ";
                     cm.ItemClicked += new ToolStripItemClickedEventHandler(contexMenuuu_ItemClicked);
                     _ContMainPanel.ContextMenuStrip = cm;
 
@@ -86,7 +90,7 @@ namespace Visual
             }
         }
 
-        public bool _IsMarked;
+        private bool _IsMarked;
         public bool IsMarked
         {
             get { return _IsMarked; }
@@ -126,6 +130,37 @@ namespace Visual
             Vcontender.Refresh();
         }
 
+        private bool _IsHidden;
+        public bool IsHidden
+        {
+            get { return _IsHidden; }
+
+            set
+            {
+                if (value == true)
+                {
+                    _IsHidden = true;
+                    Hide();
+                }
+                else
+                {
+                    _IsHidden = false;
+                    UnHide();
+                }
+            }
+
+        }
+
+        private void UnHide()
+        {
+            Vcontender.Size = ContMainPanel_Size; ;
+        }
+
+        private void Hide()
+        {
+            Vcontender.Size = new Size(Vcontender.Width, 2);
+            
+        }
 
         public static Size ContMainPanel_Size { get; set; } = new Size(507, 36);
 
@@ -209,11 +244,15 @@ namespace Visual
                     cm.Items.Add("בדוק פקטור בבית");
                     cm.Items.Add("סמן");
                     cm.Items.Add("הסר סימון");
+                    cm.Items.Add("הסתר מתחרה");
+                    cm.Items.Add("בטל הסתרה");
                     cm.Items[0].Name = Contender.SystemID.ToString();
                     cm.Items[1].Name = Contender.SystemID.ToString() + " ";
                     cm.Items[2].Name = Contender.SystemID.ToString() + "  ";
                     cm.Items[3].Name = Contender.SystemID.ToString() + "   ";
                     cm.Items[4].Name = Contender.SystemID.ToString() + "    ";
+                    cm.Items[5].Name = Contender.SystemID.ToString() + "     ";
+                    cm.Items[6].Name = Contender.SystemID.ToString() + "      ";
                     cm.ItemClicked += new ToolStripItemClickedEventHandler(contexMenuuu_ItemClicked);
                     _BtnShowContData.ContextMenuStrip = cm;
 

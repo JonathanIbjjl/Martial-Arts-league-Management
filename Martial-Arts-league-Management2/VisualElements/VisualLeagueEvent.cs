@@ -335,6 +335,17 @@ namespace Visual
             }
 
         }
+
+        public static void Hide(int ContID, bool hide)
+        {
+            if (AllVisualContenders.Any(x => x.SystemID == ContID) == true)
+            {
+                var cont = AllVisualContenders.Where(x => x.SystemID == ContID).Select(c => c).Single();
+                cont.IsHidden = hide;
+            }
+
+        }
+
         public static void MergeListsForSearch()
         {
 

@@ -60,6 +60,9 @@ namespace  Visual
                     cm.BackColor = MartialArts.GlobalVars.Sys_Yellow;
                     cm.ForeColor = MartialArts.GlobalVars.Sys_DarkerGray;
                     cm.Items.Add("הדבק מתחרה");
+                    cm.Items.Add("בטל מתחרים מוסתרים");
+                    cm.Items[0].Name = Bracket.BracketNumber.ToString();
+                    cm.Items[1].Name = Bracket.BracketNumber.ToString() + " ";
                     cm.ItemClicked += new ToolStripItemClickedEventHandler(contexMenuuu_ItemClicked);
                     _Header.ContextMenuStrip = cm;
                     // hide button 
@@ -415,8 +418,29 @@ namespace  Visual
                     VisualLeagueEvent.ClipBoardValue = 0;
                 }
             }
+
+            else if (item.Text == "בטל מתחרים מוסתרים")
+            {
+                if (e.ClickedItem.Name.ToString().Trim().IsNumeric() == true)
+                {
+                    UnHideContendersInSelectedVb(int.Parse(e.ClickedItem.Name.ToString().Trim()));   
+                }
+            }
         }
 
+        private void UnHideContendersInSelectedVb(int bracketNumber)
+        {
+            foreach (VisualBracket b in VisualLeagueEvent.VisualBracketsList)
+            {
+                if (b.Bracket.BracketNumber == bracketNumber)
+                {
+                    foreach (VisualContender vc in b.VisualCont)
+                    {
+                        vc.IsHidden = false;
+                    }
+                }
+            }
+        }
         private void PasteVisualContender()
         {
             // Extract Contender ID
