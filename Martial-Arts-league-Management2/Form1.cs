@@ -876,7 +876,7 @@ namespace MartialArts
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            
+            MartialArts.Helpers.ShowGenericPromtForm("Version: " + GlobalVars.VerNum.ToString());
         }
 
         private void tpSave_Click(object sender, EventArgs e)

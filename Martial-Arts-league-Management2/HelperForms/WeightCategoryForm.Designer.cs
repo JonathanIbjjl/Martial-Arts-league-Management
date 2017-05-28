@@ -45,7 +45,7 @@
             // ListPickWeight
             // 
             this.ListPickWeight.FormattingEnabled = true;
-            this.ListPickWeight.Location = new System.Drawing.Point(140, 19);
+            this.ListPickWeight.Location = new System.Drawing.Point(231, 19);
             this.ListPickWeight.Name = "ListPickWeight";
             this.ListPickWeight.Size = new System.Drawing.Size(193, 251);
             this.ListPickWeight.TabIndex = 1;
@@ -62,7 +62,7 @@
             this.groupBox1.Controls.Add(this.ListPickWeight);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(480, 284);
+            this.groupBox1.Size = new System.Drawing.Size(570, 284);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "בחר קטגוריית משקל";
@@ -70,7 +70,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.lblCurrentCategory);
-            this.groupBox2.Location = new System.Drawing.Point(339, 204);
+            this.groupBox2.Location = new System.Drawing.Point(430, 204);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(128, 66);
             this.groupBox2.TabIndex = 4;
@@ -91,7 +91,7 @@
             // 
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancel.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.btnCancel.Location = new System.Drawing.Point(339, 145);
+            this.btnCancel.Location = new System.Drawing.Point(430, 145);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(128, 53);
             this.btnCancel.TabIndex = 3;
@@ -104,14 +104,14 @@
             this.ListShowWeight.FormattingEnabled = true;
             this.ListShowWeight.Location = new System.Drawing.Point(11, 19);
             this.ListShowWeight.Name = "ListShowWeight";
-            this.ListShowWeight.Size = new System.Drawing.Size(123, 251);
+            this.ListShowWeight.Size = new System.Drawing.Size(214, 251);
             this.ListShowWeight.TabIndex = 1;
             this.ListShowWeight.SelectedIndexChanged += new System.EventHandler(this.ListShowWeight_SelectedIndexChanged);
             // 
             // radAdult
             // 
             this.radAdult.AutoSize = true;
-            this.radAdult.Location = new System.Drawing.Point(406, 19);
+            this.radAdult.Location = new System.Drawing.Point(497, 19);
             this.radAdult.Name = "radAdult";
             this.radAdult.Size = new System.Drawing.Size(61, 17);
             this.radAdult.TabIndex = 3;
@@ -123,7 +123,7 @@
             // 
             this.btnOK.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnOK.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.btnOK.Location = new System.Drawing.Point(339, 86);
+            this.btnOK.Location = new System.Drawing.Point(430, 86);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(128, 53);
             this.btnOK.TabIndex = 2;
@@ -135,7 +135,7 @@
             // 
             this.radChild.AutoSize = true;
             this.radChild.Checked = true;
-            this.radChild.Location = new System.Drawing.Point(344, 19);
+            this.radChild.Location = new System.Drawing.Point(435, 19);
             this.radChild.Name = "radChild";
             this.radChild.Size = new System.Drawing.Size(56, 17);
             this.radChild.TabIndex = 2;
@@ -149,7 +149,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
-            this.ClientSize = new System.Drawing.Size(500, 303);
+            this.ClientSize = new System.Drawing.Size(594, 303);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

@@ -30,7 +30,7 @@
     <ProductName>IBJJL Software</ProductName>
     <PublisherName>IBJJL</PublisherName>
     <SuiteName>IBJJL App</SuiteName>
-    <ApplicationRevision>33</ApplicationRevision>
+    <ApplicationRevision>34</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
