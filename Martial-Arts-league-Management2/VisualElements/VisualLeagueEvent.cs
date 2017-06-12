@@ -198,6 +198,9 @@ namespace Visual
 
         public static void RemoveContender(int sysid)
         {
+            // must be a least one contender if not bussinessclocks will throw an exception
+            if (VisualBracketsList.Count == 1 && VisualBracketsList[0].Bracket.ContendersList.Count == 1)
+                return;
 
             // first check if contender came from unplaced contemders, if so remove
             if (VisualUnplacedBracketsList.Any(x => x.SystemID == sysid) == true)
@@ -229,7 +232,7 @@ namespace Visual
 
             isRemoved = false;
 
-            // extract Current Bracket 
+            // resize bracket 
             foreach (VisualBracket vb in VisualBracketsList)
             {
                 foreach (Contenders.Contender c in vb.Bracket.ContendersList)
@@ -253,7 +256,46 @@ namespace Visual
             }
         }
 
+        /// <summary>
+        /// only contenders from VisualUnplacedBracketsList can be deleted
+        /// </summary>
+        /// <param name="id"></param>
+        internal static void DeleteContender(int id)
+        {
 
+            // first check if contender came from unplaced contemders, if so remove
+            if (VisualUnplacedBracketsList.Any(x => x.SystemID == id) == true)
+            {
+                var cont = VisualUnplacedBracketsList.Where(x => x.SystemID == id).Select(c => c).Single();
+                // remove
+                cont.Dispose();
+                VisualUnplacedBracketsList.Remove(cont);
+
+                // delete from allcontenders list
+                if (AllVisualContenders.Any(x => x.SystemID == id) == true)
+                {
+                    var _cont = AllVisualContenders.Where(x => x.SystemID == id).Select(c => c).Single();
+                    // remove
+                    AllVisualContenders.Remove(_cont);
+                }
+
+                // remove from datagridview
+                for (int i = 0; i < GlobalVars.dgv.RowCount; i++)
+                {
+                    if (GlobalVars.dgv.Rows[i].HeaderCell.Value.ToString() == id.ToString())
+                    {
+                        // delete the contender row
+                        GlobalVars.dgv.Rows.RemoveAt(i);
+                    }
+                }
+            }
+            else
+            {
+                //promt that only contenders from VisualUnplacedBracketsList can be deleted
+                Helpers.ShowGenericPromtForm("ניתן למחוק רק מתחרים שלא משובצים בבית");
+            }
+        }
+        
         public static int GetVisualBracketNumtByVisualContender(int sysid)
         {
             int result = -1;

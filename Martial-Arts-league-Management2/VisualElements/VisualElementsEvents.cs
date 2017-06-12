@@ -203,6 +203,17 @@ namespace Visual
                 }
             }
 
+            else if (item.Text == "מחק מתחרה")
+            {
+                if (e.ClickedItem.Name.ToString().Trim().IsNumeric() == true)
+                {
+                    if (Helpers.PromtYesNowQuestion("המתחרה יוסר לחלוטין מהאירוע, האם להמשיך במחיקת המתחרה?") == true)
+                    {
+                        VisualLeagueEvent.DeleteContender(int.Parse(e.ClickedItem.Name.ToString().Trim()));
+                    }
+                }
+            }
+
         }
 
 

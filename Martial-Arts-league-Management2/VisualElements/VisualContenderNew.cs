@@ -67,6 +67,7 @@ namespace Visual
                     cm.Items.Add("הסר סימון");
                     cm.Items.Add("הסתר מתחרה");
                     cm.Items.Add("בטל הסתרה");
+                    cm.Items.Add("מחק מתחרה");
                     cm.Items[0].Name = Contender.SystemID.ToString();
                     cm.Items[1].Name = Contender.SystemID.ToString() + " ";
                     cm.Items[2].Name = Contender.SystemID.ToString() + "  ";
@@ -74,6 +75,7 @@ namespace Visual
                     cm.Items[4].Name = Contender.SystemID.ToString() + "    ";
                     cm.Items[5].Name = Contender.SystemID.ToString() + "     ";
                     cm.Items[6].Name = Contender.SystemID.ToString() + "      ";
+                    cm.Items[7].Name = Contender.SystemID.ToString() + "       ";
                     cm.ItemClicked += new ToolStripItemClickedEventHandler(contexMenuuu_ItemClicked);
                     _ContMainPanel.ContextMenuStrip = cm;
 
@@ -246,6 +248,7 @@ namespace Visual
                     cm.Items.Add("הסר סימון");
                     cm.Items.Add("הסתר מתחרה");
                     cm.Items.Add("בטל הסתרה");
+                    cm.Items.Add("מחק מתחרה");
                     cm.Items[0].Name = Contender.SystemID.ToString();
                     cm.Items[1].Name = Contender.SystemID.ToString() + " ";
                     cm.Items[2].Name = Contender.SystemID.ToString() + "  ";
@@ -253,6 +256,7 @@ namespace Visual
                     cm.Items[4].Name = Contender.SystemID.ToString() + "    ";
                     cm.Items[5].Name = Contender.SystemID.ToString() + "     ";
                     cm.Items[6].Name = Contender.SystemID.ToString() + "      ";
+                    cm.Items[7].Name = Contender.SystemID.ToString() + "       ";
                     cm.ItemClicked += new ToolStripItemClickedEventHandler(contexMenuuu_ItemClicked);
                     _BtnShowContData.ContextMenuStrip = cm;
 

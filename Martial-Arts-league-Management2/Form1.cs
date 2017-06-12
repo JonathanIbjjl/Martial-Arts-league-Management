@@ -51,6 +51,8 @@ namespace MartialArts
             UpdateClocks(true);
             LoadMe();
             dgvColors();
+            // static variable to access the dgv from outside the instance
+            GlobalVars.dgv = dgvMain;
         }
 
         private void LoadMe()

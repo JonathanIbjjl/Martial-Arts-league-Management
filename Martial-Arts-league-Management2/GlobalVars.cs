@@ -10,7 +10,7 @@ namespace MartialArts
   public  class GlobalVars
     {
        
-        public  const string VerNum = "Beta 4.0";
+        public  const string VerNum = "Beta 5.0";
 
         private static MartialArts.ProjectsSavedAsBinaryFiles _CurrentProject;
         public static  MartialArts.ProjectsSavedAsBinaryFiles CurrentProject
@@ -18,13 +18,11 @@ namespace MartialArts
             get { return _CurrentProject; }
             set
             {
-                _CurrentProject = value;
-                
-             
+                _CurrentProject = value;            
             }
         }
-
-
+        // static variable to access the dgv from outside the instance of Form1 class
+        public static System.Windows.Forms.DataGridView dgv;
 
         public static bool IsLoading;
         public static int NumOfContendersInLeuge

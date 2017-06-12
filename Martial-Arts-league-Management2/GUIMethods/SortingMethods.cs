@@ -19,6 +19,15 @@ namespace MartialArts
                 {
                     f.BracktsFPanel.Controls.Add(vb.Vbracket);
                 }
+                // sort unplaced panel
+                if (Visual.VisualLeagueEvent.VisualUnplacedBracketsList.Count <= 0)
+                    return;
+                f.UnPlacedFpanel.Controls.Clear();
+                Visual.VisualLeagueEvent.VisualUnplacedBracketsList = Visual.VisualLeagueEvent.VisualUnplacedBracketsList.AsEnumerable().OrderByDescending(x => x.Contender.Grade).ToList();
+                foreach (Visual.VisualContender vc in Visual.VisualLeagueEvent.VisualUnplacedBracketsList)
+                {
+                    f.UnPlacedFpanel.Controls.Add(vc.Vcontender);
+                }
             }
             else
             {
@@ -28,6 +37,15 @@ namespace MartialArts
                 foreach (Visual.VisualBracket vb in Visual.VisualLeagueEvent.VisualBracketsList)
                 {
                     f.BracktsFPanel.Controls.Add(vb.Vbracket);
+                }
+                // sort unplaced panel
+                if (Visual.VisualLeagueEvent.VisualUnplacedBracketsList.Count <= 0)
+                    return;
+                f.UnPlacedFpanel.Controls.Clear();
+                Visual.VisualLeagueEvent.VisualUnplacedBracketsList = Visual.VisualLeagueEvent.VisualUnplacedBracketsList.AsEnumerable().OrderBy(x => x.Contender.Grade).ToList();
+                foreach (Visual.VisualContender vc in Visual.VisualLeagueEvent.VisualUnplacedBracketsList)
+                {
+                    f.UnPlacedFpanel.Controls.Add(vc.Vcontender);
                 }
             }
         }
@@ -43,6 +61,15 @@ namespace MartialArts
                 {
                     f.BracktsFPanel.Controls.Add(vb.Vbracket);
                 }
+                // sort unplaced panel
+                if (Visual.VisualLeagueEvent.VisualUnplacedBracketsList.Count <= 0)
+                    return;
+                f.UnPlacedFpanel.Controls.Clear();
+                Visual.VisualLeagueEvent.VisualUnplacedBracketsList = Visual.VisualLeagueEvent.VisualUnplacedBracketsList.AsEnumerable().OrderByDescending(x => x.Contender.Weight).ToList();
+                foreach (Visual.VisualContender vc in Visual.VisualLeagueEvent.VisualUnplacedBracketsList)
+                {
+                    f.UnPlacedFpanel.Controls.Add(vc.Vcontender);
+                }
             }
             else
             {
@@ -52,6 +79,15 @@ namespace MartialArts
                 foreach (Visual.VisualBracket vb in Visual.VisualLeagueEvent.VisualBracketsList)
                 {
                     f.BracktsFPanel.Controls.Add(vb.Vbracket);
+                }
+                // sort unplaced panel
+                if (Visual.VisualLeagueEvent.VisualUnplacedBracketsList.Count <= 0)
+                    return;
+                f.UnPlacedFpanel.Controls.Clear();
+                Visual.VisualLeagueEvent.VisualUnplacedBracketsList = Visual.VisualLeagueEvent.VisualUnplacedBracketsList.AsEnumerable().OrderBy(x => x.Contender.Weight).ToList();
+                foreach (Visual.VisualContender vc in Visual.VisualLeagueEvent.VisualUnplacedBracketsList)
+                {
+                    f.UnPlacedFpanel.Controls.Add(vc.Vcontender);
                 }
             }
         }
@@ -67,6 +103,15 @@ namespace MartialArts
                 {
                     f.BracktsFPanel.Controls.Add(vb.Vbracket);
                 }
+                // sort unplaced panel
+                if (Visual.VisualLeagueEvent.VisualUnplacedBracketsList.Count <= 0)
+                    return;
+                f.UnPlacedFpanel.Controls.Clear();
+                Visual.VisualLeagueEvent.VisualUnplacedBracketsList = Visual.VisualLeagueEvent.VisualUnplacedBracketsList.AsEnumerable().OrderByDescending(x => x.Contender.AgeCategory).ToList();
+                foreach (Visual.VisualContender vc in Visual.VisualLeagueEvent.VisualUnplacedBracketsList)
+                {
+                    f.UnPlacedFpanel.Controls.Add(vc.Vcontender);
+                }
             }
             else
             {
@@ -76,6 +121,15 @@ namespace MartialArts
                 foreach (Visual.VisualBracket vb in Visual.VisualLeagueEvent.VisualBracketsList)
                 {
                     f.BracktsFPanel.Controls.Add(vb.Vbracket);
+                }
+                // sort unplaced panel
+                if (Visual.VisualLeagueEvent.VisualUnplacedBracketsList.Count <= 0)
+                    return;
+                f.UnPlacedFpanel.Controls.Clear();
+                Visual.VisualLeagueEvent.VisualUnplacedBracketsList = Visual.VisualLeagueEvent.VisualUnplacedBracketsList.AsEnumerable().OrderBy(x => x.Contender.AgeCategory).ToList();
+                foreach (Visual.VisualContender vc in Visual.VisualLeagueEvent.VisualUnplacedBracketsList)
+                {
+                    f.UnPlacedFpanel.Controls.Add(vc.Vcontender);
                 }
             }
         }
