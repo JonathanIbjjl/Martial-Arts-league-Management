@@ -129,6 +129,8 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.StripEditCont = new System.Windows.Forms.ToolStripMenuItem();
             this.StripDeleteContender = new System.Windows.Forms.ToolStripMenuItem();
+            this.פתחאימיילToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.פתחאימייללכללהמשתתפיםToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -253,7 +255,8 @@
             // 
             this.עריכהToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ייצארשימתמתחריםלאקסלToolStripMenuItem,
-            this.ייצארשימתבתיםלאקסלToolStripMenuItem});
+            this.ייצארשימתבתיםלאקסלToolStripMenuItem,
+            this.פתחאימייללכללהמשתתפיםToolStripMenuItem});
             this.עריכהToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
             this.עריכהToolStripMenuItem.Name = "עריכהToolStripMenuItem";
             this.עריכהToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
@@ -264,7 +267,7 @@
             this.ייצארשימתמתחריםלאקסלToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.ייצארשימתמתחריםלאקסלToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
             this.ייצארשימתמתחריםלאקסלToolStripMenuItem.Name = "ייצארשימתמתחריםלאקסלToolStripMenuItem";
-            this.ייצארשימתמתחריםלאקסלToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.ייצארשימתמתחריםלאקסלToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.ייצארשימתמתחריםלאקסלToolStripMenuItem.Text = "ייצא רשימת מתחרים לאקסל";
             this.ייצארשימתמתחריםלאקסלToolStripMenuItem.Click += new System.EventHandler(this.ייצארשימתמתחריםלאקסלToolStripMenuItem_Click);
             // 
@@ -273,7 +276,7 @@
             this.ייצארשימתבתיםלאקסלToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.ייצארשימתבתיםלאקסלToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
             this.ייצארשימתבתיםלאקסלToolStripMenuItem.Name = "ייצארשימתבתיםלאקסלToolStripMenuItem";
-            this.ייצארשימתבתיםלאקסלToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.ייצארשימתבתיםלאקסלToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.ייצארשימתבתיםלאקסלToolStripMenuItem.Text = "ייצא רשימת בתים לאקסל";
             this.ייצארשימתבתיםלאקסלToolStripMenuItem.Click += new System.EventHandler(this.ייצארשימתבתיםלאקסלToolStripMenuItem_Click);
             // 
@@ -1451,9 +1454,10 @@
             this.contextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StripEditCont,
-            this.StripDeleteContender});
+            this.StripDeleteContender,
+            this.פתחאימיילToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(142, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(142, 70);
             // 
             // StripEditCont
             // 
@@ -1468,6 +1472,22 @@
             this.StripDeleteContender.Size = new System.Drawing.Size(141, 22);
             this.StripDeleteContender.Text = "מחק מתחרה";
             this.StripDeleteContender.Click += new System.EventHandler(this.StripDeleteContender_Click);
+            // 
+            // פתחאימיילToolStripMenuItem
+            // 
+            this.פתחאימיילToolStripMenuItem.Name = "פתחאימיילToolStripMenuItem";
+            this.פתחאימיילToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.פתחאימיילToolStripMenuItem.Text = "פתח אימייל";
+            this.פתחאימיילToolStripMenuItem.Click += new System.EventHandler(this.פתחאימיילToolStripMenuItem_Click);
+            // 
+            // פתחאימייללכללהמשתתפיםToolStripMenuItem
+            // 
+            this.פתחאימייללכללהמשתתפיםToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.פתחאימייללכללהמשתתפיםToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(154)))), ((int)(((byte)(44)))));
+            this.פתחאימייללכללהמשתתפיםToolStripMenuItem.Name = "פתחאימייללכללהמשתתפיםToolStripMenuItem";
+            this.פתחאימייללכללהמשתתפיםToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.פתחאימייללכללהמשתתפיםToolStripMenuItem.Text = "פתח אימייל לכלל המשתתפים";
+            this.פתחאימייללכללהמשתתפיםToolStripMenuItem.Click += new System.EventHandler(this.פתחאימייללכללהמשתתפיםToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -1618,6 +1638,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton radChild;
         private System.Windows.Forms.RadioButton radAdult;
+        private System.Windows.Forms.ToolStripMenuItem פתחאימיילToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem פתחאימייללכללהמשתתפיםToolStripMenuItem;
     }
 }
 

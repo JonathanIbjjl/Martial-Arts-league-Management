@@ -1634,6 +1634,35 @@ namespace MartialArts
             }
         }
 
+        private void פתחאימיילToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if ((this.dgvMain.CurrentRow == null))
+            {
+                //No row selected
+                Helpers.ShowGenericPromtForm("לא נבחר מתחרה ברשימה");
+                return;
+            }
+
+            Emails.OpenEmail(dgvMain.Rows[dgvMain.CurrentRow.Index].Cells["Email"].Value.ToString());
+        }
+
+        private void פתחאימייללכללהמשתתפיםToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvMain.RowCount <= 0)
+            {
+                Helpers.ShowGenericPromtForm("אין משתתפים ברשימה");
+                return;
+            }
+
+            var recipts = "";
+
+            for (int i = 0; i < dgvMain.RowCount; i++)
+            {
+                recipts += dgvMain.Rows[i].Cells["Email"].Value.ToString() + ";";
+            }
+
+            Emails.OpenEmail(recipts);
+        }
     }
 
 
@@ -1643,7 +1672,7 @@ namespace MartialArts
         {
             Type dgvType = dgv.GetType();
             PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
-                BindingFlags.Instance | BindingFlags.NonPublic);
+            BindingFlags.Instance | BindingFlags.NonPublic);
             pi.SetValue(dgv, setting, null);
         }
 
